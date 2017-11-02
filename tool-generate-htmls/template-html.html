@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>${article-title} - ICS MEDIA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="referrer" content="unsafe-url"/>
+  <meta property="article:author" content="https://www.facebook.com/icswebjp"/>
+  <meta property="og:locale" content="ja_JP"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="${article-title} - ICS MEDIA"/>
+  <meta property="og:description" content=""/>
+  <meta property="og:url" content="${url}"/>
+  <meta property="og:site_name" content="ICS MEDIA"/>
+  <meta property="og:image" content="https://ics.media/tutorial-three/imgs/summary_large_image.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:description" content="このサイトはWebGLのJSライブラリ「Three.js」の入門サイトです。canvas要素を使ってWebサイトに動きのある3D表現を取り入れましょう。"/>
+  <meta name="twitter:title" content="${article-title} - ICS MEDIA"/>
+  <meta name="twitter:site" content="@icsweb"/>
+  <meta name="twitter:image" content="https://ics.media/tutorial-createjs/imgs/summary_large_image.jpg"/>
+  <meta property="article:published_time" content="${article-datePublished}T00:00:00+09:00"/>
+  <meta property="article:modified_time" content="${article-dateModified}T00:00:00+09:00"/>
+  <meta property="og:updated_time" content="${article-dateModified}T00:00:00+09:00"/>
+  <meta name="date" content="${article-dateModified}T00:00:00+09:00"/>
+
+  <link rel="icon" sizes="16x16 32x32 48x48 128x128 256x256" href="https://ics.media/wp-content/themes/icslab/img/favicon.ico"/>
+  <link rel="stylesheet" type='text/css' href="styles/css/style.css"/>
+  <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Source+Code+Pro'/>
+  <script src="js/main.js" defer></script>
+</head>
+<body class="tutorial">
+  <div id="container">
+    <div id="header-always">
+      <div id="header-wrap">
+        <h1>
+          <a href="https://ics.media/"><span class="logoBlog"><img src="imgs/logo-blog.png" alt="ICS MEDIA - インタラクションデザイン×ウェブテクノロジー" width="477" height="26"/></span></a>
+        </h1>
+        <nav>
+          <ul>
+            <li><a href="https://ics.media/feed/atom" target="_blank"><i class="fa fa-rss"></i></a></li>
+            <li><a href="https://www.facebook.com/icswebjp" target="_blank"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://twitter.com/icsweb" target="_blank"><i class="fa fa-twitter"></i></a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- ================================== -->
+      <!-- パンくず -->
+      <!-- ================================== -->
+      <div id="header-breadcrumb">
+        <div class="wrap">
+          <ul class="breadcrumb">
+            <!-- 第1階層 -->
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+              <a href="https://ics.media" itemprop="url">
+                <i class="fa fa-homze"></i> <span itemprop="title">ICS MEDIA</span>
+              </a>
+            </li>
+
+            <!-- 第2階層 -->
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+              <a href="index.html" itemprop="url">
+                <i class="fa fa-folder-open"></i> <span itemprop="title">WebGL と Three.js で学ぶ3D表現</span>
+              </a>
+            </li>
+
+            <!-- 第3階層 -->
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+              <i class="fa fa-pencil-square-o"></i> <span itemprop="title">${article-title}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+
+    <!-- メインビジュアル -->
+    <div id="archive-image-wrap">
+      <iframe src="https://ics.media/wp-content/themes/icslab/special/151118_createjs_title/archives.html"></iframe>
+      <div class="title">
+        <header>
+          <p>WebGL と Three.js で学ぶ3D表現</p>
+          <h1 itemprop="name">${article-title}</h1>
+        </header>
+      </div>
+    </div>
+
+    <div id="wrap">
+      <div id="main">
+        <div class="content">
+          <div class="pageContentContainer">
+            <div class="article">
+              <div class="text-left link-index">
+                <a href="index.html" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="right" title="目次へ戻る">
+                  <i class="fa fa-list-ul"></i>
+                  目次
+                </a>
+              </div>
+
+              <!-- ============================================= -->
+              <!-- MarkDown から出力はここから -->
+              <section itemprop="articleBody" class="aritcleBody">
+                ${article-markdown}
+              </section>
+              <!-- MarkDown から出力はここまで -->
+              <!-- ============================================= -->
+
+
+              <div class="text-center link-index">
+                <a href="index.html" class="btn btn-primary">
+                  <i class="fa fa-list-ul"></i>
+                  目次に戻る
+                </a>
+                <hr/>
+              </div>
+
+              <div class="text-center">
+                <a class="share-twitter btn btn-secondary btn-sm">
+                  <i class="fa fa-twitter"></i>
+                  Twitterでツイートする
+                </a>
+                <a class="share-facebook btn btn-secondary btn-sm">
+                  <i class="fa fa-facebook"></i>
+                  Facebookでシェアする
+                </a>
+              </div>
+
+              <hr/>
+
+              <div class="text-center">
+                <a href="/" class="btn btn-secondary">
+                  <i class="fa fa-home"></i>
+                  サイトトップに戻る
+                </a>
+              </div>
+
+              <hr/>
+
+              <footer>
+                <div class="text-data">
+                  <div>公開日 : <span itemprop="datePublished" content="${article-datePublished}">${article-datePublished-locale}</span>
+                    / 最終更新日 :
+                    <time itemprop="dateModified" datetime="${article-dateModified}">${article-dateModified-locale}</time>
+                    / 著者 :
+                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                      <span itemprop="name"><a href="https://twitter.com/clockmaker">${article-author}</a>
+                      </span>
+                    </span></div>
+                  <div>※この記事は Three.js の2017年11月3日現在最新のリビジョン88を元に執筆しています。</div>
+                </div>
+              </footer>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </article>
+
+  <div id="footer-bottom" class="cf">
+    <div id="footer-menu-container" class="default">
+      <div class="footer-menu">
+        <div id="footer-menu-inside">
+          <nav>
+            <ul id="footer-menu">
+              <li><a href="https://ics.media/feed/atom" target="_blank"><i class="fa fa-rss fa-3"></i> RSS</a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/icswebjp" target="_blank"><i class="fa fa-facebook-square fa-3"></i>
+                  Facebook</a></li>
+              <li><a href="http://ics-web.jp/blog/recruit" target="_blank">採用情報</a></li>
+              <li><a href="http://ics-web.jp/blog/" target="_blank">最新事例</a></li>
+              <li><a href="http://ics-web.jp/blog/contact" target="_blank">お問い合わせ</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-sections cf">
+
+      <div class="footer-section large">
+        <p class="widget_title">Three.jsのサンプル/事例</p>
+
+        <p>作例をみてThree.jsで実現可能な表現のインスピレーションを得ましょう。</p>
+        <ul>
+          <li><a href="https://threejs.org/examples/" target="_blank"><i class="fa fa-external-link"></i> examples</a></li>
+
+        </ul>
+      </div>
+
+      <div class="footer-section large">
+        <p class="widget_title">Three.jsの公式リファレンス</p>
+
+        <ul>
+          <li>
+            <a href="https://threejs.org/docs/" target="_blank"><i class="fa fa-external-link"></i>
+              Three.js docs (英語)</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section large">
+        <p class="widget_title">Three.js フォーラム</p>
+        <p>わからないことがあれば、フォーラムで質問してみましょう。</p>
+        <a href="https://qiita.com/tags/three.js/items" target="_blank"><i class="fa fa-external-link"></i> Qiita 技術情報共有サービス</a><br/>
+
+        <p class="widget_title">Three.js コミュニティー</p>
+        <a href="http://eventdots.jp/event/search?keyword=three.js&pref=&from=&to=&sort=started_desc" target="_blank"><i class="fa fa-external-link"></i> 勉強会・イベント一覧 (dots)</a><br/>
+      </div>
+
+    </div>
+
+    <div id="copyright">Copyright &copy; ICS INC. All Rights Reserved.</div>
+  </div>
+</body>
+</html>

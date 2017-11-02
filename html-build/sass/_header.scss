@@ -1,0 +1,181 @@
+#header-always {
+  background: #000000;
+  height: 42px;
+  color: #fff;
+
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  z-index: 100;
+
+  #header-wrap {
+
+    max-width: $contentWidth;
+    margin: 0 auto;
+    @include clearfix;
+    line-height: 42px;
+    height: 42px;
+
+    h1 {
+      float: left;
+      //margin-top: 8px; // CreateJS入門サイトはOFFにする
+      font-size: 1.0rem !important;// CreateJS入門サイトはOFFにする
+      line-height: 34px;
+
+      a {
+        display: block;
+        height: 26px;
+      }
+
+      @media (max-width: $mediaWidthLarge) {
+        padding: 0 $contentHorizontalPadding;
+      }
+
+      @media (max-width: $mediaWidthMedium) {
+        width: 100%;
+
+        a {
+          width: 180px;
+          overflow: hidden;
+          margin: 0 auto;
+        }
+      }
+    }
+
+    @media (max-width: $mediaWidthMedium) {
+      ul {
+        display: none;
+      }
+    }
+
+    ul {
+      float: right;
+
+      li {
+        display: block;
+        margin: 0;
+        float: left;
+
+        a {
+          display: block;
+          height: 42px;
+          width: 42px;
+          text-align: center;
+          font-size: 1.0rem;
+          line-height: 42px;
+          color: #CCC;
+          text-decoration: none;
+          padding: 0 0.5rem;
+
+          &:visited {
+            color: #CCC;
+          }
+
+          @include transition(all 0.6s);
+
+          &:hover {
+            @include transition(all 0.075s);
+            background: $colorBaseGray;
+            color: #FFF;
+          }
+          &:active {
+            @include transition(all 0.075s);
+            background: $colorBaseLightGray;
+            color: #FFF;
+          }
+        }
+      }
+    }
+  }
+
+  @include transition(all 0.3s ease);
+  &.active {
+
+    #header-breadcrumb {
+      top: 0px;
+      position: fixed;
+      background: rgba(0, 0, 0, 0.85);
+    }
+  }
+
+  #header-breadcrumb {
+    $itemHeight: 36px;
+    width: 100%;
+    z-index: 101;
+    background: rgba(0, 0, 0, 0.70);
+    color: #ccc;
+    font-size: 0.8rem;
+
+    height: $itemHeight;
+    //line-height: $itemHeight;
+    overflow: hidden;
+
+    @include transition(background 0.6s ease);
+
+    .wrap {
+      max-width: $contentWidth;
+      margin: 0 auto;
+      @include clearfix;
+
+      ul.breadcrumb {
+
+        float: left;
+        width: calc(100% - 160px - 5px);
+
+        /* Bootstrap の打ち消し */
+        padding: 0 5px 0 0;
+        margin-bottom: 0px;
+        background-color: inherit;
+
+        @media (max-width: $mediaWidthLarge) {
+          padding-left: $contentHorizontalPadding;
+        }
+
+        li {
+          /*
+          display: block;
+          float: left;
+          margin-right: 1rem;
+          */
+
+          line-height: $itemHeight;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          a {
+            @include transition(all 0.3s);
+
+            line-height: inherit;
+
+            &:hover {
+              color: #fff;
+            }
+            &:active {
+              color: $colorTextLinkActive;
+            }
+            /*
+            &:after {
+                content: "\f105";
+                font-family: FontAwesome;
+                padding-left: 0.5rem;
+                color: #666;
+            }
+            */
+          }
+
+          .date {
+            color: #888;
+          }
+        }
+      }
+    }
+
+    a, a:visited, a:hover, a:active {
+      color: #999;
+      text-decoration: none;
+    }
+  }
+
+}
+

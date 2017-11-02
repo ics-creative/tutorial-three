@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"noImplicitAny": true,
+		"removeComments": false,
+		"preserveConstEnums": true,
+		"out": "main.js",
+		"sourceMap": false,
+		"target": "es5"
+	},
+	"files": [
+        "main.ts"
+	]
+}
