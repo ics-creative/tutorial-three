@@ -1,0 +1,14 @@
+.DS_Store
+.idea
+*.iml
+tool-generate-captures/node_modules/*
+tool-generate-captures/.idea/workspace.xml
+
+html/styles/style-tutorial.css.map
+html/js/main.js.map
+html/*.html
+html/styles/.sass-cache/*
+html-build/.sass-cache
+html-build/node_modules
+html-build/typescript/main.js.map
+/tool-generate-captures/package-lock.json
