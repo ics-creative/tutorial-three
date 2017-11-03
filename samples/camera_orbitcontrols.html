@@ -28,11 +28,13 @@
       camera.position.y = 300;
       camera.position.z = 1000;
 
+      // カメラコントローラーを作成
       const controls = new THREE.OrbitControls(camera);
 
+      // 滑らかにカメラコントローラーを制御する
       controls.enableDamping = true;
       controls.dampingFactor = 0.2;
-      controls.enableZoom = true;
+
 
 
       // 平行光源を作成
@@ -83,11 +85,10 @@
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
-
-
         // 地球は常に回転させておく
         earthMesh.rotation.y += 0.00001;
 
+        // カメラコントローラーを更新
         controls.update();
 
         // レンダリング
