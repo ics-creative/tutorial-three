@@ -23,8 +23,9 @@ Three.jsを使って3Dコンテンツを作る準備をしていきましょう�
 - [入門編](quickstart.md)
 - [マテリアルとライティング](material_basic.md)
 - [ジオメトリ](geometry_general.md)
-- [カメラの制御方法](camera_position.md)
-- [モデルデータの読み込み（準備中）]
+- [カメラの制御方法（座標制御）](camera_position.md)
+- [カメラの制御方法（OrbitControls）](camera_orbitcontrols.md)
+- [モデルデータの読み込み](model_basic.md)
 
 ## 中級編
 

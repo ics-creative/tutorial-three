@@ -153,3 +153,9 @@ segments (セグメント)というパラメーターは二次元表現にはあ
 ### まとめ
 
 今回のチュートリアルでは、基本的な形状についての解説を行いました。**平面や直方体など基本的な形状を組み合わせるだけでも様々な3D表現を作ることができます**。ぜひサンプルを元に色々と試してみてください。
+
+[次の記事へ](camera_position.md)
+
+<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
+<article-date-published>2017-11-03</article-date-published>
+<article-date-modified>2017-11-03</article-date-modified>

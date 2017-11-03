@@ -8,7 +8,15 @@
 
 ## パーティクルのサンプル
 
-コードは次のように記述します。
+![](../imgs/points.png)
+
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/points.html)
+- [サンプルのソースコードを確認する](../samples/points.html)
+
+
+## この機能の使い方
+
+この機能を実現する部分を抜粋して解説します。
 
 
 ```js
@@ -37,18 +45,17 @@ const mesh = new THREE.Points(geometry, material);
 scene.add(mesh);
 ```
 
-## 
 
 少し長いので難しく思いますが、コードの手順は次の通りです。
 
-①空のジオメトリーを作る
+### ①空のジオメトリーを作る
 
 ```js
 // 形状データを作成
 const geometry = new THREE.Geometry();
 ```
 
-②ジオメトリーに頂点座標を加えていく
+### ②ジオメトリーに頂点座標を加えていく
 
 直方体エリア（一辺3000の距離）の中にランダムに1000個の粒子を配置します。`SIZE`と`LENGTH`変数で配置領域や個数をカスタマイズできるので、適宜調整ください。
 
@@ -67,7 +74,7 @@ for (let i = 0; i < LENGTH; i++) {
 }
 ```
 
-③専用のマテリアルを作る
+### ③専用のマテリアルを作る
 
 `THREE.PointsMaterial`という専用のクラスを使って、粒子のサイズや色を指定します。
 
@@ -80,7 +87,7 @@ const material = new THREE.PointsMaterial({
   color: 0xFFFFFF,
 });
 ```
-④手順1と3で作成したジオメトリーとマテリアルから、メッシュを作り、3D空間に配置する
+### ④手順1と3で作成したジオメトリーとマテリアルから、メッシュを作り、3D空間に配置する
 
 ```js
 const mesh = new THREE.Points(geometry, material);
@@ -94,8 +101,6 @@ scene.add(mesh);
 
 
 
-
-
-### まとめ
-
-今回のチュートリアルでは、基本的な形状についての解説を行いました。**平面や直方体など基本的な形状を組み合わせるだけでも様々な3D表現を作ることができます**。ぜひサンプルを元に色々と試してみてください。
+<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
+<article-date-published>2017-11-03</article-date-published>
+<article-date-modified>2017-11-03</article-date-modified>

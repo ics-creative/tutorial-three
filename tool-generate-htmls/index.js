@@ -4,8 +4,8 @@ const mkdirp = require('mkdirp');
 const highlightJs = require('highlight.js');
 
 let promises = [];
-let samplesUrl = 'https://ics-creative.github.io/tutorial-createjs/';
-let samplesHtmlUrl = 'https://github.com/ics-creative/tutorial-createjs/blob/gh-pages/';
+let samplesUrl = 'https://ics-creative.github.io/tutorial-three/';
+let samplesHtmlUrl = 'https://github.com/ics-creative/tutorial-three/blob/master/';
 let templateHtml;
 
 /**

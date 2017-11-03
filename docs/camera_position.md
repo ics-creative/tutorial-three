@@ -4,9 +4,9 @@
 
 ## カメラの制御を体験
 
-![](https://ics.media/wp-content/uploads/2014/10/141001_Three.js_1.jpg)
+![](https://ics.media/wp-content/uploads/2014/10/141001_away3d_1.jpg)
 
-- [デモを試す](https://ics.media/wp-content/data-demos/140930_angularjs_Three.js/src/index.html)
+- [デモを試す](https://ics.media/wp-content/data-demos/140930_angularjs_away3d/src/index.html)
 
 このデモでは**スライダーによって、カメラの位置と角度を制御できるようにしています**。「Camera Position」(座標)のXYZのそれぞれのスライダーを変更すると、カメラの位置が移動し地球の見え方が変わります。「Camera LookAt」(注視点)のトグルをONに設定しているので、常に3D空間の原点をカメラを向くように設定していますが、「Camera LookAt」のトグルを解除すると、自由にカメラの角度を変更できるようになります。カメラの角度にもXYZの3方向があり、それぞれの角度を変更することで見え方が変わります。
 
@@ -20,11 +20,10 @@ Three.jsはこのように3D空間内でカメラ(視点)を自由に移動・�
 
 ## 地球を中心としてカメラを回転させる
 
-![](https://ics.media/wp-content/uploads/2014/10/141001_Three.js_2.jpg)
+![](../imgs/camera_basic_earth.png)
 
-- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/camera_basic.html)
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/camera_basic_earth.html)
 - [サンプルのソースコードを確認する](../samples/camera_basic_earth.html)
-
 
 
 このサンプルでは地球を中心として**カメラが円周上を自動的に移動**します。カメラの位置の設定は`camera`オブジェクトの`position`プロパティーに数値を代入します。
@@ -57,11 +56,11 @@ view.camera.z = 円周の半径 * Math.cos(角度 * Math.PI / 180);
 
 ## マウスの座標に応じて回転させる
 
-![](https://ics.media/wp-content/uploads/2014/10/141001_Three.js_3.jpg)
 
+![](../imgs/camera_mouse_x.png)
 
-- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/camera_mosue_x.html)
-- [サンプルのソースコードを確認する](../samples/camera_mosue_x.html)
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/camera_mouse_x.html)
+- [サンプルのソースコードを確認する](../samples/camera_mouse_x.html)
 
 
 このサンプルでは地球を中心として、**マウスの横の移動に対してカメラが移動**します。せっかくのWebGLですのでインタラクティブ性があったほうが面白いですよね。**マウスの位置に応じてカメラの位置を制御する**スクリプトは次となります。(一部抜粋)
@@ -124,3 +123,9 @@ rot += (targetRot - rot) * 0.02;
 今回はカメラの動かし方について、基本的なパターンを演習しました。Three.jsで説明していますが、**類似の3Dフレームワーク(例えば、AwayJSなど)でも同じように利用することができます。**今回のチュートリアルではThree.jsの使い方の理解というよりは、3Dの基本的な制御の理解という認識をもっていただければ幸いです。
 
 次は手軽にカメラの操作ができるコントローラーを解説します。
+
+[次の記事へ](camera_orbitcontrols.md)
+
+<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
+<article-date-published>2017-11-03</article-date-published>
+<article-date-modified>2017-11-03</article-date-modified>

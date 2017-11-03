@@ -1,11 +1,6 @@
 # Three.jsのOrbitControlsで手軽にカメラを制御する
 
 
-
-## OrbitControlsで制御する
-
-![](https://ics.media/wp-content/uploads/2014/10/141001_Three.js_4.jpg)
-
 Three.jsには**カメラの動きを自動的に制御する `THREE.OrbitControls` クラスが存在**します。
 
 
@@ -82,6 +77,15 @@ function tick() {
 }
 ```
 
+
+![](../imgs/camera_orbitcontrols_basic.png)
+
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/camera_orbitcontrols_basic.html)
+- [サンプルのソースコードを確認する](../samples/camera_orbitcontrols_basic.html)
+
+
+
+
 ### 滑らかにコントロールする
 
 `enableDamping`や`dampingFactor`プロパティーを設定すると、ドラッグ時にカメラが滑らかに動くようになります。デフォルトだと機械的な動きになってしまいますが、これらのプロパティーを設定するだけで心地いい使い勝手となります。
@@ -116,9 +120,23 @@ function tick() {
 }
 ```
 
+
+![](../imgs/camera_orbitcontrols.png)
+
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/camera_orbitcontrols.html)
+- [サンプルのソースコードを確認する](../samples/camera_orbitcontrols.html)
+
+
+
 ## まとめ
 
 カメラを手軽に制御できるので、小さな作例ではOrbitControlsを使われることが多いです。ただし、手軽である分、カスタマイズの自由度の制限があるので、細かいカメラワークを作ろうとしたらOrbitControlsでは物足りません。カメラの制御はいろんなコードを書いて自作して覚えていくといいでしょう。
 
 
 次回の記事では、モデリングデータの読み込み方法を説明します。
+
+[次の記事へ](model_basic.md)
+
+<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
+<article-date-published>2017-11-03</article-date-published>
+<article-date-modified>2017-11-03</article-date-modified>
