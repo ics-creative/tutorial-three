@@ -12,3 +12,5 @@ html-build/.sass-cache
 html-build/node_modules
 html-build/typescript/main.js.map
 /tool-generate-captures/package-lock.json
+/tool-generate-htmls/package-lock.json
+/tool-generate-htmls/yarn.lock
