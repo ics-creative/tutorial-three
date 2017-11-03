@@ -16,7 +16,7 @@
     function init() {
       // レンダラーを作成
       const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#myCanvas')
+        canvas: document.querySelector('#myCanvas'),
       });
       renderer.setSize(width, height);
 
@@ -33,8 +33,8 @@
 
       // マテリアルを作成
       const material = new THREE.MeshPhongMaterial({
-        map: new THREE.TextureLoader().load("imgs/earthmap1k.jpg"),
-        side: THREE.DoubleSide
+        map: new THREE.TextureLoader().load('imgs/earthmap1k.jpg'),
+        side: THREE.DoubleSide,
       });
 
       // 球体の形状を作成します
@@ -50,14 +50,11 @@
       function createStarField() {
         // 形状データを作成
         const geometry = new THREE.Geometry();
-        // 個数は日付の数に比例させる
-        const numParticles = 1000;
-        const SIZE = 3000;
-        for (let i = 0; i < numParticles; i++) {
+        for (let i = 0; i < 1000; i++) {
           geometry.vertices.push(new THREE.Vector3(
-            SIZE * (Math.random() - 0.5),
-            SIZE * (Math.random() - 0.5),
-            SIZE * (Math.random() - 0.5),
+            3000 * (Math.random() - 0.5),
+            3000 * (Math.random() - 0.5),
+            3000 * (Math.random() - 0.5),
           ));
         }
         // マテリアルを作成
@@ -73,7 +70,7 @@
 
 
       // マウス座標はマウスが動いた時のみ取得できる
-      document.addEventListener("mousemove", (event) => {
+      document.addEventListener('mousemove', (event) => {
         mouseX = event.pageX;
       });
 

@@ -3,15 +3,17 @@
 <head>
   <meta charset="utf-8"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
+  <script src="js/controls/OrbitControls.js"></script>
   <script>
     // ページの読み込みを待つ
     window.addEventListener('load', init);
 
+
     function init() {
+
       // サイズを指定
       const width = 960;
       const height = 540;
-      let rot = 0;
 
       // レンダラーを作成
       const renderer = new THREE.WebGLRenderer({
@@ -24,29 +26,24 @@
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+      // カメラの初期座標を設定
+      camera.position.set(0, 0, 1000);
 
-      // 直方体を作成
-      const material = new THREE.MeshNormalMaterial({wireframe: true});
-      const geometry = new THREE.SphereGeometry(300, 30, 30);
-      const mesh = new THREE.Mesh(geometry, material);
+      // カメラコントローラーを作成
+      const controls = new THREE.OrbitControls(camera);
+
+      // 形状とマテリアルからメッシュを作成します
+      const mesh = new THREE.Mesh(
+        new THREE.BoxGeometry(300, 300, 300),
+        new THREE.MeshNormalMaterial());
       scene.add(mesh);
 
       tick();
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
-        rot += 0.5; // 毎フレーム角度を0.5度ずつ足していく
-        // ラジアンに変換する
-        const radian = rot * Math.PI / 180;
-        // 角度に応じてカメラの位置を設定
-        camera.position.x = 1000 * Math.sin(radian);
-        camera.position.z = 1000 * Math.cos(radian);
-        // 原点方向を見つめる
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
-
         // レンダリング
         renderer.render(scene, camera);
-
         requestAnimationFrame(tick);
       }
     }

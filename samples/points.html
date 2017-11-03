@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
-  <script src="js/controls/OrbitControls.js"></script>
   <script>
     // ページの読み込みを待つ
     window.addEventListener('load', init);
@@ -11,11 +10,12 @@
     // サイズを指定
     const width = 960;
     const height = 540;
+    let rot = 0; // 角度
 
     function init() {
       // レンダラーを作成
       const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#myCanvas')
+        canvas: document.querySelector('#myCanvas'),
       });
       renderer.setSize(width, height);
 
@@ -24,33 +24,6 @@
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
-      // カメラの初期座標を設定
-      camera.position.set(0, 0, 1000);
-
-      // カメラコントローラーを作成
-      const controls = new THREE.OrbitControls(camera);
-
-      // 滑らかにカメラコントローラーを制御する
-      controls.enableDamping = true;
-      controls.dampingFactor = 0.2;
-
-
-      // 平行光源を作成
-      const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
-      directionalLight.position.set(1, 1, 1);
-      scene.add(directionalLight);
-
-      // マテリアルを作成
-      const material = new THREE.MeshPhongMaterial({
-        map: new THREE.TextureLoader().load("imgs/earthmap1k.jpg")
-      });
-
-      // 球体の形状を作成します
-      const geometry = new THREE.SphereGeometry(300, 30, 30);
-      // 形状とマテリアルからメッシュを作成します
-      const earthMesh = new THREE.Mesh(geometry, material);
-      // シーンにメッシュを追加します
-      scene.add(earthMesh);
 
       // 星屑を作成します (カメラの動きをわかりやすくするため)
       createStarField();
@@ -58,10 +31,11 @@
       function createStarField() {
         // 形状データを作成
         const geometry = new THREE.Geometry();
-        // 個数は日付の数に比例させる
-        const numParticles = 1000;
+        // 配置する範囲
         const SIZE = 3000;
-        for (let i = 0; i < numParticles; i++) {
+        // 配置する個数
+        const LENGTH = 1000;
+        for (let i = 0; i < LENGTH; i++) {
           geometry.vertices.push(new THREE.Vector3(
             SIZE * (Math.random() - 0.5),
             SIZE * (Math.random() - 0.5),
@@ -70,8 +44,10 @@
         }
         // マテリアルを作成
         const material = new THREE.PointsMaterial({
+          // 一つ一つのサイズ
           size: 10,
-          color: 0xFFFFFF
+          // 色
+          color: 0xFFFFFF,
         });
 
         // 物体を作成
@@ -79,15 +55,20 @@
         scene.add(mesh);
       }
 
+
       tick();
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
-        // 地球は常に回転させておく
-        earthMesh.rotation.y += 0.00001;
+        rot += 1;
 
-        // カメラコントローラーを更新
-        controls.update();
+        // ラジアンに変換する
+        const radian = rot * Math.PI / 180;
+        // 角度に応じてカメラの位置を設定
+        camera.position.x = 1000 * Math.sin(radian);
+        camera.position.z = 1000 * Math.cos(radian);
+        // 原点方向を見つめる
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
 
         // レンダリング
         renderer.render(scene, camera);
