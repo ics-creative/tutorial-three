@@ -3,6 +3,8 @@ const marked = require('marked');
 const mkdirp = require('mkdirp');
 const highlightJs = require('highlight.js');
 
+const IGNORE_LIST = ['.DS_Store'];
+
 let promises = [];
 let samplesUrl = 'https://ics-creative.github.io/tutorial-three/';
 let samplesHtmlUrl = 'https://github.com/ics-creative/tutorial-three/blob/master/';
@@ -177,12 +179,17 @@ fs.readdir('../docs', (err, files) => {
       resolve();
     });
   }));
+
+
   for (let i = 0; i < files.length; i++) {
+
     let filename = files[i];
-    let childPromise = new Promise((resolve) => {
-      generateHTML('', filename, resolve);
-    });
-    promises.push(childPromise);
+    if (IGNORE_LIST.includes(filename) === false) {
+      let childPromise = new Promise((resolve) => {
+        generateHTML('', filename, resolve);
+      });
+      promises.push(childPromise);
+    }
   }
   Promise
     .all(promises)
