@@ -7,17 +7,18 @@
     // ページの読み込みを待つ
     window.addEventListener('load', init);
 
-    // サイズを指定
-    const width = 960;
-    const height = 540;
-    let rot = 0; // 角度
-    // マウスを押した状態かどうかを判別するフラグ
-    let isMouseDown = false;
-    // 一時的なマウスの値を格納する変数
-    let oldX = 0;
-    let targetRot = 0;
-
     function init() {
+
+      // サイズを指定
+      const width = 960;
+      const height = 540;
+      let rot = 0; // 角度
+      // マウスを押した状態かどうかを判別するフラグ
+      let isMouseDown = false;
+      // 一時的なマウスの値を格納する変数
+      let oldX = 0;
+      let targetRot = 0;
+
       // レンダラーを作成
       const renderer = new THREE.WebGLRenderer({
         canvas: document.querySelector('#myCanvas'),
