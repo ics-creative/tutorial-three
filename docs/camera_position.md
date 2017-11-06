@@ -120,7 +120,7 @@ rot += (targetRot - rot) * 0.02;
 
 
 ## まとめ
-今回はカメラの動かし方について、基本的なパターンを演習しました。Three.jsで説明していますが、**類似の3Dフレームワーク(例えば、AwayJSなど)でも同じように利用することができます。**今回のチュートリアルではThree.jsの使い方の理解というよりは、3Dの基本的な制御の理解という認識をもっていただければ幸いです。
+今回はカメラの動かし方について、基本的なパターンを演習しました。Three.jsで説明していますが、**類似の3Dフレームワーク(例えば、AwayJSやBabylon.jsなど)でも同じように利用することができます**。今回のチュートリアルではThree.jsの使い方の理解というよりは、3Dの基本的な制御の理解という認識をもっていただければ幸いです。
 
 次は手軽にカメラの操作ができるコントローラーを解説します。
 
@@ -128,4 +128,4 @@ rot += (targetRot - rot) * 0.02;
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-03</article-date-published>
-<article-date-modified>2017-11-03</article-date-modified>
+<article-date-modified>2017-11-06</article-date-modified>

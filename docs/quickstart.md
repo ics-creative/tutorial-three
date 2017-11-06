@@ -7,54 +7,15 @@
 
 ▲Three.jsの公式サイト
 
-ライブラリのセットアップから3D画面への表示および直方体の回転までを紹介します。手順通りに進めば、10分くらいで作業が完了できると思います。
+ライブラリのセットアップから3D画面への表示および直方体の回転までを紹介します。手順通りに進めば、20分くらいで作業が完了できると思います。
 
 ![](../imgs/quickstart.png)
 
 - [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/quickstart.html)
 - [サンプルのソースコードを確認する](../samples/quickstart.html)
 
-ちなみに前提としてThree.jsはWebGL対応のブラウザが必須となりますので、動作確認はFirefoxやChrome、Safari、Edgeなどを使うといいでしょう。
 
-## canvas要素を用意する
-
-Three.jsはHTML5の`canvas`要素を利用します。`canvas`要素はコンテンツを表示する描画エリアとなります。`canvas`要素には属性として`id`(ID値)を最低限設定しておきましょう。
-
-```html
-<body>
-  <canvas id="myCanvas"></canvas>
-</body>
-```
-
-`canvas`要素の大きさは後ほど、JavaScriptで設定します。
-
-
-## JSライブラリを読み込む
-
-
-次にJavaScriptライブラリを読み込みます。CreateJSはJavaScriptのライブラリですが、これを読み込むことによってはじめてThree.jsが利用できるようになります。
-
-```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
-```
-
-具体的な処理はページの読み込みが終わってから実行させます。`addEventListener()`関数を使って`load`イベントが発生するのを監視させ、ページが読み込み終わったときに実行させたい関数を指定します。この関数`init()`の中にThree.jsのコードを書いていきます。
-
-```html
-<script>
-window.addEventListener('load', init);
-function init(){
-  // 処理
-}
-</script>
-```
-
-
-
-
-## 3D表示用のJavaScriptを用意
-
-ここからは様々な方法がありますが、その中でも私が最も一番手軽だと思う方法を紹介します。コンテンツ用のJSファイルに次のJavaScriptのコードを記述してみましょう。
+まずはHTMLファイルを用意して、次のコードを貼り付けて試してください。
 
 ```html
 <!DOCTYPE html>
@@ -114,21 +75,191 @@ function init(){
 </html>
 ```
 
-ここまでの設定がうまくいっていれば、ブラウザの画面上に単色の直方体が回転します。
+ブラウザの画面上に単色の直方体が回転します。
+
+ちなみに前提としてThree.jsはWebGL対応のブラウザが必須となりますので、動作確認はFirefoxやChrome、Safari、Edgeなどを使うといいでしょう。
+
+また、WebGLはローカルファイルのセキュリティーの制限があるため、ローカルサーバー上で実行することをオススメします。ローカルサーバーの構築方法がわからなければ、エディターの「[Brackets](http://brackets.io/)」がボタン一つで実行できるのでオススメです。
+
+ここからは、上記のコードを解説していくので、一つ一つ理解していきましょう。
+
+## canvas要素を用意する
+
+Three.jsはHTML5の`canvas`要素を利用します。`canvas`要素はコンテンツを表示する描画エリアとなります。`canvas`要素には属性として`id`(ID値)を最低限設定しておきましょう。
+
+```html
+<body>
+  <canvas id="myCanvas"></canvas>
+</body>
+```
+
+`canvas`要素の大きさはJavaScriptを使って設定します。
 
 
-このサンプルでは次の手順の処理を実装しています。
+## JSライブラリを読み込む
 
-1.  ページが読み込まれてから初期化用の関数が実行されるように指定
-2.  Three.jsの土台となる`THREE.Scene`, `THREE.Scene`, `THREE.PerspectiveCamera`クラスのインスタンスを作成
-3.  直方体の形状を作成し、赤色のマテリアルを指定
-4.  時間間経過で関数を呼び出すために`tick`関数を用意
-5.  時間経過で回転するように`rotation.y`プロパティの数値を加算
-6.  レンダリングを実行
+Three.jsはJavaScriptのライブラリですが、このファイルを読み込むことによってはじめてThree.jsが利用できるようになります。
+
+CDN（コンテンツ・デリバリー・ネットワーク）で提供されているURLを使うのが導入にお手軽です。
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
+```
+
+WebGLの処理はページの読み込みが終わってから実行させます。`addEventListener()`関数を使って`load`イベントが発生するのを監視させ、ページが読み込み終わったときに実行させたい関数を指定します。この関数`init()`の中にThree.jsのコードを書いていきます。
+
+```html
+<script>
+window.addEventListener('load', init);
+function init(){
+  // 処理
+}
+</script>
+```
+
+## 3D表示用のJavaScriptを用意
+
+WebGLのレンダリングをするためのレンダラーを作成します。`THREE.WebGLRenderer`クラスのコンストラクターには引数として、HTMLに配置した`canvas`要素を指定し、連携させます。
+
+```js
+const renderer = new THREE.WebGLRenderer({
+  canvas: document.querySelector('#myCanvas')
+});
+
+```
+
+デフォルトではレンダラーのサイズが小さいため、`setSize()`メソッドでサイズを設定します。今回のデモでは幅960px、高さ540pxを設定しています。
+
+```js
+renderer.setSize(width, height);
+```
+
+
+## シーンを作成する
+
+シーンを作成します。シーンとは3D空間のことで、3Dオブジェクトや光源などの置き場となります。
+
+```js
+const scene = new THREE.Scene();
+```
+
+## カメラを作る
+
+3Dではどの視点から空間を撮影するか、という実装をします。この機能は「視点」や「カメラ」と呼ばれます。
+
+Three.jsでは`THREE.PerspectiveCamera`クラスのコンストラクターで画角、アスペクト比、描画開始距離、描画終了距離の４つの情報を引数として渡しカメラを作成します。
+
+```js
+// new THREE.PerspectiveCamera(画角, アスペクト比, 描画開始距離, 描画終了距離)
+const camera = new THREE.PerspectiveCamera(45, 800 / 600, 1, 10000);
+```
+
+## 立方体を作る
+
+立方体はメッシュという表示オブジェクトを使用して作成します。メッシュを作るには、ジオメトリ(形状)とマテリアル(素材)の二種類を用意する必要があります。
+
+ジオメトリとは頂点情報や面情報を持っています。Three.jsにはさまざまなジオメトリが用意されていますが、今回は立方体や直方体のような箱状の形状を生成するための`BoxGeometry`を使用します。
+
+```js
+// new THREE.BoxGeometry(幅, 高さ, 奥行き)
+const geometry = new THREE.BoxGeometry(500, 500, 500);
+```
+
+マテリアルは色や質感の情報を持っています。今回は赤色の箱を表示させたいので、以下のようにマテリアルを生成します。
+
+```js
+const material = new THREE.MeshPhongMaterial({ color: 0xFF0000 });
+```
+
+作成したジオメトリとマテリアルを使って、メッシュを作ります。作成したメッシュをシーンに追加しましょう。
+
+```js
+// new THREE.Mesh(ジオメトリ,マテリアル)
+const box = new THREE.Mesh(geometry, material);
+// シーンに追加
+scene.add(box);
+
+```
+
+## ライトを作る
+
+このままでは真っ暗なのでライトを作成します。
+
+```js
+// new THREE.DirectionalLight(色)
+const light = new THREE.DirectionalLight(0xFFFFFF);
+// シーンに追加
+scene.add(light);
+```
+
+`DirectionalLight`は平行光源は太陽光のように一定方向から差し込む光です。ライトもシーンに追加することで反映されます。光源が斜めから差し込むように位置も変更しておきましょう。
+
+```js
+// ライトの位置を変更
+light.position.set(1, 1, 1);
+```
+
+## アニメーション
+
+JavaScriptでアニメーションをさせるには、時間経過で関数を呼び続ける必要があります。そのためには、`requestAnimationFrame()`というグローバルメソッドを使用します。`requestAnimationFrame()`は引数として渡された関数を、毎フレーム実行します。
+
+
+```js
+// 初回実行
+tick();
+ 
+function tick() {
+  requestAnimationFrame(tick);
+
+  // アニメーション処理をここに書く
+}
+```
+
+
+次に、Three.jsの表示結果を更新する命令を書きます。Three.jsでは自動的に画面が最新に切り替わらないので、明示的に画面が更新されるように命令を書く必要があります。`renderer.render()`という命令で更新を指示できます。
+
+
+```js
+// 初回実行
+tick();
+ 
+function tick() {
+  requestAnimationFrame(tick);
+
+  // アニメーション処理をここに書く
+
+  renderer.render(scene, camera); // レンダリング
+}
+```
+
+
+
+アニメーションの処理として、立方体が回転するようにしてみましょう。時間経過で回転するように`rotation.y`プロパティの数値を加算しています。
+
+```js
+// 初回実行
+tick();
+ 
+function tick() {
+  requestAnimationFrame(tick);
+
+  // アニメーション処理をここに書く
+  box.rotation.y += 0.01;
+  renderer.render(scene, camera); // レンダリング
+}
+```
+
+以上がサンプルの解説となります。
 
 ## Three.jsの基本構造
 
-上記のコードで出現した基本的なThree.jsの機能について紹介します。
+上記のコードで出現したThree.jsの基本機能について紹介します。
+
+![](https://ics.media/wp-content/uploads/2017/01/concept.png)
+
+
+図：Three.jsを構成する基本的なオブジェクトと表示の仕組み  
+ビュー(HTMLのcanvasタグ)が実際に表示される画面となります。
 
 
 **THREE.Sceneクラス**
@@ -145,11 +276,7 @@ function init(){
 3D空間のレンダリングを行います。レンダリングとは、Three.jsで計算した3Dのオブジェクトを画面に表示することです。内部的にはThree.jsがWebGLのAPIを使って、GPUで座標を計算させ画面に表示させています。Three.jsでは`requestAnimationFrame`のタイミングにあわせて、レンダリングを行うように設定しましょう。
 
 
-![](https://ics.media/wp-content/uploads/2017/01/concept.png)
 
-
-図：Three.jsを構成する基本的なオブジェクトと表示の仕組み  
-ビュー(HTMLのcanvasタグ)が実際に表示される画面となります。
 
 
 
@@ -165,4 +292,4 @@ function init(){
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2017-11-02</article-date-modified>
+<article-date-modified>2017-11-06</article-date-modified>

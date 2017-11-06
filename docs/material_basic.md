@@ -15,66 +15,54 @@
 
 具体的にJavaScriptで実装してみましょう。Three.jsのライブラリを準備した後、次のスクリプトを貼付けてブラウザで確認ください。
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
-  <script>
-    // ページの読み込みを待つ
-    window.addEventListener('load', init);
+```js
+// ページの読み込みを待つ
+window.addEventListener('load', init);
 
-    // サイズを指定
-    const width = 960;
-    const height = 540;
+// サイズを指定
+const width = 960;
+const height = 540;
 
-    function init() {
-      // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#myCanvas')
-      });
-      renderer.setSize(width, height);
+function init() {
+  // レンダラーを作成
+  const renderer = new THREE.WebGLRenderer({
+    canvas: document.querySelector('#myCanvas')
+  });
+  renderer.setSize(width, height);
 
-      // シーンを作成
-      const scene = new THREE.Scene();
+  // シーンを作成
+  const scene = new THREE.Scene();
 
-      // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
-      camera.position.set(0, 0, +1000);
+  // カメラを作成
+  const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+  camera.position.set(0, 0, +1000);
 
-      // 球体を作成
-      const geometry = new THREE.SphereGeometry(300, 30, 30);
-      const material = new THREE.MeshPhongMaterial({color: 0xFF0000});
-      // メッシュを作成
-      const mesh = new THREE.Mesh(geometry, material);
-      // 3D空間にメッシュを追加
-      scene.add(mesh);
+  // 球体を作成
+  const geometry = new THREE.SphereGeometry(300, 30, 30);
+  const material = new THREE.MeshPhongMaterial({color: 0xFF0000});
+  // メッシュを作成
+  const mesh = new THREE.Mesh(geometry, material);
+  // 3D空間にメッシュを追加
+  scene.add(mesh);
 
-      // 平行光源
-      const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
-      directionalLight.position.set(1, 1, 1);
-      // シーンに追加
-      scene.add(directionalLight);
+  // 平行光源
+  const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
+  directionalLight.position.set(1, 1, 1);
+  // シーンに追加
+  scene.add(directionalLight);
 
-      tick();
+  tick();
 
-      // 毎フレーム時に実行されるループイベントです
-      function tick() {
-        // メッシュを回転させる
-        mesh.rotation.y += 0.01;
-        // レンダリング
-        renderer.render(scene, camera);
+  // 毎フレーム時に実行されるループイベントです
+  function tick() {
+    // メッシュを回転させる
+    mesh.rotation.y += 0.01;
+    // レンダリング
+    renderer.render(scene, camera);
 
-        requestAnimationFrame(tick);
-      }
-    }
-  </script>
-</head>
-<body>
-  <canvas id="myCanvas"></canvas>
-</body>
-</html>
+    requestAnimationFrame(tick);
+  }
+}
 ```
 
 すると次の球体が作成されたと思います。
@@ -132,71 +120,59 @@ Three.jsで使用できるライティングには以下の種類があります
 準備ができましたら次のJavaScriptを使って試してみましょう。
 
 ```js
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
-  <script>
-    // ページの読み込みを待つ
-    window.addEventListener('load', init);
+// ページの読み込みを待つ
+window.addEventListener('load', init);
 
-    // サイズを指定
-    const width = 960;
-    const height = 540;
+// サイズを指定
+const width = 960;
+const height = 540;
 
-    function init() {
-      // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#myCanvas')
-      });
-      renderer.setSize(width, height);
+function init() {
+  // レンダラーを作成
+  const renderer = new THREE.WebGLRenderer({
+    canvas: document.querySelector('#myCanvas')
+  });
+  renderer.setSize(width, height);
 
-      // シーンを作成
-      const scene = new THREE.Scene();
+  // シーンを作成
+  const scene = new THREE.Scene();
 
-      // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
-      camera.position.set(0, 0, +1000);
+  // カメラを作成
+  const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+  camera.position.set(0, 0, +1000);
 
-      // 球体を作成
-      const geometry = new THREE.SphereGeometry(300, 30, 30);
-      // 画像を読み込む
-      const loader = new THREE.TextureLoader();
-      const texture = loader.load('imgs/earthmap1k.jpg');
-      // マテリアルにテクスチャーを設定
-      const material = new THREE.MeshPhongMaterial({
-        map: texture
-      });
-      // メッシュを作成
-      const mesh = new THREE.Mesh(geometry, material);
-      // 3D空間にメッシュを追加
-      scene.add(mesh);
+  // 球体を作成
+  const geometry = new THREE.SphereGeometry(300, 30, 30);
+  // 画像を読み込む
+  const loader = new THREE.TextureLoader();
+  const texture = loader.load('imgs/earthmap1k.jpg');
+  // マテリアルにテクスチャーを設定
+  const material = new THREE.MeshPhongMaterial({
+    map: texture
+  });
+  // メッシュを作成
+  const mesh = new THREE.Mesh(geometry, material);
+  // 3D空間にメッシュを追加
+  scene.add(mesh);
 
-      // 平行光源
-      const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
-      directionalLight.position.set(1, 1, 1);
-      // シーンに追加
-      scene.add(directionalLight);
+  // 平行光源
+  const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
+  directionalLight.position.set(1, 1, 1);
+  // シーンに追加
+  scene.add(directionalLight);
 
-      tick();
+  tick();
 
-      // 毎フレーム時に実行されるループイベントです
-      function tick() {
-        // メッシュを回転させる
-        mesh.rotation.y += 0.01;
-        // レンダリング
-        renderer.render(scene, camera);
+  // 毎フレーム時に実行されるループイベントです
+  function tick() {
+    // メッシュを回転させる
+    mesh.rotation.y += 0.01;
+    // レンダリング
+    renderer.render(scene, camera);
 
-        requestAnimationFrame(tick);
-      }
-    }
-  </script>
-</head>
-<body>
-  <canvas id="myCanvas"></canvas>
-</body>
-</html>
+    requestAnimationFrame(tick);
+  }
+}
 ```
 
 画像を使うには読み込み処理を作る必要があります。`THREE.TextureLoader`クラスを使って次のようにファイルパスを指定します。
@@ -217,6 +193,17 @@ const material = new THREE.MeshPhongMaterial({
 - [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/material_texture.html)
 - [サンプルのソースコードを確認する](../samples/material_texture.html)
 
+
+わかりやすいように変数に格納して記述しましたが、コンパクトに書きたい場合は次のように記述できます。処理内容はさきほどと同じです。
+
+```js
+// マテリアルにテクスチャーを設定
+const material = new THREE.MeshPhongMaterial({
+  map: new THREE.TextureLoader().load('imgs/earthmap1k.jpg')
+});
+```
+
+
 ## まとめ
 
 今回のチュートリアルでは、マテリアルとライティングについての解説を行いました。3Dオブジェクトの見栄えを構成する要素のため、コーディングの結果がすぐに見た目に反映され、3Dのプログラミングにおいてとても楽しい部分です。ぜひサンプルを元に色々と試してみてください。
@@ -228,4 +215,4 @@ const material = new THREE.MeshPhongMaterial({
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2017-11-02</article-date-modified>
+<article-date-modified>2017-11-06</article-date-modified>
