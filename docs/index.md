@@ -37,6 +37,7 @@ Three.jsには多彩な機能が存在します。機能を習得すればする
 
 - [様々なマテリアル](material_variation.md)
 - [パーティクルを大量に表示](points.md)
+- [ジオメトリの結合](geometry_merge.md)
 
 ## Three.js 数値計算
 
@@ -96,4 +97,4 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2017-11-06</article-date-modified>
+<article-date-modified>2017-11-08</article-date-modified>
