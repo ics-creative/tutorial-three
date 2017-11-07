@@ -33,8 +33,9 @@ WebGLだけで3D表現をするためには、立方体一つ表示するだけ�
 
 Three.jsには多彩な機能が存在します。機能を習得すればするほど、実現できる表現が増えていくでしょう。
 
-![](../imgs/points.png)
+![](../imgs/material_variation_toon.png)
 
+- [様々なマテリアル](material_variation.md)
 - [パーティクルを大量に表示](points.md)
 
 ## Three.js 数値計算
