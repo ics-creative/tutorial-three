@@ -76,7 +76,7 @@ for (let i = 0; i < LENGTH; i++) {
 
 ### ③専用のマテリアルを作る
 
-`THREE.PointsMaterial`という専用のクラスを使って、粒子のサイズや色を指定します。
+`THREE.PointsMaterial`という専用のクラスを使って、粒子のサイズや色を指定します。`THREE.PointsMaterial`クラスは形状を持たない為、視点が変化しても常に正面を向いて表示されます。
 
 ```js
 // マテリアルを作成
