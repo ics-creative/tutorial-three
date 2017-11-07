@@ -23,7 +23,7 @@
       const scene = new THREE.Scene();
 
       // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+      const camera = new THREE.PerspectiveCamera(45, width / height);
       camera.position.set(0, 0, +1000);
 
       // 球体を作成
@@ -32,7 +32,7 @@
       const loader = new THREE.TextureLoader();
       const texture = loader.load('imgs/earthmap1k.jpg');
       // マテリアルにテクスチャーを設定
-      const material = new THREE.MeshPhongMaterial({
+      const material = new THREE.MeshStandardMaterial({
         map: texture
       });
       // メッシュを作成
@@ -50,8 +50,6 @@
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
-        // メッシュを回転させる
-        mesh.rotation.y += 0.01;
         // レンダリング
         renderer.render(scene, camera);
 

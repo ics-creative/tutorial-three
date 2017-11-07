@@ -17,26 +17,21 @@
       const renderer = new THREE.WebGLRenderer({
         canvas: document.querySelector('#myCanvas')
       });
+      renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(width, height);
 
       // シーンを作成
       const scene = new THREE.Scene();
 
       // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+      const camera = new THREE.PerspectiveCamera(45, width / height);
       camera.position.set(0, 0, +1000);
 
       // 箱を作成
-      const geometry = new THREE.BoxGeometry(500, 500, 500);
-      const material = new THREE.MeshPhongMaterial({color: 0xFF0000});
+      const geometry = new THREE.BoxGeometry(400, 400, 400);
+      const material = new THREE.MeshNormalMaterial();
       const box = new THREE.Mesh(geometry, material);
       scene.add(box);
-
-      // 平行光源
-      const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
-      directionalLight.position.set(1, 1, 1);
-      // シーンに追加
-      scene.add(directionalLight);
 
       tick();
 

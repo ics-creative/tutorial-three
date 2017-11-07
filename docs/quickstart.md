@@ -27,35 +27,31 @@
     // ページの読み込みを待つ
     window.addEventListener('load', init);
 
-    // サイズを指定
-    const width = 960;
-    const height = 540;
-
     function init() {
+
+      // サイズを指定
+      const width = 960;
+      const height = 540;
+
       // レンダラーを作成
       const renderer = new THREE.WebGLRenderer({
         canvas: document.querySelector('#myCanvas')
       });
+      renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(width, height);
 
       // シーンを作成
       const scene = new THREE.Scene();
 
       // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+      const camera = new THREE.PerspectiveCamera(45, width / height);
       camera.position.set(0, 0, +1000);
 
       // 箱を作成
-      const geometry = new THREE.BoxGeometry(500, 500, 500);
-      const material = new THREE.MeshPhongMaterial({color: 0xFF0000});
+      const geometry = new THREE.BoxGeometry(400, 400, 400);
+      const material = new THREE.MeshNormalMaterial();
       const box = new THREE.Mesh(geometry, material);
       scene.add(box);
-
-      // 平行光源
-      const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
-      directionalLight.position.set(1, 1, 1);
-      // シーンに追加
-      scene.add(directionalLight);
 
       tick();
 
@@ -131,7 +127,7 @@ const renderer = new THREE.WebGLRenderer({
 デフォルトではレンダラーのサイズが小さいため、`setSize()`メソッドでサイズを設定します。今回のデモでは幅960px、高さ540pxを設定しています。
 
 ```js
-renderer.setSize(width, height);
+renderer.setSize(960, 540);
 ```
 
 
@@ -150,8 +146,8 @@ const scene = new THREE.Scene();
 Three.jsでは`THREE.PerspectiveCamera`クラスのコンストラクターで画角、アスペクト比、描画開始距離、描画終了距離の４つの情報を引数として渡しカメラを作成します。
 
 ```js
-// new THREE.PerspectiveCamera(画角, アスペクト比, 描画開始距離, 描画終了距離)
-const camera = new THREE.PerspectiveCamera(45, 800 / 600, 1, 10000);
+// new THREE.PerspectiveCamera(画角, アスペクト比
+const camera = new THREE.PerspectiveCamera(45, 960 / 540);
 ```
 
 ## 立方体を作る
@@ -165,10 +161,10 @@ const camera = new THREE.PerspectiveCamera(45, 800 / 600, 1, 10000);
 const geometry = new THREE.BoxGeometry(500, 500, 500);
 ```
 
-マテリアルは色や質感の情報を持っています。今回は赤色の箱を表示させたいので、以下のようにマテリアルを生成します。
+マテリアルは色や質感の情報を持っています。今回はとりあえず箱を表示させたいので、`THREE.MeshNormalMaterial`という適当なカラーを割り振るマテリアルを生成します。
 
 ```js
-const material = new THREE.MeshPhongMaterial({ color: 0xFF0000 });
+const material = new THREE.MeshNormalMaterial();
 ```
 
 作成したジオメトリとマテリアルを使って、メッシュを作ります。作成したメッシュをシーンに追加しましょう。
@@ -181,23 +177,6 @@ scene.add(box);
 
 ```
 
-## ライトを作る
-
-このままでは真っ暗なのでライトを作成します。
-
-```js
-// new THREE.DirectionalLight(色)
-const light = new THREE.DirectionalLight(0xFFFFFF);
-// シーンに追加
-scene.add(light);
-```
-
-`DirectionalLight`は平行光源は太陽光のように一定方向から差し込む光です。ライトもシーンに追加することで反映されます。光源が斜めから差し込むように位置も変更しておきましょう。
-
-```js
-// ライトの位置を変更
-light.position.set(1, 1, 1);
-```
 
 ## アニメーション
 
@@ -292,4 +271,4 @@ function tick() {
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2017-11-06</article-date-modified>
+<article-date-modified>2017-11-07</article-date-modified>

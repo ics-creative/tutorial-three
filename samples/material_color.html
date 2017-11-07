@@ -22,13 +22,13 @@
       const scene = new THREE.Scene();
 
       // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+      const camera = new THREE.PerspectiveCamera(45, width / height);
       camera.position.set(0, 0, +1000);
 
       // 球体を作成
       const geometry = new THREE.SphereGeometry(300, 30, 30);
       // マテリアルを作成
-      const material = new THREE.MeshPhongMaterial({color: 0xFF0000});
+      const material = new THREE.MeshStandardMaterial({color: 0xFF0000});
       // メッシュを作成
       const mesh = new THREE.Mesh(geometry, material);
       // 3D空間にメッシュを追加
@@ -44,8 +44,6 @@
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
-        // メッシュを回転させる
-        mesh.rotation.y += 0.01;
         // レンダリング
         renderer.render(scene, camera);
 

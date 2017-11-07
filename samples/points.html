@@ -18,13 +18,14 @@
       const renderer = new THREE.WebGLRenderer({
         canvas: document.querySelector('#myCanvas'),
       });
+      renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(width, height);
 
       // シーンを作成
       const scene = new THREE.Scene();
 
       // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+      const camera = new THREE.PerspectiveCamera(45, width / height);
 
       // 星屑を作成します (カメラの動きをわかりやすくするため)
       createStarField();

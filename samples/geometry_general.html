@@ -32,7 +32,7 @@
       scene.add(container);
 
       // マテリアルを作成
-      const material = new THREE.MeshPhongMaterial({
+      const material = new THREE.MeshStandardMaterial({
         color: 0xFF0000,
         side: THREE.DoubleSide
       });
@@ -42,7 +42,7 @@
       directionalLight.position.set(1, 1, 1);
       scene.add(directionalLight);
       // 環境光を作成
-      const ambientLight = new THREE.AmbientLight(0x666666);
+      const ambientLight = new THREE.AmbientLight(0x999999);
       scene.add(ambientLight);
 
       // ジオメトリを作成

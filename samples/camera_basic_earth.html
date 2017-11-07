@@ -23,7 +23,7 @@
       const scene = new THREE.Scene();
 
       // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+      const camera = new THREE.PerspectiveCamera(45, width / height);
 
       // 平行光源を作成
       const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
@@ -31,7 +31,7 @@
       scene.add(directionalLight);
 
       // マテリアルを作成
-      const material = new THREE.MeshPhongMaterial({
+      const material = new THREE.MeshStandardMaterial({
         map: new THREE.TextureLoader().load('imgs/earthmap1k.jpg'),
         side: THREE.DoubleSide,
       });

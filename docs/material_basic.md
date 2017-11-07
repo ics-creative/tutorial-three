@@ -9,7 +9,7 @@
 
 ![](https://ics.media/wp-content/uploads/2014/01/140926_away_8.png)
 
-代表的なマテリアルとして「単色塗りのマテリアル」と「画像を使ったマテリアル」の二種類があります。どちらも`THREE.MeshPhongMaterial`クラスを使用しますが、コンストラクタの引数に色(16進数表記の色)か画像テクスチャを指定するかで自動的にそれに適したマテリアルになります。
+代表的なマテリアルとして「単色塗りのマテリアル」と「画像を使ったマテリアル」の二種類があります。どちらも`THREE.MeshStandardMaterial`クラスを使用しますが、コンストラクタの引数に色(16進数表記の色)か画像テクスチャを指定するかで自動的にそれに適したマテリアルになります。
 
 ## マテリアルを実装してみる
 
@@ -39,7 +39,7 @@ function init() {
 
   // 球体を作成
   const geometry = new THREE.SphereGeometry(300, 30, 30);
-  const material = new THREE.MeshPhongMaterial({color: 0xFF0000});
+  const material = new THREE.MeshStandardMaterial({color: 0xFF0000});
   // メッシュを作成
   const mesh = new THREE.Mesh(geometry, material);
   // 3D空間にメッシュを追加
@@ -73,20 +73,23 @@ function init() {
 - [サンプルのソースコードを確認する](../samples/material_color.html)
 
 
-Three.jsのオブジェクトの作成手順として(1)マテリアルを作成 (2)ジオメトリを作成 (3)メッシュを作成という3つの手順を踏むことになります。上の例では`THREE.SphereGeometry`(球体の形状)と`THREE.MeshPhongMaterial`クラスのインスタンスを作成したあとに、`THREE.Mesh`クラスのコンストラクタにそれぞれを指定しています。
+Three.jsのオブジェクトの作成手順として(1)マテリアルを作成 (2)ジオメトリを作成 (3)メッシュを作成という3つの手順を踏むことになります。上の例では`THREE.SphereGeometry`(球体の形状)と`THREE.MeshStandardMaterial`クラスのインスタンスを作成したあとに、`THREE.Mesh`クラスのコンストラクタにそれぞれを指定しています。
 
 ```js
 // 球体を作成
 const geometry = new THREE.SphereGeometry(300, 30, 30);
 // マテリアルを作成
-const material = new THREE.MeshPhongMaterial({color: 0xFF0000});
+const material = new THREE.MeshStandardMaterial({color: 0xFF0000});
 // メッシュを作成
 const mesh = new THREE.Mesh(geometry, material);
 // 3D空間にメッシュを追加
 scene.add(mesh);
 ```
 
-ライティングがないと陰影がなく3Dの質感がわからないため、上記のスクリプトでは冒頭で`THREE.DirectionalLight`クラスのインスタンスを作成しています。`THREE.DirectionalLight`クラスは指定した方向からライトを適用することができます。これを**平行光源**といいます。
+
+### ライトを作る
+
+ライティングがないと陰影がなく画面が真っ暗となり、3Dの質感がわからないため、上記のスクリプトでは冒頭で`THREE.DirectionalLight`クラスのインスタンスを作成しています。`THREE.DirectionalLight`クラスは指定した方向からライトを適用することができます。これを**平行光源**といいます。
 
 
 ```js
@@ -147,7 +150,7 @@ function init() {
   const loader = new THREE.TextureLoader();
   const texture = loader.load('imgs/earthmap1k.jpg');
   // マテリアルにテクスチャーを設定
-  const material = new THREE.MeshPhongMaterial({
+  const material = new THREE.MeshStandardMaterial({
     map: texture
   });
   // メッシュを作成
@@ -182,7 +185,7 @@ function init() {
 const loader = new THREE.TextureLoader();
 const texture = loader.load('imgs/earthmap1k.jpg');
 // マテリアルにテクスチャーを設定
-const material = new THREE.MeshPhongMaterial({
+const material = new THREE.MeshStandardMaterial({
   map: texture
 });
 ```
@@ -198,7 +201,7 @@ const material = new THREE.MeshPhongMaterial({
 
 ```js
 // マテリアルにテクスチャーを設定
-const material = new THREE.MeshPhongMaterial({
+const material = new THREE.MeshStandardMaterial({
   map: new THREE.TextureLoader().load('imgs/earthmap1k.jpg')
 });
 ```
