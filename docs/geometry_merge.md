@@ -46,6 +46,9 @@ GPUを用いるコンテンツにおいてドローコール(描画の命令)の
 ▼最適化前のコード
 
 ```js
+// 1辺あたりに配置するオブジェクトの個数
+const CELL_NUM = 20;
+
 // 共通マテリアル
 const material = new THREE.MeshNormalMaterial();
 // Box
@@ -77,6 +80,9 @@ Three.jsでは、`THREE.Geometry`クラスの`mergeMesh()`メソッドで結合�
 ▼最適化後のコード（1）
 
 ```js
+// 1辺あたりに配置するオブジェクトの個数
+const CELL_NUM = 25;
+
 // 空のジオメトリを作成
 const geometry = new THREE.Geometry();
 
@@ -114,6 +120,9 @@ scene.add(mesh);
 ▼最適化後のコード（2）
 
 ```js
+// 1辺あたりに配置するオブジェクトの個数
+const CELL_NUM = 25;
+
 // 空のジオメトリを作成
 const geometry = new THREE.Geometry();
 
