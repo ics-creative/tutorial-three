@@ -62,7 +62,7 @@ Three.jsを使った表現を作例を通して学びましょう。
 - [RPGのセーブポイント風の魔法陣](https://ics.media/entry/11401)
 - [タイムリマップ表現](https://ics.media/entry/7162)
 - [アイコンフォント集Font Awesomeを扱う方法](https://ics.media/entry/8385)
-
+- [サウンドビジュアライザー](https://ics.media/entry/9105)
 
 
 ## WebGL シェーダー編
