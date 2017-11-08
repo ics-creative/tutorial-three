@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
+  <script>
+    // ページの読み込みを待つ
+    window.addEventListener('load', init);
+
+    function init() {
+      // サイズを指定
+      const width = 960;
+      const height = 540;
+
+      // レンダラーを作成
+      const renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector('#myCanvas')
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(width, height);
+
+      // シーンを作成
+      const scene = new THREE.Scene();
+
+      // 画面上にグリッド（格子）を配置
+      const grid = new THREE.GridHelper(1000, 10);
+      scene.add(grid);
+
+      // 画面上に3軸を配置
+      const axes = new THREE.AxesHelper(1000);
+      scene.add(axes);
+
+      // カメラを作成
+      const camera = new THREE.PerspectiveCamera(45, width / height);
+      camera.position.set(0, 500, +1000);
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+      const length = 30;
+      for (let i = 0; i < length; i++) {
+
+        // 球体のジオメトリを作成
+        const geometry = new THREE.SphereGeometry(20);
+
+        // マテリアルを作成
+        const material = new THREE.MeshNormalMaterial();
+
+        // 形状とマテリアルからメッシュを作成
+        const mesh = new THREE.Mesh(geometry, material);
+
+
+        // 円周上に配置
+        const radian = i / length * Math.PI * 2;
+        mesh.position.x = 400 * Math.sin(radian);
+        mesh.position.y = 0;
+        mesh.position.z = 400 * Math.cos(radian);
+
+        // 3D表示インスタンスのsceneプロパティーが3D表示空間となります
+        scene.add(mesh);
+      }
+
+
+      tick();
+
+      // 毎フレーム時に実行されるループイベントです
+      function tick() {
+        // レンダリング
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+    }
+  </script>
+</head>
+<body>
+  <canvas id="myCanvas"></canvas>
+</body>
+</html>
