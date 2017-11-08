@@ -36,6 +36,7 @@ Three.jsには多彩な機能が存在します。機能を習得すればする
 ![](../imgs/material_variation_toon.png)
 
 - [様々なマテリアル](material_variation.md)
+- [オブジェクトとの交差を調べる](raycast.md)
 - [パーティクルを大量に表示](points.md)
 - [ジオメトリの結合](geometry_merge.md)
 
