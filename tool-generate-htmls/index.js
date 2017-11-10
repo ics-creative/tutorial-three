@@ -19,7 +19,7 @@ let templateHtml;
  */
 const template = (text, values) => {
   if (!text) {
-    console.log('template-error!');
+    console.error('template-error!');
     return '';
   }
   return text.replace(/\$\{(.*?)\}/g, function (all, key) {
@@ -73,6 +73,7 @@ marked.setOptions({
 const generateHTML = (dirName, fileName, resolve) => {
   fs.readFile('../docs/' + dirName + fileName, 'utf8', (error, text) => {
     if (error) {
+      console.error(error);
       return;
     }
     let articleMarkdown = marked(text);
@@ -133,7 +134,7 @@ const generateHTML = (dirName, fileName, resolve) => {
     // テンプレートへの適用
     // --------------------------------
     articleMarkdown = articleMarkdown.replace(/\<code class\=\"lang-/g, '<code class="hljs ');
-    const url = `https://ics.media/tutorial-createjs/${fileRawName}.html`;
+    const url = `https://ics.media/tutorial-three/${fileRawName}.html`;
     const values = {
       'article-title': articleTitle,
       'article-markdown': articleMarkdown,
@@ -144,8 +145,10 @@ const generateHTML = (dirName, fileName, resolve) => {
       'article-dateModified-locale': articleModifiedStrLocale,
       'url': url
     };
+
     if (!templateHtml) {
-      console.log(fileName + ' generate error!');
+      console.log(templateHtml);
+      console.error(`Error : ${fileName}`);
       return;
     }
 
