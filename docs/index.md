@@ -16,7 +16,7 @@ WebGLだけで3D表現をするためには、立方体一つ表示するだけ�
 もともと2000年代後半のFlashの時代から、ウェブの3D表現が人気を集めてきました。今では標準技術としてのWebGLが、ゲームやビジュアライゼーションなどの多くの場面で採用されています。
 
 
-## Three.js 基本編
+## Three.js 入門編
 
 まずは少ないコードでThree.jsの基本を学んでいきましょう。
 
@@ -29,13 +29,24 @@ WebGLだけで3D表現をするためには、立方体一つ表示するだけ�
 - [カメラの制御方法（OrbitControls）](camera_orbitcontrols.md)
 - [モデルデータの読み込み](model_basic.md)
 
-## Three.js 中級編
+## Three.js 基本編
 
 Three.jsには多彩な機能が存在します。機能を習得すればするほど、実現できる表現が増えていくでしょう。
 
+
 ![](../imgs/material_variation_toon.png)
 
+
 - [様々なマテリアル](material_variation.md)
+- [様々なライト](light_variation.md)
+- [影を落とす方法](light_shadowmap.md)
+
+## Three.js 中級編
+
+専門的な方法も覚えていきましょう。
+
+![](../imgs/raycast.png)
+
 - [オブジェクトとの交差を調べる](raycast.md)
 - [パーティクルを大量に表示](points.md)
 - [ジオメトリの結合](geometry_merge.md)
@@ -98,4 +109,4 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2017-11-08</article-date-modified>
+<article-date-modified>2017-11-11</article-date-modified>
