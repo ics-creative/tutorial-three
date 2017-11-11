@@ -35,7 +35,7 @@
       // 床を作成
       const meshFloor = new THREE.Mesh(
         new THREE.BoxGeometry(2000, 0.1, 2000),
-        new THREE.MeshStandardMaterial({color: 0x808080, roughness: 0.045, metalness: 0}));
+        new THREE.MeshStandardMaterial({color: 0x808080, roughness: 0.0}));
       // 影を受け付ける
       meshFloor.receiveShadow = true;
       scene.add(meshFloor);
@@ -43,7 +43,7 @@
       // オブジェクトを作成
       const meshKnot = new THREE.Mesh(
         new THREE.TorusKnotGeometry(3, 1, 100, 16),
-        new THREE.MeshStandardMaterial({color: 0xAA0000, roughness: 0.045, metalness: 0}));
+        new THREE.MeshStandardMaterial({color: 0xAA0000, roughness: 0.0}));
       meshKnot.position.set(0, 5, 0);
       // 影を落とす
       meshKnot.castShadow = true;
