@@ -29,17 +29,17 @@
       camera.lookAt(new THREE.Vector3(0, 0, 0));
 
       // 床を作成
-      const mshStdFloor = new THREE.Mesh(
+      const meshFloor = new THREE.Mesh(
         new THREE.BoxGeometry(2000, 0.1, 2000),
         new THREE.MeshStandardMaterial({color: 0x808080, roughness: 0.045, metalness: 0}));
-      scene.add(mshStdFloor);
+      scene.add(meshFloor);
 
       // オブジェクトを作成
-      const mshStdKnot = new THREE.Mesh(
+      const meshKnot = new THREE.Mesh(
         new THREE.TorusKnotGeometry(3, 1, 100, 16),
         new THREE.MeshStandardMaterial({color: 0xAA0000, roughness: 0.045, metalness: 0}));
-      mshStdKnot.position.set(0, 5, 0);
-      scene.add(mshStdKnot);
+      meshKnot.position.set(0, 5, 0);
+      scene.add(meshKnot);
 
 
       // 照明を作成

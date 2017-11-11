@@ -44,13 +44,13 @@
       scene.add(mshStdFloor);
 
       // オブジェクトを作成
-      const mshStdKnot = new THREE.Mesh(
+      const meshKnot = new THREE.Mesh(
         new THREE.TorusKnotGeometry(3, 1, 100, 16),
         new THREE.MeshStandardMaterial({color: 0xAA0000, roughness: 0.045, metalness: 0}));
-      mshStdKnot.position.set(0, 5, 0);
-      mshStdKnot.castShadow = true;
-      mshStdKnot.receiveShadow = true;
-      scene.add(mshStdKnot);
+      meshKnot.position.set(0, 5, 0);
+      meshKnot.castShadow = true;
+      meshKnot.receiveShadow = true;
+      scene.add(meshKnot);
 
 
       // 照明を作成
