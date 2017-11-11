@@ -22,8 +22,6 @@
       renderer.setSize(width, height);
 
       // 照明に関するレンダラーの設定
-      renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       renderer.gammaInput = true;
       renderer.gammaOutput = true;
 
@@ -36,32 +34,23 @@
       camera.lookAt(new THREE.Vector3(0, 0, 0));
 
       // 床を作成
-      const mshStdFloor = new THREE.Mesh(
+      const meshFloor = new THREE.Mesh(
         new THREE.BoxGeometry(2000, 0.1, 2000),
-        new THREE.MeshStandardMaterial({color: 0x808080, roughness: 0.045, metalness: 0}));
-      mshStdFloor.castShadow = true;
-      mshStdFloor.receiveShadow = true;
-      scene.add(mshStdFloor);
+        new THREE.MeshStandardMaterial({color: 0x808080, roughness: 0.0}));
+      scene.add(meshFloor);
 
       // オブジェクトを作成
       const meshKnot = new THREE.Mesh(
         new THREE.TorusKnotGeometry(3, 1, 100, 16),
-        new THREE.MeshStandardMaterial({color: 0xAA0000, roughness: 0.045, metalness: 0}));
+        new THREE.MeshStandardMaterial({color: 0xAA0000, roughness: 0.0}));
       meshKnot.position.set(0, 5, 0);
-      meshKnot.castShadow = true;
-      meshKnot.receiveShadow = true;
       scene.add(meshKnot);
 
 
-      // 照明を作成
+      // 矩形光源を作成
+      // new THREE.RectAreaLight(色, 光の強さ, 幅, 高さ)
       const light = new THREE.RectAreaLight(0xFFFFFF, 500, 10, 10);
-      light.intensity = 1000;
-      light.position.set(5, 5, 0);
       scene.add(light);
-
-      const rectLightHelper = new THREE.RectAreaLightHelper(light);
-      scene.add(rectLightHelper);
-
 
       tick();
 

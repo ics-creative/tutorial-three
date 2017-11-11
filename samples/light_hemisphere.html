@@ -31,19 +31,20 @@
       // 床を作成
       const meshFloor = new THREE.Mesh(
         new THREE.BoxGeometry(2000, 0.1, 2000),
-        new THREE.MeshStandardMaterial({color: 0x808080, roughness: 0.045, metalness: 0}));
+        new THREE.MeshStandardMaterial({color: 0x808080, roughness: 0.0}));
       scene.add(meshFloor);
 
       // オブジェクトを作成
       const meshKnot = new THREE.Mesh(
         new THREE.TorusKnotGeometry(3, 1, 100, 16),
-        new THREE.MeshStandardMaterial({color: 0xAA0000, roughness: 0.045, metalness: 0}));
+        new THREE.MeshStandardMaterial({color: 0xAA0000, roughness: 0.0}));
       meshKnot.position.set(0, 5, 0);
       scene.add(meshKnot);
 
 
-      // 照明を作成
-      const light = new THREE.HemisphereLight(0x888888, 0x0000FF, 1);
+      // 半球光源を作成
+      // new THREE.HemisphereLight(空の色, 地の色, 光の強さ)
+      const light = new THREE.HemisphereLight(0x888888, 0x0000FF, 1.0);
       scene.add(light);
 
       // 照明を可視化するヘルパー
