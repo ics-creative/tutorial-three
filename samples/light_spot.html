@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
-  <script src="https://threejs.org/examples/js/lights/RectAreaLightUniformsLib.js"></script>
   <script>
     // ページの読み込みを待つ
     window.addEventListener('load', init);
@@ -21,12 +20,6 @@
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(width, height);
 
-      // 照明に関するレンダラーの設定
-      renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-      renderer.gammaInput = true;
-      renderer.gammaOutput = true;
-
       // シーンを作成
       const scene = new THREE.Scene();
 
@@ -39,8 +32,6 @@
       const mshStdFloor = new THREE.Mesh(
         new THREE.BoxGeometry(2000, 0.1, 2000),
         new THREE.MeshStandardMaterial({color: 0x808080, roughness: 0.045, metalness: 0}));
-      mshStdFloor.castShadow = true;
-      mshStdFloor.receiveShadow = true;
       scene.add(mshStdFloor);
 
       // オブジェクトを作成
@@ -48,19 +39,16 @@
         new THREE.TorusKnotGeometry(3, 1, 100, 16),
         new THREE.MeshStandardMaterial({color: 0xAA0000, roughness: 0.045, metalness: 0}));
       mshStdKnot.position.set(0, 5, 0);
-      mshStdKnot.castShadow = true;
-      mshStdKnot.receiveShadow = true;
       scene.add(mshStdKnot);
 
 
       // 照明を作成
-      const light = new THREE.RectAreaLight(0xFFFFFF, 500, 10, 10);
-      light.intensity = 1000;
-      light.position.set(5, 5, 0);
+      const light = new THREE.SpotLight(0xFFFFFF, 4, 30, Math.PI / 4);
       scene.add(light);
 
-      const rectLightHelper = new THREE.RectAreaLightHelper(light);
-      scene.add(rectLightHelper);
+      // 照明を可視化するヘルパー
+      const lightHelper = new THREE.SpotLightHelper(light);
+      scene.add(lightHelper);
 
 
       tick();
@@ -71,13 +59,13 @@
         renderer.render(scene, camera);
 
         // 照明の位置を更新
-        const t = ( Date.now() / 1000 );
-        const r = 10.0;
+        const t = ( Date.now() / 500 );
+        const r = 20.0;
         const lx = r * Math.cos(t);
         const lz = r * Math.sin(t);
-        const ly = 5.0 + 5.0 * Math.sin(t / 3.0);
+        const ly = 6.0 + 5.0 * Math.sin(t / 3.0);
         light.position.set(lx, ly, lz);
-        light.lookAt(new THREE.Vector3(0, 0, 0));
+        lightHelper.update();
 
         requestAnimationFrame(tick);
       }
