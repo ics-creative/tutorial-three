@@ -66,6 +66,10 @@
         tf.innerHTML = `👆スクリーン座標(${Math.round(sx)}, ${Math.round(sy)})`;
         tf.style.transform = `translate(${sx}px, ${sy}px)`;
 
+        // SVGでラインを描画
+        const line = document.getElementById('svgLine');
+        line.setAttribute('x2', sx);
+        line.setAttribute('y2', sy);
 
         requestAnimationFrame(tick);
       }
@@ -73,8 +77,21 @@
   </script>
 </head>
 <body>
+  <!-- 親のタグの基準点をリセット -->
   <div style="position:relative; overflow: hidden; width: 960px; height: 540px;">
+    <!-- Three.js用のcanvasタグ -->
     <canvas id="myCanvas" style="position: absolute; top: 0; left: 0;"></canvas>
+
+    <!-- ライン描画用のSVG -->
+    <svg width="960" height="540" style="position: absolute; top: 0; left: 0;">
+      <g stroke="white">
+        <line id="svgLine"
+              x1="0" y1="0" x2="0" y2="0"
+              stroke-width="3"/>
+      </g>
+    </svg>
+
+    <!-- 座標表示用のdivタグ -->
     <div id="hud" style="position: absolute; top: 0; left: 0; background: white"></div>
   </div>
 </body>
