@@ -40,6 +40,7 @@ Three.jsには多彩な機能が存在します。機能を習得すればする
 - [様々なマテリアル](material_variation.md)
 - [様々なライト](light_variation.md)
 - [影を落とす方法](light_shadowmap.md)
+- [様々なカメラ](camera_variation.md)
 - [スプライト/ビルボード](sprite.md)
 - [グループ化](object_group.md)
 - [ワールド座標](position_world.md)
