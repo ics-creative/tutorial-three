@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8"/>
@@ -59,7 +58,11 @@
       // マス目を作成
       {
         // 立方体のマテリアルとジオメトリを作成
-        const material = new THREE.MeshStandardMaterial({color: 0x22DD22, roughness: 0.1, metalness: 0.2});
+        const material = new THREE.MeshStandardMaterial({
+          color: 0x2299FF,
+          roughness: 0.1,
+          metalness: 0.2
+        });
         const geometry = new THREE.BoxGeometry(45, 45, 45);
 
         // 立方体を複数作成しランダムに配置
