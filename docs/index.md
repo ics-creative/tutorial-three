@@ -16,7 +16,7 @@ WebGLだけで3D表現をするためには、立方体一つ表示するだけ�
 もともと2000年代後半のFlashの時代から、ウェブの3D表現が人気を集めてきました。今では標準技術としてのWebGLが、ゲームやビジュアライゼーションなどの多くの場面で採用されています。
 
 
-## Three.js 基本編
+## Three.js 入門編
 
 まずは少ないコードでThree.jsの基本を学んでいきましょう。
 
@@ -29,13 +29,29 @@ WebGLだけで3D表現をするためには、立方体一つ表示するだけ�
 - [カメラの制御方法（OrbitControls）](camera_orbitcontrols.md)
 - [モデルデータの読み込み](model_basic.md)
 
-## Three.js 中級編
+## Three.js 基本編
 
 Three.jsには多彩な機能が存在します。機能を習得すればするほど、実現できる表現が増えていくでしょう。
 
+
 ![](../imgs/material_variation_toon.png)
 
+
 - [様々なマテリアル](material_variation.md)
+- [様々なライト](light_variation.md)
+- [影を落とす方法](light_shadowmap.md)
+- [様々なカメラ](camera_variation.md)
+- [スプライト/ビルボード](sprite.md)
+- [グループ化](object_group.md)
+- [ワールド座標](position_world.md)
+- [スクリーン座標](position_project.md)
+
+## Three.js 中級編
+
+専門的な方法も覚えていきましょう。
+
+![](../imgs/raycast.png)
+
 - [オブジェクトとの交差を調べる](raycast.md)
 - [パーティクルを大量に表示](points.md)
 - [ジオメトリの結合](geometry_merge.md)
@@ -96,6 +112,17 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 - [HTMLタグで本格VRコンテンツが作れる3Dライブラリ「A\-Frame」](https://ics.media/entry/13401)
 - [お手軽360°パノラマ制作入門！ JSでパノラマビューワー](https://ics.media/entry/14490)
 
+
+## Node.jsを使ったフロントエンド開発
+
+効率のよい開発ができるよう、最新の開発環境の構築もしましょう。開発環境を整えれば最新のJavaScript言語仕様を利用でき、開発効率向上に役立つはずです。また、型定義のあるTypeScriptを使ってコード補完をフルに効かせて開発するのもおすすめです。
+
+![](https://ics.media/wp-content/uploads/2017/08/170808_eyecatch_webpack_typescript.jpg)
+
+- [webpackとBabelでES2017環境の構築\(Three\.jsのサンプル付き\)](https://ics.media/entry/16028)
+- [webpackとTypeScriptの環境構築\(Three\.jsのサンプル付き\)](https://ics.media/entry/16329)
+
+
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2017-11-08</article-date-modified>
+<article-date-modified>2017-11-12</article-date-modified>
