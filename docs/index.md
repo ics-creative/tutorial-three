@@ -27,7 +27,7 @@ WebGLだけで3D表現をするためには、立方体一つ表示するだけ�
 - [ジオメトリ](geometry_general.md)
 - [カメラの制御方法（座標制御）](camera_position.md)
 - [カメラの制御方法（OrbitControls）](camera_orbitcontrols.md)
-- [モデルデータの読み込み](model_basic.md)
+
 
 ## Three.js 基本編
 
@@ -41,10 +41,12 @@ Three.jsには多彩な機能が存在します。機能を習得すればする
 - [様々なライト](light_variation.md)
 - [影を落とす方法](light_shadowmap.md)
 - [様々なカメラ](camera_variation.md)
+- [フォグ](fog.md)
 - [スプライト/ビルボード](sprite.md)
 - [グループ化](object_group.md)
 - [ワールド座標](position_world.md)
 - [スクリーン座標](position_project.md)
+- [モデルデータの読み込み](model_basic.md)
 
 ## Three.js 中級編
 
