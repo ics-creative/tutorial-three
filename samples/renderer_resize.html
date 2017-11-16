@@ -1,0 +1,74 @@
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+  <script>
+    // ページの読み込みを待つ
+    window.addEventListener('load', init);
+
+    function init() {
+
+      // レンダラーを作成
+      const renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector('#myCanvas'),
+        antialias: true
+      });
+
+      // シーンを作成
+      const scene = new THREE.Scene();
+
+      // カメラを作成
+      const camera = new THREE.PerspectiveCamera(45, 1.0);
+      camera.position.set(0, 0, +1000);
+
+      // 球体を作成
+      const geometry = new THREE.SphereGeometry(300, 30, 30);
+      // マテリアルを作成
+      const material = new THREE.MeshBasicMaterial({wireframe: true});
+      // メッシュを作成
+      const mesh = new THREE.Mesh(geometry, material);
+      // 3D空間にメッシュを追加
+      scene.add(mesh);
+
+
+      tick();
+
+      // 毎フレーム時に実行されるループイベントです
+      function tick() {
+        // レンダリング
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+
+      // 初期化のために実行
+      onResize();
+      // リサイズイベント発生時に実行
+      window.addEventListener('resize', onResize);
+
+      function onResize() {
+        // サイズを取得
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        // レンダラーのサイズを調整する
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height);
+
+        // カメラのアスペクト比を正す
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      }
+    }
+  </script>
+</head>
+<body>
+  <canvas id="myCanvas"></canvas>
+</body>
+</html>
