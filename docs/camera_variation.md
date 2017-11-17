@@ -62,6 +62,7 @@ const camera = new THREE.OrthographicCamera(-480, +480, 270, -270, 1, 1000);
 
 サンプルのように規則正しく3Dオブジェクトを配置すると、平行投影のゲームのような表現が得られます。 
 
+![](../imgs/camera_orthographic_1.png)
 
 ## 共通の設定：クリッピング 
  
