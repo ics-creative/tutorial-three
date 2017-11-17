@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
+  <script>
+    // ページの読み込みを待つ
+    window.addEventListener('load', init);
+
+    function init() {
+      const view3D = new View3D('#myCanvas', 960, 540);
+
+      // 球体を作成
+      const geometry = new THREE.BoxGeometry(500, 500, 500);
+      // マテリアルを作成
+      const material = new THREE.MeshStandardMaterial({color: 0xFF0000});
+      // メッシュを作成
+      const mesh = new THREE.Mesh(geometry, material);
+      // 3D空間にメッシュを追加
+      view3D.scene.add(mesh);
+
+      // 平行光源
+      const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
+      directionalLight.position.set(0, 1, 1);
+      view3D.scene.add(directionalLight);
+
+      // 時間経過ループを開始する
+      view3D.onTick = () => {
+        mesh.rotation.x += 0.005;
+        mesh.rotation.y += 0.01;
+      };
+    }
+
+    class View3D {
+
+      /**
+       * コンストラクターです。
+       * @param selector HTMLのcanvas要素をセレクターで指定します。
+       * @param width canvas要素の横幅(px)を指定します。
+       * @param height canvas要素の高さ(px)を指定します。
+       */
+      constructor(selector, width, height) {
+
+        // レンダラーを作成
+        const renderer = new THREE.WebGLRenderer({
+          canvas: document.querySelector(selector),
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height);
+
+        // シーンを作成
+        const scene = new THREE.Scene();
+
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(45, width / height);
+        camera.position.set(0, 0, 1000);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+        this.renderer = renderer;
+        this.scene = scene;
+        this.camera = camera;
+        this.onTick = null;
+
+        // 時間経過ループを開始する
+        this.tick();
+      }
+
+      tick() {
+        // イベント関数が設定されていたら
+        if (this.onTick) {
+          // 実行する
+          this.onTick();
+        }
+
+        // レンダリング
+        this.renderer.render(this.scene, this.camera);
+        requestAnimationFrame(() => {
+          this.tick();
+        });
+      }
+    }
+
+  </script>
+</head>
+<body>
+  <canvas id="myCanvas"></canvas>
+</body>
+</html>
