@@ -122,8 +122,8 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 ![](https://ics.media/wp-content/uploads/2017/08/170808_eyecatch_webpack_typescript.jpg)
 
-- [webpackとBabelでES2017環境の構築\(Three\.jsのサンプル付き\)](https://ics.media/entry/16028)
-- [webpackとTypeScriptの環境構築\(Three\.jsのサンプル付き\)](https://ics.media/entry/16329)
+- [webpack + Babelの環境構築 \(Three\.jsのサンプル付き\)](https://ics.media/entry/16028)
+- [webpack + TypeScriptの環境構築 \(Three\.jsのサンプル付き\)](https://ics.media/entry/16329)
 
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
