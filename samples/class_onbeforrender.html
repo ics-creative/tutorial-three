@@ -14,6 +14,7 @@
       // レンダラーを作成
       const renderer = new THREE.WebGLRenderer({
         canvas: document.querySelector('#myCanvas'),
+        antialias: true
       });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(width, height);
@@ -23,19 +24,20 @@
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(45, width / height);
-      camera.position.set(-100, 150, 500);
-      camera.lookAt(new THREE.Vector3(0, 0, 0));
+      camera.position.set(0, 0, 500);
 
       // ドーナツを作る
-      const mesh = new Donuts();
-      scene.add(mesh);
+      const myGroup = new MyGroup();
+      scene.add(myGroup);
+
 
       tick();
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
-        mesh.rotation.x += 0.02;
-        mesh.rotation.y += 0.01;
+
+        // 更新命令を実行します。
+        myGroup.update();
 
         // レンダリング
         renderer.render(scene, camera);
@@ -44,18 +46,36 @@
     }
 
     /** メッシュを継承したドーナツクラスです。 */
-    class Donuts extends THREE.Mesh {
+    class MyGroup extends THREE.Object3D {
 
       /** コンストラクターです。 */
       constructor() {
-        // ジオメトリを作成
-        const geometry = new THREE.TorusGeometry(120, 40, 60, 50);
+        super();
 
-        // マテリアルを作成
-        const material = new THREE.MeshNormalMaterial();
+        // 球体を作成
+        this.sphere = new THREE.Mesh(
+          new THREE.SphereGeometry(40, 20, 40),
+          new THREE.MeshNormalMaterial()
+        );
 
-        // 継承元のコンストラクターを実行
-        super(geometry, material);
+        // ドーナツを作成
+        this.donuts = new THREE.Mesh(
+          new THREE.TorusGeometry(120, 40, 60, 60),
+          new THREE.MeshNormalMaterial()
+        );
+
+        // グループに追加
+        this.add(this.sphere);
+        this.add(this.donuts);
+      }
+
+      /** 更新命令を定義します。 */
+      update() {
+        // X軸に動かす
+        this.sphere.position.x = 200 * Math.sin(Date.now() / 500);
+
+        // 回転させる
+        this.donuts.rotation.y += 0.01;
       }
     }
 
