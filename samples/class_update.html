@@ -26,7 +26,7 @@
       const camera = new THREE.PerspectiveCamera(45, width / height);
       camera.position.set(0, 0, 500);
 
-      // ドーナツを作る
+      // 独自グループを作る
       const myGroup = new MyGroup();
       scene.add(myGroup);
 
@@ -45,7 +45,7 @@
       }
     }
 
-    /** メッシュを継承したドーナツクラスです。 */
+    /** メッシュを継承した独自グループのクラスです。 */
     class MyGroup extends THREE.Object3D {
 
       /** コンストラクターです。 */
