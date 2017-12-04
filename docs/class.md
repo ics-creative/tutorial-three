@@ -1,4 +1,4 @@
-# Three.jsでES2015のclassを利用する
+# Three.jsでES2015のclassを利用する（継承）
 
 JavaScriptではオブジェクト指向としてのクラスが利用できます。クラスを利用すると、Three.jsを構造的に設計しやすくなります。
 
@@ -165,7 +165,8 @@ function init() {
 }
 ```
 
+この解説は[Three.jsでES2015のclassを利用する（メソッド）](class_method.md)に続きます。
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-20</article-date-published>
-<article-date-modified>2017-11-20</article-date-modified>
+<article-date-modified>2017-12-04</article-date-modified>

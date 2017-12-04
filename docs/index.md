@@ -1,5 +1,7 @@
 # Three.js入門サイト
 
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-large" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
 このサイトは、WebGLのライブラリ「[Three.js](https://threejs.org)」の入門サイトです。
 
 初学者から学べるように基本から解説しつつ、発展的な内容までまとめています。このサイトを通して、ウェブの3Dのインタラクションデザインについて学んでいきましょう。
@@ -58,7 +60,8 @@ Three.jsには多彩な機能が存在します。機能を習得すればする
 - [オブジェクトとの交差を調べる](raycast.md)
 - [パーティクルを大量に表示](points.md)
 - [ジオメトリの結合](geometry_merge.md)
-- [ES2015のクラスを利用する](class.md)
+- [ES2015のclassを利用する（継承）](class.md)
+- [ES2015のclassを利用する（メソッド）](class_method.md)
 
 ## Three.js 数値計算
 
@@ -129,4 +132,4 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2017-11-20</article-date-modified>
+<article-date-modified>2017-12-04</article-date-modified>
