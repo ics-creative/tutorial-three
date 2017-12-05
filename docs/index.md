@@ -13,6 +13,8 @@
 
 [Three.js](http://www.createjs.com) は、HTML5で3Dコンテンツを制作するためのJavaScriptライブラリです。[Mr.doob](http://mrdoob.com)氏が中心となって開発されており、オープンソースソフトウェアとして個人・商用でも無償で利用できます。
 
+![](https://ics.media/wp-content/uploads/2017/08/170704_webpack_site_three.png)
+
 WebGLだけで3D表現をするためには、立方体一つ表示するだけでも多くのJavaScriptやGLSLコードを書く必要があり専門知識も必要です。Three.jsを使えばJavaScriptの知識だけで簡単に3Dコンテンツが作成できるため、手軽に扱えるようになります。
 
 もともと2000年代後半のFlashの時代から、ウェブの3D表現が人気を集めてきました。今では標準技術としてのWebGLが、ゲームやビジュアライゼーションなどの多くの場面で採用されています。
@@ -43,13 +45,16 @@ Three.jsには多彩な機能が存在します。機能を習得すればする
 - [様々なライト](light_variation.md)
 - [影を落とす方法](light_shadowmap.md)
 - [様々なカメラ](camera_variation.md)
+
+![](../imgs/sprite.png)
+
 - [フォグ](fog.md)
 - [スプライト/ビルボード](sprite.md)
 - [グループ化](object3d_group.md)
 - [ワールド座標](position_world.md)
 - [スクリーン座標](position_project.md)
 - [モデルデータの読み込み](model_basic.md)
-- [canvasのリサイズ処理](renderer_resize.md)
+
 
 ## Three.js 中級編
 
@@ -57,9 +62,17 @@ Three.jsには多彩な機能が存在します。機能を習得すればする
 
 ![](../imgs/raycast.png)
 
+- [canvasのリサイズ処理](renderer_resize.md)
 - [オブジェクトとの交差を調べる](raycast.md)
 - [パーティクルを大量に表示](points.md)
 - [ジオメトリの結合](geometry_merge.md)
+
+## Three.jsとECMAScript 2015+
+
+JavaScriptの新しい仕様のECMAScript 2015（略称ES2015、別名ES6）以上では、クラスを利用できます。オブジェクト指向なプログラムで設計することで、規模の大きい開発に役立ちます。Three.jsでクラスを利用する方法を習得しましょう。
+
+![](../imgs/index-h2-es2015.png)
+
 - [ES2015のclassを利用する（継承）](class.md)
 - [ES2015のclassを利用する（メソッド）](class_method.md)
 
