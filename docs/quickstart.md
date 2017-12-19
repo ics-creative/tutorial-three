@@ -22,7 +22,7 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"></script>
   <script>
     // ページの読み込みを待つ
     window.addEventListener('load', init);
@@ -99,7 +99,7 @@ Three.jsはJavaScriptのライブラリですが、このファイルを読み�
 CDN（コンテンツ・デリバリー・ネットワーク）で提供されているURLを使うのが導入にお手軽です。
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"></script>
 ```
 
 WebGLの処理はページの読み込みが終わってから実行させます。`addEventListener()`関数を使って`load`イベントが発生するのを監視させ、ページが読み込み終わったときに実行させたい関数を指定します。この関数`init()`の中にThree.jsのコードを書いていきます。
