@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+    const list = [
+//      'camera_basic.html',
+//      'camera_basic_earth.html',
+//      'camera_mosue_drag.html',
+//      'camera_mouse_x.html',
+//      'camera_orbitcontrols.html',
+//      'camera_orbitcontrols_basic.html',
+//      'camera_orthographic.html',
+//      'camera_perspective.html',
+//      'class_group.html',
+//      'class_mesh.html',
+//      'class_update.html',
+//      'class_view3d.html',
+//      'fog.html',
+//      'geometry_general.html',
+//      'geometry_merge.html',
+//      'geometry_merge_mesh.html',
+//      'geometry_merge_none.html',
+//      'light_ambient.html',
+//      'light_directional.html',
+//      'light_hemisphere.html',
+//      'light_point.html',
+//      'light_rectarea.html',
+//      'light_shadowmap.html',
+//      'light_spot.html',
+//      'loader_3ds.html',
+//      'loader_dae.html',
+//      'material_color.html',
+//      'material_texture.html',
+//      'material_variation_basic.html',
+//      'material_variation_lambert.html',
+//      'material_variation_normal.html',
+//      'material_variation_phong.html',
+//      'material_variation_standard.html',
+//      'material_variation_toon.html',
+//      'object_group.html',
+//      'points.html',
+//      'position_project.html',
+//      'position_world.html',
+//      'quickstart.html',
+//      'raycast.html',
+//      'renderer_resize.html',
+//      'sincos_camera.html',
+//      'sincos_geo.html',
+//      'sincos_light.html',
+//      'sincos_position.html',
+//      'sprite.html',
+    ];
+    const doms = list.map((url) => `
+  <div>
+    <h1>${url}</h1>
+    <iframe width="960" height="540" src="${url}"></iframe>
+  </div>
+`);
+
+    console.log(doms);
+    document.querySelector('#container').innerHTML = doms.concat('<br />\n');
+  </script>
+
+
+</body>
+</html>
