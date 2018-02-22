@@ -6,11 +6,11 @@
 // ======================================================
 $colorTheme: #6ebdfb;
 $colorThemeDark: #222222;
-$boldColor: #E91E63;
+$boldColor: #e91e63;
 $colorBaseGray: #424242;
 $colorBaseLightGray: #666666;
 $colorBodyBg: #f9f9f9;
-$colorGrayLight: #E0E0E0;
+$colorGrayLight: #e0e0e0;
 
 // SNS 系のカラー
 $colorShareTwitter: #55acee;
@@ -18,15 +18,15 @@ $colorShareFacebook: #3b5998;
 $colorShareHatena: #2c6ebd;
 $colorShareGoogle: #dd4b39;
 
-$colorTextLinkNormal: #2196F3;
+$colorTextLinkNormal: #2196f3;
 //#3498db
 $colorTextLinkVisited: #795548;
-$colorTextLinkActive: #42A5F5;
+$colorTextLinkActive: #42a5f5;
 
 $colorBlack: #404040;
-$font-family-midashi: "游明朝 Light", "YuMincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "a-otf-ryumin-pr6n", "ＭＳ 明朝", serif;
-$font-weight-midashi: 300;
-//$font-cursive: "a-otf-ryumin-pr6n", "リュウミン", serif;
+$font-family-midashi: "游明朝 Regular", "YuMincho", "Hiragino Mincho ProN",
+  "Hiragino Mincho Pro", serif;
+$font-weight-midashi: bold;
 
 /* Medium Devices, Desktops */
 $mediaWidthLarge: 970px;
@@ -40,10 +40,99 @@ $contentWidth: 640px;
 // メディアクエリー対応時の左右のパディング
 $contentHorizontalPadding: 12px;
 
-body.tutorial {
+@import "highlight.js/atom-one-dark";
+@import "highlight.js/atom-one-light";
 
+.theme-light {
+  background: white;
+  .aritcleBody {
+    color: #555;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #444;
+    }
+    h2 {
+      border-bottom-color: #ddd;
+    }
+
+    code {
+      background-color: #fafafa;
+      border-radius: 0.25rem;
+    }
+
+    a {
+      color: #0275d8;
+      text-decoration: none;
+      font-weight: normal; // CreateJSサイト専用
+
+      &:visited {
+        color: $colorTextLinkVisited;
+      }
+      &:hover {
+        text-decoration: underline;
+      }
+      &:active {
+      }
+    }
+  }
+}
+
+.theme-dark {
+  background: #1e1e1e;
+  .aritcleBody {
+    color: #d4d4d4;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: white;
+    }
+    h2 {
+      border-bottom-color: #555;
+    }
+    code {
+      background-color: #282c34; // highlight.jsと揃える
+      border-radius: 0.25rem;
+    }
+
+    a {
+      color: #3a9ddb;
+      text-decoration: none;
+      font-weight: normal; // CreateJSサイト専用
+
+      &:visited {
+        color: #d98e73;
+      }
+      &:hover {
+        text-decoration: underline;
+      }
+      &:active {
+      }
+    }
+  }
+  .btn-secondary {
+    color: #fff;
+    background-color: #373a3c;
+    border-color: #373a3c;
+
+    &:hover {
+      background-color: #515151;
+    }
+  }
+  .text-data {
+    color: #d4d4d4;
+  }
+}
+
+body.tutorial {
   line-height: 175%;
-  font-size: 1.0rem;
+  font-size: 1rem;
 
   @media (min-width: $mediaWidthMedium) {
     .pageContentContainer {
@@ -63,7 +152,7 @@ body.tutorial {
     margin-bottom: 50px;
 
     line-height: 175%;
-    font-size: 1.0rem;
+    font-size: 1rem;
 
     @mixin createPageContentWidth($mediaW, $contentW) {
       @media (min-width: $mediaW) {
@@ -90,65 +179,48 @@ body.tutorial {
     }
 
     div.article {
-
-
-
       overflow: hidden;
-      $colorArticle: #555;
 
       .syntaxhighlighter {
-        font-size: 0.80rem !important;
+        font-size: 0.8rem !important;
       }
 
-      b, strong {
+      b,
+      strong {
         font-weight: bold;
-        color: $colorBlack;
-        background: #E6EE9C;
       }
-
-      .aritcleBody {
-        a {
-          text-decoration: none;
-          font-weight: normal; // CreateJSサイト専用
-        }
-        a:visited {
-          color: $colorTextLinkVisited;
-        }
-        a:hover {
-          text-decoration: underline;
-        }
-        a:active {
-        }
-      }
-
-
 
       img {
         max-width: 100%;
         height: auto;
       }
 
-      object, embed, video {
+      object,
+      embed,
+      video {
         max-width: 100%;
       }
 
       p {
         margin: 1.5em 0;
-        color: $colorArticle;
         text-align: left;
       }
 
-      h1, h2, h3, h4, h5 {
-        //font-family : "遊明朝";
-        font-weight: normal;
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
         line-height: 1.5;
         font-family: $font-family-midashi;
         font-weight: $font-weight-midashi;
-        color: #444;
+        font-feature-settings: "palt";
+        letter-spacing: 1px;
       }
 
       h2 {
-        border-bottom: 1px solid #DBDBDB;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
         padding: 0.25em 0;
         font-size: 1.5rem;
       }
@@ -157,23 +229,22 @@ body.tutorial {
       }
 
       code {
-        color: inherit;
-        font-family: 'Source Code Pro', monospace;
+        font-family: "Source Code Pro", SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", "メイリオ", monospace;
+        font-feature-settings: "palt" 0, "pkna" 0;
       }
 
       .hljs {
-        background-color: #f7f7f7;
         border-radius: 3px;
         padding: 16px; // GitHub と同じ指定
       }
 
-      ul, ol {
+      ul,
+      ol {
         padding-left: 2em;
 
         li {
-          color: $colorArticle;
         }
-
       }
       ul {
         li {
@@ -189,13 +260,11 @@ body.tutorial {
       div.text-data {
         font-size: 0.75rem;
         line-height: 1.5;
-        font-style: italic;
+        font-style: normal;
         text-align: center;
       }
     }
   }
-
-
 }
 
 #archive-image-wrap {
@@ -219,8 +288,6 @@ body.tutorial {
     opacity: 0.7;
   }
 
-  margin-top: 42px;
-
   div.title {
     text-align: center;
     margin: -50px auto 0px;
@@ -236,16 +303,34 @@ body.tutorial {
       max-width: $contentWidth;
       margin: 0 auto;
       margin-bottom: 0.5em;
-      color: rgba(255, 255, 255, 0.8)
+      color: rgba(255, 255, 255, 0.8);
+      font-feature-settings: "palt";
+      letter-spacing: 1px;
     }
     h1 {
       max-width: $contentWidth;
       margin: 0 auto;
       font-size: 1.7rem;
+      font-feature-settings: "palt";
+      letter-spacing: 2px;
     }
   }
 }
 
 #archive-image-wrap {
   padding-bottom: 20%;
+}
+
+.btn {
+  .fa {
+    margin-right: 5px;
+  }
+}
+
+.link-index {
+  margin-bottom: 10px;
+}
+
+.share-twitter {
+  margin-right: 10px;
 }

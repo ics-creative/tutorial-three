@@ -1,16 +1,13 @@
-@import 'compass';
-@import "compass/utilities/general/clearfix";
-
 // ======================================================
 // 定数
 // ======================================================
 $colorTheme: #6ebdfb;
 $colorThemeDark: #222222;
-$boldColor: #E91E63;
+$boldColor: #e91e63;
 $colorBaseGray: #424242;
 $colorBaseLightGray: #666666;
 $colorBodyBg: #f9f9f9;
-$colorGrayLight: #E0E0E0;
+$colorGrayLight: #e0e0e0;
 
 // SNS 系のカラー
 $colorShareTwitter: #55acee;
@@ -18,10 +15,10 @@ $colorShareFacebook: #3b5998;
 $colorShareHatena: #2c6ebd;
 $colorShareGoogle: #dd4b39;
 
-$colorTextLinkNormal: #2196F3;
+$colorTextLinkNormal: #2196f3;
 //#3498db
 $colorTextLinkVisited: #795548;
-$colorTextLinkActive: #42A5F5;
+$colorTextLinkActive: #42a5f5;
 
 /* Medium Devices, Desktops */
 $contentLargeWidth: 1280px;
@@ -47,7 +44,7 @@ $contentHorizontalPadding: 12px;
       border: 12px solid rgba(255, 255, 255, 0.7);
       background: rgba(255, 255, 255, 0.2);
 
-      @include transition(all 0.25s cubic-bezier(0, 1, .4, 1));
+      transition: all 0.25s cubic-bezier(0, 1, 0.4, 1);
     }
   }
 
@@ -60,26 +57,30 @@ $contentHorizontalPadding: 12px;
     position: absolute;
     top: 0;
     left: 0;
-    border: 0px solid rgba(255, 255, 255, 0);
+    border: 0 solid rgba(255, 255, 255, 0);
     background: rgba(0, 0, 0, 0);
 
-    @include transition(all 3.5s cubic-bezier(0, 1, .4, 1));
+    transition: all 3.5s cubic-bezier(0, 1, 0.4, 1);
   }
 }
 
 @mixin gradationBorder() {
-  @include background-image(linear-gradient(right,
-          rgba(189, 195, 199, 0),
-          rgba(189, 195, 199, 1.0),
-          rgba(189, 195, 199, 1.0),
-          rgba(189, 195, 199, 0)));
+  background-image: linear-gradient(
+    right,
+    rgba(189, 195, 199, 0),
+    rgba(189, 195, 199, 1),
+    rgba(189, 195, 199, 1),
+    rgba(189, 195, 199, 0)
+  );
 }
 
 @mixin gradationBorderLeft() {
-  @include background-image(linear-gradient(left,
-          rgba(189, 195, 199, 1.0),
-          rgba(189, 195, 199, 1.0),
-          rgba(189, 195, 199, 0)));
+  background-image: linear-gradient(
+    left,
+    rgba(189, 195, 199, 1),
+    rgba(189, 195, 199, 1),
+    rgba(189, 195, 199, 0)
+  );
 }
 
 /**
@@ -88,40 +89,21 @@ $contentHorizontalPadding: 12px;
 @mixin showElementEffect() {
   // 出現エフェクト
   @media (min-width: $mediaWidthMedium) {
-    opacity: 0.0;
-    @include transform(translate(-100px, 0));
+    opacity: 0;
+    transform: translate(-100px, 0);
     &.show {
-      opacity: 1.0;
-      @include transform(translate(0px, 0));
-      @include transition(all 1.0s cubic-bezier(0.19, 1, 0.22, 1) 0.1s);
+      opacity: 1;
+      transform: translate(0px, 0);
+      transition: all 1s cubic-bezier(0.19, 1, 0.22, 1) 0.1s;
     }
   }
 }
 
 @mixin createGradientBackground() {
-  @include background-image(linear-gradient(left,
-          #6ebdfb,
-          #80deea));
+  background-image: linear-gradient(left, #6ebdfb, #80deea);
 }
 
-$supported-browsers: reject(browsers(),
-  /* android, */
-        blackberry,
-  /* chrome,*/
-  /* android-chrome,*/
-        firefox,
-        android-firefox,
-        ie,
-        ie-mobile,
-  /* safari,*/
-  /* ios-safari,*/
-        opera,
-        opera-mini,
-        opera-mobile
-);
-
 html {
-
   @media (min-width: $mediaWidthMedium) {
     font-size: 100%;
   }
@@ -131,11 +113,12 @@ html {
 }
 
 //$font-base : sans-serif;
-$font-base : -apple-system, YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+$font-base: -apple-system, YuGothic, "ヒラギノ角ゴ Pro W3",
+  "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
 
 body {
   font-family: $font-base;
-  font-feature-settings: "palt";
+  font-feature-settings: "pkna";
 }
 
 img {
@@ -148,7 +131,7 @@ img {
 
 @media print {
   a:after {
-    content: " (" attr(href) ") "
+    content: " (" attr(href) ") ";
   }
 }
 
@@ -172,7 +155,8 @@ iframe {
 //--------------------------------------
 // WP-PageNavi
 //--------------------------------------
-.nextpostslink, .previouspostslink {
+.nextpostslink,
+.previouspostslink {
   font-family: FontAwesome;
 }
 
