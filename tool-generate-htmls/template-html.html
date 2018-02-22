@@ -26,53 +26,49 @@
   <meta name="date" content="${article-dateModified}T00:00:00+09:00"/>
 
   <link rel="icon" sizes="16x16 32x32 48x48 128x128 256x256" href="https://ics.media/wp-content/themes/icslab/img/favicon.ico"/>
-  <link rel="stylesheet" type='text/css' href="styles/css/style.css"/>
-  <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Source+Code+Pro'/>
-  <script src="js/main.js" defer></script>
+  <script src="js/bundle.js?v=2018-02-23"></script>
 </head>
-<body class="tutorial">
-  <div id="container">
-    <div id="header-always">
-      <div id="header-wrap">
-        <h1>
-          <a href="https://ics.media/"><span class="logoBlog"><img src="imgs/logo-blog.png" alt="ICS MEDIA - インタラクションデザイン×ウェブテクノロジー" width="477" height="26"/></span></a>
-        </h1>
-        <nav>
-          <ul>
-            <li><a href="https://ics.media/feed/atom" target="_blank"><i class="fa fa-rss"></i></a></li>
-            <li><a href="https://www.facebook.com/icswebjp" target="_blank"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="https://twitter.com/icsweb" target="_blank"><i class="fa fa-twitter"></i></a></li>
-          </ul>
-        </nav>
-      </div>
+<body class="tutorial theme-light">
 
-      <!-- ================================== -->
-      <!-- パンくず -->
-      <!-- ================================== -->
-      <div id="header-breadcrumb">
-        <div class="wrap">
-          <ul class="breadcrumb">
-            <!-- 第1階層 -->
-            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-              <a href="https://ics.media" itemprop="url">
-                <i class="fa fa-homze"></i> <span itemprop="title">ICS MEDIA</span>
-              </a>
-            </li>
+  <div class="header-title">
+    <div class="header-title__inner">
+      <h1>
+        <a href="https://ics.media/"><span class="logoBlog">ICS MEDIA - インタラクションデザイン×ウェブテクノロジー</span></a>
+      </h1>
+    </div>
+  </div>
 
-            <!-- 第2階層 -->
-            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-              <a href="index.html" itemprop="url">
-                <i class="fa fa-folder-open"></i> <span itemprop="title">WebGL と JavaScript で学ぶ3D表現</span>
-              </a>
-            </li>
+  <div class="header-breadcrumb">
+    <!-- ================================== -->
+    <!-- パンくず -->
+    <!-- ================================== -->
+    <div class="header-breadcrumb__inner">
+      <ul>
+        <!-- 第1階層 -->
+        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+          <a href="https://ics.media" itemprop="url">
+            <i class="fa fa-homze"></i> <span itemprop="title">ICS MEDIA</span>
+          </a>
+        </li>
 
-            <!-- 第3階層 -->
-            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-              <i class="fa fa-pencil-square-o"></i> <span itemprop="title">${article-title}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+        <!-- 第2階層 -->
+        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+          <a href="index.html" itemprop="url">
+            <i class="fa fa-folder-open"></i> <span itemprop="title">WebGL と JavaScript で学ぶ3D表現</span>
+          </a>
+        </li>
+
+        <!-- 第3階層 -->
+        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+          <i class="fa fa-pencil-square-o"></i> <span itemprop="title">${article-title}</span>
+        </li>
+      </ul>
+
+      <nav>
+        <span class="header-breadcrumb__theme">配色を選択</span>
+        <button id="btn-theme-light" class="btn-theme" aria-checked="true" aria-label="明るい配色"></button>
+        <button id="btn-theme-dark" class="btn-theme" aria-checked="false" aria-label="暗めの配色"></button>
+      </nav>
     </div>
   </div>
 
@@ -162,66 +158,66 @@
 
   </article>
 
-  <div id="footer-bottom" class="cf">
-    <div id="footer-menu-container" class="default">
-      <div class="footer-menu">
-        <div id="footer-menu-inside">
-          <nav>
-            <ul id="footer-menu">
-              <li><a href="https://ics.media/feed/atom" target="_blank"><i class="fa fa-rss fa-3"></i> RSS</a> </li>
-              <li><a href="https://www.facebook.com/icswebjp" target="_blank"><i class="fa fa-facebook-square fa-3"></i> Facebook</a></li>
-              <li><a href="https://twitter.com/icsweb" target="_blank"><i class="fa fa-twitter-square fa-3"></i> Twitter</a></li>
-              <li><a href="http://ics-web.jp/blog/recruit" target="_blank">採用情報</a></li>
-              <li><a href="http://ics-web.jp/blog/contact" target="_blank">お問い合わせ</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
+
+  <div class="footer-message">
+    <div class="footer-message__inner">
+      <p>CreateJS 入門サイトは ICS MEDIA が運営しています</p>
+      <ul>
+        <li><a target="_blank" href="https://www.facebook.com/icswebjp"><i class="fa fa-facebook-square fa-3"></i>
+          Facebook</a></li>
+        <li><a target="_blank" href="https://twitter.com/icsweb"><i class="fa fa-twitter-square fa-3"></i>
+          Twitter</a>
+        </li>
+        <li><a target="_blank" href="http://ics-web.jp/blog/recruit">採用情報</a></li>
+        <li><a target="_blank" href="http://ics-web.jp/blog/contact">お問い合わせ</a></li>
+      </ul>
     </div>
+  </div>
 
-    <div class="footer-sections cf">
+  <div class="footer-detail">
+    <div class="footer-detail__sections">
 
-      <div class="footer-section large">
-        <p class="widget_title">Three.jsのサンプル/事例</p>
+      <div class="footer-detail__section">
+        <h2>Three.jsのサンプル/事例</h2>
 
         <p>作例をみてThree.jsで実現可能な表現のインスピレーションを得ましょう。</p>
         <ul>
-          <li><a target="_blank" href="https://threejs.org/examples/"><i class="fa fa-external-link"></i> examples</a></li>
+          <li><a target="_blank" rel="noopener" href="https://threejs.org/examples/">examples</a></li>
         </ul>
 
-        <p class="widget_title">Three.jsの公式リファレンス</p>        
+        <h2>Three.jsの公式リファレンス</h2>
         <ul>
-          <li><a target="_blank" href="https://threejs.org/docs/"><i class="fa fa-external-link"></i>
-              Three.js docs (英語)</a></li>
+          <li><a target="_blank" rel="noopener" href="https://threejs.org/docs/">              Three.js docs (英語)</a></li>
         </ul>
       </div>
 
-      <div class="footer-section large">
-        <p class="widget_title">Three.jsの情報源</p>
+      <div class="footer-detail__section">
+        <h2>Three.jsの情報源</h2>
         <p>わからないことがあれば、フォーラムや勉強会を調べてみましょう。</p>
         <ul>
-          <li><a target="_blank" href="https://qiita.com/tags/three.js/items"><i class="fa fa-external-link"></i> Qiita 技術情報共有サービス</a></li>
-          <li><a target="_blank" href="http://eventdots.jp/event/search?keyword=three.js&amp;pref=&amp;from=&amp;to=&amp;sort=started_desc"><i class="fa fa-external-link"></i> 勉強会・イベント一覧 (dots)</a></li>
+          <li><a target="_blank" rel="noopener" href="https://qiita.com/tags/three.js/items">Qiita 技術情報共有サービス</a></li>
+          <li><a target="_blank" rel="noopener" href="http://eventdots.jp/event/search?keyword=three.js&amp;pref=&amp;from=&amp;to=&amp;sort=started_desc">勉強会・イベント一覧 (dots)</a></li>
         </ul>
       </div>
 
-      <div class="footer-section large">
-        <p class="widget_title">WebGLのオススメサイト</p>
+      <div class="footer-detail__section">
+        <h2>WebGLのオススメサイト</h2>
         <ul>
-          <li><a target="_blank" href="https://webgl.souhonzan.org/"><i class="fa fa-external-link"></i> WebGL 総本山</a></li>
-          <li><a target="_blank" href="https://wgld.org/"><i class="fa fa-external-link"></i> WebGL 開発支援サイト wgld.org</a></li>
-          <li><a target="_blank" href="https://www.lynda.jp/courses/learning-three-js"><i class="fa fa-external-link"></i> three.js 入門 - Lynda.com</a></li>
+          <li><a target="_blank" rel="noopener" href="https://webgl.souhonzan.org/">WebGL 総本山</a></li>
+          <li><a target="_blank" rel="noopener" href="https://wgld.org/">WebGL 開発支援サイト wgld.org</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.lynda.jp/courses/learning-three-js">three.js 入門 - Lynda.com</a></li>
         </ul>
 
-        <p class="widget_title">姉妹サイト</p>
+        <h2>姉妹サイト</h2>
         <ul>
-          <li><a target="_blank" href="https://ics.media/tutorial-createjs/index.html"><i class="fa fa-external-link"></i> CreateJS入門サイト</a></li>
+          <li><a target="_blank" rel="noopener" href="https://ics.media/tutorial-createjs/index.html">CreateJS入門サイト</a></li>
         </ul>
+
       </div>
 
     </div>
 
-    <div id="copyright">Copyright &copy; 2017 ICS INC. All Rights Reserved.</div>
+    <address class="footer-detail__copyright">Copyright &copy; 2018 ICS INC. All Rights Reserved.</address>
   </div>
 </body>
 </html>
