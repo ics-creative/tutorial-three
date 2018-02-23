@@ -46,6 +46,7 @@ module.exports = {
               url: true,
               // ソースマップを有効にする
               sourceMap: useSourceMap,
+              importLoaders: 2
             },
           },
           {

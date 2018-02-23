@@ -90,21 +90,22 @@ window._gaq = _gaq; // Windowに保存しないと動作しなくなる
 
 function changeTheme(theme) {
   switch (theme) {
+    case "theme-light":
+      $("body")
+        .removeClass("theme-dark")
+        .addClass("theme-light");
+      $("#btn-theme-dark").attr("aria-checked", false);
+      $("#btn-theme-light").attr("aria-checked", true);
+      break;
+
     case "theme-dark":
+    default:
       $("body")
         .removeClass("theme-light")
         .addClass("theme-dark");
 
       $("#btn-theme-dark").attr("aria-checked", true);
       $("#btn-theme-light").attr("aria-checked", false);
-      break;
-    case "theme-light":
-    default:
-      $("body")
-        .removeClass("theme-dark")
-        .addClass("theme-light");
-      $("#btn-theme-dark").attr("aria-checked", false);
-      $("#btn-theme-light").attr("aria-checked", true);
       break;
   }
 }
