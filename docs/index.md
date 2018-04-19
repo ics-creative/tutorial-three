@@ -11,7 +11,7 @@
 
 ## Three.js 概要
 
-[Three.js](http://www.createjs.com) は、HTML5で3Dコンテンツを制作するためのJavaScriptライブラリです。[Mr.doob](http://mrdoob.com)氏が中心となって開発されており、オープンソースソフトウェアとして個人・商用でも無償で利用できます。
+Three.jsは、HTML5で3Dコンテンツを制作するためのJavaScriptライブラリです。[Mr.doob](http://mrdoob.com)氏が中心となって開発されており、オープンソースソフトウェアとして個人・商用でも無償で利用できます。
 
 ![](https://ics.media/wp-content/uploads/2017/08/170704_webpack_site_three.png)
 
@@ -145,4 +145,4 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2017-12-04</article-date-modified>
+<article-date-modified>2018-04-19</article-date-modified>
