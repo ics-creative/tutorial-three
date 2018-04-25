@@ -137,15 +137,29 @@
               <hr/>
 
               <footer>
+
+                <div class="m-2">
+                  <div class="text-center">
+                    <img src="https://ics.media/wp-content/uploads/2018/04/ics-staff-ikeda_2.jpg"
+                         class="rounded-circle"
+                         width="48" height="48"
+                         alt="" />
+                  </div>
+                  <div class="text-center">
+                    <span style="color: #888;">執筆者: </span>
+                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                      <span itemprop="name"><a href="https://twitter.com/clockmaker">${article-author}</a>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+
+
                 <div class="text-data">
                   <div>公開日 : <span itemprop="datePublished" content="${article-datePublished}">${article-datePublished-locale}</span>
                     / 最終更新日 :
                     <time itemprop="dateModified" datetime="${article-dateModified}">${article-dateModified-locale}</time>
-                    / 著者 :
-                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-                      <span itemprop="name"><a href="https://twitter.com/clockmaker">${article-author}</a>
-                      </span>
-                    </span></div>
+                  </div>
                   <div>※この記事は Three.js の2017年12月19日現在最新のリビジョン89を元に執筆しています。</div>
                 </div>
               </footer>
