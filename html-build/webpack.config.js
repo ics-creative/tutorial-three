@@ -1,14 +1,12 @@
-const webpack = require('webpack');
-
 const isProduction = true;
-const useOptimize = isProduction;
 const useSourceMap = !isProduction;
 
 module.exports = {
+  mode: isProduction ? 'production' : 'development',
   entry: './src/main.js',
   output: { // ファイルの出力設定
     path: `${__dirname}/../html/js`,  //  出力ファイルのディレクトリ名
-    filename: 'bundle.js'  // 出力ファイル名
+    filename: 'bundle.js',  // 出力ファイル名
   },
   module: {
     rules: [
@@ -22,13 +20,11 @@ module.exports = {
             // Babel のオプションを指定する
             options: {
               presets: [
-                // env を指定することで、ES2017 を ES5 に変換。
-                // {modules: false}にしないと import 文が Babel によって CommonJS に変換され、
-                // webpack の Tree Shaking 機能が使えない
-                ['env', {'modules': false}]
-              ]
-            }
-          }
+                // プリセットを指定することで、ES2018 を ES5 に変換
+                '@babel/preset-env',
+              ],
+            },
+          },
         ],
         // node_modules は除外する
         exclude: /node_modules/,
@@ -46,7 +42,7 @@ module.exports = {
               url: true,
               // ソースマップを有効にする
               sourceMap: useSourceMap,
-              importLoaders: 2
+              importLoaders: 2,
             },
           },
           {
@@ -62,27 +58,13 @@ module.exports = {
       // 画像関係
       {
         test: /\.(png|jpeg|svg)$/,
-        use: 'url-loader'
+        use: 'url-loader',
       },
       // フォント関係
       {
         test: /\.(otf|eot|svg|ttf|woff|woff2)(\?.+)?$/,
-        use: 'url-loader'
-      }
+        use: 'url-loader',
+      },
     ],
   },
-  plugins: useOptimize === true ? [
-    // 【効果：中】Scope Hoistingをするためのプラグイン
-    new webpack.optimize.ModuleConcatenationPlugin(),
-
-    // 【効果：大】JSファイルのminifyを実行する
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: useSourceMap,
-      compress: {
-        warnings: false,
-      },
-      // マルチプロセスで高速化
-      parallel: true,
-    }),
-  ] : []
 };
