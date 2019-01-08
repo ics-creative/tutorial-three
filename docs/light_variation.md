@@ -1,6 +1,6 @@
 # Three.js ライト機能まとめ
 
-Three.jsには様々なライトが用意されています。
+Three.jsにはさまざまなライトが用意されています。
 
 初心者のうちはたくさんの種類があってどれを使うべきか迷いどころです。はじめのうちは、パラメーターの少ない`AmbientLight`や`DirectionalLight`を使い、慣れてきたら`PointLight`や`SpotLight`を使って表現を高めていくのがいいでしょう。
 
@@ -114,7 +114,7 @@ scene.add(light);
 詳しい仕様は公式ドキュメント「[SpotLight](https://threejs.org/docs/#api/lights/SpotLight)」を参照ください。パラメーターを試せるデモが掲載されてるので、これを使うとイメージしやすいでしょう。
 
 
-例えば、`exponent`プロパティーの値を変更すると次のように光源が変化します。境界がもやっとした感じに調整できます。
+たとえば、`exponent`プロパティーの値を変更すると次のように光源が変化します。境界がもやっとした感じに調整できます。
 
 
 ![](../imgs/light_spot_exponent_0.png)

@@ -6,7 +6,7 @@
 
 初学者から学べるように基本から解説しつつ、発展的な内容までまとめています。このサイトを通して、ウェブの3Dのインタラクションデザインについて学んでいきましょう。
 
-## Three.js 概要
+## Three.js概要
 
 Three.jsは、HTML5で3Dコンテンツを制作するためのJavaScriptライブラリです。[Mr.doob](http://mrdoob.com)氏が中心となって開発されており、オープンソースソフトウェアとして個人・商用でも無償で利用できます。
 
@@ -17,7 +17,7 @@ WebGLだけで3D表現をするためには、立方体1つ表示するだけで
 もともと2000年代後半のFlashの時代から、ウェブの3D表現が人気を集めてきました。今では標準技術としてのWebGLが、ゲームやビジュアライゼーションなどの多くの場面で採用されています。
 
 
-## Three.js 入門編
+## Three.js入門編
 
 まずは少ないコードでThree.jsの基本を学んでいきましょう。
 
@@ -30,16 +30,16 @@ WebGLだけで3D表現をするためには、立方体1つ表示するだけで
 - [カメラの制御方法（OrbitControls）](camera_orbitcontrols.md)
 
 
-## Three.js 基本編
+## Three.js基本編
 
 Three.jsには多彩な機能が存在します。機能を習得すればするほど、実現できる表現が増えていくでしょう。
 
 ![](../imgs/material_variation_toon.png)
 
-- [様々なマテリアル](material_variation.md)
-- [様々なライト](light_variation.md)
+- [さまざまなマテリアル](material_variation.md)
+- [さまざまなライト](light_variation.md)
 - [影を落とす方法](light_shadowmap.md)
-- [様々なカメラ](camera_variation.md)
+- [さまざまなカメラ](camera_variation.md)
 
 ![](../imgs/sprite.png)
 
@@ -51,7 +51,7 @@ Three.jsには多彩な機能が存在します。機能を習得すればする
 - [モデルデータの読み込み](model_basic.md)
 
 
-## Three.js 中級編
+## Three.js中級編
 
 専門的な方法も覚えていきましょう。
 
@@ -71,7 +71,7 @@ JavaScriptの新しい仕様のECMAScript 2015（略称ES2015、別名ES6）以�
 - [ES2015のclassを利用する（継承）](class.md)
 - [ES2015のclassを利用する（メソッド）](class_method.md)
 
-## Three.js 数値計算
+## Three.js数値計算
 
 3Dでは、三角関数やベクトルの計算をする場面が多いです。実例を通して、これらを学んでいきましょう。
 
@@ -83,7 +83,7 @@ JavaScriptの新しい仕様のECMAScript 2015（略称ES2015、別名ES6）以�
 - [ベクトルの内積](https://ics.media/entry/15321)
 - [ベクトルの外積](https://ics.media/entry/15467)
 
-## Three.js 演出編
+## Three.js演出編
 
 Three.jsを使った表現を作例を通して学びましょう。
 
@@ -96,7 +96,7 @@ Three.jsを使った表現を作例を通して学びましょう。
 - [サウンドビジュアライザー](https://ics.media/entry/9105)
 - [エフェクト作成ツールのEffekseerがWebGLに対応。Web表現の新兵器となるか](https://ics.media/entry/15745)
 
-## WebGL シェーダー編
+## WebGLシェーダー編
 
 Three.jsだけだと実現できる表現の種類に限界があります。シェーダーをGLSLでカスタマイズすることによって、表現の種類を大きく広げられます。
 
@@ -107,7 +107,7 @@ Three.jsだけだと実現できる表現の種類に限界があります。シ
 - [シェーダーの定番画像処理8選](https://ics.media/entry/5535)
 
 
-## WebGL 応用編
+## WebGL応用編
 
 WebGLの最適化や次世代の仕様について理解を深めましょう。
 
@@ -131,7 +131,7 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 ## Node.jsを使ったフロントエンド開発
 
-効率のよい開発ができるよう、最新の開発環境の構築もしましょう。開発環境を整えれば最新のJavaScript言語仕様を利用でき、開発効率向上に役立つはずです。また、型定義のあるTypeScriptを使ってコード補完をフルに効かせて開発するのもお勧めです。
+効率のよい開発ができるよう、最新の開発環境の構築もしましょう。開発環境を整えれば最新のJavaScript言語仕様を利用でき、開発効率向上に役立つはずです。また、型定義のあるTypeScriptを使ってコード補完をフルに効かせて開発するのもオススメです。
 
 ![](https://ics.media/wp-content/uploads/2017/08/170808_eyecatch_webpack_typescript.jpg)
 
@@ -141,4 +141,4 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2018-08-06</article-date-modified>
+<article-date-modified>2019-01-08</article-date-modified>

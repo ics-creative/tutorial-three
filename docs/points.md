@@ -4,7 +4,7 @@
 
 この機能を使えば大量の粒子を表示でき、性能的にもすぐ入れているので実行性能をほとんど下げることなく利用できます。
 
-3D空間にたくさんの粒子を配置するだけで、空間の距離感など雰囲気がでるので、オススメの機能の一つです。
+3D空間にたくさんの粒子を配置するだけで、空間の距離感など雰囲気がでるので、オススメの機能のひとつです。
 
 ## パーティクルのサンプル
 
@@ -57,7 +57,7 @@ const geometry = new THREE.Geometry();
 
 ### ②ジオメトリーに頂点座標を加えていく
 
-直方体エリア（一辺3000の距離）の中にランダムに1000個の粒子を配置します。`SIZE`と`LENGTH`変数で配置領域や個数をカスタマイズできるので、適宜調整ください。
+直方体エリア（一辺3000の距離）の中へランダムに1000個の粒子を配置します。`SIZE`と`LENGTH`変数で配置領域や個数をカスタマイズできるので、適宜調整ください。
 
 
 ```js
@@ -97,10 +97,10 @@ scene.add(mesh);
 
 
 
-※ここで出て来た新しいクラスについては、詳しくは公式ドキュメント(英語)の「[Points](https://threejs.org/docs/#api/objects/Points)」と「[PointsMaterial](https://threejs.org/docs/#api/materials/PointsMaterial)」を確認ください。
+※ここで出て来た新しいクラスについては、詳しくは公式ドキュメント（英語）の「[Points](https://threejs.org/docs/#api/objects/Points)」と「[PointsMaterial](https://threejs.org/docs/#api/materials/PointsMaterial)」を確認ください。
 
 
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-03</article-date-published>
-<article-date-modified>2017-11-03</article-date-modified>
+<article-date-modified>2019-01-08</article-date-modified>

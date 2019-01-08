@@ -1,4 +1,4 @@
-# Three.jsの様々なマテリアル
+# Three.jsのさまざまなマテリアル
 
 3Dの見栄えを決定するマテリアルについて説明します。
 
@@ -78,7 +78,7 @@ scene.add(mesh);
 ```
 ※このマテリアルをつかう時はライトを用意ください。
 
-このクラスの詳細な使い方は公式ドキュメント「[MeshLambertMaterial](https://threejs.org/docs/#api/materials/MeshLambertMaterial)」を参照ください。サンプルで様々なプロパティーを試せます。
+このクラスの詳細な使い方は公式ドキュメント「[MeshLambertMaterial](https://threejs.org/docs/#api/materials/MeshLambertMaterial)」を参照ください。サンプルでさまざまなプロパティーを試せます。
 
 
 
@@ -107,7 +107,7 @@ scene.add(mesh);
 
 ※このマテリアルをつかう時はライトを用意ください。
 
-このクラスの詳細な使い方は公式ドキュメント「[MeshPhongMaterial](https://threejs.org/docs/#api/materials/MeshPhongMaterial)」を参照ください。サンプルで様々なプロパティーを試せます。
+このクラスの詳細な使い方は公式ドキュメント「[MeshPhongMaterial](https://threejs.org/docs/#api/materials/MeshPhongMaterial)」を参照ください。サンプルでさまざまなプロパティーを試せます。
 
 
 
@@ -170,7 +170,7 @@ scene.add(mesh);
 
 ※このマテリアルをつかう時はライトを用意ください。
 
-このクラスの詳細な使い方は公式ドキュメント「[MeshStandardMaterial](https://threejs.org/docs/#api/materials/MeshStandardMaterial)」を参照ください。サンプルで様々なプロパティーを試せます。
+このクラスの詳細な使い方は公式ドキュメント「[MeshStandardMaterial](https://threejs.org/docs/#api/materials/MeshStandardMaterial)」を参照ください。サンプルでさまざまなプロパティーを試せます。
 
 
 
@@ -178,7 +178,7 @@ scene.add(mesh);
 
 ## まとめ
 
-今回のチュートリアルでは、Three.jsが用意する様々なマテリアルについて紹介しました。プロパティーによって様々な表現ができるため色々試してみてください。
+今回のチュートリアルでは、Three.jsが用意するさまざまなマテリアルについて紹介しました。プロパティーによってさまざまな表現ができるため色々試してみてください。
 
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>

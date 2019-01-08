@@ -7,7 +7,7 @@ Three.jsの`canvas`要素にHTMLの表示を重ねたい時があります。
 
 ## スクリーン座標の算出方法
 
-`THREE.Camera`クラスの`project()`メソッドを使うことで、ワールド座標をステージ上のXY座標に変換することができます。
+`THREE.Camera`クラスの`project()`メソッドを使うことで、ワールド座標をステージ上のXY座標に変換できます。
 
 
 ```js
@@ -61,4 +61,4 @@ console.log(sx, sy);
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-12</article-date-published>
-<article-date-modified>2017-11-12</article-date-modified>
+<article-date-modified>2019-01-08</article-date-modified>

@@ -29,9 +29,9 @@ HTMLの`meta`タグに`viewport`の設定をします。
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 ```
 
-スマートフォンのブラウザには横幅の大きなPCサイトも柔軟に見れるように自動的に拡大縮小する機能があります。WebGLを綺麗に見せたいときには、その機能が余計な処お世話となります。
+スマートフォンのブラウザーには横幅の大きなPCサイトも柔軟に見れるよう、自動的に拡大縮小する機能があります。WebGLを綺麗に見せたいときには、その機能が余計な処お世話となります。
 
-`width=device-width`と指定することでデバイスの最適な幅で表示させるようにします。また、初期状態で拡大・縮小していない見え方にするために`initial-scale=1`を指定します。
+`width=device-width`と指定することでデバイスの最適な幅で表示させるようにします。また、初期状態で拡大・縮小していない見え方へするために`initial-scale=1`を指定します。
 
 ### スタイルシート
 
@@ -46,7 +46,7 @@ HTMLの`meta`タグに`viewport`の設定をします。
 </style>
 ```
 
-また、`overflow: hidden`を指定すると、macOSのデスクトップブラウザのオーバースクロール（例えば画面上部にスクロールすると、画面上部を一瞬超えて表示される挙動）を抑制できます。全画面コンテンツを作るときにオーバースクロールの挙動は余計なお世話なので、`overflow: hidden`を指定しておきましょう。
+また、`overflow: hidden`を指定すると、macOSのデスクトップブラウザのオーバースクロール（たとえば画面上部にスクロールすると、画面上部を一瞬超えて表示される挙動）を抑制できます。全画面コンテンツを作るときにオーバースクロールの挙動は余計なお世話なので、`overflow: hidden`を指定しておきましょう。
 
 ### Three.jsの調整
 
@@ -76,7 +76,7 @@ function onResize() {
 実装のポイントは次の通りです。
 
 - リサイズ時にはレンダラーのサイズを`setSize`メソッドで画面幅に合わせること
-- デスクトップでは、メインディスプレイ・サブディスプレイでPixelRatioが異なる可能性があるので、リサイズイベントで`setPixelRatio`メソッドで更新するべき
+- デスクトップでは、メインディスプレイ・サブディスプレイでPixelRatioの異なる可能性があるので、リサイズイベントで`setPixelRatio`メソッドでを使って更新するべき
 - リサイズ時にはカメラの縦横比が狂うので、リサイズ時に縦横比を正しく調整する
 - 画面サイズの設定処理は、初期化時もリサイズ時も同じ
   - `onResize`関数は初期化時とリサイズイベント発生の両方で呼び出す
@@ -86,4 +86,4 @@ function onResize() {
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-16</article-date-published>
-<article-date-modified>2017-11-16</article-date-modified>
+<article-date-modified>2019-01-08</article-date-modified>

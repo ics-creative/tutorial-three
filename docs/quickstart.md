@@ -1,4 +1,4 @@
-# 簡単な Three.js のサンプルを試そう
+# 簡単なThree.jsのサンプルを試そう
 
 [Three.js](http://typescript.Three.js.com/)はHTMLの3D技術「[WebGL](http://ja.wikipedia.org/wiki/WebGL "WebGL - Wikipedia")」を扱いやすくしたフレームワークです。**Three.jsを使えばGPUによる本格的な3D表現をプラグイン無しで作成**できます。
 
@@ -75,13 +75,13 @@
 
 ちなみに前提としてThree.jsはWebGL対応のブラウザが必須となりますので、動作確認はFirefoxやChrome、Safari、Edgeなどを使うといいでしょう。
 
-また、WebGLはローカルファイルのセキュリティーの制限があるため、ローカルサーバー上で実行することをオススメします。ローカルサーバーの構築方法がわからなければ、エディターの「[Brackets](http://brackets.io/)」がボタン一つで実行できるのでオススメです。
+また、WebGLはローカルファイルのセキュリティーの制限があるため、ローカルサーバー上で実行することをオススメします。ローカルサーバーの構築方法がわからなければ、エディターの「[Brackets](http://brackets.io/)」がボタンひとつで実行できるのでオススメです。
 
-ここからは、上記のコードを解説していくので、一つ一つ理解していきましょう。
+ここからは、上記のコードを解説していくので、少しずつ理解していきましょう。
 
 ## canvas要素を用意する
 
-Three.jsはHTML5の`canvas`要素を利用します。`canvas`要素はコンテンツを表示する描画エリアとなります。`canvas`要素には属性として`id`(ID値)を最低限設定しておきましょう。
+Three.jsはHTML5の`canvas`要素を利用します。`canvas`要素はコンテンツを表示する描画エリアとなります。`canvas`要素には属性として`id`（ID値）を最低限設定しておきましょう。
 
 ```html
 <body>
@@ -143,7 +143,7 @@ const scene = new THREE.Scene();
 
 3Dではどの視点から空間を撮影するか、という実装をします。この機能は「視点」や「カメラ」と呼ばれます。
 
-Three.jsでは`THREE.PerspectiveCamera`クラスのコンストラクターで画角、アスペクト比、描画開始距離、描画終了距離の４つの情報を引数として渡しカメラを作成します。
+Three.jsでは`THREE.PerspectiveCamera`クラスのコンストラクターで画角、アスペクト比、描画開始距離、描画終了距離の4つの情報を引数として渡しカメラを作成します。
 
 ```js
 // new THREE.PerspectiveCamera(画角, アスペクト比
@@ -152,7 +152,7 @@ const camera = new THREE.PerspectiveCamera(45, 960 / 540);
 
 ## 立方体を作る
 
-立方体はメッシュという表示オブジェクトを使用して作成します。メッシュを作るには、ジオメトリ(形状)とマテリアル(素材)の二種類を用意する必要があります。
+立方体はメッシュという表示オブジェクトを使用して作成します。メッシュを作るには、ジオメトリ（形状）とマテリアル（素材）の二種類を用意する必要があります。
 
 ジオメトリとは頂点情報や面情報を持っています。Three.jsにはさまざまなジオメトリが用意されていますが、今回は立方体や直方体のような箱状の形状を生成するための`BoxGeometry`を使用します。
 
@@ -238,7 +238,7 @@ function tick() {
 
 
 図：Three.jsを構成する基本的なオブジェクトと表示の仕組み
-ビュー(HTMLのcanvasタグ)が実際に表示される画面となります。
+ビュー（HTMLの`canvas`タグ）が実際に表示される画面となります。
 
 
 **THREE.Sceneクラス**
@@ -271,4 +271,4 @@ function tick() {
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2017-11-07</article-date-modified>
+<article-date-modified>2019-01-08</article-date-modified>
