@@ -2,34 +2,30 @@
  
 Three.jsにはCamera3Dクラスがあることを、入門編で紹介しました。このCamera3Dがどのようにして利用できるのか、もう少し掘り下げて学んでみましょう。
  
-レンズにはThree.jsにはさまざまな種類が搭載されています。 
+Three.jsにさまざまな種類のカメラが搭載されています。 
 
 カメラの種類
 
 - `THREE.PerspectiveCamera` : 遠近感が適用されるカメラ
 - `THREE.OrthographicCamera`  : 平行投影が適用されるカメラ
 
-本節では`PerspectiveCamera`と`OrthographicCamera`の２種類を掘り下げて解説します。
- 
- 
-## PerspectiveCamera 
+本節では`PerspectiveCamera`と`OrthographicCamera`の2種類を掘り下げて解説します。
 
+## PerspectiveCamera 
 
 ![](../imgs/camera_perspective_45.png)
 
-- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/camera_perspective_45.html)
-- [サンプルのソースコードを確認する](../samples/camera_perspective_45.html)
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/camera_perspective.html)
+- [サンプルのソースコードを確認する](../samples/camera_perspective.html)
 
-
- 
-遠近感を表現できるカメラです。`PerspectiveCamera`インスタンスの`fov`プロパティーを設定することで、カメラの視野角を変更することができます。視野角とはカメラが映し出せる範囲のことです。 
+遠近感を表現できるカメラです。`PerspectiveCamera`インスタンスの`fov`プロパティーを設定することで、カメラの視野角を変更できます。視野角とはカメラが映し出せる範囲のことです。 
  
 ```js
 // new THREE.PerspectiveCamera(視野角, アスペクト比, near, far)
 const camera = new THREE.PerspectiveCamera(45, width / height, 1, 2000);
 ```
 
-`fov`プロパティーは次の書式で変更することができます。単位は角度です。ちなみに`fov`はField of View＝視野角の頭文字の略語です。
+`fov`プロパティーは次の書式で変更できます。単位は角度です。ちなみに、`fov`はField of View＝視野角の頭文字の略語です。
  
 ```js
 camera.fov = 60; 
@@ -50,10 +46,7 @@ camera.fov = 60;
 - [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/camera_orthographic.html)
 - [サンプルのソースコードを確認する](../samples/camera_orthographic.html)
 
-
-
 `OrthographicCamera`は平行投影を表現できるカメラです。このカメラには遠近感がないので、手前にある3Dオブジェクトも奥にある3Dオブジェクトも同じ大きさで表示されます。 
- 
  
 ```js
 // new THREE.OrthographicCamera(left, right, top, bottom, near, far)
@@ -66,7 +59,7 @@ const camera = new THREE.OrthographicCamera(-480, +480, 270, -270, 1, 1000);
 
 ## 共通の設定：クリッピング 
  
-3D空間に存在する全てのポリゴンをレンダリングするとパフォーマンスを無駄に使ってしまうので、クリッピングという機能がレンズには備わっています。カメラから見て一定距離区間の間に存在するオブジェクトだけをレンダリングし、その距離の区間の外のオブジェクトはレンダリングしないというしくみです。クリッピングは次の２つのプロパティーで制御されます。 
+3D空間に存在するすべてのポリゴンをレンダリングするとパフォーマンスを無駄に使ってしまうので、クリッピングという機能がレンズには備わっています。カメラから見て一定距離区間の間に存在するオブジェクトだけをレンダリングし、その距離の区間の外のオブジェクトはレンダリングしないというしくみです。クリッピングは次の2つのプロパティーで制御されます。
  
 プロパティー 
 
@@ -75,7 +68,6 @@ const camera = new THREE.OrthographicCamera(-480, +480, 270, -270, 1, 1000);
  
 Three.jsでは`near`のデフォルト値は1、`far`のデフォルト値は2000に設定されています。特に`far`の値はかなり小さく設定されていますので、必要に応じて大きな値に変更するとよいでしょう。 
 
-
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-12</article-date-published>
-<article-date-modified>2017-11-12</article-date-modified>
+<article-date-modified>2018-08-06</article-date-modified>

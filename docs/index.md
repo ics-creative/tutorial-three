@@ -6,16 +6,13 @@
 
 初学者から学べるように基本から解説しつつ、発展的な内容までまとめています。このサイトを通して、ウェブの3Dのインタラクションデザインについて学んでいきましょう。
 
-
-
-
 ## Three.js 概要
 
 Three.jsは、HTML5で3Dコンテンツを制作するためのJavaScriptライブラリです。[Mr.doob](http://mrdoob.com)氏が中心となって開発されており、オープンソースソフトウェアとして個人・商用でも無償で利用できます。
 
 ![](https://ics.media/wp-content/uploads/2017/08/170704_webpack_site_three.png)
 
-WebGLだけで3D表現をするためには、立方体一つ表示するだけでも多くのJavaScriptやGLSLコードを書く必要があり専門知識も必要です。Three.jsを使えばJavaScriptの知識だけで簡単に3Dコンテンツが作成できるため、手軽に扱えるようになります。
+WebGLだけで3D表現をするためには、立方体1つ表示するだけでも多くのJavaScriptやGLSLコードを書く必要があり専門知識も必要です。Three.jsを使えばJavaScriptの知識だけで簡単に3Dコンテンツが作成できるため、手軽に扱えるようになります。
 
 もともと2000年代後半のFlashの時代から、ウェブの3D表現が人気を集めてきました。今では標準技術としてのWebGLが、ゲームやビジュアライゼーションなどの多くの場面で採用されています。
 
@@ -35,11 +32,9 @@ WebGLだけで3D表現をするためには、立方体一つ表示するだけ�
 
 ## Three.js 基本編
 
-Three.jsには多彩な機能が存在します。機能を習得すればするほど、実現できる表現が増えていくでしょう。
-
+Three.jsには多彩な機能が存在します。機能を習得すればするほど、実現できる表現が増えていくでしょう。
 
 ![](../imgs/material_variation_toon.png)
-
 
 - [様々なマテリアル](material_variation.md)
 - [様々なライト](light_variation.md)
@@ -69,7 +64,7 @@ Three.jsには多彩な機能が存在します。機能を習得すればする
 
 ## Three.jsとECMAScript 2015+
 
-JavaScriptの新しい仕様のECMAScript 2015（略称ES2015、別名ES6）以上では、クラスを利用できます。オブジェクト指向なプログラムで設計することで、規模の大きい開発に役立ちます。Three.jsでクラスを利用する方法を習得しましょう。
+JavaScriptの新しい仕様のECMAScript 2015（略称ES2015、別名ES6）以上では、クラスを利用できます。オブジェクト指向なプログラムを用いて設計することで、規模の大きい開発に役立ちます。Three.jsでクラスを利用する方法を習得しましょう。
 
 ![](../imgs/index-h2-es2015.png)
 
@@ -103,7 +98,7 @@ Three.jsを使った表現を作例を通して学びましょう。
 
 ## WebGL シェーダー編
 
-Three.jsだけだと実現できる表現の種類に限界があります。シェーダーをGLSLでカスタマイズすることで表現の種類を大きく広げられます。
+Three.jsだけだと実現できる表現の種類に限界があります。シェーダーをGLSLでカスタマイズすることによって、表現の種類を大きく広げられます。
 
 ![](https://ics.media/wp-content/uploads/2015/03/150311_eyecatch.png)
 
@@ -129,13 +124,14 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 ![](https://ics.media/wp-content/uploads/2017/01/170112_panorama_eye.jpg)
 
+- [たった4行でできる！ ブラウザ向けVRをThree\.jsで実装する方法](https://ics.media/entry/18793)
 - [HTMLタグで本格VRコンテンツが作れる3Dライブラリ「A\-Frame」](https://ics.media/entry/13401)
 - [お手軽360°パノラマ制作入門！ JSでパノラマビューワー](https://ics.media/entry/14490)
 
 
 ## Node.jsを使ったフロントエンド開発
 
-効率のよい開発ができるよう、最新の開発環境の構築もしましょう。開発環境を整えれば最新のJavaScript言語仕様を利用でき、開発効率向上に役立つはずです。また、型定義のあるTypeScriptを使ってコード補完をフルに効かせて開発するのもおすすめです。
+効率のよい開発ができるよう、最新の開発環境の構築もしましょう。開発環境を整えれば最新のJavaScript言語仕様を利用でき、開発効率向上に役立つはずです。また、型定義のあるTypeScriptを使ってコード補完をフルに効かせて開発するのもお勧めです。
 
 ![](https://ics.media/wp-content/uploads/2017/08/170808_eyecatch_webpack_typescript.jpg)
 
@@ -145,4 +141,4 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2018-04-19</article-date-modified>
+<article-date-modified>2018-08-06</article-date-modified>
