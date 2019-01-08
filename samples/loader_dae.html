@@ -1,68 +1,73 @@
 <html>
-<head>
-  <meta charset="utf-8"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
-  <script src="js/controls/OrbitControls.js"></script>
-  <script src="js/loaders/ColladaLoader.js"></script>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+    <script src="js/loaders/ColladaLoader.js"></script>
 
-  <script>
-    // ページの読み込みを待つ
-    window.addEventListener('load', init);
+    <script>
+      // ページの読み込みを待つ
+      window.addEventListener('load', init);
 
-    function init() {
-      // サイズを指定
-      const width = 960;
-      const height = 540;
+      function init() {
+        // サイズを指定
+        const width = 960;
+        const height = 540;
 
-      // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#myCanvas'),
-      });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(width, height);
+        // レンダラーを作成
+        const renderer = new THREE.WebGLRenderer({
+          canvas: document.querySelector('#myCanvas')
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height);
 
-      // シーンを作成
-      const scene = new THREE.Scene();
+        // シーンを作成
+        const scene = new THREE.Scene();
 
-      // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
-      // カメラの初期座標を設定
-      camera.position.set(0, 10, 10);
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(
+          45,
+          width / height,
+          0.1,
+          10000
+        );
+        // カメラの初期座標を設定
+        camera.position.set(0, 10, 10);
 
-      // カメラコントローラーを作成
-      const controls = new THREE.OrbitControls(camera);
-      controls.target.set(0, 3, 0);
-      controls.update();
+        // カメラコントローラーを作成
+        const controls = new THREE.OrbitControls(camera);
+        controls.target.set(0, 3, 0);
+        controls.update();
 
-      // 平行光源を作成
-      const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
-      directionalLight.position.set(1, 1, 1);
-      scene.add(directionalLight);
-      // 環境光を追加
-      const ambientLight = new THREE.AmbientLight(0x333333);
-      scene.add(ambientLight);
+        // 平行光源を作成
+        const directionalLight = new THREE.DirectionalLight(0xffffff);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight);
+        // 環境光を追加
+        const ambientLight = new THREE.AmbientLight(0x333333);
+        scene.add(ambientLight);
 
-      // 3DS形式のモデルデータを読み込む
-      const loader = new THREE.ColladaLoader();
-      // 3dsファイルのパスを指定
-      loader.load('./models/collada/elf/elf.dae', (collada) => {
-        // 読み込み後に3D空間に追加
-        const model = collada.scene;
-        scene.add(model);
-      });
+        // 3DS形式のモデルデータを読み込む
+        const loader = new THREE.ColladaLoader();
+        // 3dsファイルのパスを指定
+        loader.load('./models/collada/elf/elf.dae', collada => {
+          // 読み込み後に3D空間に追加
+          const model = collada.scene;
+          scene.add(model);
+        });
 
-      tick();
+        tick();
 
-      // 毎フレーム時に実行されるループイベントです
-      function tick() {
-        // レンダリング
-        renderer.render(scene, camera);
-        requestAnimationFrame(tick);
+        // 毎フレーム時に実行されるループイベントです
+        function tick() {
+          // レンダリング
+          renderer.render(scene, camera);
+          requestAnimationFrame(tick);
+        }
       }
-    }
-  </script>
-</head>
-<body>
-  <canvas id="myCanvas"></canvas>
-</body>
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
 </html>

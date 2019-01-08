@@ -1,137 +1,135 @@
 <html>
-<head>
-  <meta charset="utf-8"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
-  <script>
-    // ページの読み込みを待つ
-    window.addEventListener('load', init);
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
+    <script>
+      // ページの読み込みを待つ
+      window.addEventListener('load', init);
 
-    function init() {
-      // サイズを指定
-      const width = 960;
-      const height = 540;
+      function init() {
+        // サイズを指定
+        const width = 960;
+        const height = 540;
 
-      // 角度
-      let rot = 0;
+        // 角度
+        let rot = 0;
 
-      // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#myCanvas')
-      });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(width, height);
+        // レンダラーを作成
+        const renderer = new THREE.WebGLRenderer({
+          canvas: document.querySelector('#myCanvas')
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height);
 
-      // シーンを作成
-      const scene = new THREE.Scene();
+        // シーンを作成
+        const scene = new THREE.Scene();
 
-      // 画面上にグリッド（格子）を配置
-      const grid = new THREE.GridHelper(1000, 10);
-      scene.add(grid);
+        // 画面上にグリッド（格子）を配置
+        const grid = new THREE.GridHelper(1000, 10);
+        scene.add(grid);
 
-      // 画面上に3軸を配置
-      const axes = new THREE.AxesHelper(1000);
-      scene.add(axes);
+        // 画面上に3軸を配置
+        const axes = new THREE.AxesHelper(1000);
+        scene.add(axes);
 
-      // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height);
-      camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-      // 平行光源
-      const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
-      directionalLight.position.set(1, 1, 1);
-      scene.add(directionalLight);// シーンに追加
-
-      // 環境光源
-      const ambientLight = new THREE.AmbientLight(0x999999);
-      scene.add(ambientLight);
-
-      // 球体を作成
-      const geometry = new THREE.SphereGeometry(300, 30, 30);
-      // 画像を読み込む
-      const loader = new THREE.TextureLoader();
-      const texture = loader.load('imgs/earthmap1k.jpg');
-      // マテリアルにテクスチャーを設定
-      const material = new THREE.MeshStandardMaterial({
-        map: texture
-      });
-      // メッシュを作成
-      const mesh = new THREE.Mesh(geometry, material);
-      // 3D空間にメッシュを追加
-      scene.add(mesh);
-
-
-      /** 主要都市緯度経度一覧 */
-      const citiesPoints = [
-        [35, 139], // 日本
-        [51.2838, 0], // ロンドン
-        [39, -116], // アメリカ
-        [34, 118], // 中国
-      ];
-      // リスト分のポイントをプロット
-      for (let i = 0; i < citiesPoints.length; i++) {
-        const latitude = citiesPoints[i][0];
-        const longitude = citiesPoints[i][1];
-
-        // 球
-        const sphere = new THREE.Mesh(
-          new THREE.SphereGeometry(10),
-          new THREE.MeshStandardMaterial({color: 0xFF0000}));
-        // 緯度経度から3D座標を設定
-        const coords = translateGeoCoords(latitude, longitude, 300);
-        // 3D座標を反映
-        sphere.position.x = coords.x;
-        sphere.position.y = coords.y;
-        sphere.position.z = coords.z;
-        scene.add(sphere);
-      }
-
-
-      tick();
-
-      // 毎フレーム時に実行されるループイベントです
-      function tick() {
-
-        rot += 1;
-
-        // ラジアンに変換
-        const radian = rot * Math.PI / 180;
-
-        // ライトの座標に反映
-        camera.position.x = 1000 * Math.cos(radian);
-        camera.position.y = 500;
-        camera.position.z = 1000 * Math.sin(radian);
-
-        // カメラは常に中央を向くように指定
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(45, width / height);
         camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-        // レンダリング
-        renderer.render(scene, camera);
-        requestAnimationFrame(tick);
+        // 平行光源
+        const directionalLight = new THREE.DirectionalLight(0xffffff);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight); // シーンに追加
+
+        // 環境光源
+        const ambientLight = new THREE.AmbientLight(0x999999);
+        scene.add(ambientLight);
+
+        // 球体を作成
+        const geometry = new THREE.SphereGeometry(300, 30, 30);
+        // 画像を読み込む
+        const loader = new THREE.TextureLoader();
+        const texture = loader.load('imgs/earthmap1k.jpg');
+        // マテリアルにテクスチャーを設定
+        const material = new THREE.MeshStandardMaterial({
+          map: texture
+        });
+        // メッシュを作成
+        const mesh = new THREE.Mesh(geometry, material);
+        // 3D空間にメッシュを追加
+        scene.add(mesh);
+
+        /** 主要都市緯度経度一覧 */
+        const citiesPoints = [
+          [35, 139], // 日本
+          [51.2838, 0], // ロンドン
+          [39, -116], // アメリカ
+          [34, 118] // 中国
+        ];
+        // リスト分のポイントをプロット
+        for (let i = 0; i < citiesPoints.length; i++) {
+          const latitude = citiesPoints[i][0];
+          const longitude = citiesPoints[i][1];
+
+          // 球
+          const sphere = new THREE.Mesh(
+            new THREE.SphereGeometry(10),
+            new THREE.MeshStandardMaterial({ color: 0xff0000 })
+          );
+          // 緯度経度から3D座標を設定
+          const coords = translateGeoCoords(latitude, longitude, 300);
+          // 3D座標を反映
+          sphere.position.x = coords.x;
+          sphere.position.y = coords.y;
+          sphere.position.z = coords.z;
+          scene.add(sphere);
+        }
+
+        tick();
+
+        // 毎フレーム時に実行されるループイベントです
+        function tick() {
+          rot += 1;
+
+          // ラジアンに変換
+          const radian = (rot * Math.PI) / 180;
+
+          // ライトの座標に反映
+          camera.position.x = 1000 * Math.cos(radian);
+          camera.position.y = 500;
+          camera.position.z = 1000 * Math.sin(radian);
+
+          // カメラは常に中央を向くように指定
+          camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+          // レンダリング
+          renderer.render(scene, camera);
+          requestAnimationFrame(tick);
+        }
       }
-    }
 
-    /**
-     * 緯度経度から位置を算出します。
-     * @param {number} latitude 緯度です。
-     * @param {number} longitude 経度です。
-     * @param {number} radius 半径です。
-     * @returns {Vector3} 3Dの座標です。
-     */
-    function translateGeoCoords(latitude, longitude, radius) {
-      // 仰角
-      const phi = (latitude) * Math.PI / 180;
-      // 方位角
-      const theta = (longitude - 180) * Math.PI / 180;
+      /**
+       * 緯度経度から位置を算出します。
+       * @param {number} latitude 緯度です。
+       * @param {number} longitude 経度です。
+       * @param {number} radius 半径です。
+       * @returns {Vector3} 3Dの座標です。
+       */
+      function translateGeoCoords(latitude, longitude, radius) {
+        // 仰角
+        const phi = (latitude * Math.PI) / 180;
+        // 方位角
+        const theta = ((longitude - 180) * Math.PI) / 180;
 
-      const x = -(radius) * Math.cos(phi) * Math.cos(theta);
-      const y = (radius) * Math.sin(phi);
-      const z = (radius) * Math.cos(phi) * Math.sin(theta);
+        const x = -radius * Math.cos(phi) * Math.cos(theta);
+        const y = radius * Math.sin(phi);
+        const z = radius * Math.cos(phi) * Math.sin(theta);
 
-      return new THREE.Vector3(x, y, z);
-    }
-  </script>
-</head>
-<body>
-  <canvas id="myCanvas"></canvas>
-</body>
+        return new THREE.Vector3(x, y, z);
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
 </html>

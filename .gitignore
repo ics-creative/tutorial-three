@@ -18,3 +18,4 @@ html-build/typescript/main.js.map
 /samples/package-lock.json
 /samples/package.json
 /Icon
+/samples/yarn.lock

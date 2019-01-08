@@ -1,74 +1,78 @@
 <html>
-<head>
-  <meta charset="utf-8"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
-  <script>
-    // ページの読み込みを待つ
-    window.addEventListener('load', init);
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
+    <script>
+      // ページの読み込みを待つ
+      window.addEventListener('load', init);
 
-    function init() {
-      // サイズを指定
-      const width = 960;
-      const height = 540;
+      function init() {
+        // サイズを指定
+        const width = 960;
+        const height = 540;
 
-      // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#myCanvas'),
-        antialias: true
-      });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(width, height);
+        // レンダラーを作成
+        const renderer = new THREE.WebGLRenderer({
+          canvas: document.querySelector('#myCanvas'),
+          antialias: true
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height);
 
-      // シーンを作成
-      const scene = new THREE.Scene();
+        // シーンを作成
+        const scene = new THREE.Scene();
 
-      // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height);
-      camera.position.set(0, 0, +1000);
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(45, width / height);
+        camera.position.set(0, 0, +1000);
 
-      // ドーナツを作成
-      const geometry = new THREE.TorusGeometry(300, 100, 64, 100);
-      // マテリアルを作成
-      const material = new THREE.MeshStandardMaterial({color: 0x6699FF, roughness:0.5});
-      // メッシュを作成
-      const mesh = new THREE.Mesh(geometry, material);
-      // 3D空間にメッシュを追加
-      scene.add(mesh);
+        // ドーナツを作成
+        const geometry = new THREE.TorusGeometry(300, 100, 64, 100);
+        // マテリアルを作成
+        const material = new THREE.MeshStandardMaterial({
+          color: 0x6699ff,
+          roughness: 0.5
+        });
+        // メッシュを作成
+        const mesh = new THREE.Mesh(geometry, material);
+        // 3D空間にメッシュを追加
+        scene.add(mesh);
 
-      // 平行光源
-      const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
-      directionalLight.position.set(1, 1, 1);
-      scene.add(directionalLight);
+        // 平行光源
+        const directionalLight = new THREE.DirectionalLight(0xffffff);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight);
 
-      // ポイント光源
-      const pointLight = new THREE.PointLight(0xFFFFFF, 2, 1000);
-      scene.add(pointLight);
-      const pointLightHelper = new THREE.PointLightHelper(pointLight, 30);
-      scene.add(pointLightHelper);
+        // ポイント光源
+        const pointLight = new THREE.PointLight(0xffffff, 2, 1000);
+        scene.add(pointLight);
+        const pointLightHelper = new THREE.PointLightHelper(pointLight, 30);
+        scene.add(pointLightHelper);
 
-      tick();
+        tick();
 
-      // 毎フレーム時に実行されるループイベントです
-      function tick() {
-        // メッシュを回転させる
-        mesh.rotation.x += 0.01;
-        mesh.rotation.y += 0.01;
+        // 毎フレーム時に実行されるループイベントです
+        function tick() {
+          // メッシュを回転させる
+          mesh.rotation.x += 0.01;
+          mesh.rotation.y += 0.01;
 
-        // ライトを周回させる
-        pointLight.position.set(
-          500 * Math.sin(Date.now() / 500),
-          500 * Math.sin(Date.now() / 1000),
-          500 * Math.cos(Date.now() / 500));
+          // ライトを周回させる
+          pointLight.position.set(
+            500 * Math.sin(Date.now() / 500),
+            500 * Math.sin(Date.now() / 1000),
+            500 * Math.cos(Date.now() / 500)
+          );
 
-        // レンダリング
-        renderer.render(scene, camera);
+          // レンダリング
+          renderer.render(scene, camera);
 
-        requestAnimationFrame(tick);
+          requestAnimationFrame(tick);
+        }
       }
-    }
-  </script>
-</head>
-<body>
-  <canvas id="myCanvas"></canvas>
-</body>
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
 </html>
