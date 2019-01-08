@@ -169,7 +169,7 @@ function tick() {
 ```js
 // 矩形光源を作成
 // new THREE.RectAreaLight(色, 光の強さ, 幅, 高さ)
-const light = new THREE.RectAreaLight(0xFFFFFF, 500, 10, 10);
+const light = new THREE.RectAreaLight(0xFFFFFF, 5.0, 10, 10);
 scene.add(light);
 ```
 
@@ -180,4 +180,4 @@ scene.add(light);
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-11</article-date-published>
-<article-date-modified>2017-11-11</article-date-modified>
+<article-date-modified>2019-01-08</article-date-modified>

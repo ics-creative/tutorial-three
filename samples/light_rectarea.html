@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
   <script src="https://threejs.org/examples/js/lights/RectAreaLightUniformsLib.js"></script>
   <script>
     // ページの読み込みを待つ
@@ -36,20 +36,20 @@
       // 床を作成
       const meshFloor = new THREE.Mesh(
         new THREE.BoxGeometry(2000, 0.1, 2000),
-        new THREE.MeshStandardMaterial({color: 0x808080, roughness: 0.0}));
+        new THREE.MeshStandardMaterial({color: 0x808080, roughness: 1.0}));
       scene.add(meshFloor);
 
       // オブジェクトを作成
       const meshKnot = new THREE.Mesh(
         new THREE.TorusKnotGeometry(3, 1, 100, 16),
-        new THREE.MeshStandardMaterial({color: 0xAA0000, roughness: 0.0}));
+        new THREE.MeshStandardMaterial({color: 0xAA0000, roughness: 1.0}));
       meshKnot.position.set(0, 5, 0);
       scene.add(meshKnot);
 
 
       // 矩形光源を作成
       // new THREE.RectAreaLight(色, 光の強さ, 幅, 高さ)
-      const light = new THREE.RectAreaLight(0xFFFFFF, 500, 10, 10);
+      const light = new THREE.RectAreaLight(0xFFFFFF, 5.0, 10, 10);
       scene.add(light);
 
       tick();
