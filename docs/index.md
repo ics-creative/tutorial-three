@@ -1,7 +1,5 @@
 # Three.js入門サイト
 
-<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-large" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-
 このサイトは、WebGLのライブラリ「[Three.js](https://threejs.org)」の入門サイトです。
 
 初学者から学べるように基本から解説しつつ、発展的な内容までまとめています。このサイトを通して、ウェブの3Dのインタラクションデザインについて学んでいきましょう。
@@ -77,11 +75,7 @@ JavaScriptの新しい仕様のECMAScript 2015（略称ES2015、別名ES6）以�
 
 ![](https://ics.media/wp-content/uploads/2016/08/1601_trigonometric_function1.jpg)
 
-
-- [WebGL開発に役立つ三角関数の数式・概念](https://ics.media/entry/10657)
-- [ベクトルの足し算・引き算](https://ics.media/entry/15043)
-- [ベクトルの内積](https://ics.media/entry/15321)
-- [ベクトルの外積](https://ics.media/entry/15467)
+- [数学の記事一覧](math.md)
 
 ## Three.js演出編
 
@@ -89,12 +83,7 @@ Three.jsを使った表現を作例を通して学びましょう。
 
 ![](https://ics.media/wp-content/uploads/2016/11/160907_magma_effect.jpg)
 
-- [ゲーム演出に役立つマグマ表現](https://ics.media/entry/13973)
-- [RPGのセーブポイント風の魔法陣](https://ics.media/entry/11401)
-- [タイムリマップ表現](https://ics.media/entry/7162)
-- [アイコンフォント集Font Awesomeを扱う方法](https://ics.media/entry/8385)
-- [サウンドビジュアライザー](https://ics.media/entry/9105)
-- [エフェクト作成ツールのEffekseerがWebGLに対応。Web表現の新兵器となるか](https://ics.media/entry/15745)
+- [演出の記事一覧](effect.md)
 
 ## WebGLシェーダー編
 
@@ -102,20 +91,15 @@ Three.jsだけだと実現できる表現の種類に限界があります。シ
 
 ![](https://ics.media/wp-content/uploads/2015/03/150311_eyecatch.png)
 
-- [WebGLを極めるならJSライブラリを使わず書こう](https://ics.media/entry/2663)
-- [Three\.jsでのぷるぷるシェーダーの作り方](https://ics.media/entry/3228)
-- [シェーダーの定番画像処理8選](https://ics.media/entry/5535)
-
+- [シェーダーの記事一覧](shader_md)
 
 ## WebGL応用編
 
 WebGLの最適化や次世代の仕様について理解を深めましょう。
 
-
 ![](https://ics.media/wp-content/uploads/2017/07/170706_webgl2_eyecatch.png)
 
-- [WebGLのカクつき対策まとめ](https://ics.media/entry/12930)
-- [サンプルで理解するWebGL 2\.0](https://ics.media/entry/16060)
+- [次世代WebGLの記事一覧](webgl_next.md)
 
 
 ## VR表現
@@ -124,10 +108,7 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 ![](https://ics.media/wp-content/uploads/2017/01/170112_panorama_eye.jpg)
 
-- [たった4行でできる！ ブラウザ向けVRをThree\.jsで実装する方法](https://ics.media/entry/18793)
-- [HTMLタグで本格VRコンテンツが作れる3Dライブラリ「A\-Frame」](https://ics.media/entry/13401)
-- [お手軽360°パノラマ制作入門！ JSでパノラマビューワー](https://ics.media/entry/14490)
-
+- [WebXRの記事一覧](webxr.md)
 
 ## Node.jsを使ったフロントエンド開発
 
@@ -135,10 +116,9 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 ![](https://ics.media/wp-content/uploads/2017/08/170808_eyecatch_webpack_typescript.jpg)
 
-- [webpack + Babelの環境構築 \(Three\.jsのサンプル付き\)](https://ics.media/entry/16028)
-- [webpack + TypeScriptの環境構築 \(Three\.jsのサンプル付き\)](https://ics.media/entry/16329)
+- [Node.jsの記事一覧](nodejs.md)
 
 
 <article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
 <article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>
+<article-date-modified>2019-01-17</article-date-modified>
