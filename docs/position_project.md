@@ -1,4 +1,9 @@
-# Three.jsのスクリーン座標の算出
+---
+title: Three.jsのスクリーン座標の算出
+author: 池田 泰延
+published_date: 2017-11-12
+modified_date: 2019-01-08
+---
 
 Three.jsの`canvas`要素にHTMLの表示を重ねたい時があります。
 
@@ -57,8 +62,3 @@ console.log(sx, sy);
   <div style="position: absolute; top: 0; left: 0;"></div>
 </div>
 ```
-
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-12</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

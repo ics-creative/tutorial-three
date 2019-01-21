@@ -1,4 +1,9 @@
-# Three.js ライト機能まとめ
+---
+title: Three.js ライト機能まとめ
+author: 池田 泰延
+published_date: 2017-11-11
+modified_date: 2019-01-08
+---
 
 Three.jsにはさまざまなライトが用意されています。
 
@@ -177,7 +182,3 @@ scene.add(light);
 
 この光源に関しては[RectAreaLightUniformsLib.js](https://threejs.org/examples/js/lights/RectAreaLightUniformsLib.js)を組み込むと、美しい表示結果が得られます。
 
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-11</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

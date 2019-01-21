@@ -1,4 +1,9 @@
-# Three.jsでモデルデータを読み込む
+---
+title: Three.jsでモデルデータを読み込む
+author: 池田 泰延
+published_date: 2017-11-03
+modified_date: 2019-01-08
+---
 
 **3Dモデリングソフトで制作したモデルデータの読み込み方**を説明します。3Dのモデルデータにはさまざまな形式が存在しますが、Three.jsは対応している形式がです。
 
@@ -90,7 +95,3 @@ loader.load('./models/collada/elf/elf.dae', (collada) => {
 
 今回はモデルデータの読み込み方について説明しました。JavaScriptだけのコードだとどうしても表現がプログラミングアートよりになってしまうため、モデルデータを使った方が表現のバリエーションを増やせます。とくにキャラクターや建築物、物体の表示にはモデルデータの読み込みがかかせません。
 
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-03</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

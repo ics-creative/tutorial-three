@@ -1,4 +1,9 @@
-# Three.jsでの最適なリサイズ処理
+---
+title: Three.jsでの最適なリサイズ処理
+author: 池田 泰延
+published_date: 2017-11-16
+modified_date: 2019-01-08
+---
 
 Three.jsでの最適なリサイズ処理の方法を紹介します。この手順を覚えれば次のような希望に対応できます。
 
@@ -83,7 +88,3 @@ function onResize() {
 
 
 以上となります。詳しくはサンプルのコードをコピーするなどして取り組んでください。
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-16</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

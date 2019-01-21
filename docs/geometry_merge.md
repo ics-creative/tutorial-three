@@ -1,4 +1,9 @@
-# Three.jsの高速化手法：ジオメトリの結合
+---
+title: Three.jsの高速化手法：ジオメトリの結合
+author: 池田 泰延
+published_date: 2017-11-08
+modified_date: 2019-01-08
+---
 
 Three.jsで大量のオブジェクトを描画するときに役立つ最適化テクニックを紹介します。
 
@@ -164,7 +169,3 @@ scene.add(mesh);
 ジオメトリをまとめてしまうと、3Dオブジェクト（`Mesh`のインスタンス）としては1つになります。そのため、個別にマテリアルを設定したりマウスイベントを設定することができなくなります。
 
 インタラクションをしないもの、アニメーションしないものを対象に、このテクニックを適用するといいでしょう。
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-08</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

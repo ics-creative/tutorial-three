@@ -1,4 +1,9 @@
-# Three.jsで入れ子構造
+---
+title: Three.jsで入れ子構造
+author: 池田 泰延
+published_date: 2017-11-12
+modified_date: 2019-01-08
+---
 
 Three.jsの3Dオブジェクトはまとめて管理できる機能があります。いわゆる「入れ子構造」として作ることも可能です。入れ子構造として設計することで、複数の3Dオブジェクトをまとめて移動させたり、回転させたりするのが便利になるでしょう。
 
@@ -85,7 +90,3 @@ function tick() {
 
 詳しくは[ワールド座標](position_world.md)を参照ください。
 
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-12</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

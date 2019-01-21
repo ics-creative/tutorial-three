@@ -1,4 +1,9 @@
-# WebXR
+---
+title: WebXR
+author: 池田 泰延
+published_date: 2019-01-17
+modified_date: 2019-01-17
+---
 
 3Dの知識はバーチャルリアリティーの実装にも役立ちます。
 
@@ -8,6 +13,3 @@
 - [HTMLタグで本格VRコンテンツが作れる3Dライブラリ「A\-Frame」](https://ics.media/entry/13401)
 - [お手軽360°パノラマ制作入門！ JSでパノラマビューワー](https://ics.media/entry/14490)
 
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2019-01-17</article-date-published>
-<article-date-modified>2019-01-17</article-date-modified>

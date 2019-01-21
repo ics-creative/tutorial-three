@@ -1,4 +1,9 @@
-# Three.jsで影を落とす方法
+---
+title: Three.jsで影を落とす方法
+author: 池田 泰延
+published_date: 2017-11-11
+modified_date: 2019-01-08
+---
 
 Threeでは光源に対してオブジェクトの影を別のオブジェクトに落とすことができます。影を落とすことで、リアリティーの向上につながります。
 
@@ -84,7 +89,3 @@ light.shadow.mapSize.height = 2048;
 前者は3Dのモデリングソフトなどで焼きこみ（影となる暗い部分）を作ることでクオリティー向上ができるうえに、計算量を少なくできるので高速化にもつながります。Flash時代から使われていた高速化の1つです。
 
 たいして、後者の動的に影を作るのは計算量が高く（シャドウマップのサイズの関係で）十分な精度を得ることはできませんが、光源の位置によって影の位置を変更することができるので、自由度が高い表現だと言えます。 
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-11</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

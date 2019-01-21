@@ -1,5 +1,9 @@
-# Three.jsのフォグ機能
- 
+---
+title: Three.jsのフォグ機能
+author: 池田 泰延
+published_date: 2017-11-16
+modified_date: 2019-01-08
+--- 
 
 フォグ効果とは遠くのものが霞んで見えるような状態にする効果のことです。フォグ（Fog）は日本語で「霧、濃霧」という意味です。
 
@@ -38,7 +42,3 @@ scene.fog = new THREE.Fog(0x000000, 50, 2000);
 ```
 
 わずか一行のコードを加えるだけで空間の奥行きを表現できるので、手軽に試すことのできる機能です。
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-16</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

@@ -1,4 +1,9 @@
-# Three.js数値計算
+---
+title: Three.js数値計算
+author: 池田 泰延
+published_date: 2019-01-17
+modified_date: 2019-01-17
+---
 
 3Dでは、三角関数やベクトルの計算をする場面が多いです。実例を通して、これらを学んでいきましょう。
 
@@ -9,7 +14,3 @@
 - [ベクトルの内積](https://ics.media/entry/15321)
 - [ベクトルの外積](https://ics.media/entry/15467)
 
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2019-01-17</article-date-published>
-<article-date-modified>2019-01-17</article-date-modified>

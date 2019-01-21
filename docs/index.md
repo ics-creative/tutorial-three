@@ -1,4 +1,9 @@
-# Three.js入門サイト
+---
+title: Three.js入門サイト
+author: 池田 泰延
+published_date: 2017-11-02
+modified_date: 2019-01-17
+---
 
 このサイトは、WebGLのライブラリ「[Three.js](https://threejs.org)」の入門サイトです。
 
@@ -118,7 +123,3 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 - [Node.jsの記事一覧](nodejs.md)
 
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2019-01-17</article-date-modified>

@@ -1,4 +1,9 @@
-# Three.jsのワールド座標の算出
+---
+title: Three.jsのワールド座標の算出
+author: 池田 泰延
+published_date: 2017-11-12
+modified_date: 2019-01-08
+---
 
 ワールド座標（空間座標）とは3D空間（`scene`）の原点から見た座標をワールド座標といいます。
 
@@ -27,7 +32,3 @@ const world = object3D.getWorldPosition();
 
 - [スクリーン座標の算出方法](position_project.md)
 
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-12</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

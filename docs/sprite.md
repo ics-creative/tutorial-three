@@ -1,4 +1,9 @@
-# Three.jsのスプライト
+---
+title: Three.jsのスプライト
+author: 池田 泰延
+published_date: 2017-11-11
+modified_date: 2019-01-08
+---
 
 3Dでスプライトとは常に正面を向く3Dオブジェクトのことを言います。別の言い方でビルボードとも呼びます。今まで紹介した形状の3Dオブジェクトは角度の変化をつけることでさまざまな「向き」が表現されていました。ここで紹介するスプライトはどの視点から見ても常に正面を向いています。
 
@@ -44,8 +49,3 @@ material.fog = true;
 const sprite = new THREE.Sprite(material);
 scene.add(sprite);
 ```
-
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-11</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

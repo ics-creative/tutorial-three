@@ -1,4 +1,9 @@
-# Three.jsのカメラの制御
+---
+title: Three.jsのカメラの制御
+author: 池田 泰延
+published_date: 2017-11-03
+modified_date: 2019-01-08
+---
 
 3D空間の視点となるカメラについて説明します。3Dには視点を制御するカメラという概念があります。カメラの動かし方を抑えれば表現の自由度が上がります。
 
@@ -124,7 +129,3 @@ rot += (targetRot - rot) * 0.02;
 次は手軽にカメラの操作ができるコントローラーを解説します。
 
 [次の記事へ](camera_orbitcontrols.md)
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-03</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

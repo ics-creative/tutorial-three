@@ -1,8 +1,11 @@
-# WebGL応用編
+---
+title: WebGL応用編
+author: 池田 泰延
+published_date: 2019-01-17
+modified_date: 2019-01-17
+---
 
 WebGLの次世代の仕様について理解を深めましょう。
-
-
 
 ## 最適化
 
@@ -28,7 +31,3 @@ WebGLの次世代の仕様について理解を深めましょう。
 - [WebGLと比較して理解する描画機能の違い](https://ics.media/entry/18507)
 - [計算シェーダーで高速並列計算](https://ics.media/entry/18467)
 - [最新WebGL通信](https://ics.media/entry/19657)
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2019-01-17</article-date-published>
-<article-date-modified>2019-01-17</article-date-modified>

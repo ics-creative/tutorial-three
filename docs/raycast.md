@@ -1,4 +1,9 @@
-# Three.jsでオブジェクトとの交差を調べる
+---
+title: Three.jsでオブジェクトとの交差を調べる
+author: 池田 泰延
+published_date: 2017-11-08
+modified_date: 2017-11-08
+---
 
 Three.jsで3Dオブジェクトにマウスがホバーしていた時、クリックした時を調べるにはレイキャストという機能を使います。次のサンプルでは、マウスが重なったオブジェクトだけ、赤くなるようにしています。
 
@@ -77,10 +82,4 @@ function tick() {
 ## まとめ
 
 ちょっと難しいですが、応用の効く機能なのでぜひ覚えてみてください。
-
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-08</article-date-published>
-<article-date-modified>2017-11-08</article-date-modified>
-
 

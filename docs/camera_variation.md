@@ -1,4 +1,9 @@
-# Three.jsのカメラ
+---
+title: Three.jsのカメラ
+author: 池田 泰延
+published_date: 2017-11-12
+modified_date: 2019-01-08
+---
 
 Three.jsにはCamera3Dクラスがあることを、入門編で紹介しました。このCamera3Dがどのようにして利用できるのか、もう少し掘り下げて学んでみましょう。
 
@@ -66,7 +71,3 @@ const camera = new THREE.OrthographicCamera(-480, +480, 270, -270, 1, 1000);
 - `far` : 区間の終了距離 
 
 Three.jsでは`near`のデフォルト値は1、`far`のデフォルト値は2000に設定されています。とくに`far`の値はかなり小さく設定されていますので、必要に応じて大きな値に変更するとよいでしょう。 
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-12</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

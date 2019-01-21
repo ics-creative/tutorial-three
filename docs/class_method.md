@@ -1,5 +1,9 @@
-# Three.jsでES2015のclassを利用する(メソッド編)
-
+---
+title: Three.jsでES2015のclassを利用する(メソッド編)
+author: 池田 泰延
+published_date: 2017-12-04
+modified_date: 2017-12-04
+---
 
 この解説は[Three.jsでES2015のclassを利用する（継承）](class.md)からの続きです。クラスのメソッドを呼び出すベスト・プラクティスな例を学んでいきましょう。
 
@@ -94,6 +98,3 @@ class MyGroup extends THREE.Object3D {
 
 こうすれば、`requestAnimationFrame()`メソッドが実行されるのはメインコードの一箇所のみになります。メインコードにレンダリングのための`renderer.render(scene, camera);`処理の前に子供の`MyGroup`クラスの`update()`メソッドが実行されることが保証されます。
 
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-12-04</article-date-published>
-<article-date-modified>2017-12-04</article-date-modified>

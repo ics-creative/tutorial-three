@@ -1,4 +1,9 @@
-# 簡単なThree.jsのサンプルを試そう
+---
+title: 簡単なThree.jsのサンプルを試そう
+author: 池田 泰延
+published_date: 2017-11-02
+modified_date: 2019-01-08
+---
 
 [Three.js](http://typescript.Three.js.com/)はHTMLの3D技術「[WebGL](http://ja.wikipedia.org/wiki/WebGL "WebGL - Wikipedia")」を扱いやすくしたフレームワークです。**Three.jsを使えばGPUによる本格的な3D表現をプラグイン無しで作成**できます。
 
@@ -268,7 +273,3 @@ function tick() {
 
 [次の記事へ](material_basic.md)
 
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-02</article-date-published>
-<article-date-modified>2019-01-08</article-date-modified>

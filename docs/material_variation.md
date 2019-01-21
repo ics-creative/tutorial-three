@@ -1,4 +1,9 @@
-# Three.jsのさまざまなマテリアル
+---
+title: Three.jsのさまざまなマテリアル
+author: 池田 泰延
+published_date: 2017-11-07
+modified_date: 2017-11-07
+---
 
 3Dの見栄えを決定するマテリアルについて説明します。
 
@@ -180,7 +185,3 @@ scene.add(mesh);
 
 今回のチュートリアルでは、Three.jsが用意するさまざまなマテリアルについて紹介しました。プロパティーによってさまざまな表現ができるため色々試してみてください。
 
-
-<article-author>[池田 泰延](https://twitter.com/clockmaker)</article-author>
-<article-date-published>2017-11-07</article-date-published>
-<article-date-modified>2017-11-07</article-date-modified>
