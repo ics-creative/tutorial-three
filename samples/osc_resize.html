@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      #myCanvas {
+        /* 画面全域にしておく */
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+    <script>
+      window.addEventListener('DOMContentLoaded', init);
+
+      function init() {
+        // 普通のキャンバスを取得
+        const canvasElement = document.querySelector('#myCanvas');
+        // オフスクリーンキャンバスを取得
+        const offscreenCanvas = canvasElement.transferControlToOffscreen();
+        const worker = new Worker('osc_resize_worker.js');
+        worker.postMessage(
+          {
+            type: 'init',
+            canvas: offscreenCanvas,
+            width: innerWidth,
+            height: innerHeight,
+            devicePixelRatio: devicePixelRatio
+          },
+          [offscreenCanvas]
+        );
+
+        window.addEventListener('resize', event => {
+          worker.postMessage({
+            type: 'resize',
+            width: innerWidth,
+            height: innerHeight,
+            devicePixelRatio: devicePixelRatio
+          });
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
+</html>
