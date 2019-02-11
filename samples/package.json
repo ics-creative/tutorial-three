@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "format" : "prettier --write '*.{html,js,css}' --single-quote"
+  },
+  "dependencies": {
+    "@types/three": "^0.93.19"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.4"
+  }
+}
