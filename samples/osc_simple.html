@@ -10,13 +10,10 @@
         const canvasElement = document.querySelector('#myCanvas');
         // オフスクリーンキャンバスを取得
         const offscreenCanvas = canvasElement.transferControlToOffscreen();
+        // ワーカーを起動
         const worker = new Worker('osc_simple_worker.js');
-        worker.postMessage(
-          {
-            canvas: offscreenCanvas
-          },
-          [offscreenCanvas]
-        );
+        // ワーカー側にオフスクリーンキャンバスを転送
+        worker.postMessage({ canvas: offscreenCanvas }, [offscreenCanvas]);
       }
     </script>
   </head>
