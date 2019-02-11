@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script>
+      window.addEventListener('load', init);
+
+      function init() {
+        const canvas = document.querySelector('#myCanvas');
+        const offscreenCanvas = canvas.transferControlToOffscreen();
+        const worker = new Worker('offscreencanvas_simple_worker.js');
+        worker.postMessage(
+          {
+            type: 'init',
+            canvas: offscreenCanvas
+          },
+          [offscreenCanvas]
+        );
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
+</html>
