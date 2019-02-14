@@ -43,7 +43,6 @@ onmessage = async event => {
 
   // 毎フレーム時に実行されるループイベントです
   function tick() {
-    // カメラの自動移動
     mesh.rotation.y += 0.01;
 
     // レンダリング
