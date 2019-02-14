@@ -1,20 +1,31 @@
 ---
 title: オフスクリーンキャンバス
 author: 池田 泰延
-published_date: 2019-02-12
-modified_date: 2019-02-12
+published_date: 2019-02-14
+modified_date: 2019-02-14
 ---
 
-オフスクリーンキャンバスはWeb Workers（ウェブワーカーズ）を使用してWorkerスレッドで描画処理を行える機能です。負荷の高い描画処理をWorkerスレッドに移動することで、メインスレッドの負担が軽くなり、余裕ができます。これによりメインスレッドでスムーズなユーザー操作を実現できるようになり、ユーザー体験の向上が期待できます。
+オフスクリーンキャンバスはWeb Workers（ウェブワーカーズ）を使用してWorkerスレッドで描画処理を行える機能です。負荷の高い描画処理をWorkerスレッドに移動することで、メインスレッドの負担が軽くなり、余裕ができます。これによりメインスレッドでスムーズなユーザー操作を実現できるようになり、ユーザー体験の向上が期待できます。具体的には、`canvas`の描画処理が大きかった場合にオフスクリーンキャンバスを使うと、ボタンクリック時の反応やCSSアニメーションが滑らかになるでしょう。
 
 Three.jsでもオフスクリーンキャンバスを利用できます。複雑なことをしなければ難しくなく、通常のThree.jsのコードに少しの実装を追加するだけで実現できます。
 
-オフスクリーンキャンバスの機能については記事「[オフスクリーンキャンバスを使ったJSのマルチスレッド描画 – スムーズなユーザー操作実現の切り札 \- ICS MEDIA](https://ics.media/entry/19043)」で詳しく解説しています。Three.jsで利用する前に一読をオススメします。
+オフスクリーンキャンバスの機能については記事「[オフスクリーンキャンバスを使ったJSのマルチスレッド描画 – スムーズなユーザー操作実現の切り札](https://ics.media/entry/19043)」で詳しく解説しています。この解説を読み進める前に一読ください。
 
 
-## 使い方
+## Three.jsでの使い方
 
-ワーカーを利用するにあたって、メインスレッド側とワーカー側と処理を分離する必要があります。これはファイル単位で分けなければなりません。まずはメインスレッド側のコードを紹介します。HTMLに`canvas`要素を配置し、JavaScriptではワーカー側に`canvas`要素のオフスクリーン用オブジェクトを転送します。
+ワーカーを利用するにあたって、メインスレッド側とワーカー側と処理を分離する必要があります。これはファイル単位で分けなければなりません。まずはメインスレッド側のコードを紹介します。HTMLに`canvas`要素を配置し、JavaScriptでは`canvas`要素のオフスクリーン用オブジェクトを取得します。ワーカーインスタンスで投げてしまいます。
+
+![](../imgs/osc_simple.png)
+
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/osc_simple.html)
+- サンプルのソースコードを確認する
+  - [メインスレッド側](../samples/osc_simple.html)
+  - [ワーカー側](../samples/osc_simple_worker.js)
+
+
+
+### メインスレッド側
 
 ```html
 <canvas id="myCanvas"></canvas>
@@ -31,7 +42,11 @@ const worker = new Worker('osc_simple_worker.js');
 worker.postMessage({ canvas: offscreenCanvas }, [offscreenCanvas]);
 ```
 
-続いて、ワーカー側の処理を解説します。ワーカー側では、Three.jsを`importScripts()`メソッドを使って読み込みます。`importScripts()`メソッドはワーカーでのみ利用できる機能です。
+### ワーカー側
+
+ワーカー側では、Three.jsを`importScripts()`メソッドを使って読み込みます。`importScripts()`メソッドはワーカーでのみ利用できる機能です。外部のJSファイルを読み込むことができます。
+
+※ES Modules形式はワーカーで利用できないため注意ください。
 
 ```js
 importScripts(
@@ -49,7 +64,7 @@ onmessage = event => {
   // ・・・いろいろ処理
 ```
 
-バッドノウハウですが、ひとつだけ工夫しなければ、Three.jsをワーカー側で利用できません。Three.jsは内部でCanvas要素のstyleにアクセスします。しかし、OffscreenCanvasはDOM要素ではないため、`style`属性を持ちません。Three.jsで使用する場合はランタイムエラーを避けるため、OffscreenCanvasオブジェクトに明示的に`style`プロパティを付加します。
+ひとつだけ工夫しなければ、Three.jsをワーカー側で利用できません。Three.jsは内部で`canvas`要素の`style`属性にアクセスします。しかし、OffscreenCanvasはDOM要素ではないため、`style`属性を持ちません。Three.jsで使用する場合はランタイムエラーを避けるため、OffscreenCanvasオブジェクトに明示的に`style`プロパティを付加します。
 
 ```js
   // Three.jsのライブラリの内部で style.width にアクセスされてしまう
@@ -57,12 +72,23 @@ onmessage = event => {
   canvas.style = { width: 0, height: 0 };
 ```
 
-あとは普通にコードをかけばThree.jsが動きます。コードを全部みて呆気なさを感じてください。
+あとは普通にコードをかけばThree.jsが動きます。次のコードを見て、呆気なさを感じてください。
 
 
-## 画像の使い方
+## オフスクリーンキャンバスでの画像の使い方
 
-オフスクリーンキャンバスで画像を使うには`ImageBitmap`を利用します。通常の`THREE.ImageLoader()`だとDOM APIの`Image`オブジェクト、つまり`img`タグが使われます。ワーカー側ではDOM APIが利用できないため、`img`タグで画像を読み込むことはできないのです。オフスクリーンキャンバスと同時期に用意された、`ImageBitmap`オブジェクトを使います。Three.jsでは`THREE.ImageBitmapLoader()`でファイルを読み込み、`ImageBitmap`インスタンスを`THREE.CanvasTexture`でテクスチャーへと変換します。あとは、適当なマテリアルにテクスチャーとして設定するだけです。
+オフスクリーンキャンバスで画像を使うには`ImageBitmap`オブジェクトを利用します。
+
+![](../imgs/osc_imagebitmap.png)
+
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/osc_imagebitmap.html)
+- サンプルのソースコードを確認する
+  - [メインスレッド側](../samples/osc_imagebitmap.html)
+  - [ワーカー側](../samples/osc_imagebitmap_worker.js)
+
+
+
+通常の`THREE.ImageLoader()`メソッドだとDOM APIの`Image`オブジェクト、つまり`img`タグが使われます。ワーカー側ではDOM APIが利用できないため、`img`タグで画像を読み込むことはできないのです。オフスクリーンキャンバスと同時期に用意された`ImageBitmap`オブジェクトでは、DOM APIの`Image`オブジェクトを使わずに画像データを扱えます。Three.jsでは`THREE.ImageBitmapLoader()`でファイルを読み込み、`ImageBitmap`インスタンスを`THREE.CanvasTexture`でテクスチャーへと変換します。あとは、適当なマテリアルにテクスチャーとして設定するだけです。
 
 ```js
 // テクスチャーを読み込み
@@ -76,11 +102,24 @@ const texture = await new Promise(resolve => {
 const material = new THREE.MeshStandardMaterial({ map: texture });
 ```
 
-## リサイズの方法
+上記のコードではawait/asyncの構文を使っています。オフスクリーンキャンバスが動作するような新しいブラウザーのバージョンであれば、ECMAScript 2018ぐらいは動作するでしょう。
+
+## オフスクリーンキャンバスでのリサイズの方法
 
 通常のThree.jsのりサイズ処理は、記事「[リサイズ処理](renderer_resize.md)」を先に読んで学習しておいてください。その上で解説します。
 
-オフスクリーンキャンバスからだと、メインスレッド側のりサイズを検知できません。メインスレッド側のりサイズは、メインスレッド側で検知しなけばなりません。たとえば、次のようなコードで、ワーカー側にリサイズイベントを通知します。ワーカー側では`worker.postMessage()`メソッドにより通達を受けますが、初期化なのかリサイズイベントなのか判断する手がかりが必要なため、任意の`type`プロパティーを付与しています。
+![](../imgs/osc_resize.png)
+
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/osc_resize.html)
+- サンプルのソースコードを確認する
+  - [メインスレッド側](../samples/osc_resize.html)
+  - [ワーカー側](../samples/osc_resize_worker.js)
+
+
+
+オフスクリーンキャンバスからだと、メインスレッド側のリサイズイベントを検知できません。メインスレッド側のリサイズイベントは、メインスレッド側で検知しなけばなりません。
+
+たとえば、次のようなコードでワーカー側にリサイズイベントを通知します。ワーカー側では`worker.postMessage()`メソッドにより通達を受けますが、初期化なのかリサイズイベントなのか判断する手がかりが必要となります。引数には区別ができるように任意の`type`プロパティーを付与しています。
 
 ```js
 // 普通のキャンバスを取得
@@ -90,7 +129,7 @@ const offscreenCanvas = canvasElement.transferControlToOffscreen();
 const worker = new Worker('osc_resize_worker.js');
 worker.postMessage(
   {
-    type: 'init',
+    type: 'init', // 処理区別のために追加
     canvas: offscreenCanvas,
     width: innerWidth,
     height: innerHeight,
@@ -101,7 +140,7 @@ worker.postMessage(
 
 window.addEventListener('resize', event => {
   worker.postMessage({
-    type: 'resize',
+    type: 'resize', // 処理区別のために追加
     width: innerWidth,
     height: innerHeight,
     devicePixelRatio: devicePixelRatio
