@@ -9,8 +9,6 @@ modified_date: 2019-01-08
 
 ## カメラの制御を体験
 
-![](https://ics.media/wp-content/uploads/2014/10/141001_away3d_1.jpg)
-
 - [デモを試す](https://ics.media/wp-content/data-demos/140930_angularjs_away3d/src/index.html)
 
 このデモでは**スライダーによって、カメラの位置と角度を制御できるようにしています**。「Camera Position」(座標)のXYZのそれぞれのスライダーを変更すると、カメラの位置が移動し地球の見え方が変わります。「Camera LookAt」（注視点）のトグルをONに設定しているので、常に3D空間の原点をカメラを向くように設定していますが、「Camera LookAt」のトグルを解除すると、自由にカメラの角度を変更できるようになります。カメラの角度にもXYZの3方向があり、それぞれの角度を変更することで見え方が変わります。
@@ -57,7 +55,6 @@ view.camera.x = 円周の半径 * Math.sin(角度 * Math.PI / 180);
 view.camera.z = 円周の半径 * Math.cos(角度 * Math.PI / 180);
 ```
 
-![](https://ics.media/wp-content/uploads/2014/10/141001_circle.png)
 
 ## マウスの座標に応じて回転させる
 
