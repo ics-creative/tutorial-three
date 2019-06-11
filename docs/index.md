@@ -13,7 +13,6 @@ modified_date: 2019-01-17
 
 Three.jsは、HTML5で3Dコンテンツを制作するためのJavaScriptライブラリです。[Mr.doob](http://mrdoob.com)氏が中心となって開発されており、オープンソースソフトウェアとして個人・商用でも無償で利用できます。
 
-![](https://ics.media/wp-content/uploads/2017/08/170704_webpack_site_three.png)
 
 WebGLだけで3D表現をするためには、立方体1つ表示するだけでも多くのJavaScriptやGLSLコードを書く必要があり専門知識も必要です。Three.jsを使えばJavaScriptの知識だけで簡単に3Dコンテンツが作成できるため、手軽に扱えるようになります。
 
@@ -78,7 +77,6 @@ JavaScriptの新しい仕様のECMAScript 2015（略称ES2015、別名ES6）以�
 
 3Dでは、三角関数やベクトルの計算をする場面が多いです。実例を通して、これらを学んでいきましょう。
 
-![](https://ics.media/wp-content/uploads/2016/08/1601_trigonometric_function1.jpg)
 
 - [数学の記事一覧](math.md)
 
@@ -86,7 +84,6 @@ JavaScriptの新しい仕様のECMAScript 2015（略称ES2015、別名ES6）以�
 
 Three.jsを使った表現を作例を通して学びましょう。
 
-![](https://ics.media/wp-content/uploads/2016/11/160907_magma_effect.jpg)
 
 - [演出の記事一覧](effect.md)
 
@@ -94,7 +91,6 @@ Three.jsを使った表現を作例を通して学びましょう。
 
 Three.jsだけだと実現できる表現の種類に限界があります。シェーダーをGLSLでカスタマイズすることによって、表現の種類を大きく広げられます。
 
-![](https://ics.media/wp-content/uploads/2015/03/150311_eyecatch.png)
 
 - [シェーダーの記事一覧](shader_md)
 
@@ -102,7 +98,6 @@ Three.jsだけだと実現できる表現の種類に限界があります。シ
 
 WebGLの最適化や次世代の仕様について理解を深めましょう。
 
-![](https://ics.media/wp-content/uploads/2017/07/170706_webgl2_eyecatch.png)
 
 - [次世代WebGLの記事一覧](webgl_next.md)
 - [オフスクリーンキャンバス](offscreencanvas.md)
@@ -112,7 +107,6 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 3Dの知識はバーチャルリアリティーの実装にも役立ちます。
 
-![](https://ics.media/wp-content/uploads/2017/01/170112_panorama_eye.jpg)
 
 - [WebXRの記事一覧](webxr.md)
 
@@ -120,7 +114,6 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 
 効率のよい開発ができるよう、最新の開発環境の構築もしましょう。開発環境を整えれば最新のJavaScript言語仕様を利用でき、開発効率向上に役立つはずです。また、型定義のあるTypeScriptを使ってコード補完をフルに効かせて開発するのもオススメです。
 
-![](https://ics.media/wp-content/uploads/2017/08/170808_eyecatch_webpack_typescript.jpg)
 
 - [Node.jsの記事一覧](nodejs.md)
 

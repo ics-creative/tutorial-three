@@ -7,7 +7,6 @@ modified_date: 2019-01-17
 
 Three.jsだけだと実現できる表現の種類に限界があります。シェーダーをGLSLでカスタマイズすることによって、表現の種類を大きく広げられます。
 
-![](https://ics.media/wp-content/uploads/2015/03/150311_eyecatch.png)
 
 - [WebGLを極めるならJSライブラリを使わず書こう](https://ics.media/entry/2663)
 - [Three\.jsでのぷるぷるシェーダーの作り方](https://ics.media/entry/3228)

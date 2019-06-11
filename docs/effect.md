@@ -7,7 +7,6 @@ modified_date: 2019-01-17
 
 Three.jsを使った表現を作例を通して学びましょう。
 
-![](https://ics.media/wp-content/uploads/2016/11/160907_magma_effect.jpg)
 
 - [ゲーム演出に役立つマグマ表現](https://ics.media/entry/13973)
 - [RPGのセーブポイント風の魔法陣](https://ics.media/entry/11401)

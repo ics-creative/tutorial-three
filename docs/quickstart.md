@@ -8,10 +8,6 @@ modified_date: 2019-01-08
 [Three.js](http://typescript.Three.js.com/)はHTMLの3D技術「[WebGL](http://ja.wikipedia.org/wiki/WebGL "WebGL - Wikipedia")」を扱いやすくしたフレームワークです。**Three.jsを使えばGPUによる本格的な3D表現をプラグイン無しで作成**できます。
 
 
-![](https://ics.media/wp-content/uploads/2017/08/170704_webpack_site_three.png)
-
-▲Three.jsの公式サイト
-
 ライブラリのセットアップから3D画面への表示および直方体の回転までを紹介します。手順通りに進めば、20分くらいで作業が完了できると思います。
 
 ![](../imgs/quickstart.png)
@@ -238,8 +234,6 @@ function tick() {
 ## Three.jsの基本構造
 
 上記のコードで出現したThree.jsの基本機能について紹介します。
-
-![](https://ics.media/wp-content/uploads/2017/01/concept.png)
 
 
 図：Three.jsを構成する基本的なオブジェクトと表示の仕組み
