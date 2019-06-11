@@ -2,7 +2,7 @@
 title: Three.jsでオフスクリーンキャンバスを使う
 author: 池田 泰延
 published_date: 2019-02-15
-modified_date: 2019-02-15
+modified_date: 2019-06-11
 ---
 
 オフスクリーンキャンバスはWorkerスレッドで描画処理を行える機能です。負荷の高い描画処理をWorkerスレッドに移動することで、メインスレッドの負担が軽くなり、余裕ができます。これによりメインスレッドでスムーズなユーザー操作を実現できるようになり、ユーザー体験の向上が期待できます。具体的には、`canvas`の描画処理が大きかった場合にオフスクリーンキャンバスを使うと、ボタンクリック時の反応やCSSアニメーションが滑らかになるでしょう。
@@ -50,7 +50,7 @@ worker.postMessage({ canvas: offscreenCanvas }, [offscreenCanvas]);
 
 ```js
 importScripts(
-  'https://cdnjs.cloudflare.com/ajax/libs/three.js/101/three.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js'
 );
 ```
 

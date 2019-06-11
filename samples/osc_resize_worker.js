@@ -1,5 +1,5 @@
 importScripts(
-  'https://cdnjs.cloudflare.com/ajax/libs/three.js/101/three.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js'
 );
 let renderer;
 let camera;

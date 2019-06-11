@@ -2,7 +2,7 @@
 title: 簡単なThree.jsのサンプルを試そう
 author: 池田 泰延
 published_date: 2017-11-02
-modified_date: 2019-01-08
+modified_date: 2019-06-11
 ---
 
 [Three.js](http://typescript.Three.js.com/)はHTMLの3D技術「[WebGL](http://ja.wikipedia.org/wiki/WebGL "WebGL - Wikipedia")」を扱いやすくしたフレームワークです。**Three.jsを使えばGPUによる本格的な3D表現をプラグイン無しで作成**できます。
@@ -23,7 +23,7 @@ modified_date: 2019-01-08
 <html>
 <head>
   <meta charset="utf-8"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/101/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
   <script>
     // ページの読み込みを待つ
     window.addEventListener('load', init);
@@ -76,7 +76,7 @@ modified_date: 2019-01-08
 
 ちなみに前提としてThree.jsはWebGL対応のブラウザが必須となりますので、動作確認はFirefoxやChrome、Safari、Edgeなどを使うといいでしょう。
 
-また、WebGLはローカルファイルのセキュリティーの制限があるため、ローカルサーバー上で実行することをオススメします。ローカルサーバーの構築方法がわからなければ、エディターの「[Brackets](http://brackets.io/)」がボタンひとつで実行できるのでオススメです。
+また、WebGLはローカルファイルのセキュリティーの制限があるため、ローカルサーバー上で実行することをオススメします。ローカルサーバーの構築方法がわからなければ、記事『[VS Codeを使いこなせ\! フロントエンジニア必須の拡張機能7選](https://ics.media/entry/18544/)』で紹介している「Live Server」を利用しましょう。マウス操作で簡単にローカルサーバーを起動できるので簡単です。
 
 ここからは、上記のコードを解説していくので、少しずつ理解していきましょう。
 
@@ -100,7 +100,7 @@ Three.jsはJavaScriptのライブラリですが、このファイルを読み�
 CDN（コンテンツ・デリバリー・ネットワーク）で提供されているURLを使うのが導入にお手軽です。
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/101/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
 ```
 
 WebGLの処理はページの読み込みが終わってから実行させます。`addEventListener()`関数を使って`load`イベントが発生するのを監視させ、ページが読み込み終わったときに実行させたい関数を指定します。この関数`init()`の中にThree.jsのコードを書いていきます。
