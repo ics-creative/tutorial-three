@@ -2,7 +2,7 @@
 title: Three.jsのジオメトリの基本
 author: 池田 泰延
 published_date: 2017-11-03
-modified_date: 2019-01-08
+modified_date: 2019-06-11
 ---
 
 形状（ジオメトリとも言います）を指定することで「球体」や「直方体」、「平面」などさまざまな3Dのオブジェクトを表示できます。言葉で説明するより、実際に動くものを見たほうがわかりやすいと思いますので、次のデモを試してみてください。
@@ -46,7 +46,7 @@ Three.jsに用意されているさまざまな形状を実現するコードを
 
 ### 球体のジオメトリ
 
-<img class="aligncenter" src="https://ics.media/wp-content/uploads/2014/01/away3d-sphere.png" alt="Three.js-sphere" width="639" height="330">
+![](../imgs/geometry_shpere.png)
 
 ```js
 const geometry = new THREE.SphereGeometry( 5, 32, 32 );
@@ -61,7 +61,7 @@ scene.add( sphere );
 
 ### 直方体のジオメトリ
 
-<img class="aligncenter" src="https://ics.media/wp-content/uploads/2014/01/away3d-cube.png" alt="Three.js-cube" width="639" height="330">
+![](../imgs/geometry_box.png)
 
 ```js
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
@@ -76,7 +76,7 @@ scene.add( cube );
 
 ### 平面のジオメトリ
 
-<img class="aligncenter" src="https://ics.media/wp-content/uploads/2014/01/away3d-plane.png" alt="Three.js-plane" width="639" height="330">
+![](../imgs/geometry_plane.png)
 
 ```js
 const geometry = new THREE.PlaneGeometry( 5, 20, 32 );
@@ -92,7 +92,7 @@ scene.add( plane );
 
 ### 三角錐のジオメトリ
 
-<img class="size-full wp-image-1152 aligncenter" src="https://ics.media/wp-content/uploads/2014/01/away3d-cone.png" alt="Three.js-cone" width="639" height="330">
+![](../imgs/geometry_cone.png)
 
 ```js
 const geometry = new THREE.ConeGeometry( 5, 20, 32 );
@@ -105,10 +105,9 @@ scene.add( cone );
 
 
 
-
 ### 円柱のジオメトリ
 
-<img class="size-full wp-image-1154 aligncenter" src="https://ics.media/wp-content/uploads/2014/01/away3d-cylinder.png" alt="Three.js-cylinder" width="639" height="330">
+![](../imgs/geometry_cylinder.png)
 
 ```js
 const geometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );
@@ -117,15 +116,15 @@ const cylinder = new THREE.Mesh( geometry, material );
 scene.add( cylinder );
 ```
 
-
 ※このジオメトリの使い方は公式ドキュメント（英語）の「[CylinderGeometry \- three\.js docs](https://threejs.org/docs/#api/geometries/CylinderGeometry)」を確認ください。
+
 
 
 
 
 ### ドーナツ形状のジオメトリ
 
-<img class="size-full wp-image-1157 aligncenter" src="https://ics.media/wp-content/uploads/2014/01/away3d-torus.png" alt="Three.js-torus" width="639" height="330">
+![](../imgs/geometry_torus.png)
 
 ```js
 const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
