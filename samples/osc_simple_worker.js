@@ -1,5 +1,5 @@
 importScripts(
-  'https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js'
 );
 
 // メインスレッドから通達があったとき
