@@ -2,7 +2,7 @@
 title: Three.jsのスクリーン座標の算出
 author: 池田 泰延
 published_date: 2017-11-12
-modified_date: 2019-01-08
+modified_date: 2020-01-29
 ---
 
 Three.jsの`canvas`要素にHTMLの表示を重ねたい時があります。
@@ -46,7 +46,7 @@ console.log(sx, sy);
 
 ![](../imgs/position_project.png)
 
-- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/camera_project.html)
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/position_project.html)
 - [サンプルのソースコードを確認する](../samples/position_project.html)
 
 
