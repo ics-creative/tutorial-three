@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
     <script>
       // ページの読み込みを待つ
       window.addEventListener('load', init);
@@ -14,7 +14,7 @@
         // レンダラーを作成
         const renderer = new THREE.WebGLRenderer({
           canvas: document.querySelector('#myCanvas'),
-          antialias: true
+          antialias: true,
         });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height);
@@ -57,7 +57,7 @@
             new THREE.MeshStandardMaterial({
               map: texture,
               roughness: 0.0,
-              metalness: 0.6
+              metalness: 0.6,
             })
           );
           floor.rotation.x = -Math.PI / 2;
@@ -71,7 +71,7 @@
           const material = new THREE.MeshStandardMaterial({
             color: 0x2299ff,
             roughness: 0.1,
-            metalness: 0.2
+            metalness: 0.2,
           });
           const geometry = new THREE.BoxGeometry(45, 45, 45);
 

@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
     <script>
       // ページの読み込みを待つ
       window.addEventListener('load', init);
@@ -19,7 +19,7 @@
 
         // レンダラーを作成
         const renderer = new THREE.WebGLRenderer({
-          canvas: canvas
+          canvas: canvas,
         });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height);
@@ -89,7 +89,7 @@
           // その光線とぶつかったオブジェクトを得る
           const intersects = raycaster.intersectObjects(meshList);
 
-          meshList.map(mesh => {
+          meshList.map((mesh) => {
             // 交差しているオブジェクトが1つ以上存在し、
             // 交差しているオブジェクトの1番目(最前面)のものだったら
             if (intersects.length > 0 && mesh === intersects[0].object) {

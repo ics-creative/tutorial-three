@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
     <script src="js/controls/OrbitControls.js"></script>
     <script src="js/loaders/TDSLoader.js"></script>
 
@@ -16,7 +16,7 @@
 
         // レンダラーを作成
         const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas')
+          canvas: document.querySelector('#myCanvas'),
         });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height);
@@ -50,7 +50,7 @@
         // テクスチャーのパスを指定
         loader.setPath('models/3ds/portalgun/textures/');
         // 3dsファイルのパスを指定
-        loader.load('models/3ds/portalgun/portalgun.3ds', object => {
+        loader.load('models/3ds/portalgun/portalgun.3ds', (object) => {
           // 読み込み後に3D空間に追加
           scene.add(object);
         });

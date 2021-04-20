@@ -13,7 +13,7 @@
         const worker = new Worker('osc_imagebitmap_worker.js');
         worker.postMessage(
           {
-            canvas: offscreenCanvas
+            canvas: offscreenCanvas,
           },
           [offscreenCanvas]
         );

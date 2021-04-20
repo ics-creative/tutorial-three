@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
     <script>
       // ページの読み込みを待つ
       window.addEventListener('load', init);
@@ -15,7 +15,7 @@
 
         // レンダラーを作成
         const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas')
+          canvas: document.querySelector('#myCanvas'),
         });
         renderer.setSize(width, height);
 
@@ -33,7 +33,7 @@
         // マテリアルを作成
         const material = new THREE.MeshPhongMaterial({
           map: new THREE.TextureLoader().load('imgs/earthmap1k.jpg'),
-          side: THREE.DoubleSide
+          side: THREE.DoubleSide,
         });
 
         // 球体の形状を作成します
@@ -61,7 +61,7 @@
           // マテリアルを作成
           const material = new THREE.PointsMaterial({
             size: 10,
-            color: 0xffffff
+            color: 0xffffff,
           });
 
           // 物体を作成
@@ -70,7 +70,7 @@
         }
 
         // マウス座標はマウスが動いた時のみ取得できる
-        document.addEventListener('mousemove', event => {
+        document.addEventListener('mousemove', (event) => {
           mouseX = event.pageX;
         });
 

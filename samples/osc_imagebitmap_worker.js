@@ -1,9 +1,9 @@
 importScripts(
-  'https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js'
 );
 
 // メインスレッドから通達があったとき
-onmessage = async event => {
+onmessage = async (event) => {
   // メインスレッドからオフスクリーンキャンバスを受け取る
   const canvas = event.data.canvas;
   // Three.jsのライブラリの内部で style.width にアクセスされてしまう
@@ -27,8 +27,8 @@ onmessage = async event => {
   scene.add(directionalLight);
 
   // テクスチャーを読み込み
-  const texture = await new Promise(resolve => {
-    new THREE.ImageBitmapLoader().load('imgs/earthmap1k.jpg', imageBitmap => {
+  const texture = await new Promise((resolve) => {
+    new THREE.ImageBitmapLoader().load('imgs/earthmap1k.jpg', (imageBitmap) => {
       const texture = new THREE.CanvasTexture(imageBitmap);
       resolve(texture);
     });

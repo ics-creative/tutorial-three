@@ -3,9 +3,9 @@
     "format" : "prettier --write '*.{html,js,css}' --single-quote"
   },
   "dependencies": {
-    "@types/three": "^0.93.19"
+    "@types/three": "^0.127.1"
   },
   "devDependencies": {
-    "prettier": "^1.16.4"
+    "prettier": "^2.2.1"
   }
 }

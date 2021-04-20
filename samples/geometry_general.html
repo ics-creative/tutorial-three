@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
     <script>
       // ページの読み込みを待つ
       window.addEventListener('load', init);
@@ -13,7 +13,7 @@
 
         // レンダラーを作成
         const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas')
+          canvas: document.querySelector('#myCanvas'),
         });
         renderer.setSize(width, height);
 
@@ -37,7 +37,7 @@
         // マテリアルを作成
         const material = new THREE.MeshStandardMaterial({
           color: 0xff0000,
-          side: THREE.DoubleSide
+          side: THREE.DoubleSide,
         });
 
         // 平行光源を作成
@@ -56,7 +56,7 @@
           new THREE.TetrahedronGeometry(100, 0), // カプセル形状
           new THREE.ConeGeometry(100, 100, 32), // 三角錐
           new THREE.CylinderGeometry(50, 50, 100, 32), // 円柱
-          new THREE.TorusGeometry(50, 30, 16, 100) // ドーナツ形状
+          new THREE.TorusGeometry(50, 30, 16, 100), // ドーナツ形状
         ];
 
         geometryList.map((geometry, index) => {

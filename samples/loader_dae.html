@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
     <script src="js/controls/OrbitControls.js"></script>
     <script src="js/loaders/ColladaLoader.js"></script>
 
@@ -16,7 +16,7 @@
 
         // レンダラーを作成
         const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas')
+          canvas: document.querySelector('#myCanvas'),
         });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height);
@@ -50,7 +50,7 @@
         // 3DS形式のモデルデータを読み込む
         const loader = new THREE.ColladaLoader();
         // 3dsファイルのパスを指定
-        loader.load('./models/collada/elf/elf.dae', collada => {
+        loader.load('./models/collada/elf/elf.dae', (collada) => {
           // 読み込み後に3D空間に追加
           const model = collada.scene;
           scene.add(model);

@@ -29,17 +29,17 @@
             canvas: offscreenCanvas,
             width: innerWidth,
             height: innerHeight,
-            devicePixelRatio: devicePixelRatio
+            devicePixelRatio: devicePixelRatio,
           },
           [offscreenCanvas]
         );
 
-        window.addEventListener('resize', event => {
+        window.addEventListener('resize', (event) => {
           worker.postMessage({
             type: 'resize',
             width: innerWidth,
             height: innerHeight,
-            devicePixelRatio: devicePixelRatio
+            devicePixelRatio: devicePixelRatio,
           });
         });
       }

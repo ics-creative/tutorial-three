@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
     <script>
       // ページの読み込みを待つ
       window.addEventListener('load', init);
@@ -15,7 +15,7 @@
 
         // レンダラーを作成
         const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas')
+          canvas: document.querySelector('#myCanvas'),
         });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height);
@@ -80,20 +80,16 @@
   <body>
     <!-- 親のタグの基準点をリセット -->
     <div
-      style="position:relative; overflow: hidden; width: 960px; height: 540px;"
+      style="position: relative; overflow: hidden; width: 960px; height: 540px"
     >
       <!-- Three.js用のcanvasタグ -->
       <canvas
         id="myCanvas"
-        style="position: absolute; top: 0; left: 0;"
+        style="position: absolute; top: 0; left: 0"
       ></canvas>
 
       <!-- ライン描画用のSVG -->
-      <svg
-        width="960"
-        height="540"
-        style="position: absolute; top: 0; left: 0;"
-      >
+      <svg width="960" height="540" style="position: absolute; top: 0; left: 0">
         <g stroke="white">
           <line id="svgLine" x1="0" y1="0" x2="0" y2="0" stroke-width="3" />
         </g>

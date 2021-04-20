@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
     <script>
       // ページの読み込みを待つ
       window.addEventListener('load', init);
@@ -14,7 +14,7 @@
 
         // レンダラーを作成
         const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas')
+          canvas: document.querySelector('#myCanvas'),
         });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height);
@@ -29,7 +29,7 @@
 
         // マテリアルを作成する
         const material = new THREE.SpriteMaterial({
-          map: new THREE.TextureLoader().load('imgs/star.png')
+          map: new THREE.TextureLoader().load('imgs/star.png'),
         });
         // フォグ（霞）を有効にする
         material.fog = true;

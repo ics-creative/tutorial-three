@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
     <script>
       // ページの読み込みを待つ
       window.addEventListener('load', init);
@@ -16,7 +16,7 @@
 
         // レンダラーを作成
         const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas')
+          canvas: document.querySelector('#myCanvas'),
         });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height);
@@ -49,7 +49,7 @@
         const texture = loader.load('imgs/earthmap1k.jpg');
         // マテリアルにテクスチャーを設定
         const material = new THREE.MeshStandardMaterial({
-          map: texture
+          map: texture,
         });
         // メッシュを作成
         const mesh = new THREE.Mesh(geometry, material);

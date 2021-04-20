@@ -1,11 +1,11 @@
 importScripts(
-  'https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js'
 );
 let renderer;
 let camera;
 
 // メインスレッドから通達があったとき
-onmessage = event => {
+onmessage = (event) => {
   switch (event.data.type) {
     case 'init':
       init(event);
