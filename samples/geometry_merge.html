@@ -3,6 +3,7 @@
     <meta charset="utf-8" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+    <script src="js/utils/BufferGeometryUtils.js"></script>
 
     <script>
       // ページの読み込みを待つ
@@ -29,29 +30,28 @@
         const camera = new THREE.PerspectiveCamera(45, width / height);
         camera.position.set(0, 0, 400);
 
-        // 空のジオメトリを作成
-        const geometry = new THREE.Geometry();
-
         // Box
+        const boxes = [];
         for (let i = 0; i < CELL_NUM; i++) {
           for (let j = 0; j < CELL_NUM; j++) {
             for (let k = 0; k < CELL_NUM; k++) {
               // 立方体個別の要素を作成
-              const sampleGeometry = new THREE.BoxGeometry(5, 5, 5);
+              const geometryBox = new THREE.BoxGeometry(5, 5, 5);
 
-              // 座標調整の行列を作成
-              const matrix = new THREE.Matrix4();
-              matrix.makeTranslation(
+              // 座標調整
+              const geometryTranslated = geometryBox.translate(
                 10 * (i - CELL_NUM / 2),
                 10 * (j - CELL_NUM / 2),
                 10 * (k - CELL_NUM / 2)
               );
 
-              // ジオメトリをマージ（結合）
-              geometry.merge(sampleGeometry, matrix);
+              // ジオメトリを保存
+              boxes.push(geometryTranslated);
             }
           }
         }
+
+        const geometry = THREE.BufferGeometryUtils.mergeBufferGeometries(boxes);
 
         // マテリアルを作成
         const material = new THREE.MeshNormalMaterial();

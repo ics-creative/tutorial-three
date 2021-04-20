@@ -56,7 +56,9 @@
           renderer.render(scene, camera);
 
           // 球体のワールド座標を取得する
-          const project = mesh.position.project(camera);
+          // project()メソッドによって、もとの座標が変更を受けてしまうので、
+          // clone()して複製しておく
+          const project = mesh.position.clone().project(camera);
           const sx = (width / 2) * (+project.x + 1.0);
           const sy = (height / 2) * (-project.y + 1.0);
 

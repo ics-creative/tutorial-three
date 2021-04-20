@@ -15,8 +15,9 @@
         const height = 540;
 
         // レンダラーを作成
+        const canvasElement = document.querySelector('#myCanvas');
         const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas'),
+          canvas: canvasElement,
         });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height);
@@ -35,7 +36,7 @@
         camera.position.set(0, 10, 10);
 
         // カメラコントローラーを作成
-        const controls = new THREE.OrbitControls(camera);
+        const controls = new THREE.OrbitControls(camera, canvasElement);
         controls.target.set(0, 3, 0);
         controls.update();
 

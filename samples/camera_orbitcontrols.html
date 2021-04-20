@@ -12,9 +12,10 @@
         const width = 960;
         const height = 540;
 
+        const canvasElement = document.querySelector('#myCanvas');
         // レンダラーを作成
         const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas'),
+          canvas: canvasElement,
         });
         renderer.setSize(width, height);
 
@@ -27,7 +28,7 @@
         camera.position.set(0, 0, 1000);
 
         // カメラコントローラーを作成
-        const controls = new THREE.OrbitControls(camera);
+        const controls = new THREE.OrbitControls(camera, canvasElement);
 
         // 滑らかにカメラコントローラーを制御する
         controls.enableDamping = true;
@@ -53,21 +54,32 @@
         // 星屑を作成します (カメラの動きをわかりやすくするため)
         createStarField();
 
+        /** 星屑を作成します */
         function createStarField() {
-          // 形状データを作成
-          const geometry = new THREE.Geometry();
-          // 個数は日付の数に比例させる
-          const numParticles = 1000;
-          const SIZE = 3000;
-          for (let i = 0; i < numParticles; i++) {
-            geometry.vertices.push(
-              new THREE.Vector3(
-                SIZE * (Math.random() - 0.5),
-                SIZE * (Math.random() - 0.5),
-                SIZE * (Math.random() - 0.5)
-              )
+          // 頂点情報を格納する配列
+          const vertices = [];
+          // 1000 個の頂点を作成
+          for (let i = 0; i < 1000; i++) {
+            const x = THREE.MathUtils.randFloatSpread(
+              3000 * (Math.random() - 0.5)
             );
+            const y = THREE.MathUtils.randFloatSpread(
+              3000 * (Math.random() - 0.5)
+            );
+            const z = THREE.MathUtils.randFloatSpread(
+              3000 * (Math.random() - 0.5)
+            );
+
+            vertices.push(x, y, z);
           }
+
+          // 形状データを作成
+          const geometry = new THREE.BufferGeometry();
+          geometry.setAttribute(
+            'position',
+            new THREE.Float32BufferAttribute(vertices, 3)
+          );
+
           // マテリアルを作成
           const material = new THREE.PointsMaterial({
             size: 10,

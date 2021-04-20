@@ -46,18 +46,32 @@
         // 星屑を作成します (カメラの動きをわかりやすくするため)
         createStarField();
 
+        /** 星屑を作成します */
         function createStarField() {
-          // 形状データを作成
-          const geometry = new THREE.Geometry();
+          // 頂点情報を格納する配列
+          const vertices = [];
+          // 1000 個の頂点を作成
           for (let i = 0; i < 1000; i++) {
-            geometry.vertices.push(
-              new THREE.Vector3(
-                3000 * (Math.random() - 0.5),
-                3000 * (Math.random() - 0.5),
-                3000 * (Math.random() - 0.5)
-              )
+            const x = THREE.MathUtils.randFloatSpread(
+              3000 * (Math.random() - 0.5)
             );
+            const y = THREE.MathUtils.randFloatSpread(
+              3000 * (Math.random() - 0.5)
+            );
+            const z = THREE.MathUtils.randFloatSpread(
+              3000 * (Math.random() - 0.5)
+            );
+
+            vertices.push(x, y, z);
           }
+
+          // 形状データを作成
+          const geometry = new THREE.BufferGeometry();
+          geometry.setAttribute(
+            'position',
+            new THREE.Float32BufferAttribute(vertices, 3)
+          );
+
           // マテリアルを作成
           const material = new THREE.PointsMaterial({
             size: 10,

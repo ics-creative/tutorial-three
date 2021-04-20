@@ -57,11 +57,18 @@
         }
 
         // ライン
-        const geometry = new THREE.Geometry();
-        geometry.vertices.push(
+        // const geometry = new THREE.Geometry();
+        // geometry.vertices.push(
+        //   new THREE.Vector3(0, 0, 0),
+        //   new THREE.Vector3(0, 0, 0)
+        // );
+        // const line = new THREE.Line(geometry, new THREE.LineBasicMaterial());
+        // scene.add(line);
+
+        const geometry = new THREE.BufferGeometry().setFromPoints([
           new THREE.Vector3(0, 0, 0),
-          new THREE.Vector3(0, 0, 0)
-        );
+          new THREE.Vector3(50, 50, 0),
+        ]);
         const line = new THREE.Line(geometry, new THREE.LineBasicMaterial());
         scene.add(line);
 
@@ -73,11 +80,17 @@
           group.rotation.y += 0.01;
 
           // ワールド座標を取得
-          const world = targetMesh.getWorldPosition();
+          const world = targetMesh.getWorldPosition(new THREE.Vector3());
 
           // ラインを更新
-          geometry.vertices[0].copy(world);
-          geometry.verticesNeedUpdate = true;
+          const positions = line.geometry.attributes.position.array;
+          positions[0] = 0; // 1番目頂点のX座標
+          positions[1] = 0; // 1番目頂点のY座標
+          positions[2] = 0; // 1番目頂点のZ座標
+          positions[3] = world.x; // 2番目頂点のX座標
+          positions[4] = world.y; // 2番目頂点のY座標
+          positions[5] = world.z; // 2番目頂点のZ座標
+          line.geometry.attributes.position.needsUpdate = true;
 
           // レンダリング
           renderer.render(scene, camera);
