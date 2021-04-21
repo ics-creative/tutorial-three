@@ -2,7 +2,7 @@
 title: Three.jsのマテリアルの基本
 author: 池田 泰延
 published_date: 2017-11-02
-modified_date: 2019-01-08
+modified_date: 2021-04-21
 ---
 
 3Dの見栄えを決定するマテリアルとライティングについて説明します。

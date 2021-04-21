@@ -2,7 +2,7 @@
 title: Three.jsで大量のパーティクルを表示する方法
 author: 池田 泰延
 published_date: 2017-11-03
-modified_date: 2019-01-08
+modified_date: 2021-04-21
 ---
 
 3D空間内に大量の粒子を表示させたい、星を表示させたい、塵を表示させたい。そんな表現に適しているのが`THREE.Point`クラスです。
@@ -26,60 +26,81 @@ modified_date: 2019-01-08
 
 ```js
 // 形状データを作成
-const geometry = new THREE.Geometry();
-// 配置する範囲
 const SIZE = 3000;
 // 配置する個数
 const LENGTH = 1000;
+// 頂点情報を格納する配列
+const vertices = [];
 for (let i = 0; i < LENGTH; i++) {
-  geometry.vertices.push(new THREE.Vector3(
-    SIZE * (Math.random() - 0.5),
-    SIZE * (Math.random() - 0.5),
-    SIZE * (Math.random() - 0.5),
-  ));
+  const x = SIZE * (Math.random() - 0.5);
+  const y = SIZE * (Math.random() - 0.5);
+  const z = SIZE * (Math.random() - 0.5);
+
+  vertices.push(x, y, z);
 }
+
+// 形状データを作成
+const geometry = new THREE.BufferGeometry();
+geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
 // マテリアルを作成
 const material = new THREE.PointsMaterial({
   // 一つ一つのサイズ
   size: 10,
   // 色
-  color: 0xFFFFFF,
+  color: 0xffffff,
 });
 
+// 物体を作成
 const mesh = new THREE.Points(geometry, material);
-scene.add(mesh);
+scene.add(mesh); // シーンは任意の THREE.Scene インスタンス
 ```
 
 
 少し長いので難しく思いますが、コードの手順は次の通りです。
 
-### ①空のジオメトリーを作る
+### ①頂点を格納する配列を作成する
 
 ```js
-// 形状データを作成
-const geometry = new THREE.Geometry();
+// 頂点情報を格納する配列
+const vertices = [];
 ```
 
 ### ②ジオメトリーに頂点座標を加えていく
 
-直方体エリア（一辺3000の距離）の中へランダムに1000個の粒子を配置します。`SIZE`と`LENGTH`変数で配置領域や個数をカスタマイズできるので、適宜調整ください。
+直方体エリア（一辺3000の距離）の中へランダムに1000個の粒子を配置します。`SIZE`と`LENGTH`変数で配置領域や個数をカスタマイズできるので、適宜調整ください。verticesは1次元の配列であり、頂点座標を`[x0, y0, z0, x1, y1, z1, x2, y2, z2]`と順番を登録していきます。
 
 
 ```js
-// 配置する範囲
+// 頂点情報を格納する配列
+const vertices = [];
+
+// 形状データを作成
 const SIZE = 3000;
 // 配置する個数
 const LENGTH = 1000;
+
+const vertices = [];
 for (let i = 0; i < LENGTH; i++) {
-  geometry.vertices.push(new THREE.Vector3(
-    SIZE * (Math.random() - 0.5),
-    SIZE * (Math.random() - 0.5),
-    SIZE * (Math.random() - 0.5),
-  ));
+  const x = SIZE * (Math.random() - 0.5);
+  const y = SIZE * (Math.random() - 0.5);
+  const z = SIZE * (Math.random() - 0.5);
+
+  vertices.push(x, y, z);
 }
 ```
 
-### ③専用のマテリアルを作る
+### ③頂点からジオメトリーを作成する
+
+頂点座標を格納した配列`vertices`から、ジオメトリを作成します。`setAttribute()`メソッドを利用し登録します。
+
+```js
+// 形状データを作成
+const geometry = new THREE.BufferGeometry();
+geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+```
+
+### ④専用のマテリアルを作る
 
 `THREE.PointsMaterial`という専用のクラスを使って、粒子のサイズや色を指定します。`THREE.PointsMaterial`クラスは形状を持たない為、視点が変化しても常に正面を向いて表示されます。
 
@@ -92,7 +113,7 @@ const material = new THREE.PointsMaterial({
   color: 0xFFFFFF,
 });
 ```
-### ④手順1と3で作成したジオメトリーとマテリアルから、メッシュを作り、3D空間に配置する
+### ④手順3と5で作成したジオメトリーとマテリアルから、メッシュを作り、3D空間に配置する
 
 ```js
 const mesh = new THREE.Points(geometry, material);

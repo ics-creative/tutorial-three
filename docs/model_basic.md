@@ -2,7 +2,7 @@
 title: Three.jsでモデルデータを読み込む
 author: 池田 泰延
 published_date: 2017-11-03
-modified_date: 2019-01-08
+modified_date: 2021-04-21
 ---
 
 **3Dモデリングソフトで制作したモデルデータの読み込み方**を説明します。3Dのモデルデータにはさまざまな形式が存在しますが、Three.jsは対応している形式がです。
@@ -41,13 +41,13 @@ Three.jsでモデルデータを読み込むには、JavaScriptでThree.jsの初
 読み込む処理は次のように記載します。`THREE.TDSLoader`クラスのインスタンスから、`load`メソッドを利用します。
 第一引数にはファイルパスを指定し、第二引数に読み込み後のコールバック関数を指定します。コールバック関数内で3D空間への追加処理をするのがポイントです。
 
-なお、3dsファイルのテクスチャーのパスがずれないように、`setPath`メソッドを使って、明示的にテクスチャーが含まれるフォルダーのパスを指定します。
+なお、3dsファイルのテクスチャーのパスがずれないように、`setResourcePath`メソッドを使って、明示的にテクスチャーが含まれるフォルダーのパスを指定します。
 
 ```js
 // 3DS形式のモデルデータを読み込む
 const loader = new THREE.TDSLoader();
 // テクスチャーのパスを指定
-loader.setPath('models/3ds/portalgun/textures/');
+loader.setResourcePath('models/3ds/portalgun/textures/');
 // 3dsファイルのパスを指定
 loader.load('models/3ds/portalgun/portalgun.3ds',  (object) => {
   // 読み込み後に3D空間に追加

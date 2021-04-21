@@ -2,7 +2,7 @@
 title: Three.js入門サイト
 author: 池田 泰延
 published_date: 2017-11-02
-modified_date: 2019-01-17
+modified_date: 2021-04-21
 ---
 
 このサイトは、WebGLのライブラリ「[Three.js](https://threejs.org)」の入門サイトです。

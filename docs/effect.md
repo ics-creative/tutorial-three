@@ -2,7 +2,7 @@
 title: Three.js演出編
 author: 池田 泰延
 published_date: 2019-01-17
-modified_date: 2019-01-17
+modified_date: 2021-04-21
 ---
 
 Three.jsを使った表現を作例を通して学びましょう。

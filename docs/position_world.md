@@ -2,7 +2,7 @@
 title: Three.jsのワールド座標の算出
 author: 池田 泰延
 published_date: 2017-11-12
-modified_date: 2019-01-08
+modified_date: 2021-04-21
 ---
 
 ワールド座標（空間座標）とは3D空間（`scene`）の原点から見た座標をワールド座標といいます。
@@ -11,10 +11,11 @@ Three.jsでは`getWorldPosition`メソッドを使って、ワールド座標を
 
 ## ワールド座標の算出方法
 
-`THREE.Object3D`クラスの`getWorldPosition()`メソッドを使うことで、ワールド座標が得られます。
+`THREE.Object3D`クラスの`getWorldPosition()`メソッドを使うことで、ワールド座標が得られます。ワールド座標を計算する必要があるので、計算対象の3Dオブジェクトはシーンに追加されている必要があります（シーン直下でなくても問題ありません）。
 
 ```js
-const world = object3D.getWorldPosition();
+// object3D は任意の3Dオブジェクト。
+const world = object3D.getWorldPosition(new THREE.Vector3());
 ```
 
 ##  ワールド座標算出のサンプル

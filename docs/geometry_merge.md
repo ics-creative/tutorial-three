@@ -2,7 +2,7 @@
 title: Three.jsの高速化手法：ジオメトリの結合
 author: 池田 泰延
 published_date: 2017-11-08
-modified_date: 2019-01-08
+modified_date: 2021-04-21
 ---
 
 Three.jsで大量のオブジェクトを描画するときに役立つ最適化テクニックを紹介します。
@@ -80,38 +80,41 @@ for (let i = 0; i < CELL_NUM; i++) {
 }
 ```
 
-Three.jsでは、`THREE.Geometry`クラスの`mergeMesh()`メソッドで結合できます。コードは次のように記述します。`scene`オブジェクトに追加されているメッシュはたった1個であることに注目してください。
+Three.jsでは、`THREE.BufferGeometryUtils.mergeBufferGeometries()`メソッドで結合できます。このメソッドはThree.js本体のコードに含まれていないので注意ください。公式GitHubの`examples/js/utils`フォルダーにJavaScriptファイルがあるので、これを`script`要素で読み込みます。作業用フォルダーに`BufferGeometryUtils.js`ファイルをコピーしておきましょう。該当ファイルは[こちら](https://github.com/mrdoob/three.js/blob/dev/examples/js/utils/BufferGeometryUtils.js)からダウンロードできます。
+
+```html
+<script src="js/utils/BufferGeometryUtils.js"></script>
+```
+
+コードは次のように記述します。`scene`オブジェクトに追加されているメッシュはたった1個であることに注目してください。ジオメトリの配置座標を調整するには`translate()`メソッドを利用します。
 
 ▼最適化後のコード（1）
 
 ```js
 // 1辺あたりに配置するオブジェクトの個数
 const CELL_NUM = 25;
-
-// 空のジオメトリを作成
-const geometry = new THREE.Geometry();
-
-// Box
+// 結合用のジオメトリを格納する配列
+const boxes = [];
 for (let i = 0; i < CELL_NUM; i++) {
   for (let j = 0; j < CELL_NUM; j++) {
     for (let k = 0; k < CELL_NUM; k++) {
       // 立方体個別の要素を作成
-      const meshTemp = new THREE.Mesh(
-        new THREE.BoxGeometry(5, 5, 5)
-      );
+      const geometryBox = new THREE.BoxGeometry(5, 5, 5);
 
-      // XYZ座標を設定
-      meshTemp.position.set(
+      // 座標調整
+      const geometryTranslated = geometryBox.translate(
         10 * (i - CELL_NUM / 2),
         10 * (j - CELL_NUM / 2),
         10 * (k - CELL_NUM / 2)
       );
 
-      // メッシュをマージ（結合）
-      geometry.mergeMesh(meshTemp);
+      // ジオメトリを保存
+      boxes.push(geometryTranslated);
     }
   }
 }
+// ジオメトリを生成
+const geometry = THREE.BufferGeometryUtils.mergeBufferGeometries(boxes);
 
 // マテリアルを作成
 const material = new THREE.MeshNormalMaterial();
@@ -120,49 +123,6 @@ const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 ```
 
-上記のコードだと、一時的にメッシュを作る必要があるので少しムダがあります。行列`THREE.Matrix4`クラスを扱う知識があれば、次のように`mergeMesh()`メソッドを`merge()`メソッドで置きかけることもできます。どちらでもそれほど大きく性能差は出ませんので、好みの書き方を使ってください。
-
-▼最適化後のコード（2）
-
-```js
-// 1辺あたりに配置するオブジェクトの個数
-const CELL_NUM = 25;
-
-// 空のジオメトリを作成
-const geometry = new THREE.Geometry();
-
-// Box
-for (let i = 0; i < CELL_NUM; i++) {
-  for (let j = 0; j < CELL_NUM; j++) {
-    for (let k = 0; k < CELL_NUM; k++) {
-      // 立方体個別の要素を作成
-      const sampleGeometry = new THREE.BoxGeometry(5, 5, 5);
-
-      // 座標調整の行列を作成
-      const matrix = new THREE.Matrix4();
-      matrix.makeTranslation(
-        10 * (i - CELL_NUM / 2),
-        10 * (j - CELL_NUM / 2),
-        10 * (k - CELL_NUM / 2)
-      );
-
-      // ジオメトリをマージ（結合）
-      geometry.merge(sampleGeometry, matrix);
-    }
-  }
-}
-
-// マテリアルを作成
-const material = new THREE.MeshNormalMaterial();
-// メッシュを作成
-const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
-```
-
-![](../imgs/geometry_merge.png)
-
-- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/geometry_merge.html)
-- [サンプルのソースコードを確認する](../samples/geometry_merge.html)
 
 ## ジオメトリ結合のデメリット
 

@@ -2,7 +2,7 @@
 title: Three.jsのスクリーン座標の算出
 author: 池田 泰延
 published_date: 2017-11-12
-modified_date: 2020-01-29
+modified_date: 2021-04-21
 ---
 
 Three.jsの`canvas`要素にHTMLの表示を重ねたい時があります。
@@ -12,29 +12,34 @@ Three.jsの`canvas`要素にHTMLの表示を重ねたい時があります。
 
 ## スクリーン座標の算出方法
 
-`THREE.Camera`クラスの`project()`メソッドを使うことで、ワールド座標をステージ上のXY座標に変換できます。
+`THREE.Camera`クラスの`project()`メソッドを使うことで、ステージ上のXY座標に変換できます。
 
 
 ```js
-const project = object3D.project(camera);
+// object3D は任意の3Dオブジェクト。
+// 3Dオブジェクトのワールド座標を取得する
+const worldPosition = object3D.getWorldPosition(new THREE.Vector3());
+// スクリーン座標を取得する
+const projection = worldPosition.project(camera);
 ```
 
-`project()`メソッドの戻り値は`THREE.Vector3D`型で、`x`と`y`はそれぞれ`-1.0`～`+1.0`の値をとります。`z`は3Dオブジェクトの深度を示します。
-
+`project()`メソッドの戻り値は`THREE.Vector3D`型で、`x`と`y`はそれぞれ`-1.0`～`+1.0`の値をとります。`z`は3Dオブジェクトの深度を示します。ワールド座標を計算する必要があるので、計算対象の3Dオブジェクトはシーンに追加されている必要があります（シーン直下でなくても問題ありません）。
 
 
 2D座標の取得には、`renderer`インスタンスの幅・高さの値を計算することで`canvas`要素の左上からの座標を求めることができます。
 
 
 ```js
-const object3D = new Mesh(); // 任意の3Dオブジェクト
-const width = 960; // rendererのサイズ
+const object3D = new THREE.Mesh(); // 任意の3Dオブジェクト
+const width = 960; // rendererの仮サイズ（利用場面において適したサイズに変更ください）
 const height = 540;
 
+// 3Dオブジェクトのワールド座標を取得する
+const worldPosition = object3D.getWorldPosition(new THREE.Vector3());
 // スクリーン座標を取得する
-const project = object3D.position.project(camera);
-const sx = width / 2 * (+project.x + 1.0);
-const sy = height / 2 * (-project.y + 1.0);
+const projection = worldPosition.project(camera);
+const sx = (width / 2) * (+projection.x + 1.0);
+const sy = (height / 2) * (-projection.y + 1.0);
 
 // スクリーン座標
 console.log(sx, sy);
