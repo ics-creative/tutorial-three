@@ -13,8 +13,9 @@
         const height = 540;
 
         // レンダラーを作成
+        const canvasElement = document.querySelector('#myCanvas')
         const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas'),
+          canvas: canvasElement,
         });
         renderer.setSize(width, height);
 
@@ -27,7 +28,7 @@
         camera.position.set(0, 0, 1000);
 
         // カメラコントローラーを作成
-        const controls = new THREE.OrbitControls(camera);
+        const controls = new THREE.OrbitControls(camera, canvasElement);
 
         // 形状とマテリアルからメッシュを作成します
         const mesh = new THREE.Mesh(new THREE.BoxGeometry(300, 300, 300), new THREE.MeshNormalMaterial());

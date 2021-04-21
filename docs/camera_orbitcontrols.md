@@ -109,7 +109,7 @@ const camera = new THREE.PerspectiveCamera(/*省略*/);
 camera.position.set(0, 0, 1000);
 
 // カメラコントローラーを作成
-const controls = new THREE.OrbitControls(camera);
+const controls = new THREE.OrbitControls(camera, canvasElement);
 
 // 滑らかにカメラコントローラーを制御する
 controls.enableDamping = true;
