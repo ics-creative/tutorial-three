@@ -30,10 +30,7 @@
         const controls = new THREE.OrbitControls(camera);
 
         // 形状とマテリアルからメッシュを作成します
-        const mesh = new THREE.Mesh(
-          new THREE.BoxGeometry(300, 300, 300),
-          new THREE.MeshNormalMaterial()
-        );
+        const mesh = new THREE.Mesh(new THREE.BoxGeometry(300, 300, 300), new THREE.MeshNormalMaterial());
         scene.add(mesh);
 
         tick();

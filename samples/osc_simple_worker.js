@@ -1,6 +1,4 @@
-importScripts(
-  'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js'
-);
+importScripts('https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js');
 
 // メインスレッドから通達があったとき
 onmessage = (event) => {
@@ -33,11 +31,7 @@ onmessage = (event) => {
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
     // 適当に配置
-    mesh.position.set(
-      1000 * (Math.random() - 0.5),
-      1000 * (Math.random() - 0.5),
-      1000 * (Math.random() - 0.5)
-    );
+    mesh.position.set(1000 * (Math.random() - 0.5), 1000 * (Math.random() - 0.5), 1000 * (Math.random() - 0.5));
   }
 
   tick();

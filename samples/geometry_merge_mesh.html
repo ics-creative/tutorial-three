@@ -13,8 +13,6 @@
         // サイズを指定
         const width = 960;
         const height = 540;
-        // 1辺あたりに配置するオブジェクトの個数
-        const CELL_NUM = 25;
 
         // レンダラーを作成
         const renderer = new THREE.WebGLRenderer({
@@ -30,7 +28,9 @@
         const camera = new THREE.PerspectiveCamera(45, width / height);
         camera.position.set(0, 0, 400);
 
-        // Box
+        // 1辺あたりに配置するオブジェクトの個数
+        const CELL_NUM = 25;
+        // 結合用のジオメトリを格納する配列
         const boxes = [];
         for (let i = 0; i < CELL_NUM; i++) {
           for (let j = 0; j < CELL_NUM; j++) {
@@ -50,7 +50,7 @@
             }
           }
         }
-
+        // ジオメトリを生成
         const geometry = THREE.BufferGeometryUtils.mergeBufferGeometries(boxes);
 
         // マテリアルを作成
@@ -76,11 +76,7 @@
           renderer.render(scene, camera);
 
           // レンダリング情報を画面に表示
-          document.getElementById('info').innerHTML = JSON.stringify(
-            renderer.info.render,
-            '',
-            '    '
-          );
+          document.getElementById('info').innerHTML = JSON.stringify(renderer.info.render, '', '    ');
 
           // フレームレートを表示
           stats.update();

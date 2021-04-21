@@ -37,6 +37,7 @@
         // 直方体を作成
         const material = new THREE.MeshNormalMaterial();
         const geometry = new THREE.SphereGeometry(30, 30, 30);
+
         const mesh = new THREE.Mesh(geometry, material);
         scene.add(mesh);
 
@@ -56,17 +57,15 @@
           renderer.render(scene, camera);
 
           // 球体のワールド座標を取得する
-          // project()メソッドによって、もとの座標が変更を受けてしまうので、
-          // clone()して複製しておく
-          const project = mesh.position.clone().project(camera);
-          const sx = (width / 2) * (+project.x + 1.0);
-          const sy = (height / 2) * (-project.y + 1.0);
+          const worldPosition = mesh.getWorldPosition(new THREE.Vector3());
+          // スクリーン座標を取得する
+          const projection = worldPosition.project(camera);
+          const sx = (width / 2) * (+projection.x + 1.0);
+          const sy = (height / 2) * (-projection.y + 1.0);
 
           const tf = document.getElementById('hud');
           // テキストフィールドにスクリーン座標を表示
-          tf.innerHTML = `👆スクリーン座標(${Math.round(sx)}, ${Math.round(
-            sy
-          )})`;
+          tf.innerHTML = `👆スクリーン座標(${Math.round(sx)}, ${Math.round(sy)})`;
           tf.style.transform = `translate(${sx}px, ${sy}px)`;
 
           // SVGでラインを描画
@@ -81,14 +80,9 @@
   </head>
   <body>
     <!-- 親のタグの基準点をリセット -->
-    <div
-      style="position: relative; overflow: hidden; width: 960px; height: 540px"
-    >
+    <div style="position: relative; overflow: hidden; width: 960px; height: 540px">
       <!-- Three.js用のcanvasタグ -->
-      <canvas
-        id="myCanvas"
-        style="position: absolute; top: 0; left: 0"
-      ></canvas>
+      <canvas id="myCanvas" style="position: absolute; top: 0; left: 0"></canvas>
 
       <!-- ライン描画用のSVG -->
       <svg width="960" height="540" style="position: absolute; top: 0; left: 0">
@@ -98,10 +92,7 @@
       </svg>
 
       <!-- 座標表示用のdivタグ -->
-      <div
-        id="hud"
-        style="position: absolute; top: 0; left: 0; background: white"
-      ></div>
+      <div id="hud" style="position: absolute; top: 0; left: 0; background: white"></div>
     </div>
   </body>
 </html>

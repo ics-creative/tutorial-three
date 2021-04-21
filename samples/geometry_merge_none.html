@@ -38,17 +38,10 @@
           for (let j = 0; j < CELL_NUM; j++) {
             for (let k = 0; k < CELL_NUM; k++) {
               // 立方体個別の要素を作成
-              const mesh = new THREE.Mesh(
-                new THREE.BoxGeometry(5, 5, 5),
-                material
-              );
+              const mesh = new THREE.Mesh(new THREE.BoxGeometry(5, 5, 5), material);
 
               // XYZ座標を設定
-              mesh.position.set(
-                10 * (i - CELL_NUM / 2),
-                10 * (j - CELL_NUM / 2),
-                10 * (k - CELL_NUM / 2)
-              );
+              mesh.position.set(10 * (i - CELL_NUM / 2), 10 * (j - CELL_NUM / 2), 10 * (k - CELL_NUM / 2));
 
               // メッシュを3D空間に追加
               container.add(mesh);
@@ -73,11 +66,7 @@
           renderer.render(scene, camera);
 
           // レンダリング情報を画面に表示
-          document.getElementById('info').innerHTML = JSON.stringify(
-            renderer.info.render,
-            '',
-            '    '
-          );
+          document.getElementById('info').innerHTML = JSON.stringify(renderer.info.render, '', '    ');
 
           // フレームレートを表示
           stats.update();

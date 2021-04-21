@@ -1,6 +1,4 @@
-importScripts(
-  'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js'
-);
+importScripts('https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js');
 
 // メインスレッドから通達があったとき
 onmessage = async (event) => {

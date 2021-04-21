@@ -41,10 +41,7 @@
 
         for (let i = 0; i < 10; i++) {
           // 直方体を作成
-          const material =
-            i === 0
-              ? new THREE.MeshNormalMaterial()
-              : new THREE.MeshBasicMaterial();
+          const material = i === 0 ? new THREE.MeshNormalMaterial() : new THREE.MeshBasicMaterial();
           const geometry = new THREE.SphereGeometry(30, 30, 30);
           const mesh = new THREE.Mesh(geometry, material);
           const radian = (i / 10) * Math.PI * 2;

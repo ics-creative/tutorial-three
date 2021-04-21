@@ -50,16 +50,10 @@
           super();
 
           // 球体を作成
-          this.sphere = new THREE.Mesh(
-            new THREE.SphereGeometry(40, 20, 40),
-            new THREE.MeshNormalMaterial()
-          );
+          this.sphere = new THREE.Mesh(new THREE.SphereGeometry(40, 20, 40), new THREE.MeshNormalMaterial());
 
           // ドーナツを作成
-          this.donuts = new THREE.Mesh(
-            new THREE.TorusGeometry(120, 40, 60, 60),
-            new THREE.MeshNormalMaterial()
-          );
+          this.donuts = new THREE.Mesh(new THREE.TorusGeometry(120, 40, 60, 60), new THREE.MeshNormalMaterial());
 
           // グループに追加
           this.add(this.sphere);

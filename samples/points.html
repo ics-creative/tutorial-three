@@ -29,32 +29,25 @@
         createStarField();
 
         function createStarField() {
+          // 頂点情報を格納する配列
+          const vertices = [];
+
           // 配置する範囲
           const SIZE = 3000;
           // 配置する個数
           const LENGTH = 1000;
-          // 頂点情報を格納する配列
-          const vertices = [];
+
           for (let i = 0; i < LENGTH; i++) {
-            const x = THREE.MathUtils.randFloatSpread(
-              SIZE * (Math.random() - 0.5)
-            );
-            const y = THREE.MathUtils.randFloatSpread(
-              SIZE * (Math.random() - 0.5)
-            );
-            const z = THREE.MathUtils.randFloatSpread(
-              SIZE * (Math.random() - 0.5)
-            );
+            const x = SIZE * (Math.random() - 0.5);
+            const y = SIZE * (Math.random() - 0.5);
+            const z = SIZE * (Math.random() - 0.5);
 
             vertices.push(x, y, z);
           }
 
           // 形状データを作成
           const geometry = new THREE.BufferGeometry();
-          geometry.setAttribute(
-            'position',
-            new THREE.Float32BufferAttribute(vertices, 3)
-          );
+          geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
           // マテリアルを作成
           const material = new THREE.PointsMaterial({

@@ -60,25 +60,16 @@
           const vertices = [];
           // 1000 個の頂点を作成
           for (let i = 0; i < 1000; i++) {
-            const x = THREE.MathUtils.randFloatSpread(
-              3000 * (Math.random() - 0.5)
-            );
-            const y = THREE.MathUtils.randFloatSpread(
-              3000 * (Math.random() - 0.5)
-            );
-            const z = THREE.MathUtils.randFloatSpread(
-              3000 * (Math.random() - 0.5)
-            );
+            const x = 3000 * (Math.random() - 0.5);
+            const y = 3000 * (Math.random() - 0.5);
+            const z = 3000 * (Math.random() - 0.5);
 
             vertices.push(x, y, z);
           }
 
           // 形状データを作成
           const geometry = new THREE.BufferGeometry();
-          geometry.setAttribute(
-            'position',
-            new THREE.Float32BufferAttribute(vertices, 3)
-          );
+          geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
           // マテリアルを作成
           const material = new THREE.PointsMaterial({
