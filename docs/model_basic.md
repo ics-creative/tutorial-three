@@ -2,7 +2,7 @@
 title: Three.jsでモデルデータを読み込む
 author: 池田 泰延
 published_date: 2017-11-03
-modified_date: 2021-04-21
+modified_date: 2021-08-10
 ---
 
 **3Dモデリングソフトで制作したモデルデータの読み込み方**を説明します。3Dのモデルデータにはさまざまな形式が存在しますが、Three.jsは対応している形式がです。
@@ -32,10 +32,10 @@ Three.jsでモデルデータを読み込むには、JavaScriptでThree.jsの初
 
 ### 3dsファイルの場合
 
-3dsファイルの場合を読み込むには`TDSLoader.js`ファイルが必要となります。
+3dsファイルの場合を読み込むには`TDSLoader.js`ファイルが必要となります。CDNで読み込む場合は以下の`script`タグをHTMLに記述します。
 
 ```html
-<script src="js/loader/TDSLoader.js"></script>
+<script src="https://unpkg.com/three@0.131.3/examples/js/loaders/TDSLoader.js"></script>
 ```
 
 読み込む処理は次のように記載します。`THREE.TDSLoader`クラスのインスタンスから、`load`メソッドを利用します。
@@ -64,10 +64,10 @@ loader.load('models/3ds/portalgun/portalgun.3ds',  (object) => {
 
 ### Daeファイルの場合
 
-daeファイルの場合を読み込むには`ColladaLoader.js`ファイルが必要となります。
+`dae`ファイルの場合を読み込むには`ColladaLoader.js`ファイルが必要となります。
 
 ```html
-<script src="js/loader/ColladaLoader.js"></script>
+<script src="https://unpkg.com/three@0.131.3/examples/js/loaders/ColladaLoader.js"></script>
 ```
 
 読み込む処理は次のように記載します。`THREE.ColladaLoader`クラスのインスタンスから、`load`メソッドを利用します。

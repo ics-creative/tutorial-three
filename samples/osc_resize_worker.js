@@ -1,4 +1,4 @@
-importScripts('https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js');
+importScripts('https://unpkg.com/three@0.131.3/build/three.min.js');
 let renderer;
 let camera;
 

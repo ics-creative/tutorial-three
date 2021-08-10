@@ -2,7 +2,7 @@
 title: Three.jsのOrbitControlsで手軽にカメラを制御する
 author: 池田 泰延
 published_date: 2017-11-03
-modified_date: 2021-04-21
+modified_date: 2021-08-10
 ---
 
 Three.jsには**カメラの動きを自動的に制御する `THREE.OrbitControls` クラスが存在**します。
@@ -15,11 +15,14 @@ Three.jsには**カメラの動きを自動的に制御する `THREE.OrbitContro
 
 ## 導入方法
 
-`OrbitControls.js`は、Three.jsライブラリの本体に含まれていないので注意が必要です。公式GitHubの`examples/js/controls`フォルダーにJavaScriptファイルがあるので、これを`script`要素で読み込みます。作業用フォルダーに`OrbitControls.js`ファイルをコピーしておきましょう。該当ファイルは[こちら](https://github.com/mrdoob/three.js/blob/dev/examples/js/controls/OrbitControls.js)からダウンロードできます。
+`OrbitControls.js`は、Three.jsライブラリの本体に含まれていないので注意が必要です。CDNで利用するときは、以下の`script`要素で読み込みます。
+
 
 ```html
-<script src="js/controls/OrbitControls.js"></script>
+<script src="https://unpkg.com/three@0.131.3/examples/js/controls/OrbitControls.js"></script>
 ```
+
+※公式GitHubの`examples/js/controls`フォルダーにJavaScriptファイルにはいっています。該当ファイルは[こちら](https://github.com/mrdoob/three.js/blob/dev/examples/js/controls/OrbitControls.js)で確認できます。
 
 
 
