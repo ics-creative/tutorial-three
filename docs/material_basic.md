@@ -20,7 +20,7 @@ modified_date: 2021-04-21
 
 ```js
 // ページの読み込みを待つ
-window.addEventListener('load', init);
+window.addEventListener('DOMContentLoaded', init);
 
 // サイズを指定
 const width = 960;
@@ -127,7 +127,7 @@ Three.jsで使用できるライティングには以下の種類があります
 
 ```js
 // ページの読み込みを待つ
-window.addEventListener('load', init);
+window.addEventListener('DOMContentLoaded', init);
 
 // サイズを指定
 const width = 960;

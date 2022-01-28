@@ -2,7 +2,7 @@
 title: 簡単なThree.jsのサンプルを試そう
 author: 池田 泰延
 published_date: 2017-11-02
-modified_date: 2021-08-10
+modified_date: 2022-01-28
 ---
 
 [Three.js](http://typescript.Three.js.com/)はHTMLの3D技術「[WebGL](http://ja.wikipedia.org/wiki/WebGL "WebGL - Wikipedia")」を扱いやすくしたフレームワークです。**Three.jsを使えばGPUによる本格的な3D表現をプラグイン無しで作成**できます。
@@ -26,7 +26,7 @@ modified_date: 2021-08-10
   <script src="https://unpkg.com/three@0.137.4/build/three.min.js"></script>
   <script>
     // ページの読み込みを待つ
-    window.addEventListener('load', init);
+    window.addEventListener('DOMContentLoaded', init);
 
     function init() {
 
@@ -103,11 +103,11 @@ CDN（コンテンツ・デリバリー・ネットワーク）で提供され�
 <script src="https://unpkg.com/three@0.137.4/build/three.min.js"></script>
 ```
 
-WebGLの処理はページの読み込みが終わってから実行させます。`addEventListener()`関数を使って`load`イベントが発生するのを監視させ、ページが読み込み終わったときに実行させたい関数を指定します。この関数`init()`の中にThree.jsのコードを書いていきます。
+WebGLの処理はHTMLページの読み込みが終わってから実行させます。`addEventListener()`関数を使って`DOMContentLoaded`イベントが発生するのを監視させ、ページが読み込み終わったときに実行させたい関数を指定します。この関数`init()`の中にThree.jsのコードを書いていきます。
 
 ```html
 <script>
-window.addEventListener('load', init);
+window.addEventListener('DOMContentLoaded', init);
 function init(){
   // 処理
 }
