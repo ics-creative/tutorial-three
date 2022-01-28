@@ -35,7 +35,7 @@ Three.jsでモデルデータを読み込むには、JavaScriptでThree.jsの初
 3dsファイルの場合を読み込むには`TDSLoader.js`ファイルが必要となります。CDNで読み込む場合は以下の`script`タグをHTMLに記述します。
 
 ```html
-<script src="https://unpkg.com/three@0.131.3/examples/js/loaders/TDSLoader.js"></script>
+<script src="https://unpkg.com/three@0.137.4/examples/js/loaders/TDSLoader.js"></script>
 ```
 
 読み込む処理は次のように記載します。`THREE.TDSLoader`クラスのインスタンスから、`load`メソッドを利用します。
@@ -67,7 +67,7 @@ loader.load('models/3ds/portalgun/portalgun.3ds',  (object) => {
 `dae`ファイルの場合を読み込むには`ColladaLoader.js`ファイルが必要となります。
 
 ```html
-<script src="https://unpkg.com/three@0.131.3/examples/js/loaders/ColladaLoader.js"></script>
+<script src="https://unpkg.com/three@0.137.4/examples/js/loaders/ColladaLoader.js"></script>
 ```
 
 読み込む処理は次のように記載します。`THREE.ColladaLoader`クラスのインスタンスから、`load`メソッドを利用します。

@@ -1,4 +1,4 @@
-importScripts('https://unpkg.com/three@0.131.3/build/three.min.js');
+importScripts('https://unpkg.com/three@0.137.4/build/three.min.js');
 
 // メインスレッドから通達があったとき
 onmessage = async (event) => {
