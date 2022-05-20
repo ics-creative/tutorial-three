@@ -1,4 +1,4 @@
-importScripts('https://unpkg.com/three@0.137.4/build/three.min.js');
+importScripts('https://unpkg.com/three@0.140.2/build/three.min.js');
 let renderer;
 let camera;
 
