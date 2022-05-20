@@ -135,4 +135,4 @@ scene.add(mesh);
 
 Node.js関連のバンドルツールで`BufferGeometryUtils`を利用する場合は、以下の解説を参照ください。
 
-- [Node.jsを使ったフロントエンド開発](./nodejs.md)
+- [Node.jsを使ったフロントエンド開発](nodejs.md)

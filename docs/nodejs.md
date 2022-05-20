@@ -12,9 +12,9 @@ modified_date: 2022-05-20
 
 ### import文の課題
 
-とくに注意したいのは、Three.jsのうち本体に含まれていないライブラリです。本入門サイトで扱った`OrbitControls`や`mergeBufferGeometries`、`ColladaLoader`などが該当します。
+とくに注意したいのは、Three.jsの本体に含まれていないライブラリです。本入門サイトで扱った`OrbitControls`や`mergeBufferGeometries`、`GLTFLoader`などが該当します。
 
-これらの機能はThree.js本体に含まれていないので、別途JavaScriptファイルを`script`タグを使って読み込むことで利用しました。バンドルツール（webpackやVite等）を使った開発では、`script`タグを読み込んで利用する方法とは異なる方式で解決しなければなりません。以下に対策方法を示します。
+これらの機能はThree.js本体に含まれていないので、入門サイトでは別途JavaScriptファイルを`script`タグを使って読み込むことで利用しました。バンドルツール（webpackやVite等）を使った開発では、`script`タグを読み込んで利用する方法とは異なる方式で解決しなければなりません。以下に対策方法を示します。
 
 
 
@@ -27,16 +27,15 @@ Node.jsのバンドルツールで取り込む場合は、`THREE`名前空間上
 
 ### OrbitControls の使い方
 
-`import`文で、`three/examples/jsm/controls/OrbitControls`から該当機能を読み込みます。
+`import`文で、`three/examples/jsm/controls/OrbitControls`から該当機能を読み込みます。`import`文により`OrbitControls`オブジェクトで該当機能を得ているので、これを使って利用します。`THREE.OrbitControls`ではなく`OrbitControls`で参照していることがポイントです。
+
 
 ```js
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-```
 
-`import`文により`OrbitControls`オブジェクトで該当機能を得ているので、これを使って利用します。`THREE.OrbitControls`ではなく`OrbitControls`で参照していることがポイントです。
+// ･･･省略
 
-```js
 // カメラを作成
 const camera = new THREE.PerspectiveCamera(/* 省略 */);
 
@@ -47,23 +46,22 @@ const controls = new OrbitControls(camera, renderer.domElement);
 サンプルを用意しているので、以下の構成を参考ください。
 
 - [TypeScript + webpack](https://github.com/ics-creative/170330_webpack/tree/master/tutorial-typescript-three)
-- [TypeScript + Babel](https://github.com/ics-creative/170330_webpack/tree/master/tutorial-babel-three)
+- [Babel + webpack](https://github.com/ics-creative/170330_webpack/tree/master/tutorial-babel-three)
 
 
 
 ### mergeBufferGeometries の使い方
 
 
-`import`文で、`three/examples/jsm/utils/BufferGeometryUtils`から該当機能を読み込みます。
+`import`文で、`three/examples/jsm/utils/BufferGeometryUtils`から該当機能を読み込みます。`import`文により`mergeBufferGeometries`が該当機能を得ているので、これを使って利用します。`THREE.BufferGeometryUtils.mergeBufferGeometries`ではなく`mergeBufferGeometries`で参照していることがポイントです。
+
 
 ```js
 import * as THREE from "three";
 import { mergeBufferGeometries } from "three/examples/jsm/utils/BufferGeometryUtils";
-```
 
-`import`文により`mergeBufferGeometries`が該当機能を得ているので、これを使って利用します。`THREE.BufferGeometryUtils.mergeBufferGeometries`ではなく`mergeBufferGeometries`で参照していることがポイントです。
+// ･･･省略
 
-```js
 // ジオメトリを生成
 const geometry = mergeBufferGeometries(boxes);
 ```
@@ -83,16 +81,15 @@ const geometry = BufferGeometryUtils.mergeBufferGeometries(boxes);
 
 ### GLTFLoader の使い方
 
-`import`文で、`three/examples/jsm/loaders/GLTFLoader`から該当機能を読み込みます。
+`import`文で、`three/examples/jsm/loaders/GLTFLoader`から該当機能を読み込みます。`import`文により`GLTFLoader`オブジェクトが該当機能を得ているので、これを使って利用します。`THREE.GLTFLoader`ではなく`GLTFLoader`で参照していることがポイントです。
+
 
 ```js
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-```
 
-`import`文により`GLTFLoader`オブジェクトが該当機能を得ているので、これを使って利用します。`THREE.GLTFLoader`ではなく`GLTFLoader`で参照していることがポイントです。
+// ･･･省略
 
-```js
 // GLTF形式のモデルデータを読み込む
 const loader = new GLTFLoader();
 ```

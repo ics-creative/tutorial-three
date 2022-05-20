@@ -153,4 +153,4 @@ function tick() {
 
 Node.js関連のバンドルツールで`OrbitControls`を利用する場合は、以下の解説を参照ください。
 
-- [Node.jsを使ったフロントエンド開発](./nodejs.md)
+- [Node.jsを使ったフロントエンド開発](nodejs.md)
