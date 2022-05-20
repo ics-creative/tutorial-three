@@ -2,7 +2,7 @@
 title: Three.jsのOrbitControlsで手軽にカメラを制御する
 author: 池田 泰延
 published_date: 2017-11-03
-modified_date: 2021-08-10
+modified_date: 2022-05-20
 ---
 
 Three.jsには**カメラの動きを自動的に制御する `THREE.OrbitControls` クラスが存在**します。
@@ -149,3 +149,8 @@ function tick() {
 
 [次の記事へ](model_basic.md)
 
+### 関連
+
+Node.js関連のバンドルツールで`OrbitControls`を利用する場合は、以下の解説を参照ください。
+
+- [Node.jsを使ったフロントエンド開発](./nodejs.md)
