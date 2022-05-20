@@ -2,7 +2,7 @@
 title: Three.jsでモデルデータを読み込む
 author: 池田 泰延
 published_date: 2017-11-03
-modified_date: 2021-08-10
+modified_date: 2022-05-20
 ---
 
 **3Dモデリングソフトで制作したモデルデータの読み込み方**を説明します。3Dのモデルデータにはさまざまな形式が存在しますが、Three.jsは対応している形式がです。
@@ -13,6 +13,7 @@ Three.jsでは外部ソフトを利用して作成した3Dモデリングデー�
 
 Three.jsでは次の形式の読み込みに対応しています。
 
+* GLTF形式
 * OBJ形式 : Wavefront社のAdvanced Visualizerというソフト用のファイルフォーマット。テキストデータ。 
 * Collada(dae)形式 : 汎用的なデータファイル。XMLで構成されている。
 * FBX形式（バイナリー）
@@ -62,9 +63,9 @@ loader.load('models/3ds/portalgun/portalgun.3ds',  (object) => {
 - [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/loader_3ds.html)
 - [サンプルのソースコードを確認する](../samples/loader_3ds.html)
 
-### Daeファイルの場合
+### Colladaファイルの場合
 
-`dae`ファイルの場合を読み込むには`ColladaLoader.js`ファイルが必要となります。
+Colladaファイル（拡張子は`.dae`）の場合を読み込むには`ColladaLoader.js`ファイルが必要となります。
 
 ```html
 <script src="https://unpkg.com/three@0.137.4/examples/js/loaders/ColladaLoader.js"></script>
@@ -74,9 +75,9 @@ loader.load('models/3ds/portalgun/portalgun.3ds',  (object) => {
 第一引数にはファイルパスを指定し、第二引数に読み込み後のコールバック関数を指定します。コールバック関数内で3D空間への追加処理をするのがポイントです。Colladaファイルにはシーンの情報の他に、カメラやライトなどさまざまな情報が含まれます。そのため、コールバック関数の引数から、シーンの情報だけ抜き出すようにしましょう。
 
 ```js
-// 3DS形式のモデルデータを読み込む
+// Collada形式のモデルデータを読み込む
 const loader = new THREE.ColladaLoader();
-// 3dsファイルのパスを指定
+// Colladaファイルのパスを指定
 loader.load('./models/collada/elf/elf.dae', (collada) => {
   // 読み込み後に3D空間に追加
   const model = collada.scene;
@@ -91,7 +92,41 @@ loader.load('./models/collada/elf/elf.dae', (collada) => {
 - [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/loader_dae.html)
 - [サンプルのソースコードを確認する](../samples/loader_dae.html)
 
+### GLTFファイルの場合
+
+`gltf`ファイルの場合を読み込むには`GLTFLoader.js`ファイルが必要となります。
+
+```html
+<script src="https://unpkg.com/three@0.137.4/examples/js/loaders/GLTFLoader.js"></script>
+```
+
+読み込む処理は次のように記載します。`THREE.GLTFLoader`クラスのインスタンスから、`load`メソッドを利用します。
+第一引数にはファイルパスを指定し、第二引数に読み込み後のコールバック関数を指定します。コールバック関数内で3D空間への追加処理をするのがポイントです。Colladaファイルにはシーンの情報の他に、カメラやライトなどさまざまな情報が含まれます。そのため、コールバック関数の引数から、シーンの情報だけ抜き出すようにしましょう。
+
+```js
+// GLTF形式のモデルデータを読み込む
+const loader = new THREE.GLTFLoader();
+// GLTFファイルのパスを指定
+loader.load('./models/gltf/DamagedHelmet/glTF/DamagedHelmet.gltf', (gltf) => {
+  // 読み込み後に3D空間に追加
+  const model = gltf.scene;
+  scene.add(model);
+});
+```
+
+このコードの実行結果は次のとなります。
+
+![](../imgs/loader_gltf.png)
+
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/loader_gltf.html)
+- [サンプルのソースコードを確認する](../samples/loader_gltf.html)
+
 ### まとめ
 
 今回はモデルデータの読み込み方について説明しました。JavaScriptだけのコードだとどうしても表現がプログラミングアートよりになってしまうため、モデルデータを使った方が表現のバリエーションを増やせます。とくにキャラクターや建築物、物体の表示にはモデルデータの読み込みがかかせません。
 
+### 関連
+
+Node.js関連のバンドルツールで各種ローダーを利用する場合は、以下の解説を参照ください。
+
+- [Node.jsを使ったフロントエンド開発](./nodejs.md)
