@@ -2,7 +2,7 @@
 title: Three.jsでオブジェクトとの交差を調べる
 author: 池田 泰延
 published_date: 2017-11-08
-modified_date: 2017-11-08
+modified_date: 2023-01-10
 ---
 
 Three.jsで3Dオブジェクトにマウスがホバーしていた時、クリックした時を調べるにはレイキャストという機能を使います。次のサンプルでは、マウスが重なったオブジェクトだけ、赤くなるようにしています。
@@ -76,7 +76,7 @@ function tick() {
 - [webgl_interactive_cubes](https://threejs.org/examples/#webgl_interactive_cubes)
 - [webgl_geometry_terrain_raycast](https://threejs.org/examples/?q=raycast#webgl_geometry_terrain_raycast)
 - [webgl_interactive_raycasting_points](https://threejs.org/examples/?q=raycast#webgl_interactive_raycasting_points)
-- [webgl_raycast_texture](https://threejs.org/examples/?q=raycast#webgl_raycast_texture)
+- [webgl_raycaster_texture](https://threejs.org/examples/?q=raycast#webgl_raycaster_texture)
 
 
 ## まとめ
