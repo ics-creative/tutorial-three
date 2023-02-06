@@ -23,7 +23,7 @@ modified_date: 2022-01-28
 <html>
 <head>
   <meta charset="utf-8"/>
-  <script src="https://unpkg.com/three@0.140.2/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
   <script>
     // ページの読み込みを待つ
     window.addEventListener('DOMContentLoaded', init);
@@ -100,7 +100,7 @@ Three.jsはJavaScriptのライブラリですが、このファイルを読み�
 CDN（コンテンツ・デリバリー・ネットワーク）で提供されているURLを使うのが導入にお手軽です。
 
 ```html
-<script src="https://unpkg.com/three@0.140.2/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
 ```
 
 WebGLの処理はHTMLページの読み込みが終わってから実行させます。`addEventListener()`関数を使って`DOMContentLoaded`イベントが発生するのを監視させ、ページが読み込み終わったときに実行させたい関数を指定します。この関数`init()`の中にThree.jsのコードを書いていきます。

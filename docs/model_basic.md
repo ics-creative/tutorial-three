@@ -36,8 +36,9 @@ Three.jsでモデルデータを読み込むには、JavaScriptでThree.jsの初
 3dsファイルの場合を読み込むには`TDSLoader.js`ファイルが必要となります。CDNで読み込む場合は以下の`script`タグをHTMLに記述します。
 
 ```html
-<script src="https://unpkg.com/three@0.137.4/examples/js/loaders/TDSLoader.js"></script>
+<script src="https://unpkg.com/three@0.147.0/examples/js/loaders/TDSLoader.js"></script>
 ```
+※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
 
 読み込む処理は次のように記載します。`THREE.TDSLoader`クラスのインスタンスから、`load`メソッドを利用します。
 第一引数にはファイルパスを指定し、第二引数に読み込み後のコールバック関数を指定します。コールバック関数内で3D空間への追加処理をするのがポイントです。
@@ -68,8 +69,10 @@ loader.load('models/3ds/portalgun/portalgun.3ds',  (object) => {
 Colladaファイル（拡張子は`.dae`）の場合を読み込むには`ColladaLoader.js`ファイルが必要となります。
 
 ```html
-<script src="https://unpkg.com/three@0.137.4/examples/js/loaders/ColladaLoader.js"></script>
+<script src="https://unpkg.com/three@0.147.0/examples/js/loaders/ColladaLoader.js"></script>
 ```
+
+※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
 
 読み込む処理は次のように記載します。`THREE.ColladaLoader`クラスのインスタンスから、`load`メソッドを利用します。
 第一引数にはファイルパスを指定し、第二引数に読み込み後のコールバック関数を指定します。コールバック関数内で3D空間への追加処理をするのがポイントです。Colladaファイルにはシーンの情報の他に、カメラやライトなどさまざまな情報が含まれます。そのため、コールバック関数の引数から、シーンの情報だけ抜き出すようにしましょう。
@@ -97,8 +100,10 @@ loader.load('./models/collada/elf/elf.dae', (collada) => {
 `gltf`ファイルの場合を読み込むには`GLTFLoader.js`ファイルが必要となります。
 
 ```html
-<script src="https://unpkg.com/three@0.137.4/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://unpkg.com/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
 ```
+
+※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
 
 読み込む処理は次のように記載します。`THREE.GLTFLoader`クラスのインスタンスから、`load`メソッドを利用します。
 第一引数にはファイルパスを指定し、第二引数に読み込み後のコールバック関数を指定します。コールバック関数内で3D空間への追加処理をするのがポイントです。Colladaファイルにはシーンの情報の他に、カメラやライトなどさまざまな情報が含まれます。そのため、コールバック関数の引数から、シーンの情報だけ抜き出すようにしましょう。

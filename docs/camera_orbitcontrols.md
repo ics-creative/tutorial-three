@@ -19,12 +19,12 @@ Three.jsには**カメラの動きを自動的に制御する `THREE.OrbitContro
 
 
 ```html
-<script src="https://unpkg.com/three@0.137.4/examples/js/controls/OrbitControls.js"></script>
+<script src="https://unpkg.com/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
 ```
 
 ※公式GitHubの`examples/js/controls`フォルダーにJavaScriptファイルにはいっています。該当ファイルは[こちら](https://github.com/mrdoob/three.js/blob/dev/examples/js/controls/OrbitControls.js)で確認できます。
 
-
+※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
 
 
 ## 使い方

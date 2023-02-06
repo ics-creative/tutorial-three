@@ -49,7 +49,7 @@ worker.postMessage({ canvas: offscreenCanvas }, [offscreenCanvas]);
 ※ES Modules形式はワーカーで利用できないため注意ください。
 
 ```js
-importScripts('https://unpkg.com/three@0.140.2/build/three.min.js');
+importScripts('https://unpkg.com/three@0.147.0/build/three.min.js');
 ```
 
 メインスレッド側からの起動コールを受信するために、`onmessage`イベントを監視します。ここに初期化処理を記述します。引数の`event.data`オブジェクトで、メインスレッド側からのデータを受け取れます。
