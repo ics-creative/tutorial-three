@@ -9,7 +9,8 @@
       // ページの読み込みを待つ
       window.addEventListener('DOMContentLoaded', init);
 
-      function init() {
+      // 非同期処理で待機するのでasync function宣言とする
+      async function init() {
         // サイズを指定
         const width = 960;
         const height = 540;
@@ -46,11 +47,10 @@
         // Collada形式のモデルデータを読み込む
         const loader = new THREE.ColladaLoader();
         // Colladaファイルのパスを指定
-        loader.load('./models/collada/elf/elf.dae', (collada) => {
-          // 読み込み後に3D空間に追加
-          const model = collada.scene;
-          scene.add(model);
-        });
+        const collada = await loader.loadAsync('./models/collada/elf/elf.dae');
+        // 読み込み後に3D空間に追加
+        const model = collada.scene;
+        scene.add(model);
 
         tick();
 

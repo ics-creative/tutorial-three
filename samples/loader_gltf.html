@@ -9,7 +9,8 @@
       // ページの読み込みを待つ
       window.addEventListener('DOMContentLoaded', init);
 
-      function init() {
+      // 非同期処理で待機するのでasync function宣言とする
+      async function init() {
         // サイズを指定
         const width = 960;
         const height = 540;
@@ -28,7 +29,7 @@
         // カメラを作成
         const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
         // カメラの初期座標を設定
-        camera.position.set(2, 2, 2);
+        camera.position.set(1, 1, 1);
 
         // カメラコントローラーを作成
         const controls = new THREE.OrbitControls(camera, canvasElement);
@@ -36,21 +37,25 @@
         controls.update();
 
         // 平行光源を作成
+        // 上から照らす
         const directionalLight = new THREE.DirectionalLight(0xffffff);
         directionalLight.position.set(1, 1, 1);
         scene.add(directionalLight);
-        // 環境光を追加
-        const ambientLight = new THREE.AmbientLight(0xffffff);
-        scene.add(ambientLight);
+
+        // 横からテラス
+        const directionalLight2 = new THREE.DirectionalLight(0xffffff);
+        directionalLight2.position.set(1, 0, 1);
+        scene.add(directionalLight2);
 
         // GLTF形式のモデルデータを読み込む
         const loader = new THREE.GLTFLoader();
         // GLTFファイルのパスを指定
-        loader.load('./models/gltf/DamagedHelmet/glTF/DamagedHelmet.gltf', (gltf) => {
-          // 読み込み後に3D空間に追加
-          const model = gltf.scene;
-          scene.add(model);
-        });
+        const gltf = await loader.loadAsync('./models/gltf/gltf/ToyCar.gltf');
+        // 読み込み後に3D空間に追加
+        const model = gltf.scene;
+        scene.add(model);
+
+        model.scale.set(30, 30, 30);
 
         tick();
 

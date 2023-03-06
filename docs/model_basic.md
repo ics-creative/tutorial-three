@@ -2,7 +2,7 @@
 title: Three.jsでモデルデータを読み込む
 author: 池田 泰延
 published_date: 2017-11-03
-modified_date: 2023-02-06
+modified_date: 2023-03-06
 ---
 
 **3Dモデリングソフトで制作したモデルデータの読み込み方**を説明します。3Dのモデルデータにはさまざまな形式が存在しますが、Three.jsは対応している形式がです。
@@ -13,7 +13,7 @@ Three.jsでは外部ソフトを利用して作成した3Dモデリングデー�
 
 Three.jsでは次の形式の読み込みに対応しています。
 
-* GLTF形式
+* GLTF形式（ジーエルティーエフ形式） : インターネット向けの3Dファイル形式。2017年に仕様として定められた新しい形式。
 * OBJ形式 : Wavefront社のAdvanced Visualizerというソフト用のファイルフォーマット。テキストデータ。 
 * Collada(dae)形式 : 汎用的なデータファイル。XMLで構成されている。
 * FBX形式（バイナリー）
@@ -26,9 +26,86 @@ Three.jsでは次の形式の読み込みに対応しています。
 
 Three.jsでモデルデータを読み込むには、JavaScriptでThree.jsの初期化を済ませたあとで、ローダーを使ってファイルを読み込み、3D空間に追加するという手順をとります。
 
-データ形式ごとにローダークラスが用意されています。ただ、ローダークラスは、Three.jsライブラリの本体に含まれていないので注意が必要です。公式GitHubの`examples/js/loader`フォルダーにJavaScriptファイルがあるので、これを`script`要素で読み込みます。作業用フォルダーにローダー関連のファイルをコピーしておきましょう。
+データ形式ごとにローダークラスが用意されています。ただ、ローダークラスは、Three.jsライブラリの本体に含まれていないので注意が必要です。ローダークラスは`script`タグ等で取り込む必要があります。
 
 
+
+
+### GLTFファイルの場合
+
+
+GLTF（ジーエルティーエフ）はインターネット向けの3Dファイル形式です。クロノスグループによって2017年に仕様として定められました。GLTFの中身はJSONファイルを中心として、そこから参照される画像やメッシュデータ等の関連ファイルで構成されています。
+
+
+GLTFファイルのサンプルは[クロノスグループのGitHub](https://github.com/KhronosGroup/glTF-Sample-Models)から取得できます。
+
+今回は以下のファイルを利用します。ライセンスがPublic domain (CC0) のファイルです。
+
+https://github.com/KhronosGroup/glTF-Sample-Models/tree/master/2.0/ToyCar
+
+
+`gltf`ファイルの場合を読み込むには`GLTFLoader.js`ファイルが必要となります。
+
+```html
+<script src="https://unpkg.com/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
+```
+
+※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
+
+読み込む処理は次のように記載します。`THREE.GLTFLoader`クラスのインスタンスから、`loadAsync()`メソッドを利用します。
+引数にはファイルパスを指定します。読み込み完了後に3D空間への追加処理をするのがポイントです。GLTFファイルにはシーンの情報の他に、カメラやライトなどさまざまな情報が含まれます。そのため、シーンの情報だけ抜き出すようにしましょう。
+
+```js
+// 非同期処理で待機するのでasync function宣言とする
+async function init() {
+  // ･･･省略
+
+  // GLTF形式のモデルデータを読み込む
+  const loader = new THREE.GLTFLoader();
+  // GLTFファイルのパスを指定
+  const gltf = loader.loadAsync('./models/gltf/glTF/ToyCar.gltf');
+  // 読み込み後に3D空間に追加
+  const model = gltf.scene;
+  scene.add(model);
+  
+  // ･･･省略
+}
+```
+
+このコードの実行結果は次のとなります。
+
+![](../imgs/loader_glb.png)
+
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/loader_gltf.html)
+- [サンプルのソースコードを確認する](../samples/loader_gltf.html)
+
+
+GLTFには、バイナリ形式のGLBがあります。GLTFはテキストデータや関連ファイルがばらけているのに対して、GLBはGLTFを1ファイルにまとめた形式となっています。GLBファイルを読み込む場合も`GLTFLoader`クラスを利用します。コードは先ほど紹介したものとほとんど同じです。
+
+```js
+// 非同期処理で待機するのでasync function宣言とする
+async function init() {
+  // ･･･省略
+
+  // GLTF形式のモデルデータを読み込む
+  const loader = new THREE.GLTFLoader();
+  // GLTFファイルのパスを指定
+  const objects = loader.loadAsync('./models/gltf/binary/ToyCar.glb');
+  // 読み込み後に3D空間に追加
+  const model = objects.scene;
+  scene.add(model);
+  
+  // ･･･省略
+}
+```
+
+
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/loader_glb.html)
+- [サンプルのソースコードを確認する](../samples/loader_glb.html)
+
+
+
+昔のThree.jsに`loadAsync()`メソッドは存在せず、`load()`メソッドのみ提供されていました。ネット上の記事では、`load()`メソッドで説明されているものが多いですが、`Promise`による非同期処理が苦手でなければ`await`・`async`を使って制御するといいでしょう。
 
 
 ### 3dsファイルの場合
@@ -40,21 +117,27 @@ Three.jsでモデルデータを読み込むには、JavaScriptでThree.jsの初
 ```
 ※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
 
-読み込む処理は次のように記載します。`THREE.TDSLoader`クラスのインスタンスから、`load`メソッドを利用します。
-第一引数にはファイルパスを指定し、第二引数に読み込み後のコールバック関数を指定します。コールバック関数内で3D空間への追加処理をするのがポイントです。
+読み込む処理は次のように記載します。`THREE.TDSLoader`クラスのインスタンスから、`loadAsync()`メソッドを利用します。戻り値として`Promise`オブジェクトを返すので`await`・`async`で待機します。
+引数にはファイルパスを指定します。
 
 なお、3dsファイルのテクスチャーのパスがずれないように、`setResourcePath`メソッドを使って、明示的にテクスチャーが含まれるフォルダーのパスを指定します。
 
 ```js
-// 3DS形式のモデルデータを読み込む
-const loader = new THREE.TDSLoader();
-// テクスチャーのパスを指定
-loader.setResourcePath('models/3ds/portalgun/textures/');
-// 3dsファイルのパスを指定
-loader.load('models/3ds/portalgun/portalgun.3ds',  (object) => {
+// 非同期処理で待機するのでasync function宣言とする
+async function init() {
+  // ･･･省略
+
+  // 3DS形式のモデルデータを読み込む
+  const loader = new THREE.TDSLoader();
+  // テクスチャーのパスを指定
+  loader.setResourcePath('models/3ds/portalgun/textures/');
+  // 3dsファイルのパスを指定
+  const object = loader.loadAsync('models/3ds/portalgun/portalgun.3ds');
   // 読み込み後に3D空間に追加
   scene.add(object);
-});
+
+  // ･･･省略
+}
 ```
 
 このコードの実行結果は次のとなります。
@@ -63,6 +146,9 @@ loader.load('models/3ds/portalgun/portalgun.3ds',  (object) => {
 
 - [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/loader_3ds.html)
 - [サンプルのソースコードを確認する](../samples/loader_3ds.html)
+
+
+
 
 ### Colladaファイルの場合
 
@@ -74,18 +160,23 @@ Colladaファイル（拡張子は`.dae`）の場合を読み込むには`Collad
 
 ※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
 
-読み込む処理は次のように記載します。`THREE.ColladaLoader`クラスのインスタンスから、`load`メソッドを利用します。
-第一引数にはファイルパスを指定し、第二引数に読み込み後のコールバック関数を指定します。コールバック関数内で3D空間への追加処理をするのがポイントです。Colladaファイルにはシーンの情報の他に、カメラやライトなどさまざまな情報が含まれます。そのため、コールバック関数の引数から、シーンの情報だけ抜き出すようにしましょう。
+読み込む処理は次のように記載します。`THREE.ColladaLoader`クラスのインスタンスから、`loadAsync()`メソッドを利用します。
+引数にはファイルパスを指定します。読み込み完了後に3D空間への配置処理をするのがポイントです。Colladaファイルにはシーンの情報の他に、カメラやライトなどさまざまな情報が含まれます。そのため、シーンの情報だけ抜き出すようにしましょう。
 
 ```js
-// Collada形式のモデルデータを読み込む
-const loader = new THREE.ColladaLoader();
-// Colladaファイルのパスを指定
-loader.load('./models/collada/elf/elf.dae', (collada) => {
+// 非同期処理で待機するのでasync function宣言とする
+async function init() {
+  // ･･･省略
+
+  // Collada形式のモデルデータを読み込む
+  const loader = new THREE.ColladaLoader();
+  // Colladaファイルのパスを指定
+  const collada = await loader.loadAsync('./models/collada/elf/elf.dae');
   // 読み込み後に3D空間に追加
   const model = collada.scene;
   scene.add(model);
-});
+  // ･･･省略
+}
 ```
 
 このコードの実行結果は次のとなります。
@@ -95,36 +186,6 @@ loader.load('./models/collada/elf/elf.dae', (collada) => {
 - [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/loader_dae.html)
 - [サンプルのソースコードを確認する](../samples/loader_dae.html)
 
-### GLTFファイルの場合
-
-`gltf`ファイルの場合を読み込むには`GLTFLoader.js`ファイルが必要となります。
-
-```html
-<script src="https://unpkg.com/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
-```
-
-※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
-
-読み込む処理は次のように記載します。`THREE.GLTFLoader`クラスのインスタンスから、`load`メソッドを利用します。
-第一引数にはファイルパスを指定し、第二引数に読み込み後のコールバック関数を指定します。コールバック関数内で3D空間への追加処理をするのがポイントです。Colladaファイルにはシーンの情報の他に、カメラやライトなどさまざまな情報が含まれます。そのため、コールバック関数の引数から、シーンの情報だけ抜き出すようにしましょう。
-
-```js
-// GLTF形式のモデルデータを読み込む
-const loader = new THREE.GLTFLoader();
-// GLTFファイルのパスを指定
-loader.load('./models/gltf/DamagedHelmet/glTF/DamagedHelmet.gltf', (gltf) => {
-  // 読み込み後に3D空間に追加
-  const model = gltf.scene;
-  scene.add(model);
-});
-```
-
-このコードの実行結果は次のとなります。
-
-![](../imgs/loader_gltf.png)
-
-- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/loader_gltf.html)
-- [サンプルのソースコードを確認する](../samples/loader_gltf.html)
 
 ### まとめ
 

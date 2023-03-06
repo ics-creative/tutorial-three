@@ -9,7 +9,8 @@
       // ページの読み込みを待つ
       window.addEventListener('DOMContentLoaded', init);
 
-      function init() {
+      // 非同期処理で待機するのでasync function宣言とする
+      async function init() {
         // サイズを指定
         const width = 960;
         const height = 540;
@@ -31,7 +32,7 @@
         camera.position.set(0, 0, 5);
 
         // カメラコントローラーを作成
-        const controls = new THREE.OrbitControls(camera, canvasElement);
+        new THREE.OrbitControls(camera, canvasElement);
 
         // 平行光源を作成
         const directionalLight = new THREE.DirectionalLight(0xffffff);
@@ -41,15 +42,15 @@
         const ambientLight = new THREE.AmbientLight(0xffffff);
         scene.add(ambientLight);
 
-        // 3DS形式のモデルデータを読み込む
+        // 3DS形式(3DS Max) のモデルデータを読み込む
         const loader = new THREE.TDSLoader();
         // テクスチャーのパスを指定
         loader.setResourcePath('models/3ds/portalgun/textures/');
         // 3dsファイルのパスを指定
-        loader.load('models/3ds/portalgun/portalgun.3ds', (object) => {
-          // 読み込み後に3D空間に追加
-          scene.add(object);
-        });
+        const object = await loader.loadAsync('models/3ds/portalgun/portalgun.3ds');
+
+        // 読み込み後に3D空間に追加
+        scene.add(object);
 
         tick();
         // 毎フレーム時に実行されるループイベントです
