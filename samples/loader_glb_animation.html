@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://unpkg.com/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <script>
+      // ページの読み込みを待つ
+      window.addEventListener('DOMContentLoaded', init);
+
+      // 非同期処理で待機するのでasync function宣言とする
+      async function init() {
+        // サイズを指定
+        const width = 960;
+        const height = 540;
+
+        // レンダラーを作成
+        const canvasElement = document.querySelector('#myCanvas');
+        const renderer = new THREE.WebGLRenderer({
+          canvas: canvasElement,
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height);
+
+        // シーンを作成
+        const scene = new THREE.Scene();
+
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(45, width / height, 0.001, 10000);
+        // カメラの初期座標を設定
+        camera.position.set(2, 2, 2);
+
+        // カメラコントローラーを作成
+        const controls = new THREE.OrbitControls(camera, canvasElement);
+        controls.target.set(0, 1, 0);
+        controls.update();
+
+        // 平行光源を作成
+        // 上から照らす
+        const directionalLight = new THREE.DirectionalLight(0xffffff);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight);
+
+        // 横から照らす
+        const directionalLight2 = new THREE.DirectionalLight(0xffffff);
+        directionalLight2.position.set(1, 0, 1);
+        scene.add(directionalLight2);
+
+        // 正面から照らす
+        const directionalLight3 = new THREE.DirectionalLight(0xffffff);
+        directionalLight3.position.set(0, 0, -1);
+        scene.add(directionalLight3);
+
+        // GLTF形式のモデルデータを読み込む
+        const loader = new THREE.GLTFLoader();
+        // GLTFファイルのパスを指定
+        const gltf = await loader.loadAsync('models/gltf/animation/Soldier.glb');
+        // 読み込み後に3D空間に追加
+        const model = gltf.scene;
+        scene.add(model);
+
+        // アニメーションミキサー
+        const mixer = new THREE.AnimationMixer(model);
+
+        // 0 : idle, 1: run, 3: walk
+        mixer.clipAction(gltf.animations[1]).play();
+
+        let oldTime = Date.now();
+        tick();
+
+        // 毎フレーム時に実行されるループイベントです
+        function tick() {
+          // レンダリング
+          renderer.render(scene, camera);
+
+          // アニメーションを更新
+          const diffTime = Date.now() - oldTime;
+          mixer.update(diffTime / 1000);
+          oldTime = Date.now();
+
+          requestAnimationFrame(tick);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
+</html>
