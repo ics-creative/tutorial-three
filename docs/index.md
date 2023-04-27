@@ -62,6 +62,7 @@ Three.jsには多彩な機能が存在します。機能を習得すればする
 - [canvasのリサイズ処理](renderer_resize.md)
 - [オブジェクトとの交差を調べる](raycast.md)
 - [パーティクルを大量に表示](points.md)
+- [ジオメトリの動かし方](position_attributes.md)
 - [ジオメトリの結合](geometry_merge.md)
 
 ## Three.jsとECMAScript 2015+

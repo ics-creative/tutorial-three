@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+
+    <script>
+      // ページの読み込みを待つ
+      window.addEventListener('DOMContentLoaded', init);
+
+      function init() {
+        // サイズを指定
+        const width = 960;
+        const height = 540;
+
+        // レンダラーを作成
+        const canvasElement = document.querySelector('#myCanvas');
+        const renderer = new THREE.WebGLRenderer({
+          canvas: canvasElement,
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height);
+
+        // シーンを作成
+        const scene = new THREE.Scene();
+
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(45, width / height);
+        camera.position.set(0, 100, 0);
+        // カメラコントローラーを作成
+        const controls = new THREE.OrbitControls(camera, canvasElement);
+        controls.autoRotate = true;
+
+        // 頂点情報を格納する配列
+        const vertices = [];
+
+        // 配置する個数
+        const LENGTH = 1000;
+
+        /**
+         * パーティクルの速度を格納する配列
+         * @type {THREE.Vector3[]}
+         */
+        const speeds = [];
+
+        for (let i = 0; i < LENGTH; i++) {
+          // 頂点の初期座標
+          vertices.push(0, 0, 0);
+
+          // パーティクルの速度を定義
+          const x = 2 * (Math.random() - 0.5);
+          const y = 2 * (Math.random() - 0.5);
+          const z = 2 * (Math.random() - 0.5);
+
+          speeds.push(new THREE.Vector3(x, y, z));
+        }
+
+        // 形状データを作成
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
+        // マテリアルを作成
+        const material = new THREE.PointsMaterial({
+          // 一つ一つのサイズ
+          size: 2,
+          // 色
+          color: 0xffffff,
+        });
+
+        // 物体を作成
+        const mesh = new THREE.Points(geometry, material);
+        scene.add(mesh);
+
+        tick();
+
+        // 毎フレーム時に実行されるループイベントです
+        function tick() {
+          controls.update();
+
+          // ポジションをかえる
+          const position = mesh.geometry.attributes.position;
+          for (let i = 0; i < position.count; i++) {
+            // 各頂点のXYZ座標
+            const x = position.getX(i);
+            const y = position.getY(i);
+            const z = position.getZ(i);
+
+            // speeds配列は速度用の配列。各頂点の速度を格納している
+            const nextX = x + speeds[i].x;
+            const nextY = y + speeds[i].y;
+            const nextZ = z + speeds[i].z;
+
+            // 新しい座標
+            position.setXYZ(i, nextX, nextY, nextZ);
+
+            // 原点からの距離を計算
+            const length = new THREE.Vector3(x, y, z).length();
+            // 一定の範囲を超えたら
+            if (length > 100) {
+              // 原点に戻す
+              position.setXYZ(i, 0, 0, 0);
+            }
+          }
+
+          // 頂点の更新が必要なことを伝える
+          position.needsUpdate = true;
+
+          // レンダリング
+          renderer.render(scene, camera);
+
+          requestAnimationFrame(tick);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas" style="cursor: move"></canvas>
+  </body>
+</html>
