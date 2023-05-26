@@ -1,8 +1,8 @@
 ---
-title: Three.jsでES2015のclassを利用する(メソッド編)
+title: Three.jsでclass構文を利用する(メソッド編)
 author: 池田 泰延
 published_date: 2017-12-04
-modified_date: 2017-12-04
+modified_date: 2023-05-26
 ---
 
 この解説は[Three.jsでES2015のclassを利用する（継承）](class.md)からの続きです。クラスのメソッドを呼び出すベスト・プラクティスな例を学んでいきましょう。
@@ -24,20 +24,6 @@ modified_date: 2017-12-04
 良くないコード例から見てみます。
 
 ```js
-// 独自グループを作る
-const myGroup = new MyGroup();
-scene.add(myGroup);
-
-tick();
-
-// 毎フレーム時に実行されるループイベントです
-function tick() {
-
-  // レンダリング
-  renderer.render(scene, camera);
-  requestAnimationFrame(tick);
-}
-
 /** メッシュを継承した独自グループのクラスです。 */
 class MyGroup extends THREE.Object3D {
 
@@ -53,6 +39,20 @@ class MyGroup extends THREE.Object3D {
     requestAnimationFrame(this.update);
   }
 }
+
+// 独自グループを作る
+const myGroup = new MyGroup();
+scene.add(myGroup);
+
+tick();
+
+// 毎フレーム時に実行されるループイベントです
+function tick() {
+
+  // レンダリング
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
 ```
 
 良くないのは親となるコードにも、子供のクラスにも`requestAnimationFrame()`が使われているところです。うまく動くと思いますが、どちらの`requestAnimationFrame()`が先に実行されるのか、明示的にわからなくなります。メインコードにレンダリングのための`renderer.render(scene, camera);`処理がありますが、その処理の実行前後で子供の`MyGroup`が実行されるか、保証されません。
@@ -64,6 +64,20 @@ class MyGroup extends THREE.Object3D {
 良い例
 
 ```js
+/** メッシュを継承した独自グループのクラスです。 */
+class MyGroup extends THREE.Object3D {
+
+  /** コンストラクターです。 */
+  constructor() {
+    super();
+    // 任意の処理
+  }
+
+  /** 更新命令を定義します。 */
+  update() {
+  }
+}
+
 // 独自グループを作る
 const myGroup = new MyGroup();
 scene.add(myGroup);
@@ -79,20 +93,6 @@ function tick() {
   // レンダリング
   renderer.render(scene, camera);
   requestAnimationFrame(tick);
-}
-
-/** メッシュを継承した独自グループのクラスです。 */
-class MyGroup extends THREE.Object3D {
-
-  /** コンストラクターです。 */
-  constructor() {
-    super();
-    // 任意の処理
-  }
-
-  /** 更新命令を定義します。 */
-  update() {
-  }
 }
 ```
 

@@ -1,8 +1,8 @@
 ---
-title: Three.jsでES2015のclassを利用する（継承）
+title: Three.jsでclass構文を利用する（継承）
 author: 池田 泰延
 published_date: 2017-11-20
-modified_date: 2019-01-08
+modified_date: 2023-05-26
 ---
 
 JavaScriptではオブジェクト指向としてのクラスが利用できます。クラスを利用すると、Three.jsを構造的に設計しやすくなります。
@@ -63,27 +63,25 @@ const mesh = new Donuts();
 scene.add(mesh);
 ```
 
-サンプルのソースコードを見ると、`init()`関数の中身がシンプルになり、読みやすくなりましたね。
+サンプルのソースコードを見ると、中身がシンプルになり、読みやすくなりましたね。
 
 ```js
-function init() {
-  // 省略：レンダラーやカメラ、シーンを作成（詳しくはサンプルのソースコードを）
+// 省略：レンダラーやカメラ、シーンを作成（詳しくはサンプルのソースコードを）
 
-  // ドーナツを作る
-  const mesh = new Donuts();
-  scene.add(mesh);
+// ドーナツを作る
+const mesh = new Donuts();
+scene.add(mesh);
 
-  tick();
+tick();
 
-  // 毎フレーム時に実行されるループイベントです
-  function tick() {
-    mesh.rotation.x += 0.02;
-    mesh.rotation.y += 0.01;
+// 毎フレーム時に実行されるループイベントです
+function tick() {
+  mesh.rotation.x += 0.02;
+  mesh.rotation.y += 0.01;
 
-    // レンダリング
-    renderer.render(scene, camera);
-    requestAnimationFrame(tick);
-  }
+  // レンダリング
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
 }
 ```
 
@@ -146,27 +144,25 @@ const group = new MyGroup();
 scene.add(group);
 ```
 
-これも`init()`関数の中身がシンプルになり、読みやすくなりましたね。
+これも処理の中身がシンプルになり、読みやすくなりましたね。
 
 ```js
-function init() {
-  // 省略：レンダラーやカメラ、シーンを作成（詳しくはサンプルのソースコードを）
+// 省略：レンダラーやカメラ、シーンを作成（詳しくはサンプルのソースコードを）
 
-  // グループを作る
-  const group = new MyGroup();
-  // 3D空間にグループを追加する
-  scene.add(group);
+// グループを作る
+const group = new MyGroup();
+// 3D空間にグループを追加する
+scene.add(group);
 
-  tick();
+tick();
 
-  // 毎フレーム時に実行されるループイベントです
-  function tick() {
-    group.rotation.y += 0.01;
+// 毎フレーム時に実行されるループイベントです
+function tick() {
+  group.rotation.y += 0.01;
 
-    // レンダリング
-    renderer.render(scene, camera);
-    requestAnimationFrame(tick);
-  }
+  // レンダリング
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
 }
 ```
 
