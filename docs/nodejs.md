@@ -2,7 +2,7 @@
 title: Node.jsを使ったフロントエンド開発
 author: 池田 泰延
 published_date: 2019-01-17
-modified_date: 2022-05-20
+modified_date: 2023-05-26
 ---
 
 効率のよい開発ができるよう、最新の開発環境の構築もしましょう。開発環境を整えれば最新のJavaScript言語仕様を利用でき、開発効率向上に役立つはずです。また、型定義のあるTypeScriptを使ってコード補完をフルに効かせて開発するのもオススメです。
@@ -14,7 +14,7 @@ modified_date: 2022-05-20
 
 とくに注意したいのは、Three.jsの本体に含まれていないライブラリです。本入門サイトで扱った`OrbitControls`や`mergeBufferGeometries`、`GLTFLoader`などが該当します。
 
-これらの機能はThree.js本体に含まれていないので、入門サイトでは別途JavaScriptファイルを`script`タグを使って読み込むことで利用しました。バンドルツール（webpackやVite等）を使った開発では、`script`タグを読み込んで利用する方法とは異なる方式で解決しなければなりません。以下に対策方法を示します。
+これらの機能はThree.js本体に含まれていないので、入門サイトでは別途JavaScriptファイルを`importmap`を使って読み込むことで利用しました。バンドルツール（webpackやVite等）を使った開発では、`importmap`での利用する方法とは異なる方式で解決しなければなりません。以下に対策方法を示します。
 
 
 

@@ -2,7 +2,7 @@
 title: Three.jsのジオメトリを動かす方法
 author: 池田 泰延
 published_date: 2023-04-27
-modified_date: 2023-04-27
+modified_date: 2023-05-26
 ---
 
 Three.jsではジオメトリを動かすことで表現をつくりたいことがあります。平面の`THREE.PlaneGeometry`を例に取り上げて、ジオメトリのいじり方を紹介します。
@@ -101,15 +101,27 @@ SimplexNoiseを使ってノイズを生成することで、地面のような�
 
 
 ```html
-<script src="https://unpkg.com/three@0.147.0/examples/js/math/SimplexNoise.js"></script>
+
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.152.2/examples/jsm/"
+    }
+  }
+</script>
 ```
 
-利用する際は、`THREE.SimplexNoise`クラスからインスタンスを作成し、`noise()`メソッドを使います。`noise()`メソッドは、引数に数値を渡すと、-1から1の間の数値を返します。
+```js
+import { SimplexNoise } from "three/addons/math/SimplexNoise.js";
+```
+
+利用する際は、`SimplexNoise`クラスからインスタンスを作成し、`noise()`メソッドを使います。`noise()`メソッドは、引数に数値を渡すと、-1から1の間の数値を返します。
 
 ```js
 // ノイズを初期化
 // インスタンスは使いますことが重要
-const simplexNoise = new THREE.SimplexNoise();
+const simplexNoise = new SimplexNoise();
 
 const value = simplexNoise.noise(x1, y1); // x1とy1は任意の数値
 ```
@@ -137,7 +149,7 @@ mesh.rotation.x = Math.PI / 2; // 地面らしい角度にする
 scene.add(mesh);
 
 // ノイズを初期化
-const simplexNoise = new THREE.SimplexNoise();
+const simplexNoise = new SimplexNoise();
 
 tick();
 // 毎フレーム時に実行されるループイベントです

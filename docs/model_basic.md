@@ -2,7 +2,7 @@
 title: Three.jsでモデルデータを読み込む
 author: 池田 泰延
 published_date: 2017-11-03
-modified_date: 2023-05-23
+modified_date: 2023-05-26
 ---
 
 **3Dモデリングソフトで制作したモデルデータの読み込み方**を説明します。3Dのモデルデータにはさまざまな形式が存在しますが、Three.jsは多くの種類の形式に対応しています。
@@ -46,14 +46,48 @@ https://github.com/KhronosGroup/glTF-Sample-Models/tree/master/2.0/ToyCar
 
 `gltf`ファイルの場合を読み込むには`GLTFLoader.js`ファイルが必要となります。
 
+以下の`importmap`を記載して、`three/addons/`というエイリアスを貼ります。
+
+
 ```html
-<script src="https://unpkg.com/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.152.2/examples/jsm/"
+    }
+  }
+</script>
 ```
 
-※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
+処理のほうでは`import`文で読み込みます。
 
-読み込む処理は次のように記載します。`THREE.GLTFLoader`クラスのインスタンスから、`loadAsync()`メソッドを利用します。
+```html
+<script type="module">
+  import * as THREE from "three";
+  import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+  // …
+</script>
+```
+
+
+読み込む処理は次のように記載します。`GLTFLoader`クラスのインスタンスから、`loadAsync()`メソッドを利用します。
 引数にはファイルパスを指定します。読み込み完了後に3D空間への追加処理をするのがポイントです。GLTFファイルにはシーンの情報の他に、カメラやライトなどさまざまな情報が含まれます。そのため、シーンの情報だけ抜き出すようにしましょう。
+
+トップレベルで実行する場合
+
+```js
+// GLTF形式のモデルデータを読み込む
+const loader = new GLTFLoader();
+// GLTFファイルのパスを指定
+const gltf = loader.loadAsync('./models/gltf/glTF/ToyCar.gltf');
+// 読み込み後に3D空間に追加
+const model = gltf.scene;
+scene.add(model);
+```
+
+関数宣言をして実行する場合
 
 ```js
 // 非同期処理で待機するのでasync function宣言とする
@@ -61,7 +95,7 @@ async function init() {
   // ･･･省略
 
   // GLTF形式のモデルデータを読み込む
-  const loader = new THREE.GLTFLoader();
+  const loader = new GLTFLoader();
   // GLTFファイルのパスを指定
   const gltf = loader.loadAsync('./models/gltf/glTF/ToyCar.gltf');
   // 読み込み後に3D空間に追加
@@ -88,7 +122,7 @@ async function init() {
   // ･･･省略
 
   // GLTF形式のモデルデータを読み込む
-  const loader = new THREE.GLTFLoader();
+  const loader = new GLTFLoader();
   // GLTFファイルのパスを指定
   const objects = loader.loadAsync('./models/gltf/binary/ToyCar.glb');
   // 読み込み後に3D空間に追加
@@ -112,12 +146,31 @@ async function init() {
 
 3dsファイルの場合を読み込むには`TDSLoader.js`ファイルが必要となります。CDNで読み込む場合は以下の`script`タグをHTMLに記述します。
 
-```html
-<script src="https://unpkg.com/three@0.147.0/examples/js/loaders/TDSLoader.js"></script>
-```
-※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
 
-読み込む処理は次のように記載します。`THREE.TDSLoader`クラスのインスタンスから、`loadAsync()`メソッドを利用します。戻り値として`Promise`オブジェクトを返すので`await`・`async`で待機します。
+
+```html
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.152.2/examples/jsm/"
+    }
+  }
+</script>
+```
+
+処理のほうでは`import`文で読み込みます。
+
+```html
+<script type="module">
+  import * as THREE from "three";
+  import { TDSLoader } from "three/addons/loaders/TDSLoader.js";
+
+  // …
+</script>
+```
+
+読み込む処理は次のように記載します。`TDSLoader`クラスのインスタンスから、`loadAsync()`メソッドを利用します。戻り値として`Promise`オブジェクトを返すので`await`・`async`で待機します。
 引数にはファイルパスを指定します。
 
 なお、3dsファイルのテクスチャーのパスがずれないように、`setResourcePath`メソッドを使って、明示的にテクスチャーが含まれるフォルダーのパスを指定します。
@@ -128,7 +181,7 @@ async function init() {
   // ･･･省略
 
   // 3DS形式のモデルデータを読み込む
-  const loader = new THREE.TDSLoader();
+  const loader = new TDSLoader();
   // テクスチャーのパスを指定
   loader.setResourcePath('models/3ds/portalgun/textures/');
   // 3dsファイルのパスを指定
@@ -154,13 +207,32 @@ async function init() {
 
 Colladaファイル（拡張子は`.dae`）の場合を読み込むには`ColladaLoader.js`ファイルが必要となります。
 
+
+
 ```html
-<script src="https://unpkg.com/three@0.147.0/examples/js/loaders/ColladaLoader.js"></script>
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.152.2/examples/jsm/"
+    }
+  }
+</script>
 ```
 
+処理のほうでは`import`文で読み込みます。
+
+```html
+<script type="module">
+  import * as THREE from "three";
+  import { ColladaLoader } from "three/addons/loaders/ColladaLoader.js";
+
+  // …
+</script>
+```
 ※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
 
-読み込む処理は次のように記載します。`THREE.ColladaLoader`クラスのインスタンスから、`loadAsync()`メソッドを利用します。
+読み込む処理は次のように記載します。`ColladaLoader`クラスのインスタンスから、`loadAsync()`メソッドを利用します。
 引数にはファイルパスを指定します。読み込み完了後に3D空間への配置処理をするのがポイントです。Colladaファイルにはシーンの情報の他に、カメラやライトなどさまざまな情報が含まれます。そのため、シーンの情報だけ抜き出すようにしましょう。
 
 ```js
@@ -169,7 +241,7 @@ async function init() {
   // ･･･省略
 
   // Collada形式のモデルデータを読み込む
-  const loader = new THREE.ColladaLoader();
+  const loader = new ColladaLoader();
   // Colladaファイルのパスを指定
   const collada = await loader.loadAsync('./models/collada/elf/elf.dae');
   // 読み込み後に3D空間に追加

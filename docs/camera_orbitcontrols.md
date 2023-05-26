@@ -2,10 +2,10 @@
 title: Three.jsのOrbitControlsで手軽にカメラを制御する
 author: 池田 泰延
 published_date: 2017-11-03
-modified_date: 2023-02-06
+modified_date: 2023-05-26
 ---
 
-Three.jsには**カメラの動きを自動的に制御する `THREE.OrbitControls` クラスが存在**します。
+Three.jsには**カメラの動きを自動的に制御する `OrbitControls` クラスが存在**します。
 
 次の用途で役立つ機能です。
 
@@ -15,23 +15,42 @@ Three.jsには**カメラの動きを自動的に制御する `THREE.OrbitContro
 
 ## 導入方法
 
-`OrbitControls.js`は、Three.jsライブラリの本体に含まれていないので注意が必要です。CDNで利用するときは、以下の`script`要素で読み込みます。
+`OrbitControls.js`は、Three.jsライブラリの本体に含まれていないので注意が必要です。CDNで利用するときは、以下の`importmap`を記載して、`three/addons/`というエイリアスを貼ります。
 
 
 ```html
-<script src="https://unpkg.com/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.152.2/examples/jsm/"
+    }
+  }
+</script>
 ```
 
-※公式GitHubの`examples/js/controls`フォルダーにJavaScriptファイルにはいっています。該当ファイルは[こちら](https://github.com/mrdoob/three.js/blob/dev/examples/js/controls/OrbitControls.js)で確認できます。
+処理のほうでは`import`文で読み込みます。
 
-※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
+```html
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+// …
+</script>
+```
+
+
+※公式GitHubの`examples/jsm/controls`フォルダーにJavaScriptファイルにはいっています。該当ファイルは[こちら](https://github.com/mrdoob/three.js/blob/dev/examples/jsm/controls/OrbitControls.js)で確認できます。
+
+※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。`OrbitControls`はES Modulesで利用します。
 
 
 ## 使い方
 
-`THREE.OrbitControls`は次の書式で利用します。`THREE.OrbitControls`クラスのコンストラクターへ、カメラのインスタンスとDOM要素を引数として指定します。これだけで、自動的にマウスと連動してインタラクションが効くようになります。
+`OrbitControls`は次の書式で利用します。`OrbitControls`クラスのコンストラクターへ、カメラのインスタンスとDOM要素を引数として指定します。これだけで、自動的にマウスと連動してインタラクションが効くようになります。
 
-`THREE.OrbitControls`クラスの第2引数は、ポインターの操作を受け付ける対象のDOM要素を指定します。多くの利用用途では`document.body`か`canvas`要素が妥当でしょう。以下の例では`document.body`として指定しています（画面内のどこでもポインター操作を受け付けるようになります）。
+`OrbitControls`クラスの第2引数は、ポインターの操作を受け付ける対象のDOM要素を指定します。多くの利用用途では`document.body`か`canvas`要素が妥当でしょう。以下の例では`document.body`として指定しています（画面内のどこでもポインター操作を受け付けるようになります）。
 
 ```js
 // カメラを作成
@@ -40,7 +59,7 @@ const camera = new THREE.PerspectiveCamera(/*省略*/);
 camera.position.set(0, 0, 1000);
 
 // カメラコントローラーを作成
-const controls = new THREE.OrbitControls(camera, document.body);
+const controls = new OrbitControls(camera, document.body);
 ```
 
 マウス操作で次のようにカメラを制御できます。
@@ -50,7 +69,7 @@ const controls = new THREE.OrbitControls(camera, document.body);
 - パン: 右ボタンでドラッグ
 
 
-実行可能な最小のサンプルコードはこちらです。次の例では、`THREE.OrbitControls`クラスの第2引数に`canvas`要素を指定しており、ポインター操作の対象をCanvasだけに絞っています。
+実行可能な最小のサンプルコードはこちらです。次の例では、`OrbitControls`クラスの第2引数に`canvas`要素を指定しており、ポインター操作の対象をCanvasだけに絞っています。
 
 ```js
 // サイズを指定
@@ -72,7 +91,7 @@ const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
 camera.position.set(0, 0, 1000);
 
 // カメラコントローラーを作成
-const controls = new THREE.OrbitControls(camera, canvasElement);
+const controls = new OrbitControls(camera, canvasElement);
 
 // 形状とマテリアルからメッシュを作成します
 const mesh = new THREE.Mesh(
@@ -101,9 +120,9 @@ function tick() {
 
 ### 滑らかにコントロールする
 
-`THREE.OrbitControls`インスタンスの`enableDamping`や`dampingFactor`プロパティーを設定すると、ドラッグ時にカメラが滑らかに動くようになります。デフォルトだと機械的な動きになってしまいますが、これらのプロパティーを設定するだけで心地良い操作感になります。
+`OrbitControls`インスタンスの`enableDamping`や`dampingFactor`プロパティーを設定すると、ドラッグ時にカメラが滑らかに動くようになります。デフォルトだと機械的な動きになってしまいますが、これらのプロパティーを設定するだけで心地良い操作感になります。
 
-`enableDamping`や`dampingFactor`プロパティーを使う場合は、`requestAnimationFrame`内で`THREE.OrbitControls`インスンタンスの`update`メソッドを呼び出す必要があります。
+`enableDamping`や`dampingFactor`プロパティーを使う場合は、`requestAnimationFrame`内で`OrbitControls`インスンタンスの`update`メソッドを呼び出す必要があります。
 
 ```js
 // カメラを作成
@@ -112,7 +131,7 @@ const camera = new THREE.PerspectiveCamera(/*省略*/);
 camera.position.set(0, 0, 1000);
 
 // カメラコントローラーを作成
-const controls = new THREE.OrbitControls(camera, canvasElement);
+const controls = new OrbitControls(camera, canvasElement);
 
 // 滑らかにカメラコントローラーを制御する
 controls.enableDamping = true;
@@ -142,7 +161,7 @@ function tick() {
 
 ## まとめ
 
-カメラを手軽に制御できるので、小さな作例では`THREE.OrbitControls`を使われることが多いです。ただし、手軽である分、カスタマイズの自由度の制限があるので、細かいカメラワークを作ろうとしたら`THREE.OrbitControls`では物足りません。カメラの制御はいろんなコードを書いて自作して覚えていくといいでしょう。
+カメラを手軽に制御できるので、小さな作例では`OrbitControls`を使われることが多いです。ただし、手軽である分、カスタマイズの自由度の制限があるので、細かいカメラワークを作ろうとしたら`OrbitControls`では物足りません。カメラの制御はいろんなコードを書いて自作して覚えていくといいでしょう。
 
 
 次回の記事では、モデリングデータの読み込み方法を説明します。

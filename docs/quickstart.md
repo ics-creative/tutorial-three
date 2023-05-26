@@ -2,7 +2,7 @@
 title: 簡単なThree.jsのサンプルを試そう
 author: 池田 泰延
 published_date: 2017-11-02
-modified_date: 2022-01-28
+modified_date: 2023-05-26
 ---
 
 [Three.js](http://typescript.Three.js.com/)はHTMLの3D技術「[WebGL](http://ja.wikipedia.org/wiki/WebGL "WebGL - Wikipedia")」を扱いやすくしたフレームワークです。**Three.jsを使えばGPUによる本格的な3D表現をプラグイン無しで作成**できます。
@@ -19,16 +19,18 @@ modified_date: 2022-01-28
 まずはHTMLファイルを用意して、次のコードを貼り付けて試してください。
 
 ```html
-<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8"/>
-  <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
-  <script>
-    // ページの読み込みを待つ
-    window.addEventListener('DOMContentLoaded', init);
-
-    function init() {
+  <head>
+    <meta charset="utf-8" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.152.2/build/three.module.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
 
       // サイズを指定
       const width = 960;
@@ -36,7 +38,7 @@ modified_date: 2022-01-28
 
       // レンダラーを作成
       const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#myCanvas')
+        canvas: document.querySelector("#myCanvas"),
       });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(width, height);
@@ -63,12 +65,11 @@ modified_date: 2022-01-28
 
         requestAnimationFrame(tick);
       }
-    }
-  </script>
-</head>
-<body>
-  <canvas id="myCanvas"></canvas>
-</body>
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
 </html>
 ```
 
@@ -97,20 +98,25 @@ Three.jsはHTML5の`canvas`要素を利用します。`canvas`要素はコンテ
 
 Three.jsはJavaScriptのライブラリですが、このファイルを読み込むことによってはじめてThree.jsが利用できるようになります。
 
-CDN（コンテンツ・デリバリー・ネットワーク）で提供されているURLを使うのが導入にお手軽です。
+CDN（コンテンツ・デリバリー・ネットワーク）で提供されているURLを使うのが導入にお手軽です。ECMAScript Modulesの仕組みを使って、`import`文でThree.jsを読み込みます。
 
 ```html
-<script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.152.2/build/three.module.js"
+    }
+  }
+</script>
 ```
 
-WebGLの処理はHTMLページの読み込みが終わってから実行させます。`addEventListener()`関数を使って`DOMContentLoaded`イベントが発生するのを監視させ、ページが読み込み終わったときに実行させたい関数を指定します。この関数`init()`の中にThree.jsのコードを書いていきます。
+WebGLの処理はJavaScriptで記述します。Three.jsはES Modulesに対応しているため、`import`文で読み込むことができます。`import`文は`<script>`要素の`type`属性に`module`を指定することで利用できます。
 
 ```html
-<script>
-window.addEventListener('DOMContentLoaded', init);
-function init(){
-  // 処理
-}
+<script type="module">
+import * as THREE from "three";
+
+// 処理
 </script>
 ```
 
