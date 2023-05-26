@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <script>
-      window.addEventListener('DOMContentLoaded', init);
+      window.addEventListener("DOMContentLoaded", init);
 
       function init() {
         // 普通のキャンバスを取得
-        const canvasElement = document.querySelector('#myCanvas');
+        const canvasElement = document.querySelector("#myCanvas");
         // オフスクリーンキャンバスを取得
         const offscreenCanvas = canvasElement.transferControlToOffscreen();
         // ワーカーを起動
-        const worker = new Worker('osc_simple_worker.js');
+        const worker = new Worker("osc_simple_worker.js");
         // ワーカー側にオフスクリーンキャンバスを転送
         worker.postMessage({ canvas: offscreenCanvas }, [offscreenCanvas]);
       }

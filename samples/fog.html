@@ -1,10 +1,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.152.2/build/three.module.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
       // ページの読み込みを待つ
-      window.addEventListener('DOMContentLoaded', init);
+      window.addEventListener("DOMContentLoaded", init);
 
       function init() {
         // サイズを指定
@@ -13,7 +20,7 @@
 
         // レンダラーを作成
         const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas'),
+          canvas: document.querySelector("#myCanvas"),
           antialias: true,
           devicePixelRatio: window.devicePixelRatio,
         });

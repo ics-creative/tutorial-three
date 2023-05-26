@@ -1,4 +1,4 @@
-importScripts('https://unpkg.com/three@0.147.0/build/three.min.js');
+importScripts("https://unpkg.com/three@0.152.2/build/three.min.js");
 
 // メインスレッドから通達があったとき
 onmessage = async (event) => {
@@ -26,7 +26,7 @@ onmessage = async (event) => {
 
   // テクスチャーを読み込み
   const texture = await new Promise((resolve) => {
-    new THREE.ImageBitmapLoader().load('imgs/earthmap1k.jpg', (imageBitmap) => {
+    new THREE.ImageBitmapLoader().load("imgs/earthmap1k.jpg", (imageBitmap) => {
       const texture = new THREE.CanvasTexture(imageBitmap);
       resolve(texture);
     });

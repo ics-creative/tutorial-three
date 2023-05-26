@@ -1,14 +1,14 @@
-importScripts('https://unpkg.com/three@0.147.0/build/three.min.js');
+importScripts("https://unpkg.com/three@0.152.2/build/three.min.js");
 let renderer;
 let camera;
 
 // メインスレッドから通達があったとき
 onmessage = (event) => {
   switch (event.data.type) {
-    case 'init':
+    case "init":
       init(event);
       break;
-    case 'resize':
+    case "resize":
       resize(event.data.width, event.data.height, event.data.devicePixelRatio);
       break;
   }

@@ -1,65 +1,67 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://unpkg.com/three@0.147.0/examples/js/loaders/ColladaLoader.js"></script>
 
-    <script>
-      // ページの読み込みを待つ
-      window.addEventListener('DOMContentLoaded', init);
-
-      // 非同期処理で待機するのでasync function宣言とする
-      async function init() {
-        // サイズを指定
-        const width = 960;
-        const height = 540;
-
-        // レンダラーを作成
-        const canvasElement = document.querySelector('#myCanvas');
-        const renderer = new THREE.WebGLRenderer({
-          canvas: canvasElement,
-        });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(width, height);
-
-        // シーンを作成
-        const scene = new THREE.Scene();
-
-        // カメラを作成
-        const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
-        // カメラの初期座標を設定
-        camera.position.set(0, 10, 10);
-
-        // カメラコントローラーを作成
-        const controls = new THREE.OrbitControls(camera, canvasElement);
-        controls.target.set(0, 3, 0);
-        controls.update();
-
-        // 平行光源を作成
-        const directionalLight = new THREE.DirectionalLight(0xffffff);
-        directionalLight.position.set(1, 1, 1);
-        scene.add(directionalLight);
-        // 環境光を追加
-        const ambientLight = new THREE.AmbientLight(0x333333);
-        scene.add(ambientLight);
-
-        // Collada形式のモデルデータを読み込む
-        const loader = new THREE.ColladaLoader();
-        // Colladaファイルのパスを指定
-        const collada = await loader.loadAsync('./models/collada/elf/elf.dae');
-        // 読み込み後に3D空間に追加
-        const model = collada.scene;
-        scene.add(model);
-
-        tick();
-
-        // 毎フレーム時に実行されるループイベントです
-        function tick() {
-          // レンダリング
-          renderer.render(scene, camera);
-          requestAnimationFrame(tick);
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.152.2/examples/jsm/"
         }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+      import { ColladaLoader } from "three/addons/loaders/ColladaLoader.js";
+      // サイズを指定
+      const width = 960;
+      const height = 540;
+
+      // レンダラーを作成
+      const canvasElement = document.querySelector("#myCanvas");
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvasElement,
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(width, height);
+
+      // シーンを作成
+      const scene = new THREE.Scene();
+
+      // カメラを作成
+      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
+      // カメラの初期座標を設定
+      camera.position.set(0, 10, 10);
+
+      // カメラコントローラーを作成
+      const controls = new OrbitControls(camera, canvasElement);
+      controls.target.set(0, 3, 0);
+      controls.update();
+
+      // 平行光源を作成
+      const directionalLight = new THREE.DirectionalLight(0xffffff);
+      directionalLight.position.set(1, 1, 1);
+      scene.add(directionalLight);
+      // 環境光を追加
+      const ambientLight = new THREE.AmbientLight(0x333333);
+      scene.add(ambientLight);
+
+      // Collada形式のモデルデータを読み込む
+      const loader = new ColladaLoader();
+      // Colladaファイルのパスを指定
+      const collada = await loader.loadAsync("./models/collada/elf/elf.dae");
+      // 読み込み後に3D空間に追加
+      const model = collada.scene;
+      scene.add(model);
+
+      tick();
+
+      // 毎フレーム時に実行されるループイベントです
+      function tick() {
+        // レンダリング
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
       }
     </script>
   </head>

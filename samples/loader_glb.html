@@ -1,70 +1,72 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://unpkg.com/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
-
-    <script>
-      // ページの読み込みを待つ
-      window.addEventListener('DOMContentLoaded', init);
-
-      // 非同期処理で待機するのでasync function宣言とする
-      async function init() {
-        // サイズを指定
-        const width = 960;
-        const height = 540;
-
-        // レンダラーを作成
-        const canvasElement = document.querySelector('#myCanvas');
-        const renderer = new THREE.WebGLRenderer({
-          canvas: canvasElement,
-        });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(width, height);
-
-        // シーンを作成
-        const scene = new THREE.Scene();
-
-        // カメラを作成
-        const camera = new THREE.PerspectiveCamera(45, width / height, 0.001, 10000);
-        // カメラの初期座標を設定
-        camera.position.set(1, 1, 1);
-
-        // カメラコントローラーを作成
-        const controls = new THREE.OrbitControls(camera, canvasElement);
-        controls.target.set(0, 0, 0);
-        controls.update();
-
-        // 平行光源を作成
-        // 上から照らす
-        const directionalLight = new THREE.DirectionalLight(0xffffff);
-        directionalLight.position.set(1, 1, 1);
-        scene.add(directionalLight);
-
-        // 横からテラス
-        const directionalLight2 = new THREE.DirectionalLight(0xffffff);
-        directionalLight2.position.set(1, 0, 1);
-        scene.add(directionalLight2);
-
-        // GLTF形式のモデルデータを読み込む
-        const loader = new THREE.GLTFLoader();
-        // GLTFファイルのパスを指定
-        const objects = await loader.loadAsync('./models/gltf/binary/ToyCar.glb');
-        // 読み込み後に3D空間に追加
-        const model = objects.scene;
-        scene.add(model);
-
-        model.scale.set(30, 30, 30); // 大きさ30倍に拡大
-
-        tick();
-
-        // 毎フレーム時に実行されるループイベントです
-        function tick() {
-          // レンダリング
-          renderer.render(scene, camera);
-          requestAnimationFrame(tick);
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.152.2/examples/jsm/"
         }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+      import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+      // サイズを指定
+      const width = 960;
+      const height = 540;
+
+      // レンダラーを作成
+      const canvasElement = document.querySelector("#myCanvas");
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvasElement,
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(width, height);
+
+      // シーンを作成
+      const scene = new THREE.Scene();
+
+      // カメラを作成
+      const camera = new THREE.PerspectiveCamera(45, width / height, 0.001, 10000);
+      // カメラの初期座標を設定
+      camera.position.set(1, 1, 1);
+
+      // カメラコントローラーを作成
+      const controls = new OrbitControls(camera, canvasElement);
+      controls.target.set(0, 0, 0);
+      controls.update();
+
+      // 平行光源を作成
+      // 上から照らす
+      const directionalLight = new THREE.DirectionalLight(0xffffff);
+      directionalLight.position.set(1, 1, 1);
+      scene.add(directionalLight);
+
+      // 横からテラス
+      const directionalLight2 = new THREE.DirectionalLight(0xffffff);
+      directionalLight2.position.set(1, 0, 1);
+      scene.add(directionalLight2);
+
+      // GLTF形式のモデルデータを読み込む
+      const loader = new GLTFLoader();
+      // GLTFファイルのパスを指定
+      const objects = await loader.loadAsync("./models/gltf/binary/ToyCar.glb");
+      // 読み込み後に3D空間に追加
+      const model = objects.scene;
+      scene.add(model);
+
+      model.scale.set(30, 30, 30); // 大きさ30倍に拡大
+
+      tick();
+
+      // 毎フレーム時に実行されるループイベントです
+      function tick() {
+        // レンダリング
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
       }
     </script>
   </head>

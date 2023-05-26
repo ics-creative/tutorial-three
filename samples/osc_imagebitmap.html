@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <script>
-      window.addEventListener('DOMContentLoaded', init);
+      window.addEventListener("DOMContentLoaded", init);
 
       function init() {
         // 普通のキャンバスを取得
-        const canvasElement = document.querySelector('#myCanvas');
+        const canvasElement = document.querySelector("#myCanvas");
         // オフスクリーンキャンバスを取得
         const offscreenCanvas = canvasElement.transferControlToOffscreen();
-        const worker = new Worker('osc_imagebitmap_worker.js');
+        const worker = new Worker("osc_imagebitmap_worker.js");
         worker.postMessage(
           {
             canvas: offscreenCanvas,

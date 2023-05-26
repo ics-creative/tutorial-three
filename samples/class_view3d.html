@@ -1,34 +1,15 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
-    <script>
-      // ページの読み込みを待つ
-      window.addEventListener('DOMContentLoaded', init);
-
-      function init() {
-        const view3D = new View3D('#myCanvas', 960, 540);
-
-        // 球体を作成
-        const geometry = new THREE.BoxGeometry(500, 500, 500);
-        // マテリアルを作成
-        const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
-        // メッシュを作成
-        const mesh = new THREE.Mesh(geometry, material);
-        // 3D空間にメッシュを追加
-        view3D.scene.add(mesh);
-
-        // 平行光源
-        const directionalLight = new THREE.DirectionalLight(0xffffff);
-        directionalLight.position.set(0, 1, 1);
-        view3D.scene.add(directionalLight);
-
-        // 時間経過ループを開始する
-        view3D.onTick = () => {
-          mesh.rotation.x += 0.005;
-          mesh.rotation.y += 0.01;
-        };
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.152.2/build/three.module.js"
+        }
       }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
 
       class View3D {
         /**
@@ -76,6 +57,28 @@
           });
         }
       }
+
+      const view3D = new View3D("#myCanvas", 960, 540);
+
+      // 球体を作成
+      const geometry = new THREE.BoxGeometry(500, 500, 500);
+      // マテリアルを作成
+      const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+      // メッシュを作成
+      const mesh = new THREE.Mesh(geometry, material);
+      // 3D空間にメッシュを追加
+      view3D.scene.add(mesh);
+
+      // 平行光源
+      const directionalLight = new THREE.DirectionalLight(0xffffff);
+      directionalLight.position.set(0, 1, 1);
+      view3D.scene.add(directionalLight);
+
+      // 時間経過ループを開始する
+      view3D.onTick = () => {
+        mesh.rotation.x += 0.005;
+        mesh.rotation.y += 0.01;
+      };
     </script>
   </head>
   <body>

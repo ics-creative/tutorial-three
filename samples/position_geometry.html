@@ -1,80 +1,84 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
 
-    <script>
-      // ページの読み込みを待つ
-      window.addEventListener('DOMContentLoaded', init);
-
-      function init() {
-        // サイズを指定
-        const width = 960;
-        const height = 540;
-
-        // レンダラーを作成
-        const canvasElement = document.querySelector('#myCanvas');
-        const renderer = new THREE.WebGLRenderer({
-          canvas: canvasElement,
-        });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(width, height);
-
-        // シーンを作成
-        const scene = new THREE.Scene();
-
-        // カメラを作成
-        const camera = new THREE.PerspectiveCamera(45, width / height);
-        camera.position.set(200, 300, 0);
-        // カメラコントローラーを作成
-        const controls = new THREE.OrbitControls(camera, canvasElement);
-        controls.autoRotate = true;
-        controls.maxDistance = 1000; // ズーム最大距離
-        controls.maxPolarAngle = (Math.PI * 0.8) / 2; // 上限の角度
-        controls.minPolarAngle = 0;
-
-        // 形状データを作成
-        const geometry = new THREE.PlaneGeometry(400, 400, 20, 20);
-
-        // マテリアルを作成
-        const material = new THREE.MeshBasicMaterial({ wireframe: true });
-
-        // 物体を作成
-        const mesh = new THREE.Mesh(geometry, material);
-        mesh.rotation.x = Math.PI / 2; // 地面らしい角度にする
-        scene.add(mesh);
-
-        tick();
-
-        // 毎フレーム時に実行されるループイベントです
-        function tick() {
-          controls.update();
-
-          // ジオメトリの頂点座標情報
-          const position = mesh.geometry.attributes.position;
-          for (let i = 0; i < position.count; i++) {
-            // 各頂点のXYZ座標
-            const x = position.getX(i);
-            const y = position.getY(i);
-            const z = position.getZ(i);
-
-            // 高さを計算（PlaneGeometryの場合はZ座標）
-            const nextZ = Math.sin(x * 0.03 + y * 0.02 + Date.now() * 0.002) * 30;
-
-            position.setX(i, x); // xとyは変更していないので省略しても大丈夫
-            position.setY(i, y);
-            position.setZ(i, nextZ);
-          }
-
-          // 頂点の更新が必要なことを伝える
-          position.needsUpdate = true;
-
-          // レンダリング
-          renderer.render(scene, camera);
-
-          requestAnimationFrame(tick);
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.152.2/examples/jsm/"
         }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+      // サイズを指定
+      const width = 960;
+      const height = 540;
+
+      // レンダラーを作成
+      const canvasElement = document.querySelector("#myCanvas");
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvasElement,
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(width, height);
+
+      // シーンを作成
+      const scene = new THREE.Scene();
+
+      // カメラを作成
+      const camera = new THREE.PerspectiveCamera(45, width / height);
+      camera.position.set(200, 300, 0);
+      // カメラコントローラーを作成
+      const controls = new OrbitControls(camera, canvasElement);
+      controls.autoRotate = true;
+      controls.maxDistance = 1000; // ズーム最大距離
+      controls.maxPolarAngle = (Math.PI * 0.8) / 2; // 上限の角度
+      controls.minPolarAngle = 0;
+
+      // 形状データを作成
+      const geometry = new THREE.PlaneGeometry(400, 400, 20, 20);
+
+      // マテリアルを作成
+      const material = new THREE.MeshBasicMaterial({ wireframe: true });
+
+      // 物体を作成
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.x = Math.PI / 2; // 地面らしい角度にする
+      scene.add(mesh);
+
+      tick();
+
+      // 毎フレーム時に実行されるループイベントです
+      function tick() {
+        controls.update();
+
+        // ジオメトリの頂点座標情報
+        const position = mesh.geometry.attributes.position;
+        for (let i = 0; i < position.count; i++) {
+          // 各頂点のXYZ座標
+          const x = position.getX(i);
+          const y = position.getY(i);
+          const z = position.getZ(i);
+
+          // 高さを計算（PlaneGeometryの場合はZ座標）
+          const nextZ = Math.sin(x * 0.03 + y * 0.02 + Date.now() * 0.002) * 30;
+
+          position.setX(i, x); // xとyは変更していないので省略しても大丈夫
+          position.setY(i, y);
+          position.setZ(i, nextZ);
+        }
+
+        // 頂点の更新が必要なことを伝える
+        position.needsUpdate = true;
+
+        // レンダリング
+        renderer.render(scene, camera);
+
+        requestAnimationFrame(tick);
       }
     </script>
   </head>

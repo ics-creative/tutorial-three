@@ -1,78 +1,82 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
     <script src="https://unpkg.com/stats.js@0.17.0/build/stats.min.js"></script>
-    <script>
-      // ページの読み込みを待つ
-      window.addEventListener('DOMContentLoaded', init);
 
-      function init() {
-        // サイズを指定
-        const width = 960;
-        const height = 540;
-        // 1辺あたりに配置するオブジェクトの個数
-        const CELL_NUM = 20;
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.152.2/build/three.module.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
 
-        // レンダラーを作成
-        const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas'),
-        });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(width, height);
+      // サイズを指定
+      const width = 960;
+      const height = 540;
+      // 1辺あたりに配置するオブジェクトの個数
+      const CELL_NUM = 20;
 
-        // シーンを作成
-        const scene = new THREE.Scene();
+      // レンダラーを作成
+      const renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector("#myCanvas"),
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(width, height);
 
-        // カメラを作成
-        const camera = new THREE.PerspectiveCamera(45, width / height);
-        camera.position.set(0, 0, 400);
+      // シーンを作成
+      const scene = new THREE.Scene();
 
-        const container = new THREE.Group();
-        scene.add(container);
+      // カメラを作成
+      const camera = new THREE.PerspectiveCamera(45, width / height);
+      camera.position.set(0, 0, 400);
 
-        // 共通マテリアル
-        const material = new THREE.MeshNormalMaterial();
-        // Box
-        for (let i = 0; i < CELL_NUM; i++) {
-          for (let j = 0; j < CELL_NUM; j++) {
-            for (let k = 0; k < CELL_NUM; k++) {
-              // 立方体個別の要素を作成
-              const mesh = new THREE.Mesh(new THREE.BoxGeometry(5, 5, 5), material);
+      const container = new THREE.Group();
+      scene.add(container);
 
-              // XYZ座標を設定
-              mesh.position.set(10 * (i - CELL_NUM / 2), 10 * (j - CELL_NUM / 2), 10 * (k - CELL_NUM / 2));
+      // 共通マテリアル
+      const material = new THREE.MeshNormalMaterial();
+      // Box
+      for (let i = 0; i < CELL_NUM; i++) {
+        for (let j = 0; j < CELL_NUM; j++) {
+          for (let k = 0; k < CELL_NUM; k++) {
+            // 立方体個別の要素を作成
+            const mesh = new THREE.Mesh(new THREE.BoxGeometry(5, 5, 5), material);
 
-              // メッシュを3D空間に追加
-              container.add(mesh);
-            }
+            // XYZ座標を設定
+            mesh.position.set(10 * (i - CELL_NUM / 2), 10 * (j - CELL_NUM / 2), 10 * (k - CELL_NUM / 2));
+
+            // メッシュを3D空間に追加
+            container.add(mesh);
           }
         }
+      }
 
-        // フレームレートの数値を画面に表示
-        const stats = new Stats();
-        stats.domElement.style.position = 'absolute';
-        stats.domElement.style.top = '0px';
-        document.body.appendChild(stats.domElement);
+      // フレームレートの数値を画面に表示
+      const stats = new Stats();
+      stats.domElement.style.position = "absolute";
+      stats.domElement.style.top = "0px";
+      document.body.appendChild(stats.domElement);
 
-        tick();
+      tick();
 
-        // 毎フレーム時に実行されるループイベントです
-        function tick() {
-          container.rotation.x += Math.PI / 180;
-          container.rotation.y += Math.PI / 180;
+      // 毎フレーム時に実行されるループイベントです
+      function tick() {
+        container.rotation.x += Math.PI / 180;
+        container.rotation.y += Math.PI / 180;
 
-          // レンダリング
-          renderer.render(scene, camera);
+        // レンダリング
+        renderer.render(scene, camera);
 
-          // レンダリング情報を画面に表示
-          document.getElementById('info').innerHTML = JSON.stringify(renderer.info.render, '', '    ');
+        // レンダリング情報を画面に表示
+        document.getElementById("info").innerHTML = JSON.stringify(renderer.info.render, "", "    ");
 
-          // フレームレートを表示
-          stats.update();
+        // フレームレートを表示
+        stats.update();
 
-          requestAnimationFrame(tick);
-        }
+        requestAnimationFrame(tick);
       }
     </script>
   </head>

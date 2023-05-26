@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "format" : "prettier --write '*.{html,js,css}' --single-quote --print-width=120"
+    "format" : "prettier --write '*.{html,js,css}' --print-width=120"
   },
   "dependencies": {
     "@types/three": "^0.147.1"

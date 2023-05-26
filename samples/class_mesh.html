@@ -1,47 +1,15 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
-    <script>
-      // ページの読み込みを待つ
-      window.addEventListener('DOMContentLoaded', init);
-
-      function init() {
-        // サイズを指定
-        const width = 960;
-        const height = 540;
-
-        // レンダラーを作成
-        const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('#myCanvas'),
-        });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(width, height);
-
-        // シーンを作成
-        const scene = new THREE.Scene();
-
-        // カメラを作成
-        const camera = new THREE.PerspectiveCamera(45, width / height);
-        camera.position.set(-100, 150, 500);
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-        // ドーナツを作る
-        const mesh = new Donuts();
-        scene.add(mesh);
-
-        tick();
-
-        // 毎フレーム時に実行されるループイベントです
-        function tick() {
-          mesh.rotation.x += 0.02;
-          mesh.rotation.y += 0.01;
-
-          // レンダリング
-          renderer.render(scene, camera);
-          requestAnimationFrame(tick);
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.152.2/build/three.module.js"
         }
       }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
 
       /** メッシュを継承したドーナツクラスです。 */
       class Donuts extends THREE.Mesh {
@@ -56,6 +24,41 @@
           // 継承元のコンストラクターを実行
           super(geometry, material);
         }
+      }
+
+      // サイズを指定
+      const width = 960;
+      const height = 540;
+
+      // レンダラーを作成
+      const renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector("#myCanvas"),
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(width, height);
+
+      // シーンを作成
+      const scene = new THREE.Scene();
+
+      // カメラを作成
+      const camera = new THREE.PerspectiveCamera(45, width / height);
+      camera.position.set(-100, 150, 500);
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+      // ドーナツを作る
+      const mesh = new Donuts();
+      scene.add(mesh);
+
+      tick();
+
+      // 毎フレーム時に実行されるループイベントです
+      function tick() {
+        mesh.rotation.x += 0.02;
+        mesh.rotation.y += 0.01;
+
+        // レンダリング
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
       }
     </script>
   </head>
