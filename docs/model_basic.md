@@ -2,7 +2,7 @@
 title: Three.jsでモデルデータを読み込む
 author: 池田 泰延
 published_date: 2017-11-03
-modified_date: 2023-05-26
+modified_date: 2023-08-16
 ---
 
 **3Dモデリングソフトで制作したモデルデータの読み込み方**を説明します。3Dのモデルデータにはさまざまな形式が存在しますが、Three.jsは多くの種類の形式に対応しています。
@@ -13,13 +13,13 @@ Three.jsでは外部ソフトを利用して作成した3Dモデリングデー�
 
 Three.jsでは次の形式の読み込みに対応しています。
 
-* GLTF形式（ジーエルティーエフ形式）: インターネット向けの3Dファイル形式。2017年に仕様として定められた新しい形式。
-* OBJ形式 : Wavefront社のAdvanced Visualizerというソフト用のファイルフォーマット。テキストデータ。 
-* Collada(dae)形式 : 汎用的なデータファイル。XMLで構成されている。
-* FBX形式（バイナリー）
-* 3DMax(.3ds)形式 : Autodesk 3ds Maxの出力フォーマットとして使われるデータ形式。 
-* Quake 2 MD2(.md2)形式 : Id Software'sがQuake II用に作成したファイルフォーマット。 
-* BlenderからThree.js Exporterを使って出力したJSON形式
+
+| 形式名      | 説明                                                                                   | 拡張子  |
+| ----------- | -------------------------------------------------------------------------------------- | ------- |
+| glTF形式    | インターネット向けの3Dファイル形式。2017年に仕様として定められた新しい形式。           | `.gltf`, `.glb` |
+| OBJ形式     | Wavefront社のAdvanced Visualizerというソフト用のファイルフォーマット。テキストデータ。 | `.obj`  |
+| Collada形式 | 汎用的なデータファイル。XMLで構成されている。                                          | `.dae`  |
+| 3DMax形式   | Autodesk 3ds Maxの出力フォーマットとして使われるデータ形式。                           | `.3ds`  |
 
 
 ### Three.jsでの読み込み方
@@ -81,7 +81,7 @@ https://github.com/KhronosGroup/glTF-Sample-Models/tree/master/2.0/ToyCar
 // GLTF形式のモデルデータを読み込む
 const loader = new GLTFLoader();
 // GLTFファイルのパスを指定
-const gltf = loader.loadAsync('./models/gltf/glTF/ToyCar.gltf');
+const gltf = await loader.loadAsync('./models/gltf/glTF/ToyCar.gltf');
 // 読み込み後に3D空間に追加
 const model = gltf.scene;
 scene.add(model);
@@ -97,7 +97,7 @@ async function init() {
   // GLTF形式のモデルデータを読み込む
   const loader = new GLTFLoader();
   // GLTFファイルのパスを指定
-  const gltf = loader.loadAsync('./models/gltf/glTF/ToyCar.gltf');
+  const gltf = await loader.loadAsync('./models/gltf/glTF/ToyCar.gltf');
   // 読み込み後に3D空間に追加
   const model = gltf.scene;
   scene.add(model);
@@ -124,7 +124,7 @@ async function init() {
   // GLTF形式のモデルデータを読み込む
   const loader = new GLTFLoader();
   // GLTFファイルのパスを指定
-  const objects = loader.loadAsync('./models/gltf/binary/ToyCar.glb');
+  const objects = await loader.loadAsync('./models/gltf/binary/ToyCar.glb');
   // 読み込み後に3D空間に追加
   const model = objects.scene;
   scene.add(model);
@@ -185,7 +185,7 @@ async function init() {
   // テクスチャーのパスを指定
   loader.setResourcePath('models/3ds/portalgun/textures/');
   // 3dsファイルのパスを指定
-  const object = loader.loadAsync('models/3ds/portalgun/portalgun.3ds');
+  const object = await loader.loadAsync('models/3ds/portalgun/portalgun.3ds');
   // 読み込み後に3D空間に追加
   scene.add(object);
 
