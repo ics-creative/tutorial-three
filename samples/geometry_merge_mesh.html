@@ -6,14 +6,15 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@0.152.2/examples/jsm/"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
         }
       }
     </script>
     <script type="module">
       import * as THREE from "three";
-      import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
+      import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
+
 
       // サイズを指定
       const width = 960;
@@ -47,7 +48,7 @@
             const geometryTranslated = geometryBox.translate(
               10 * (i - CELL_NUM / 2),
               10 * (j - CELL_NUM / 2),
-              10 * (k - CELL_NUM / 2)
+              10 * (k - CELL_NUM / 2),
             );
 
             // ジオメトリを保存
@@ -56,7 +57,7 @@
         }
       }
       // ジオメトリを生成
-      const geometry = BufferGeometryUtils.mergeBufferGeometries(boxes);
+      const geometry = BufferGeometryUtils.mergeGeometries(boxes);
 
       // マテリアルを作成
       const material = new THREE.MeshNormalMaterial();

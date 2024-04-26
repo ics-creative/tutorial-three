@@ -2,7 +2,7 @@
 title: Three.jsの高速化手法：ジオメトリの結合
 author: 池田 泰延
 published_date: 2017-11-08
-modified_date: 2022-05-20
+modified_date: 2024-04-27
 ---
 
 Three.jsで大量のオブジェクトを描画するときに役立つ最適化テクニックを紹介します。
@@ -80,7 +80,7 @@ for (let i = 0; i < CELL_NUM; i++) {
 }
 ```
 
-Three.jsでは、`THREE.BufferGeometryUtils.mergeBufferGeometries()`メソッドで結合できます。このメソッドはThree.js本体のコードに含まれていないので注意ください。公式GitHubの`examples/js/utils`フォルダーにJavaScriptファイルがあるので、これを`script`要素で読み込みます。作業用フォルダーに`BufferGeometryUtils.js`ファイルをコピーしておきましょう。該当ファイルは[こちら](https://github.com/mrdoob/three.js/blob/dev/examples/js/utils/BufferGeometryUtils.js)からダウンロードできます。
+Three.jsでは、`THREE.BufferGeometryUtils.mergeGeometries()`メソッドで結合できます。このメソッドはThree.js本体のコードに含まれていないので注意ください。公式GitHubの`examples/js/utils`フォルダーにJavaScriptファイルがあるので、これを`script`要素で読み込みます。作業用フォルダーに`BufferGeometryUtils.js`ファイルをコピーしておきましょう。該当ファイルは[こちら](https://github.com/mrdoob/three.js/blob/dev/examples/js/utils/BufferGeometryUtils.js)からダウンロードできます。
 
 ```html
 <script src="js/utils/BufferGeometryUtils.js"></script>
@@ -114,7 +114,7 @@ for (let i = 0; i < CELL_NUM; i++) {
   }
 }
 // ジオメトリを生成
-const geometry = THREE.BufferGeometryUtils.mergeBufferGeometries(boxes);
+const geometry = THREE.BufferGeometryUtils.mergeGeometries(boxes);
 
 // マテリアルを作成
 const material = new THREE.MeshNormalMaterial();

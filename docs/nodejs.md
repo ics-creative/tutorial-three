@@ -2,7 +2,7 @@
 title: Node.jsを使ったフロントエンド開発
 author: 池田 泰延
 published_date: 2019-01-17
-modified_date: 2023-05-26
+modified_date: 2024-04-27
 ---
 
 効率のよい開発ができるよう、最新の開発環境の構築もしましょう。開発環境を整えれば最新のJavaScript言語仕様を利用でき、開発効率向上に役立つはずです。また、型定義のあるTypeScriptを使ってコード補完をフルに効かせて開発するのもオススメです。
@@ -12,7 +12,7 @@ modified_date: 2023-05-26
 
 ### import文の課題
 
-とくに注意したいのは、Three.jsの本体に含まれていないライブラリです。本入門サイトで扱った`OrbitControls`や`mergeBufferGeometries`、`GLTFLoader`などが該当します。
+とくに注意したいのは、Three.jsの本体に含まれていないライブラリです。本入門サイトで扱った`OrbitControls`や`mergeGeometries`、`GLTFLoader`などが該当します。
 
 これらの機能はThree.js本体に含まれていないので、入門サイトでは別途JavaScriptファイルを`importmap`を使って読み込むことで利用しました。バンドルツール（webpackやVite等）を使った開発では、`importmap`での利用する方法とは異なる方式で解決しなければなりません。以下に対策方法を示します。
 
@@ -50,20 +50,20 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 
 
-### mergeBufferGeometries の使い方
+### mergeGeometries の使い方
 
 
-`import`文で、`three/examples/jsm/utils/BufferGeometryUtils`から該当機能を読み込みます。`import`文により`mergeBufferGeometries`が該当機能を得ているので、これを使って利用します。`THREE.BufferGeometryUtils.mergeBufferGeometries`ではなく`mergeBufferGeometries`で参照していることがポイントです。
+`import`文で、`three/examples/jsm/utils/BufferGeometryUtils`から該当機能を読み込みます。`import`文により`mergeGeometries`が該当機能を得ているので、これを使って利用します。`THREE.BufferGeometryUtils.mergeGeometries`ではなく`mergeGeometries`で参照していることがポイントです。
 
 
 ```js
 import * as THREE from "three";
-import { mergeBufferGeometries } from "three/examples/jsm/utils/BufferGeometryUtils";
+import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils";
 
 // ･･･省略
 
 // ジオメトリを生成
-const geometry = mergeBufferGeometries(boxes);
+const geometry = mergeGeometries(boxes);
 ```
 
 もしくは、以下のように`* as BufferGeometryUtils`として`import`文を記載しても問題ありません。
@@ -75,7 +75,7 @@ import * as BufferGeometryUtils from "three/examples/jsm/utils/BufferGeometryUti
 // ･･･省略
 
 // ジオメトリを生成
-const geometry = BufferGeometryUtils.mergeBufferGeometries(boxes);
+const geometry = BufferGeometryUtils.mergeGeometries(boxes);
 ```
 
 

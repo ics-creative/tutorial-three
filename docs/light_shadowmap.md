@@ -2,7 +2,7 @@
 title: Three.jsで影を落とす方法
 author: 池田 泰延
 published_date: 2017-11-11
-modified_date: 2019-01-08
+modified_date: 2024-04-27
 ---
 
 Threeでは光源に対してオブジェクトの影を別のオブジェクトに落とすことができます。影を落とすことで、リアリティーの向上につながります。
@@ -39,7 +39,7 @@ renderer.shadowMap.enabled = true;
 
 ```js
 // 照明を作成
-const light = new THREE.SpotLight(0xFFFFFF, 2, 100, Math.PI / 4, 1);
+const light = new THREE.SpotLight(0xffffff, 400, 100, Math.PI / 4, 1);
 // ライトに影を有効にする
 light.castShadow = true;
 scene.add(light);

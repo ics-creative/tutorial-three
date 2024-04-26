@@ -4,7 +4,7 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://unpkg.com/three@0.152.2/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js"
         }
       }
     </script>
@@ -32,8 +32,8 @@
 
       // 光源を作成
       {
-        const spotLight = new THREE.SpotLight(0xffffff, 4, 2000, Math.PI / 5, 0.2, 1.5);
-        spotLight.position.set(500, 300, 500);
+        const spotLight = new THREE.SpotLight(0xffffff, 200, 2000, Math.PI / 5, 0.2, 0.5);
+        spotLight.position.set(500, 250, 500);
         spotLight.castShadow = true; // 影を落とす設定
         spotLight.shadow.mapSize.width = 2048;
         spotLight.shadow.mapSize.height = 2048;
@@ -54,7 +54,7 @@
             map: texture,
             roughness: 0.0,
             metalness: 0.6,
-          })
+          }),
         );
         floor.rotation.x = -Math.PI / 2;
         floor.receiveShadow = true; // 影の設定

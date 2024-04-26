@@ -42,7 +42,7 @@ onmessage = (event) => {
     camera.position.set(
       100 * Math.sin(Date.now() / 2000),
       100 * Math.cos(Date.now() / 2000),
-      50 * Math.sin(Date.now() / 1000) + 60
+      50 * Math.sin(Date.now() / 1000) + 60,
     );
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 

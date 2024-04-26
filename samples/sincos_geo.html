@@ -4,7 +4,7 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://unpkg.com/three@0.152.2/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js"
         }
       }
     </script>
@@ -78,7 +78,7 @@
         // 球
         const sphere = new THREE.Mesh(
           new THREE.SphereGeometry(10),
-          new THREE.MeshStandardMaterial({ color: 0xff0000 })
+          new THREE.MeshStandardMaterial({ color: 0xff0000 }),
         );
         // 緯度経度から3D座標を設定
         const coords = translateGeoCoords(latitude, longitude, 300);

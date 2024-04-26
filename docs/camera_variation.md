@@ -2,7 +2,7 @@
 title: Three.jsのカメラ
 author: 池田 泰延
 published_date: 2017-11-12
-modified_date: 2019-01-08
+modified_date: 2024-04-27
 ---
 
 Three.jsにはCamera3Dクラスがあることを、入門編で紹介しました。このCamera3Dがどのようにして利用できるのか、もう少し掘り下げて学んでみましょう。
