@@ -10,7 +10,7 @@
         const canvasElement = document.querySelector("#myCanvas");
         // オフスクリーンキャンバスを取得
         const offscreenCanvas = canvasElement.transferControlToOffscreen();
-        const worker = new Worker("osc_imagebitmap_worker.js");
+        const worker = new Worker("osc_imagebitmap_worker.js", { type: "module" });
         worker.postMessage(
           {
             canvas: offscreenCanvas,

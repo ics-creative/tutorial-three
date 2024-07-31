@@ -37,19 +37,19 @@ const canvasElement = document.querySelector('#myCanvas');
 // オフスクリーンキャンバスを取得
 const offscreenCanvas = canvasElement.transferControlToOffscreen();
 // ワーカーを起動
-const worker = new Worker('osc_simple_worker.js');
+const worker = new Worker('osc_simple_worker.js', { type: 'module' });
 // ワーカー側にオフスクリーンキャンバスを転送
 worker.postMessage({ canvas: offscreenCanvas }, [offscreenCanvas]);
 ```
 
 ### ワーカー側
 
-ワーカー側では、Three.jsを`importScripts()`メソッドを使って読み込みます。`importScripts()`メソッドはワーカーでのみ利用できる機能です。外部のJSファイルを読み込むことができます。
+ワーカー側では、Three.jsを`import`を使って読み込みます。
 
-※ES Modules形式は一部のブラウザ（Firefox）ではワーカーで利用できないため注意ください（[Can i useより](https://caniuse.com/mdn-api_worker_worker_ecmascript_modules)）。
+※かつてはES Modules形式は一部のブラウザ（Firefox）ではワーカーで利用できませんでした（[Can i useより](https://caniuse.com/mdn-api_worker_worker_ecmascript_modules)）。しかし、2023年以降はほぼ対応したことと、Three.jsがES Modules前提であるため、ES Modules形式で記述します。
 
 ```js
-importScripts("https://unpkg.com/three@0.152.2/build/three.min.js");
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.module.js";
 ```
 
 メインスレッド側からの起動コールを受信するために、`onmessage`イベントを監視します。ここに初期化処理を記述します。引数の`event.data`オブジェクトで、メインスレッド側からのデータを受け取れます。
@@ -91,7 +91,7 @@ onmessage = event => {
 ```js
 // テクスチャーを読み込み
 const texture = await new Promise(resolve => {
-  new THREE.ImageBitmapLoader().load('imgs/earthmap1k.jpg', imageBitmap => {
+  new THREE.ImageBitmapLoader().load('imgs/earthmap1k.jpg', (imageBitmap) => {
     const texture = new THREE.CanvasTexture(imageBitmap);
     resolve(texture);
   });
@@ -124,7 +124,7 @@ const material = new THREE.MeshStandardMaterial({ map: texture });
 const canvasElement = document.querySelector('#myCanvas');
 // オフスクリーンキャンバスを取得
 const offscreenCanvas = canvasElement.transferControlToOffscreen();
-const worker = new Worker('osc_resize_worker.js');
+const worker = new Worker('osc_resize_worker.js', {type: 'module'});
 worker.postMessage(
   {
     type: 'init', // 処理区別のために追加

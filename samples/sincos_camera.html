@@ -4,7 +4,7 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.module.js"
         }
       }
     </script>
@@ -51,6 +51,7 @@
       // 画像を読み込む
       const loader = new THREE.TextureLoader();
       const texture = loader.load("imgs/earthmap1k.jpg");
+      texture.colorSpace = THREE.SRGBColorSpace; // カラースペースを指定
       // マテリアルにテクスチャーを設定
       const material = new THREE.MeshStandardMaterial({
         map: texture,

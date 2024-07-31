@@ -1,4 +1,4 @@
-importScripts("https://unpkg.com/three@0.152.2/build/three.min.js");
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.module.js";
 let renderer;
 let camera;
 

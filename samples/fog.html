@@ -4,69 +4,64 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.module.js"
         }
       }
     </script>
     <script type="module">
       import * as THREE from "three";
-      // ページの読み込みを待つ
-      window.addEventListener("DOMContentLoaded", init);
+      // サイズを指定
+      const width = 960;
+      const height = 540;
 
-      function init() {
-        // サイズを指定
-        const width = 960;
-        const height = 540;
+      // レンダラーを作成
+      const renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector("#myCanvas"),
+        antialias: true,
+        devicePixelRatio: window.devicePixelRatio,
+      });
+      renderer.setSize(width, height);
 
-        // レンダラーを作成
-        const renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector("#myCanvas"),
-          antialias: true,
-          devicePixelRatio: window.devicePixelRatio,
-        });
-        renderer.setSize(width, height);
+      // シーンを作成
+      const scene = new THREE.Scene();
 
-        // シーンを作成
-        const scene = new THREE.Scene();
+      // フォグを設定
+      scene.fog = new THREE.Fog(0x000000, 50, 2000);
 
-        // フォグを設定
-        scene.fog = new THREE.Fog(0x000000, 50, 2000);
+      // カメラを作成
+      const camera = new THREE.PerspectiveCamera(45, width / height);
+      camera.position.set(0, 0, +1000);
 
-        // カメラを作成
-        const camera = new THREE.PerspectiveCamera(45, width / height);
-        camera.position.set(0, 0, +1000);
+      // グループを作成
+      const group = new THREE.Group();
+      scene.add(group);
+      const geometry = new THREE.BoxGeometry(50, 50, 50);
+      const material = new THREE.MeshStandardMaterial();
 
-        // グループを作成
-        const group = new THREE.Group();
-        scene.add(group);
-        const geometry = new THREE.BoxGeometry(50, 50, 50);
-        const material = new THREE.MeshStandardMaterial();
+      for (let i = 0; i < 1000; i++) {
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.x = (Math.random() - 0.5) * 2000;
+        mesh.position.y = (Math.random() - 0.5) * 2000;
+        mesh.position.z = (Math.random() - 0.5) * 2000;
+        mesh.rotation.x = Math.random() * 2 * Math.PI;
+        mesh.rotation.y = Math.random() * 2 * Math.PI;
+        mesh.rotation.z = Math.random() * 2 * Math.PI;
+        // グループに格納する
+        group.add(mesh);
+      }
 
-        for (let i = 0; i < 1000; i++) {
-          const mesh = new THREE.Mesh(geometry, material);
-          mesh.position.x = (Math.random() - 0.5) * 2000;
-          mesh.position.y = (Math.random() - 0.5) * 2000;
-          mesh.position.z = (Math.random() - 0.5) * 2000;
-          mesh.rotation.x = Math.random() * 2 * Math.PI;
-          mesh.rotation.y = Math.random() * 2 * Math.PI;
-          mesh.rotation.z = Math.random() * 2 * Math.PI;
-          // グループに格納する
-          group.add(mesh);
-        }
+      // 光源
+      scene.add(new THREE.DirectionalLight(0xff0000, 2)); // 平行光源
+      scene.add(new THREE.AmbientLight(0x00ffff)); // 環境光源
 
-        // 光源
-        scene.add(new THREE.DirectionalLight(0xff0000, 2)); // 平行光源
-        scene.add(new THREE.AmbientLight(0x00ffff)); // 環境光源
+      // 毎フレーム時に実行されるループイベントです
+      tick();
 
-        // 毎フレーム時に実行されるループイベントです
-        tick();
-
-        function tick() {
-          // グループを回す
-          group.rotateY(0.01);
-          renderer.render(scene, camera); // レンダリング
-          requestAnimationFrame(tick);
-        }
+      function tick() {
+        // グループを回す
+        group.rotateY(0.01);
+        renderer.render(scene, camera); // レンダリング
+        requestAnimationFrame(tick);
       }
     </script>
   </head>

@@ -22,7 +22,7 @@
         const canvasElement = document.querySelector("#myCanvas");
         // オフスクリーンキャンバスを取得
         const offscreenCanvas = canvasElement.transferControlToOffscreen();
-        const worker = new Worker("osc_resize_worker.js");
+        const worker = new Worker("osc_resize_worker.js", { type: "module" });
         worker.postMessage(
           {
             type: "init",

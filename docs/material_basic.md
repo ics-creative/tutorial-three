@@ -172,12 +172,14 @@ function tick() {
 }
 ```
 
-画像を使うには読み込み処理を作る必要があります。`THREE.TextureLoader`クラスを使って次のようにファイルパスを指定します。
+画像を使うには読み込み処理を作る必要があります。`THREE.TextureLoader`クラスを使って次のようにファイルパスを指定します。`colorSpace`は馴染みがないと思いますが、カラースペースを指定しないとThree.jsでは画像がコントラストが低い状態で表示されるため、画像のカラースペースを適切に指定します。ウェブのほとんどの画像はsRGBカラースペースで作成されているため、`THREE.SRGBColorSpace`を指定するとよいでしょう。
 
 ```js
 // 画像を読み込む
 const loader = new THREE.TextureLoader();
 const texture = loader.load('imgs/earthmap1k.jpg');
+texture.colorSpace = THREE.SRGBColorSpace; // カラースペースを指定
+
 // マテリアルにテクスチャーを設定
 const material = new THREE.MeshStandardMaterial({
   map: texture
@@ -191,14 +193,7 @@ const material = new THREE.MeshStandardMaterial({
 - [サンプルのソースコードを確認する](../samples/material_texture.html)
 
 
-わかりやすいように変数に格納して記述しましたが、コンパクトに書きたい場合は次のように記述できます。処理内容はさきほどと同じです。
 
-```js
-// マテリアルにテクスチャーを設定
-const material = new THREE.MeshStandardMaterial({
-  map: new THREE.TextureLoader().load('imgs/earthmap1k.jpg')
-});
-```
 
 
 ## まとめ

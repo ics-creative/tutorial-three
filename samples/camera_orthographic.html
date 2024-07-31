@@ -4,7 +4,7 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.module.js"
         }
       }
     </script>
@@ -44,6 +44,7 @@
       {
         // 床のテクスチャー
         const texture = new THREE.TextureLoader().load("imgs/floor.png");
+        texture.colorSpace = THREE.SRGBColorSpace; // カラースペースを指定
         texture.wrapS = texture.wrapT = THREE.RepeatWrapping; // リピート可能に
         texture.repeat.set(10, 10); // 10x10マスに設定
         texture.magFilter = THREE.NearestFilter; // アンチエイリアスを外す

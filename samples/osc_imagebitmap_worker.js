@@ -1,4 +1,4 @@
-importScripts("https://unpkg.com/three@0.152.2/build/three.min.js");
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.module.js";
 
 // メインスレッドから通達があったとき
 onmessage = async (event) => {
@@ -28,6 +28,7 @@ onmessage = async (event) => {
   const texture = await new Promise((resolve) => {
     new THREE.ImageBitmapLoader().load("imgs/earthmap1k.jpg", (imageBitmap) => {
       const texture = new THREE.CanvasTexture(imageBitmap);
+      texture.colorSpace = THREE.SRGBColorSpace; // カラースペースを指定
       resolve(texture);
     });
   });
