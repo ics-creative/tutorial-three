@@ -23,9 +23,12 @@ modified_date: 2019-01-08
 Three.jsでは`THREE.Sprite`クラスのインスタンスを作成することで、ビルボードの表現ができます。`THREE.Sprite`は`THREE.Object3D`クラスのサブクラスであり、任意のマテリアルをコンストラクターで設定し、3D空間に`add()`メソッドで追加して画面に表示します。
 
 ```js
+const texture = new THREE.TextureLoader().load(/*画像パス*/);
+texture.colorSpace = THREE.SRGBColorSpace;
+
 // マテリアルを作成する
 const material = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load(/*画像パス*/),
+  map: texture,
 });
 
 const sprite = new THREE.Sprite(material);
@@ -39,9 +42,12 @@ scene.add(sprite);
 スプライトに対してフォグを有効にするには`THREE.SpriteMaterial`の`fog`プロパティーを有効にします。
 
 ```js
+const texture = new THREE.TextureLoader().load(/*画像パス*/);
+texture.colorSpace = THREE.SRGBColorSpace;
+
 // マテリアルを作成する
 const material = new THREE.SpriteMaterial({
-  map: new THREE.TextureLoader().load(/*画像パス*/),
+  map: texture,
 });
 // マテリアルでフォグを有効にする
 material.fog = true;
