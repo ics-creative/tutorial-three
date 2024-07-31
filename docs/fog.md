@@ -2,7 +2,7 @@
 title: Three.jsのフォグ機能
 author: 池田 泰延
 published_date: 2017-11-16
-modified_date: 2019-01-08
+modified_date: 2024-08-01
 ---
 
 フォグ効果とは遠くのものが霞んで見えるような状態にする効果のことです。フォグ（Fog）は日本語で「霧、濃霧」という意味です。

@@ -2,7 +2,7 @@
 title: 簡単なThree.jsのサンプルを試そう
 author: 池田 泰延
 published_date: 2017-11-02
-modified_date: 2023-05-26
+modified_date: 2024-08-01
 ---
 
 [Three.js](http://typescript.Three.js.com/)はHTMLの3D技術「[WebGL](http://ja.wikipedia.org/wiki/WebGL "WebGL - Wikipedia")」を扱いやすくしたフレームワークです。**Three.jsを使えばGPUによる本格的な3D表現をプラグイン無しで作成**できます。
