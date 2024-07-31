@@ -144,6 +144,7 @@ const geometry = new THREE.SphereGeometry(300, 30, 30);
 // 画像を読み込む
 const loader = new THREE.TextureLoader();
 const texture = loader.load('imgs/earthmap1k.jpg');
+texture.colorSpace = THREE.SRGBColorSpace;
 // マテリアルにテクスチャーを設定
 const material = new THREE.MeshStandardMaterial({
   map: texture

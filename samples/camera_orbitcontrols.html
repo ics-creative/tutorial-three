@@ -48,9 +48,12 @@
         directionalLight.position.set(1, 1, 1);
         scene.add(directionalLight);
 
+        const texture = new THREE.TextureLoader().load("imgs/earthmap1k.jpg");
+        texture.colorSpace = THREE.SRGBColorSpace;
+
         // マテリアルを作成
         const material = new THREE.MeshStandardMaterial({
-          map: new THREE.TextureLoader().load("imgs/earthmap1k.jpg"),
+          map: texture,
         });
 
         // 球体の形状を作成します
