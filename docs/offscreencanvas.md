@@ -49,7 +49,7 @@ worker.postMessage({ canvas: offscreenCanvas }, [offscreenCanvas]);
 ※かつてはES Modules形式は一部のブラウザ（Firefox）ではワーカーで利用できませんでした（[Can i useより](https://caniuse.com/mdn-api_worker_worker_ecmascript_modules)）。しかし、2023年以降はほぼ対応したことと、Three.jsがES Modules前提であるため、ES Modules形式で記述します。
 
 ```js
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.module.js";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js";
 ```
 
 メインスレッド側からの起動コールを受信するために、`onmessage`イベントを監視します。ここに初期化処理を記述します。引数の`event.data`オブジェクトで、メインスレッド側からのデータを受け取れます。

@@ -1,4 +1,4 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.module.js";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js";
 let renderer;
 let camera;
 

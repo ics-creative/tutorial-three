@@ -25,7 +25,7 @@ modified_date: 2024-08-01
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js"
         }
       }
     </script>
@@ -104,7 +104,7 @@ CDN（コンテンツ・デリバリー・ネットワーク）で提供され�
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.module.js"
+      "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js"
     }
   }
 </script>
