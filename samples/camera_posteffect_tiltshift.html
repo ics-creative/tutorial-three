@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.175.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+      import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+      import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
+
+      // サイズを指定
+      const width = 960;
+      const height = 540;
+
+      // レンダラーを作成
+      const renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector("#myCanvas"),
+        antialias: true,
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(width, height);
+      // レンダラー側で影を有効に
+      renderer.shadowMap.enabled = true;
+
+      // シーンを作成
+      const scene = new THREE.Scene();
+
+      // カメラを作成
+      const camera = new THREE.PerspectiveCamera(30, width / height, 1, 9999);
+
+      // --- ポストプロセス設定 ---
+      const composer = new EffectComposer(renderer);
+      composer.addPass(new RenderPass(scene, camera)); // 元のシーンをレンダリング
+
+      const tiltShiftShader = {
+        uniforms: {
+          tDiffuse: { value: null },
+          focusPos: { value: 0.5 }, // Y軸中心 (0.0-1.0)
+          blurAmount: { value: 7.0 }, // ブラー強度
+          gradientRadius: { value: 0.2 }, // フォーカスが合う範囲 (値を小さくしてぼかし領域を広げる)
+          resolution: { value: new THREE.Vector2(width, height) },
+        },
+        vertexShader: `
+varying vec2 vUv;
+void main() {
+  vUv = uv;
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}`,
+        fragmentShader: `
+precision highp float;
+
+uniform sampler2D tDiffuse; // 元のシーンのテクスチャ
+uniform float focusPos; // フォーカスを合わせるY座標 (0.0-1.0)
+uniform float blurAmount; // ブラーの強さ
+uniform float gradientRadius; // フォーカスが合っている範囲の半径
+uniform vec2 resolution; // 画面解像度
+
+varying vec2 vUv; // バーテックスシェーダーから渡されるUV座標
+
+// ガウシアン関数 (確率密度関数)
+// x: 中心からの距離, sigma: 標準偏差
+float gaussianPdf(in float x, in float sigma) {
+  return 0.39894 * exp(-0.5 * x * x / (sigma * sigma)) / sigma;
+}
+
+void main() {
+  // 現在のフラグメントのY座標とフォーカス位置との距離を計算
+  float dist = abs(vUv.y - focusPos);
+  // smoothstep関数を使って、フォーカス範囲の外側で滑らかにブラー強度を上げる
+  // gradientRadius から gradientRadius + 0.2 の範囲で 0.0 から 1.0 に変化
+  float blurStrength = smoothstep(gradientRadius, gradientRadius + 0.2, dist) * blurAmount;
+
+  // 元のピクセルの色を取得
+  vec4 originalColor = texture2D(tDiffuse, vUv);
+
+  // ブラー強度が非常に弱い場合は、ブラー処理をスキップして元の色を返す
+  if (blurStrength < 0.1) {
+    gl_FragColor = originalColor;
+    return;
+  }
+
+  // 1パス 2Dガウシアンブラー
+  // カーネルの半径 (カーネルサイズは (KERNEL_RADIUS*2+1) x (KERNEL_RADIUS*2+1))
+  const int KERNEL_RADIUS = 3; // 半径
+  float kernel[KERNEL_RADIUS + 1]; // 1Dガウスカーネルの重みを格納する配列
+  vec3 final_color = vec3(0.0); // 最終的な色を格納する変数
+  float totalWeight = 0.0;
+
+  // 1Dガウスカーネルの重みを計算 (中心からの距離に応じて)
+  float sigma = float(KERNEL_RADIUS);
+  float sum = 0.0;
+  for (int i = 0; i <= KERNEL_RADIUS; i++) {
+    kernel[i] = gaussianPdf(float(i), sigma);
+    sum += (i == 0 ? 1.0 : 2.0) * kernel[i];
+  }
+  // カーネルの重みの合計が1になるように正規化
+  for (int i = 0; i <= KERNEL_RADIUS; i++) {
+    kernel[i] /= sum;
+  }
+
+  // 1ピクセルのサイズ (UV座標系)
+  vec2 pixelSize = 1.0 / resolution;
+
+  // 2Dサンプリングでブラー計算
+  // カーネルサイズの範囲内で周囲のピクセルをサンプリング
+  for (int i = -KERNEL_RADIUS; i <= KERNEL_RADIUS; i++) {
+    for (int j = -KERNEL_RADIUS; j <= KERNEL_RADIUS; j++) {
+      // 1Dカーネルの重みから2Dカーネルの重みを計算
+      float weight = kernel[abs(i)] * kernel[abs(j)]; // 2Dカーネル重み
+      // サンプリングするオフセット位置を計算 (ブラー強度に応じてオフセットを調整)
+      vec2 offset = vec2(float(i), float(j)) * pixelSize * blurStrength;
+      // オフセット位置のピクセル色を取得し、重みを掛けて加算
+      final_color += texture2D(tDiffuse, vUv + offset).rgb * weight;
+      // 重みの合計を計算 (最終的な正規化のため)
+      totalWeight += weight;
+    }
+  }
+
+  // 重みの合計で割って、最終的なブラー処理後の色を計算
+  // アルファ値は元の色を維持
+  gl_FragColor = vec4(final_color / totalWeight, originalColor.a);
+}`,
+      };
+
+      const tiltShiftPass = new ShaderPass(tiltShiftShader);
+      composer.addPass(tiltShiftPass);
+      // --- ポストプロセス設定ここまで ---
+
+      // 光源を作成
+      {
+        const spotLight = new THREE.SpotLight(0xffffff, 200, 2000, Math.PI / 5, 0.2, 0.5);
+        spotLight.position.set(500, 300, 500);
+        spotLight.castShadow = true; // 影を落とす設定
+        spotLight.shadow.mapSize.width = 2048;
+        spotLight.shadow.mapSize.height = 2048;
+        scene.add(spotLight);
+      }
+
+      // 地面を作成
+      {
+        // 床のテクスチャー
+        const texture = new THREE.TextureLoader().load("imgs/floor.png");
+        texture.colorSpace = THREE.SRGBColorSpace; // カラースペースを指定
+        texture.wrapS = texture.wrapT = THREE.RepeatWrapping; // リピート可能に
+        texture.repeat.set(10, 10); // 10x10マスに設定
+        texture.magFilter = THREE.NearestFilter; // アンチエイリアスを外す
+
+        const floor = new THREE.Mesh(
+          new THREE.PlaneGeometry(1000, 1000),
+          new THREE.MeshStandardMaterial({
+            map: texture,
+            roughness: 0.0,
+            metalness: 0.6,
+          }),
+        );
+        floor.rotation.x = -Math.PI / 2;
+        floor.receiveShadow = true; // 影の設定
+        scene.add(floor);
+      }
+
+      // マス目を作成
+      {
+        // 立方体のマテリアルとジオメトリを作成
+        const material = new THREE.MeshStandardMaterial({
+          color: 0xff2222,
+          roughness: 0.1,
+          metalness: 0.2,
+        });
+        const geometry = new THREE.BoxGeometry(45, 45, 45);
+
+        // 立方体を複数作成しランダムに配置
+        for (let i = 0; i < 100; i++) {
+          const box = new THREE.Mesh(geometry, material);
+          box.position.x = Math.round((Math.random() - 0.5) * 19) * 50 + 25;
+          box.position.y = 25;
+          box.position.z = Math.round((Math.random() - 0.5) * 19) * 50 + 25;
+          // 影の設定
+          box.receiveShadow = true;
+          box.castShadow = true;
+          scene.add(box);
+        }
+      }
+
+      tick();
+
+      // 毎フレーム時に実行されるループイベントです
+      function tick() {
+        // 角度に応じてカメラの位置を設定
+        camera.position.x = 500 * Math.sin(Date.now() / 2000);
+        camera.position.y = 250;
+        camera.position.z = 500 * Math.cos(Date.now() / 2000);
+        // 原点方向を見つめる
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+        // レンダリング
+        composer.render();
+        requestAnimationFrame(tick);
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
+</html>
