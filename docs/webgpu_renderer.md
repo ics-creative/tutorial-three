@@ -5,7 +5,6 @@ published_date: 2025-04-23
 modified_date: 2025-04-23
 ---
 
-# WebGPURenderer の基本的な使い方
 
 `WebGPURenderer` は、最新のWebグラフィックスAPIである WebGPU を利用して Three.js のシーンを描画するためのレンダラーです。
 従来の `WebGLRenderer` と同様のインターフェースを持ちながら、WebGPU のパフォーマンス上の利点を活かすことができます。
@@ -20,11 +19,14 @@ modified_date: 2025-04-23
 4.  **シーン、カメラ、オブジェクトの作成**: 通常通り、シーン、カメラ、メッシュなどを作成します。
 
 
-※`renderer.render(scene, camera)` や `setPixelRatio()`などの処理はWebGLRendererと同じです。
 
 ## サンプルコード
 
 ![](../imgs/webgpu_renderer.png)
+
+
+- [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/webgpu_renderer_cdn.html)
+- [サンプルのソースコードを確認する](../samples/webgpu_renderer_cdn.html)
 
 
 ```html
@@ -133,4 +135,8 @@ import { WebGPURenderer } from "three/webgpu";
 - その他のプロパティや機能：
   - `outputColorSpace`, `toneMapping`, `physicallyCorrectLights`, `shadowMap` などの設定もほぼ同一です
 
-なお、WebGPU 非対応のブラウザでは `WebGPURenderer` を初期化できないため、必要に応じてフォールバックとして `WebGLRenderer` を使用することをおすすめします。
+## WebGPU非対応のブラウザでも利用できる
+
+`WebGPURenderer` は、WebGPU をサポートしていないブラウザ環境でも動作するように設計されています。WebGPU が利用できない場合、自動的に **WebGL 2** レンダラーにフォールバックします。
+
+これにより、開発者は最新の WebGPU API を活用しつつ、WebGPU 非対応のブラウザでもアプリケーションを実行できるため、幅広いユーザーにリーチできます。このフォールバック機能は Three.js によって自動的に処理されるため、開発者が特別な対応を行う必要はありません。
