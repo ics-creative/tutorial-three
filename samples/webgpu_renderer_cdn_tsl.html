@@ -12,7 +12,7 @@
     </script>
     <script type="module">
       import * as THREE from "three";
-      import { MeshStandardNodeMaterial } from "three/webgpu";
+      import { MeshStandardNodeMaterial, WebGPURenderer } from "three/webgpu";
       import {
         positionLocal,
         normalLocal,
@@ -33,7 +33,7 @@
       const height = 540;
 
       // レンダラーを作成
-      const renderer = new THREE.WebGPURenderer({
+      const renderer = new WebGPURenderer({
         canvas: document.querySelector("#myCanvas"),
       });
       renderer.setPixelRatio(window.devicePixelRatio);

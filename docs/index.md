@@ -104,6 +104,14 @@ WebGLの最適化や次世代の仕様について理解を深めましょう。
 - [オフスクリーンキャンバス](offscreencanvas.md)
 
 
+## WebGPU
+
+Three.jsは次世代のWebGPUにも対応しています。Three.jsでWebGPUを使うための方法を学びましょう。
+
+- [WebGPURendererの使い方](webgpu.md)
+- [TLSシェーダー言語](webgpu_shader.md)
+
+
 ## VR表現
 
 3Dの知識はバーチャルリアリティーの実装にも役立ちます。

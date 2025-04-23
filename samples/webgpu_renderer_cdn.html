@@ -4,19 +4,21 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.webgpu.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.webgpu.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.webgpu.js"
         }
       }
     </script>
     <script type="module">
       import * as THREE from "three";
+      import { WebGPURenderer } from "three/webgpu";
 
       // サイズを指定
       const width = 960;
       const height = 540;
 
       // レンダラーを作成
-      const renderer = new THREE.WebGPURenderer({
+      const renderer = new WebGPURenderer({
         canvas: document.querySelector("#myCanvas"),
       });
       renderer.setPixelRatio(window.devicePixelRatio);
