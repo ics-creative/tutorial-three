@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+      import { SimplexNoise } from "three/addons/math/SimplexNoise.js";
+
+      // サイズを指定
+      const width = 960;
+      const height = 540;
+
+      // レンダラーを作成
+      const canvasElement = document.querySelector("#myCanvas");
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvasElement,
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(width, height);
+
+      // シーンを作成
+      const scene = new THREE.Scene();
+
+      // カメラを作成
+      const camera = new THREE.PerspectiveCamera(45, width / height);
+      camera.position.set(0, 100, -100);
+      // カメラコントローラーを作成
+      const controls = new OrbitControls(camera, canvasElement);
+      controls.autoRotate = true;
+
+      // SimplexNoiseインスタンスを作成
+      const simplex = new SimplexNoise();
+
+      // 頂点情報を格納する配列
+      const vertices = [];
+
+      // 格子のサイズ
+      const GRID_SIZE = 100;
+      const SPACING = 1;
+
+      /**
+       * 格子状の座標を計算する共通関数
+       * @param {number} index - パーティクルのインデックス
+       * @returns {{x: number, z: number}} 格子状の座標オブジェクト
+       */
+      function getGridPosition(index) {
+        const nx = index % ((GRID_SIZE / SPACING) * 2 + 1);
+        const nz = Math.floor(index / ((GRID_SIZE / SPACING) * 2 + 1));
+
+        const x = (nx - GRID_SIZE / SPACING) * SPACING;
+        const z = (nz - GRID_SIZE / SPACING) * SPACING;
+
+        return { x, z };
+      }
+
+      // XZ平面上に格子状にポイントを配置
+      for (let x = -GRID_SIZE; x <= GRID_SIZE; x += SPACING) {
+        for (let z = -GRID_SIZE; z <= GRID_SIZE; z += SPACING) {
+          // 初期座標（Yは0から開始）
+          vertices.push(x, 0, z);
+        }
+      }
+
+      // 形状データを作成
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
+
+      // マテリアルを作成
+      const material = new THREE.PointsMaterial({
+        // 一つ一つのサイズ
+        size: 1,
+        // 色
+        color: 0xffffff,
+      });
+
+      // 物体を作成
+      const mesh = new THREE.Points(geometry, material);
+      scene.add(mesh);
+
+      // GridHelperを作成
+      const gridHelper = new THREE.GridHelper(100, 20);
+      scene.add(gridHelper);
+
+      // 時間の初期値
+      let time = 0;
+      let startTime = Date.now();
+
+      tick();
+
+      // 毎フレーム時に実行されるループイベントです
+      function tick() {
+        controls.update();
+
+        // 3秒経過したかチェック
+        const currentTime = Date.now();
+        if (currentTime - startTime > 6_000) {
+          // 3秒経過したらリセット
+          time = 0;
+          startTime = currentTime;
+
+          // 座標もリセット
+          const position = mesh.geometry.attributes.position;
+          for (let i = 0; i < position.count; i++) {
+            const { x, z } = getGridPosition(i);
+            position.setXYZ(i, x, 0, z);
+          }
+          position.needsUpdate = true;
+        }
+
+        // 時間を更新
+        time += 0.001;
+
+        // ポジションを更新
+        const position = mesh.geometry.attributes.position;
+        for (let i = 0; i < position.count; i++) {
+          const { x: gridX, z: gridZ } = getGridPosition(i);
+
+          // 各頂点のXYZ座標
+          const x = position.getX(i);
+          const y = position.getY(i);
+          const z = position.getZ(i);
+
+          // SimplexNoiseを使ってY座標を計算
+          // x, z, timeの3つの引数を与える
+          const mul = 0.3;
+          const vx = simplex.noise3d(gridX * 0.002, time, gridZ * 0.002) * mul;
+          const vy = simplex.noise3d(gridZ * 0.02, time, gridX * 0.01) * mul;
+          const vz = simplex.noise3d(time, gridX * 0.01, gridZ * 0.002) * mul;
+
+          // 新しい座標を設定
+          position.setXYZ(i, x + vx, y + vy, z + vz);
+        }
+
+        // 頂点の更新が必要なことを伝える
+        position.needsUpdate = true;
+
+        // レンダリング
+        renderer.render(scene, camera);
+
+        requestAnimationFrame(tick);
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas" style="cursor: move"></canvas>
+  </body>
+</html>
