@@ -34,7 +34,6 @@
       camera.position.set(0, 100, -100);
       // カメラコントローラーを作成
       const controls = new OrbitControls(camera, canvasElement);
-      controls.autoRotate = true;
 
       // SimplexNoiseインスタンスを作成
       const simplex = new SimplexNoise();
@@ -43,8 +42,15 @@
       const vertices = [];
 
       // 格子のサイズ
-      const GRID_SIZE = 100;
-      const SPACING = 1;
+      const GRID_SIZE = 60;
+      const SPACING = 10;
+
+      // 軌跡の履歴を格納する配列
+      const trajectoryHistory = [];
+      const MAX_TRAJECTORY_POINTS = 300; // 軌跡の最大ポイント数
+
+      // 各頂点のグリッド座標情報を格納する配列
+      const gridPositions = [];
 
       /**
        * 格子状の座標を計算する共通関数
@@ -61,12 +67,20 @@
         return { x, z };
       }
 
-      // XZ平面上に格子状にポイントを配置
+      // グリッド座標を計算して配列に格納
       for (let x = -GRID_SIZE; x <= GRID_SIZE; x += SPACING) {
         for (let z = -GRID_SIZE; z <= GRID_SIZE; z += SPACING) {
-          // 初期座標（Yは0から開始）
-          vertices.push(x, 0, z);
+          // グリッド座標情報を保存
+          gridPositions.push({ x, z });
+          // すべての頂点を原点から開始
+          vertices.push(0, 0, 0);
         }
+      }
+
+      // 軌跡履歴の初期化
+      const vertexCount = vertices.length / 3;
+      for (let i = 0; i < vertexCount; i++) {
+        trajectoryHistory[i] = [];
       }
 
       // 形状データを作成
@@ -85,6 +99,22 @@
       const mesh = new THREE.Points(geometry, material);
       scene.add(mesh);
 
+      // 軌跡の線を作成
+      const trajectoryLines = [];
+      for (let i = 0; i < vertexCount; i++) {
+        // 初期状態では同じ点を2つ設定（線として表示されない）
+        const lineGeometry = new THREE.BufferGeometry();
+        const positions = new Float32Array([0, 0, 0, 0, 0, 0]);
+        lineGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+        const lineMaterial = new THREE.LineBasicMaterial({
+          color: 0x00ff00,
+          transparent: true,
+        });
+        const line = new THREE.Line(lineGeometry, lineMaterial);
+        scene.add(line);
+        trajectoryLines.push(line);
+      }
+
       // GridHelperを作成
       const gridHelper = new THREE.GridHelper(100, 20);
       scene.add(gridHelper);
@@ -101,7 +131,7 @@
 
         // 3秒経過したかチェック
         const currentTime = Date.now();
-        if (currentTime - startTime > 6_000) {
+        if (currentTime - startTime > 10_000) {
           // 3秒経過したらリセット
           time = 0;
           startTime = currentTime;
@@ -113,6 +143,11 @@
             position.setXYZ(i, x, 0, z);
           }
           position.needsUpdate = true;
+
+          // 軌跡履歴もリセット
+          for (let i = 0; i < vertexCount; i++) {
+            trajectoryHistory[i] = [];
+          }
         }
 
         // 時間を更新
@@ -121,7 +156,8 @@
         // ポジションを更新
         const position = mesh.geometry.attributes.position;
         for (let i = 0; i < position.count; i++) {
-          const { x: gridX, z: gridZ } = getGridPosition(i);
+          // グリッド座標情報を取得
+          const { x: gridX, z: gridZ } = gridPositions[i];
 
           // 各頂点のXYZ座標
           const x = position.getX(i);
@@ -130,13 +166,38 @@
 
           // SimplexNoiseを使ってY座標を計算
           // x, z, timeの3つの引数を与える
-          const mul = 0.3;
-          const vx = simplex.noise3d(gridX * 0.002, time, gridZ * 0.002) * mul;
-          const vy = simplex.noise3d(gridZ * 0.02, time, gridX * 0.01) * mul;
-          const vz = simplex.noise3d(time, gridX * 0.01, gridZ * 0.002) * mul;
+          const mul = 0.5;
+          // const vx = simplex.noise3d(gridX * 0.002, time, gridZ * 0.002) * mul;
+          // const vy = simplex.noise3d(gridZ * 0.02, time, gridX * 0.01) * mul;
+          // const vz = simplex.noise3d(time, gridX * 0.01, gridZ * 0.002) * mul;
+
+          const vx = simplex.noise(gridX * 0.002, time) * mul;
+          const vy = (simplex.noise(time, gridX * 0.01) + 0.5) * mul;
+          const vz = simplex.noise(time, gridZ * 0.01) * mul;
 
           // 新しい座標を設定
-          position.setXYZ(i, x + vx, y + vy, z + vz);
+          const newX = x + vx;
+          const newY = y + vy;
+          const newZ = z + vz;
+          position.setXYZ(i, newX, newY, newZ);
+
+          // 軌跡履歴に追加
+          trajectoryHistory[i].push(newX, newY, newZ);
+
+          // 軌跡履歴が最大数を超えたら古いものを削除
+          if (trajectoryHistory[i].length > MAX_TRAJECTORY_POINTS * 3) {
+            trajectoryHistory[i].splice(0, 3);
+          }
+
+          // 軌跡の線を更新
+          if (trajectoryHistory[i].length >= 6) {
+            // 最低2点必要
+            const line = trajectoryLines[i];
+            const lineGeometry = line.geometry;
+            const positions = new Float32Array(trajectoryHistory[i]);
+            lineGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+            lineGeometry.computeBoundingSphere();
+          }
         }
 
         // 頂点の更新が必要なことを伝える
