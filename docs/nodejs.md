@@ -22,17 +22,17 @@ modified_date: 2024-04-27
 
 Node.jsのバンドルツールで取り込む場合は、`THREE`名前空間上に該当機能が存在しないので、`import`文の書き方を調整する必要があります。
 
-`three/examples/jsm/`以下の階層に該当機能が存在するので、ここにパスを通します。
+`three/addons/`以下の階層に該当機能が存在するので、ここにパスを通します。
 
 
 ### OrbitControls の使い方
 
-`import`文で、`three/examples/jsm/controls/OrbitControls`から該当機能を読み込みます。`import`文により`OrbitControls`オブジェクトで該当機能を得ているので、これを使って利用します。`THREE.OrbitControls`ではなく`OrbitControls`で参照していることがポイントです。
+`import`文で、`three/addons/controls/OrbitControls.js`から該当機能を読み込みます。`import`文により`OrbitControls`オブジェクトで該当機能を得ているので、これを使って利用します。`THREE.OrbitControls`ではなく`OrbitControls`で参照していることがポイントです。
 
 
 ```js
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 // ･･･省略
 
@@ -53,12 +53,12 @@ const controls = new OrbitControls(camera, renderer.domElement);
 ### mergeGeometries の使い方
 
 
-`import`文で、`three/examples/jsm/utils/BufferGeometryUtils`から該当機能を読み込みます。`import`文により`mergeGeometries`が該当機能を得ているので、これを使って利用します。`THREE.BufferGeometryUtils.mergeGeometries`ではなく`mergeGeometries`で参照していることがポイントです。
+`import`文で、`three/addons/utils/BufferGeometryUtils.js`から該当機能を読み込みます。`import`文により`mergeGeometries`が該当機能を得ているので、これを使って利用します。`THREE.BufferGeometryUtils.mergeGeometries`ではなく`mergeGeometries`で参照していることがポイントです。
 
 
 ```js
 import * as THREE from "three";
-import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils";
+import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 
 // ･･･省略
 
@@ -70,7 +70,7 @@ const geometry = mergeGeometries(boxes);
 
 ```js
 import * as THREE from "three";
-import * as BufferGeometryUtils from "three/examples/jsm/utils/BufferGeometryUtils";
+import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 
 // ･･･省略
 
@@ -81,12 +81,12 @@ const geometry = BufferGeometryUtils.mergeGeometries(boxes);
 
 ### GLTFLoader の使い方
 
-`import`文で、`three/examples/jsm/loaders/GLTFLoader`から該当機能を読み込みます。`import`文により`GLTFLoader`オブジェクトが該当機能を得ているので、これを使って利用します。`THREE.GLTFLoader`ではなく`GLTFLoader`で参照していることがポイントです。
+`import`文で、`three/addons/loaders/GLTFLoader.js`から該当機能を読み込みます。`import`文により`GLTFLoader`オブジェクトが該当機能を得ているので、これを使って利用します。`THREE.GLTFLoader`ではなく`GLTFLoader`で参照していることがポイントです。
 
 
 ```js
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 // ･･･省略
 

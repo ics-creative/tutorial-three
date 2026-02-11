@@ -105,8 +105,8 @@ SimplexNoiseを使ってノイズを生成することで、地面のような�
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.175.0/examples/jsm/"
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
     }
   }
 </script>

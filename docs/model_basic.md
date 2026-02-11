@@ -53,8 +53,8 @@ https://github.com/KhronosGroup/glTF-Sample-Models/tree/master/2.0/ToyCar
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.175.0/examples/jsm/"
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
     }
   }
 </script>
@@ -152,8 +152,8 @@ async function init() {
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.175.0/examples/jsm/"
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
     }
   }
 </script>
@@ -213,8 +213,8 @@ Colladaファイル（拡張子は`.dae`）の場合を読み込むには`Collad
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.175.0/examples/jsm/"
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
     }
   }
 </script>
@@ -230,7 +230,7 @@ Colladaファイル（拡張子は`.dae`）の場合を読み込むには`Collad
   // …
 </script>
 ```
-※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。今後はES Modulesでの利用を推奨されますので、本記事もゆくゆく更新します。
+※Three.js r148（2022年12月リリース）より`examples/js`フォルダーでの提供はなくなりました。本記事のコードはES Modules（`three/addons/`）で解説しています。
 
 読み込む処理は次のように記載します。`ColladaLoader`クラスのインスタンスから、`loadAsync()`メソッドを利用します。
 引数にはファイルパスを指定します。読み込み完了後に3D空間への配置処理をするのがポイントです。Colladaファイルにはシーンの情報の他に、カメラやライトなどさまざまな情報が含まれます。そのため、シーンの情報だけ抜き出すようにしましょう。

@@ -80,10 +80,21 @@ for (let i = 0; i < CELL_NUM; i++) {
 }
 ```
 
-Three.jsでは、`THREE.BufferGeometryUtils.mergeGeometries()`メソッドで結合できます。このメソッドはThree.js本体のコードに含まれていないので注意ください。公式GitHubの`examples/js/utils`フォルダーにJavaScriptファイルがあるので、これを`script`要素で読み込みます。作業用フォルダーに`BufferGeometryUtils.js`ファイルをコピーしておきましょう。該当ファイルは[こちら](https://github.com/mrdoob/three.js/blob/dev/examples/js/utils/BufferGeometryUtils.js)からダウンロードできます。
+Three.jsでは、`BufferGeometryUtils.mergeGeometries()`メソッドで結合できます。`BufferGeometryUtils`はThree.js本体とは別モジュールのため、`three/addons/`から読み込みます。CDNを利用する場合は、次の`importmap`と`import`を記述します。
 
 ```html
-<script src="js/utils/BufferGeometryUtils.js"></script>
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
+    }
+  }
+</script>
+<script type="module">
+  import * as THREE from "three";
+  import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
+</script>
 ```
 
 コードは次のように記述します。`scene`オブジェクトに追加されているメッシュはたった1個であることに注目してください。ジオメトリの配置座標を調整するには`translate()`メソッドを利用します。
@@ -114,7 +125,7 @@ for (let i = 0; i < CELL_NUM; i++) {
   }
 }
 // ジオメトリを生成
-const geometry = THREE.BufferGeometryUtils.mergeGeometries(boxes);
+const geometry = BufferGeometryUtils.mergeGeometries(boxes);
 
 // マテリアルを作成
 const material = new THREE.MeshNormalMaterial();

@@ -74,9 +74,9 @@ TSL はこれらのプロパティ（`positionNode`／`colorNode`／`normalNode`
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.webgpu.js",
-          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.webgpu.js",
-          "three/tsl": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.tsl.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/tsl": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.tsl.js"
         }
       }
     </script>

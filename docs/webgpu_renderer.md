@@ -36,8 +36,8 @@ modified_date: 2025-04-23
   <script type="importmap">
     {
       "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.webgpu.js",
-        "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.webgpu.js"
+        "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+        "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js"
       }
     }
   </script>
@@ -103,8 +103,8 @@ modified_date: 2025-04-23
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.webgpu.js",
-      "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.webgpu.js"
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+      "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js"
     }
   }
 </script>
@@ -133,7 +133,7 @@ import { WebGPURenderer } from "three/webgpu";
   - `render(scene, camera)` でシーンを描画
   - `dispose()` でリソースを破棄
 - その他のプロパティや機能：
-  - `outputColorSpace`, `toneMapping`, `physicallyCorrectLights`, `shadowMap` などの設定もほぼ同一です
+  - `outputColorSpace`, `toneMapping`, `shadowMap` など多くの設定を共通して扱えます
 
 ## WebGPU非対応のブラウザでも利用できる
 

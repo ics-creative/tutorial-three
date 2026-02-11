@@ -180,5 +180,10 @@ scene.add(light);
 
 詳しい仕様は公式ドキュメント「[RectAreaLight](https://threejs.org/docs/#api/lights/RectAreaLight)」を参照ください。
 
-この光源に関しては[RectAreaLightUniformsLib.js](https://threejs.org/examples/js/lights/RectAreaLightUniformsLib.js)を組み込むと、美しい表示結果が得られます。
+この光源を利用する際は、`RectAreaLightUniformsLib`を読み込んで初期化します。
 
+```js
+import { RectAreaLightUniformsLib } from "three/addons/lights/RectAreaLightUniformsLib.js";
+
+RectAreaLightUniformsLib.init();
+```
