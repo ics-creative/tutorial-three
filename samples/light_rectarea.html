@@ -6,8 +6,8 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js",
-          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.175.0/examples/jsm/"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
         }
       }
     </script>
@@ -29,9 +29,8 @@
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(width, height);
 
-      // 照明に関するレンダラーの設定
-      renderer.gammaInput = true;
-      renderer.gammaOutput = true;
+      // レンダラーの色空間を設定
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
 
       // シーンを作成
       const scene = new THREE.Scene();

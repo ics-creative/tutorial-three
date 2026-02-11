@@ -1,48 +1,60 @@
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js"
         }
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
+      import * as THREE from "three/webgpu";
 
-      // サイズを指定
       const width = 960;
       const height = 540;
+      const canvas = document.querySelector("#myCanvas");
 
       // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector("#myCanvas"),
+      const renderer = new THREE.WebGPURenderer({
+        canvas,
+        antialias: true,
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(width, height);
+      renderer.setPixelRatio(devicePixelRatio);
+      renderer.setAnimationLoop(tick);
 
       // シーンを作成
       const scene = new THREE.Scene();
 
-      // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height);
-      camera.position.set(0, 0, +1000);
+      // カメラを作成(画角, アスペクト比, 描画開始距離, 描画終了距離)
+      const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+      // カメラの初期座標を設定（X座標, Y座標, Z座標）
+      camera.position.set(0, 0, 1000);
 
-      // 箱を作成
-      const geometry = new THREE.BoxGeometry(400, 400, 400);
-      const material = new THREE.MeshNormalMaterial();
+      // 箱を作成(幅, 高さ, 奥行き)
+      const geometry = new THREE.BoxGeometry(500, 500, 500);
+      const material = new THREE.MeshStandardMaterial({ color: 0x0000ff });
       const box = new THREE.Mesh(geometry, material);
+      // シーンに追加
       scene.add(box);
 
-      tick();
+      // 平行光源
+      const light = new THREE.DirectionalLight(0xffffff);
+      light.intensity = 2; // 光の強さを倍に
+      light.position.set(1, 1, 1); // ライトの方向
+      // シーンに追加
+      scene.add(light);
 
-      // 毎フレーム時に実行されるループイベントです
       function tick() {
+        // 箱を回転させる
+        box.rotation.x += 0.01;
         box.rotation.y += 0.01;
-        renderer.render(scene, camera); // レンダリング
 
-        requestAnimationFrame(tick);
+        // レンダリング
+        renderer.render(scene, camera);
       }
     </script>
   </head>

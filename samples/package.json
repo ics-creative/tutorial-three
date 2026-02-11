@@ -4,7 +4,7 @@
     "format" : "prettier --write '*.{html,js,css}' --print-width=120"
   },
   "dependencies": {
-    "@types/three": "^0.175.0"
+    "@types/three": "^0.182.0"
   },
   "devDependencies": {
     "prettier": "^3.6.2"
