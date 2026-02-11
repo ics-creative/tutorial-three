@@ -74,14 +74,12 @@
         mesh.position.z = 400 * Math.cos((index / geometryList.length) * Math.PI * 2);
       });
 
-
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         // メッシュを回転させる
         container.rotation.y += 0.01;
         // レンダリング
         renderer.render(scene, camera);
-
       }
     </script>
   </head>

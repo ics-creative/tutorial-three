@@ -37,7 +37,6 @@ onmessage = async (event) => {
     mesh.position.set(1000 * (Math.random() - 0.5), 1000 * (Math.random() - 0.5), 1000 * (Math.random() - 0.5));
   }
 
-
   // 毎フレーム時に実行されるループイベントです
   function tick() {
     // カメラの自動移動

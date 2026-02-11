@@ -79,7 +79,6 @@
       const mesh = new THREE.Points(geometry, material);
       scene.add(mesh);
 
-
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         controls.update();
@@ -114,7 +113,6 @@
 
         // レンダリング
         renderer.render(scene, camera);
-
       }
     </script>
   </head>

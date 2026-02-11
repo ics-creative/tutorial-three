@@ -66,7 +66,6 @@
       const light = new THREE.RectAreaLight(0xffffff, 5.0, 10, 10);
       scene.add(light);
 
-
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         // レンダリング
@@ -80,7 +79,6 @@
         const ly = 5.0 + 5.0 * Math.sin(t / 3.0);
         light.position.set(lx, ly, lz);
         light.lookAt(new THREE.Vector3(0, 0, 0));
-
       }
     </script>
   </head>

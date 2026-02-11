@@ -38,7 +38,6 @@
       const mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
 
-
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         rot += 0.5; // 毎フレーム角度を0.5度ずつ足していく
@@ -52,7 +51,6 @@
 
         // レンダリング
         renderer.render(scene, camera);
-
       }
     </script>
   </head>

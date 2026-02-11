@@ -7,28 +7,31 @@
         "imports": {
           "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
           "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/tsl": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.tsl.js",
           "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
         }
       }
     </script>
     <script type="module">
       import * as THREE from "three/webgpu";
-      import { WebGPURenderer } from "three/webgpu";
+      import { gaussianBlur } from "three/addons/tsl/display/GaussianBlurNode.js";
+      import { abs, mix, pass, smoothstep, uniform, vec2, viewportUV } from "three/tsl";
 
       // サイズを指定
       const width = 960;
       const height = 540;
+      const canvas = document.querySelector("#myCanvas");
 
       // レンダラーを作成
-      const renderer = new WebGPURenderer({
-        canvas: document.querySelector("#myCanvas"),
+      const renderer = new THREE.WebGPURenderer({
+        canvas,
         antialias: true,
       });
       renderer.setPixelRatio(devicePixelRatio);
       renderer.setSize(width, height);
       // レンダラー側で影を有効に
       renderer.shadowMap.enabled = true;
-
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       renderer.setAnimationLoop(tick);
 
       // シーンを作成
@@ -38,13 +41,19 @@
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(30, width / height, 1, 9999);
 
+      const postProcessing = new THREE.PostProcessing(renderer);
+      const lookAtTarget = new THREE.Vector3(0, 0, 0);
+
       // 光源を作成
       {
         const spotLight = new THREE.SpotLight(0xffffff, 200, 2000, Math.PI / 5, 0.2, 0.5);
         spotLight.position.set(500, 300, 500);
         spotLight.castShadow = true; // 影を落とす設定
-        spotLight.shadow.mapSize.width = 2048;
-        spotLight.shadow.mapSize.height = 2048;
+        spotLight.shadow.mapSize.width = 4096;
+        spotLight.shadow.mapSize.height = 4096;
+        spotLight.shadow.bias = -0.000001;
+        spotLight.shadow.normalBias = 0.02;
+        spotLight.shadow.radius = 8;
         scene.add(spotLight);
       }
 
@@ -93,6 +102,15 @@
         }
       }
 
+      const focusPosUniform = uniform(0.5);
+      const blurAmountUniform = uniform(7.0);
+      const gradientRadiusUniform = uniform(0.2);
+      const scenePass = pass(scene, camera);
+      const sceneColor = scenePass.getTextureNode();
+      const dist = abs(viewportUV.y.sub(focusPosUniform));
+      const blurStrength = smoothstep(gradientRadiusUniform, gradientRadiusUniform.add(0.2), dist);
+      const blurredScene = gaussianBlur(sceneColor, vec2(blurAmountUniform, blurAmountUniform), 4);
+      postProcessing.outputNode = mix(sceneColor, blurredScene, blurStrength);
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
@@ -101,10 +119,9 @@
         camera.position.y = 250;
         camera.position.z = 500 * Math.cos(Date.now() / 2000);
         // 原点方向を見つめる
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        camera.lookAt(lookAtTarget);
 
-        // レンダリング
-        renderer.render(scene, camera);
+        postProcessing.render();
       }
     </script>
   </head>

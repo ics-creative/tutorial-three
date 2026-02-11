@@ -42,7 +42,6 @@ onmessage = async (event) => {
   mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
 
-
   // 毎フレーム時に実行されるループイベントです
   function tick() {
     if (!mesh) {

@@ -55,7 +55,6 @@
       const light = new THREE.SpotLight(0xffffff, 4, 50, Math.PI / 4, 0, 0.5);
       scene.add(light);
 
-
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         // レンダリング
@@ -68,7 +67,6 @@
         const lz = r * Math.sin(t);
         const ly = 6.0 + 5.0 * Math.sin(t / 3.0);
         light.position.set(lx, ly, lz);
-
       }
     </script>
   </head>

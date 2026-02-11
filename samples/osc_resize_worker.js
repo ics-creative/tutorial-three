@@ -46,7 +46,6 @@ async function init(event) {
   // 3D空間にメッシュを追加
   scene.add(mesh);
 
-
   // 毎フレーム時に実行されるループイベントです
   function tick() {
     mesh.rotation.y += 0.01;

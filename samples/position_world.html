@@ -77,7 +77,6 @@
       const line = new THREE.Line(geometry, new THREE.LineBasicMaterial());
       scene.add(line);
 
-
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         group.rotation.x += 0.02;
@@ -98,7 +97,6 @@
 
         // レンダリング
         renderer.render(scene, camera);
-
       }
     </script>
   </head>

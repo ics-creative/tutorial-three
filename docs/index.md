@@ -2,10 +2,10 @@
 title: Three.js入門サイト
 author: 池田 泰延
 published_date: 2024-04-27
-modified_date: 2024-04-27
+modified_date: 2026-02-11
 ---
 
-このサイトは、WebGLのライブラリ「[Three.js](https://threejs.org)」の入門サイトです。
+このサイトは、3Dライブラリ「[Three.js](https://threejs.org)」の入門サイトです。Three.jsはWebGLとWebGPUの両方に対応していますが、このサイトでは次世代のWebGPU版（`three/webgpu`）を中心に解説します。
 
 初学者から学べるように基本から解説しつつ、発展的な内容までまとめています。このサイトを通して、ウェブの3Dのインタラクションデザインについて学んでいきましょう。
 
@@ -14,9 +14,9 @@ modified_date: 2024-04-27
 Three.jsは、HTML5で3Dコンテンツを制作するためのJavaScriptライブラリです。[Mr.doob](http://mrdoob.com)氏が中心となって開発されており、オープンソースソフトウェアとして個人・商用でも無償で利用できます。
 
 
-WebGLだけで3D表現をするためには、立方体1つ表示するだけでも多くのJavaScriptやGLSLコードを書く必要があり専門知識も必要です。Three.jsを使えばJavaScriptの知識だけで簡単に3Dコンテンツが作成できるため、手軽に扱えるようになります。
+WebGPUやWebGLを素のAPIだけで3D表現しようとすると、立方体1つ表示するだけでも多くのJavaScriptやWGSL / GLSLコードが必要です。Three.jsを使えばJavaScriptを中心に3Dコンテンツを作成できるため、手軽に扱えるようになります。
 
-もともと2000年代後半のFlashの時代から、ウェブの3D表現が人気を集めてきました。今では標準技術としてのWebGLが、ゲームやビジュアライゼーションなどの多くの場面で採用されています。
+もともと2000年代後半のFlashの時代から、ウェブの3D表現が人気を集めてきました。今では標準技術のWebGLに加えてWebGPUも利用が進み、ゲームやビジュアライゼーションなど多くの場面で採用されています。
 
 
 ## Three.js入門編
@@ -97,7 +97,7 @@ Three.jsだけだと実現できる表現の種類に限界があります。シ
 
 ## WebGL応用編
 
-WebGLの最適化や次世代の仕様について理解を深めましょう。
+WebGLの最適化や関連仕様について理解を深めましょう。WebGPU中心の実装を学ぶ際にも、互換性や背景知識として役立ちます。
 
 
 - [次世代WebGLの記事一覧](webgl_next.md)
@@ -125,4 +125,3 @@ Three.jsは次世代のWebGPUにも対応しています。Three.jsでWebGPUを�
 
 
 - [Node.jsの記事一覧](nodejs.md)
-
