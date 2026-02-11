@@ -5,7 +5,7 @@ published_date: 2019-01-17
 modified_date: 2026-02-11
 ---
 
-WebGLの次世代の仕様について理解を深めましょう。
+WebGPUやWebGLの新しいの仕様について理解を深めましょう。
 
 ## 最適化
 
@@ -15,6 +15,12 @@ WebGLの次世代の仕様について理解を深めましょう。
 - [オフスクリーンキャンバスを使ったJSのマルチスレッド描画](https://ics.media/entry/19043)
 - [圧縮テクスチャーをWebGLで扱う方法と利点](https://ics.media/entry/17863)
 
+## WebGPU
+
+- [WebGPUがついに利用可能に \- WebGL以上の高速な描画と、計算処理への可能性](https://ics.media/entry/230426/)
+- [WebGPU対応のThree\.jsのはじめ方](https://ics.media/entry/250501/)
+- [GPGPUを体験しよう！ WebGPUのコンピュートシェーダー入門](https://ics.media/entry/250626/)
+
 ## WebGL 2.0
 
 ![](https://ics.media/wp-content/uploads/2017/07/170706_webgl2_eyecatch.png)
@@ -23,7 +29,8 @@ WebGLの次世代の仕様について理解を深めましょう。
 - [Multiple Render Targetsによる動的なライティング表現](https://ics.media/entry/17120)
 - [Transform Feedbackによるパーティクル表現](https://ics.media/entry/17505)
 
-## WebGPU
+
+## WebMetal（旧仕様）
 
 ![](https://ics.media/wp-content/uploads/2018/06/180619_WebGPU_ComputeShader_eyecatch.png)
 
