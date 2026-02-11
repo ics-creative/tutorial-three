@@ -5,13 +5,14 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
           "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
         }
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
+      import * as THREE from "three/webgpu";
       import { OrbitControls } from "three/addons/controls/OrbitControls.js";
       import { SimplexNoise } from "three/addons/math/SimplexNoise.js";
       // サイズを指定
@@ -20,14 +21,17 @@
 
       // レンダラーを作成
       const canvasElement = document.querySelector("#myCanvas");
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new THREE.WebGPURenderer({
         canvas: canvasElement,
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(devicePixelRatio);
       renderer.setSize(width, height);
+
+      renderer.setAnimationLoop(tick);
 
       // シーンを作成
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
       scene.fog = new THREE.Fog(0x000000, 400, 1000);
 
       // カメラを作成
@@ -63,7 +67,6 @@
       // インスタンスは使いますことが重要
       const simplexNoise = new SimplexNoise();
 
-      tick();
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         // ジオメトリの頂点座標情報
@@ -89,7 +92,6 @@
         // レンダリング
         renderer.render(scene, camera);
 
-        requestAnimationFrame(tick);
       }
     </script>
   </head>

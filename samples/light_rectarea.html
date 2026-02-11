@@ -6,34 +6,40 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
           "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
         }
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
-      import { RectAreaLightUniformsLib } from "three/addons/lights/RectAreaLightUniformsLib.js";
+      import * as THREE from "three/webgpu";
+      import { WebGPURenderer } from "three/webgpu";
+      import { RectAreaLightTexturesLib } from "three/addons/lights/RectAreaLightTexturesLib.js";
 
-      // 呼び出しておく必要がある
-      RectAreaLightUniformsLib.init();
+      const ltc = RectAreaLightTexturesLib.init();
+      THREE.RectAreaLightNode.setLTC(ltc);
 
       // サイズを指定
       const width = 960;
       const height = 540;
 
       // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new WebGPURenderer({
         canvas: document.querySelector("#myCanvas"),
+        forceWebGL: true,
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(devicePixelRatio);
       renderer.setSize(width, height);
 
       // レンダラーの色空間を設定
       renderer.outputColorSpace = THREE.SRGBColorSpace;
 
+      renderer.setAnimationLoop(tick);
+
       // シーンを作成
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(45, width / height);
@@ -60,7 +66,6 @@
       const light = new THREE.RectAreaLight(0xffffff, 5.0, 10, 10);
       scene.add(light);
 
-      tick();
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
@@ -76,7 +81,6 @@
         light.position.set(lx, ly, lz);
         light.lookAt(new THREE.Vector3(0, 0, 0));
 
-        requestAnimationFrame(tick);
       }
     </script>
   </head>

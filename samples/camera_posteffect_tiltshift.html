@@ -5,134 +5,38 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
           "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
         }
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
-      import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
-      import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
-      import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
+      import * as THREE from "three/webgpu";
+      import { WebGPURenderer } from "three/webgpu";
 
       // サイズを指定
       const width = 960;
       const height = 540;
 
       // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new WebGPURenderer({
         canvas: document.querySelector("#myCanvas"),
         antialias: true,
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(devicePixelRatio);
       renderer.setSize(width, height);
       // レンダラー側で影を有効に
       renderer.shadowMap.enabled = true;
 
+      renderer.setAnimationLoop(tick);
+
       // シーンを作成
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(30, width / height, 1, 9999);
-
-      // --- ポストプロセス設定 ---
-      const composer = new EffectComposer(renderer);
-      composer.addPass(new RenderPass(scene, camera)); // 元のシーンをレンダリング
-
-      const tiltShiftShader = {
-        uniforms: {
-          tDiffuse: { value: null },
-          focusPos: { value: 0.5 }, // Y軸中心 (0.0-1.0)
-          blurAmount: { value: 7.0 }, // ブラー強度
-          gradientRadius: { value: 0.2 }, // フォーカスが合う範囲 (値を小さくしてぼかし領域を広げる)
-          resolution: { value: new THREE.Vector2(width, height) },
-        },
-        vertexShader: `
-varying vec2 vUv;
-void main() {
-  vUv = uv;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-}`,
-        fragmentShader: `
-precision highp float;
-
-uniform sampler2D tDiffuse; // 元のシーンのテクスチャ
-uniform float focusPos; // フォーカスを合わせるY座標 (0.0-1.0)
-uniform float blurAmount; // ブラーの強さ
-uniform float gradientRadius; // フォーカスが合っている範囲の半径
-uniform vec2 resolution; // 画面解像度
-
-varying vec2 vUv; // バーテックスシェーダーから渡されるUV座標
-
-// ガウシアン関数 (確率密度関数)
-// x: 中心からの距離, sigma: 標準偏差
-float gaussianPdf(in float x, in float sigma) {
-  return 0.39894 * exp(-0.5 * x * x / (sigma * sigma)) / sigma;
-}
-
-void main() {
-  // 現在のフラグメントのY座標とフォーカス位置との距離を計算
-  float dist = abs(vUv.y - focusPos);
-  // smoothstep関数を使って、フォーカス範囲の外側で滑らかにブラー強度を上げる
-  // gradientRadius から gradientRadius + 0.2 の範囲で 0.0 から 1.0 に変化
-  float blurStrength = smoothstep(gradientRadius, gradientRadius + 0.2, dist) * blurAmount;
-
-  // 元のピクセルの色を取得
-  vec4 originalColor = texture2D(tDiffuse, vUv);
-
-  // ブラー強度が非常に弱い場合は、ブラー処理をスキップして元の色を返す
-  if (blurStrength < 0.1) {
-    gl_FragColor = originalColor;
-    return;
-  }
-
-  // 1パス 2Dガウシアンブラー
-  // カーネルの半径 (カーネルサイズは (KERNEL_RADIUS*2+1) x (KERNEL_RADIUS*2+1))
-  const int KERNEL_RADIUS = 3; // 半径
-  float kernel[KERNEL_RADIUS + 1]; // 1Dガウスカーネルの重みを格納する配列
-  vec3 final_color = vec3(0.0); // 最終的な色を格納する変数
-  float totalWeight = 0.0;
-
-  // 1Dガウスカーネルの重みを計算 (中心からの距離に応じて)
-  float sigma = float(KERNEL_RADIUS);
-  float sum = 0.0;
-  for (int i = 0; i <= KERNEL_RADIUS; i++) {
-    kernel[i] = gaussianPdf(float(i), sigma);
-    sum += (i == 0 ? 1.0 : 2.0) * kernel[i];
-  }
-  // カーネルの重みの合計が1になるように正規化
-  for (int i = 0; i <= KERNEL_RADIUS; i++) {
-    kernel[i] /= sum;
-  }
-
-  // 1ピクセルのサイズ (UV座標系)
-  vec2 pixelSize = 1.0 / resolution;
-
-  // 2Dサンプリングでブラー計算
-  // カーネルサイズの範囲内で周囲のピクセルをサンプリング
-  for (int i = -KERNEL_RADIUS; i <= KERNEL_RADIUS; i++) {
-    for (int j = -KERNEL_RADIUS; j <= KERNEL_RADIUS; j++) {
-      // 1Dカーネルの重みから2Dカーネルの重みを計算
-      float weight = kernel[abs(i)] * kernel[abs(j)]; // 2Dカーネル重み
-      // サンプリングするオフセット位置を計算 (ブラー強度に応じてオフセットを調整)
-      vec2 offset = vec2(float(i), float(j)) * pixelSize * blurStrength;
-      // オフセット位置のピクセル色を取得し、重みを掛けて加算
-      final_color += texture2D(tDiffuse, vUv + offset).rgb * weight;
-      // 重みの合計を計算 (最終的な正規化のため)
-      totalWeight += weight;
-    }
-  }
-
-  // 重みの合計で割って、最終的なブラー処理後の色を計算
-  // アルファ値は元の色を維持
-  gl_FragColor = vec4(final_color / totalWeight, originalColor.a);
-}`,
-      };
-
-      const tiltShiftPass = new ShaderPass(tiltShiftShader);
-      composer.addPass(tiltShiftPass);
-      // --- ポストプロセス設定ここまで ---
 
       // 光源を作成
       {
@@ -189,7 +93,6 @@ void main() {
         }
       }
 
-      tick();
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
@@ -201,8 +104,7 @@ void main() {
         camera.lookAt(new THREE.Vector3(0, 0, 0));
 
         // レンダリング
-        composer.render();
-        requestAnimationFrame(tick);
+        renderer.render(scene, camera);
       }
     </script>
   </head>

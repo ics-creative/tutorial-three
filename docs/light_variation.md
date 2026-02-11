@@ -146,7 +146,7 @@ scene.add(light);
 const lightHelper = new THREE.SpotLightHelper(light);
 scene.add(lightHelper);
 
-tick();
+renderer.setAnimationLoop(tick);
 
 // 毎フレーム時に実行されるループイベントです
 function tick() {
@@ -156,7 +156,6 @@ function tick() {
     // ヘルパーを更新
     lightHelper.update();
 
-    requestAnimationFrame(tick);
 }
 ```
 
@@ -179,11 +178,3 @@ scene.add(light);
 ```
 
 詳しい仕様は公式ドキュメント「[RectAreaLight](https://threejs.org/docs/#api/lights/RectAreaLight)」を参照ください。
-
-この光源を利用する際は、`RectAreaLightUniformsLib`を読み込んで初期化します。
-
-```js
-import { RectAreaLightUniformsLib } from "three/addons/lights/RectAreaLightUniformsLib.js";
-
-RectAreaLightUniformsLib.init();
-```

@@ -5,7 +5,7 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
           "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js"
         }
       }
@@ -24,10 +24,12 @@
       });
       renderer.setSize(width, height);
       renderer.setPixelRatio(devicePixelRatio);
+
       renderer.setAnimationLoop(tick);
 
       // シーンを作成
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
 
       // カメラを作成(画角, アスペクト比, 描画開始距離, 描画終了距離)
       const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);

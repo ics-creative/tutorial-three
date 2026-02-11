@@ -72,7 +72,7 @@ for (let i = 0; i < 10; i++) {
 時間経過では親となる`group`インスタンスを回転させることで、子として配置した10個の球体が円周上を移動します。 
 
 ```js
-tick();
+renderer.setAnimationLoop(tick);
 
 // 毎フレーム時に実行されるループイベントです
 function tick() {
@@ -80,7 +80,6 @@ function tick() {
 
   // レンダリング
   renderer.render(scene, camera);
-  requestAnimationFrame(tick);
 }
 ```
 

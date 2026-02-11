@@ -2,13 +2,13 @@
 title: 簡単なThree.jsのサンプルを試そう
 author: 池田 泰延
 published_date: 2017-11-02
-modified_date: 2024-08-01
+modified_date: 2026-02-11
 ---
 
-[Three.js](http://typescript.Three.js.com/)はHTMLの3D技術「[WebGL](http://ja.wikipedia.org/wiki/WebGL "WebGL - Wikipedia")」を扱いやすくしたフレームワークです。**Three.jsを使えばGPUによる本格的な3D表現をプラグイン無しで作成**できます。
+[Three.js](https://threejs.org/)はHTMLの3D技術を扱いやすくしたフレームワークです。**Three.jsを使えばGPUによる本格的な3D表現をプラグイン無しで作成**できます。
 
 
-ライブラリのセットアップから3D画面への表示および直方体の回転までを紹介します。手順通りに進めば、20分くらいで作業が完了できると思います。
+ライブラリのセットアップから3D画面への表示および直方体の回転までを紹介します。手順通りに進めれば、20分くらいで作業を完了できると思います。
 
 ![](../imgs/quickstart.png)
 
@@ -19,29 +19,33 @@ modified_date: 2024-08-01
 まずはHTMLファイルを用意して、次のコードを貼り付けて試してください。
 
 ```html
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js"
         }
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
+      import * as THREE from "three/webgpu";
 
       // サイズを指定
       const width = 960;
       const height = 540;
 
       // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new THREE.WebGPURenderer({
         canvas: document.querySelector("#myCanvas"),
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(devicePixelRatio);
       renderer.setSize(width, height);
+
+      renderer.setAnimationLoop(tick);
 
       // シーンを作成
       const scene = new THREE.Scene();
@@ -56,14 +60,10 @@ modified_date: 2024-08-01
       const box = new THREE.Mesh(geometry, material);
       scene.add(box);
 
-      tick();
-
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         box.rotation.y += 0.01;
         renderer.render(scene, camera); // レンダリング
-
-        requestAnimationFrame(tick);
       }
     </script>
   </head>
@@ -75,9 +75,9 @@ modified_date: 2024-08-01
 
 ブラウザの画面上に単色の直方体が回転します。
 
-ちなみに前提としてThree.jsはWebGL対応のブラウザが必須となりますので、動作確認はFirefoxやChrome、Safari、Edgeなどを使うといいでしょう。
+Three.jsの`WebGPURenderer`は、WebGPUが有効な環境ではWebGPUで動作し、非対応環境ではWebGL 2へフォールバックします。
 
-また、WebGLはローカルファイルのセキュリティーの制限があるため、ローカルサーバー上で実行することをオススメします。ローカルサーバーの構築方法がわからなければ、記事『[VS Codeを使いこなせ\! フロントエンジニア必須の拡張機能7選](https://ics.media/entry/18544/)』で紹介している「Live Server」を利用しましょう。マウス操作で簡単にローカルサーバーを起動できるので簡単です。
+また、ローカルファイルのセキュリティー制限を避けるため、ローカルサーバー上で実行することをおすすめします。ローカルサーバーの構築方法がわからなければ、記事『[VS Codeを使いこなせ! フロントエンジニア必須の拡張機能7選](https://ics.media/entry/18544/)』で紹介している「Live Server」を利用すると簡単です。
 
 ここからは、上記のコードを解説していくので、少しずつ理解していきましょう。
 
@@ -96,7 +96,7 @@ Three.jsはHTML5の`canvas`要素を利用します。`canvas`要素はコンテ
 
 ## JSライブラリを読み込む
 
-Three.jsはJavaScriptのライブラリですが、このファイルを読み込むことによってはじめてThree.jsが利用できるようになります。
+Three.jsはJavaScriptのライブラリですが、このファイルを読み込むことではじめてThree.jsが利用できるようになります。
 
 CDN（コンテンツ・デリバリー・ネットワーク）で提供されているURLを使うのが導入にお手軽です。ECMAScript Modulesの仕組みを使って、`import`文でThree.jsを読み込みます。
 
@@ -104,17 +104,18 @@ CDN（コンテンツ・デリバリー・ネットワーク）で提供され�
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js"
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+      "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js"
     }
   }
 </script>
 ```
 
-WebGLの処理はJavaScriptで記述します。Three.jsはES Modulesに対応しているため、`import`文で読み込むことができます。`import`文は`<script>`要素の`type`属性に`module`を指定することで利用できます。
+3Dの処理はJavaScriptで記述します。Three.jsはES Modulesに対応しているため、`import`文で読み込むことができます。`import`文は`<script>`要素の`type`属性に`module`を指定することで利用できます。
 
 ```html
 <script type="module">
-import * as THREE from "three";
+import * as THREE from "three/webgpu";
 
 // 処理
 </script>
@@ -122,21 +123,20 @@ import * as THREE from "three";
 
 ## 3D表示用のJavaScriptを用意
 
-WebGLのレンダリングをするためのレンダラーを作成します。`THREE.WebGLRenderer`クラスのコンストラクターには引数として、HTMLに配置した`canvas`要素を指定し、連携させます。
+3Dのレンダリングをするためのレンダラーを作成します。`THREE.WebGPURenderer`クラスのコンストラクターには引数として、HTMLに配置した`canvas`要素を指定し、連携させます。
 
 ```js
-const renderer = new THREE.WebGLRenderer({
+const renderer = new THREE.WebGPURenderer({
   canvas: document.querySelector('#myCanvas')
 });
-
 ```
 
 デフォルトではレンダラーのサイズが小さいため、`setSize()`メソッドでサイズを設定します。今回のデモでは幅960px、高さ540pxを設定しています。
 
 ```js
 renderer.setSize(960, 540);
+renderer.setPixelRatio(devicePixelRatio);
 ```
-
 
 ## シーンを作成する
 
@@ -153,7 +153,7 @@ const scene = new THREE.Scene();
 Three.jsでは`THREE.PerspectiveCamera`クラスのコンストラクターで画角、アスペクト比、描画開始距離、描画終了距離の4つの情報を引数として渡しカメラを作成します。
 
 ```js
-// new THREE.PerspectiveCamera(画角, アスペクト比
+// new THREE.PerspectiveCamera(画角, アスペクト比)
 const camera = new THREE.PerspectiveCamera(45, 960 / 540);
 ```
 
@@ -181,37 +181,27 @@ const material = new THREE.MeshNormalMaterial();
 const box = new THREE.Mesh(geometry, material);
 // シーンに追加
 scene.add(box);
-
 ```
 
 
 ## アニメーション
 
-JavaScriptでアニメーションをさせるには、時間経過で関数を呼び続ける必要があります。そのためには、`requestAnimationFrame()`というグローバルメソッドを使用します。`requestAnimationFrame()`は引数として渡された関数を、毎フレーム実行します。
-
+Three.jsでは、`renderer.setAnimationLoop()`に更新関数を登録することで毎フレームの描画ループを構築できます。
 
 ```js
-// 初回実行
-tick();
+renderer.setAnimationLoop(tick);
 
 function tick() {
-  requestAnimationFrame(tick);
-
   // アニメーション処理をここに書く
 }
 ```
 
-
 次に、Three.jsの表示結果を更新する命令を書きます。Three.jsでは自動的に画面が最新に切り替わらないので、明示的に画面が更新されるように命令を書く必要があります。`renderer.render()`という命令で更新を指示できます。
 
-
 ```js
-// 初回実行
-tick();
+renderer.setAnimationLoop(tick);
 
 function tick() {
-  requestAnimationFrame(tick);
-
   // アニメーション処理をここに書く
 
   renderer.render(scene, camera); // レンダリング
@@ -219,16 +209,12 @@ function tick() {
 ```
 
 
-
-アニメーションの処理として、立方体が回転するようにしてみましょう。時間経過で回転するように`rotation.y`プロパティの数値を加算しています。
+アニメーションの処理として、立方体が回転するようにしてみましょう。時間経過で回転するように`rotation.y`プロパティの数値を加算しています。
 
 ```js
-// 初回実行
-tick();
+renderer.setAnimationLoop(tick);
 
 function tick() {
-  requestAnimationFrame(tick);
-
   // アニメーション処理をここに書く
   box.rotation.y += 0.01;
   renderer.render(scene, camera); // レンダリング
@@ -255,9 +241,9 @@ function tick() {
 3D空間を撮影するカメラ。視点を制御するために使用します。3D空間のどの視点で撮影しているのかの情報が必要となります。
 
 
-**THREE.WebGLRendererクラス**
+**THREE.WebGPURendererクラス**
 
-3D空間のレンダリングを行います。レンダリングとは、Three.jsで計算した3Dのオブジェクトを画面に表示することです。内部的にはThree.jsがWebGLのAPIを使って、GPUで座標を計算させ画面に表示させています。Three.jsでは`requestAnimationFrame`のタイミングにあわせて、レンダリングを行うように設定しましょう。
+3D空間のレンダリングを行います。レンダリングとは、Three.jsで計算した3Dのオブジェクトを画面に表示することです。Three.jsでは`renderer.setAnimationLoop()`のタイミングにあわせて、レンダリングを行うように設定しましょう。
 
 
 
@@ -272,4 +258,3 @@ function tick() {
 次回の記事では、マテリアルやライティングの設定方法を説明します。
 
 [次の記事へ](material_basic.md)
-

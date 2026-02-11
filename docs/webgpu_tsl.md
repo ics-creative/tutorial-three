@@ -81,7 +81,7 @@ TSL はこれらのプロパティ（`positionNode`／`colorNode`／`normalNode`
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
+      import * as THREE from "three/webgpu";
       import { MeshStandardNodeMaterial, WebGPURenderer } from "three/webgpu";
       import {
         positionLocal,

@@ -17,7 +17,7 @@ modified_date: 2023-05-26
 - [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/class_update.html)
 - [サンプルのソースコードを確認する](../samples/class_update.html)
 
-時間経過は`requestAnimationFrame()`メソッドを使いたいところですが、いたる所に`requestAnimationFrame()`メソッドを記述するのはベストプラクティスとは言えません。複数の`requestAnimationFrame()`メソッドがあったときに、どれがはじめに実行されるのか、処理の実行順がわかりにくいからです。また、負荷の観点からも複数の`requestAnimationFrame()`メソッドを定義するのは最適とは言えません。
+時間経過は`renderer.setAnimationLoop()`で管理するのが基本です。クラス内部で独自に`requestAnimationFrame()`を回しはじめると、更新順序が分かりづらくなり、レンダリングとの前後関係も不明確になります。ループの起点は1箇所に絞りましょう。
 
 ### 悪い例
 
@@ -44,22 +44,21 @@ class MyGroup extends THREE.Object3D {
 const myGroup = new MyGroup();
 scene.add(myGroup);
 
-tick();
+renderer.setAnimationLoop(tick);
 
 // 毎フレーム時に実行されるループイベントです
 function tick() {
 
   // レンダリング
   renderer.render(scene, camera);
-  requestAnimationFrame(tick);
 }
 ```
 
-良くないのは親となるコードにも、子供のクラスにも`requestAnimationFrame()`が使われているところです。うまく動くと思いますが、どちらの`requestAnimationFrame()`が先に実行されるのか、明示的にわからなくなります。メインコードにレンダリングのための`renderer.render(scene, camera);`処理がありますが、その処理の実行前後で子供の`MyGroup`が実行されるか、保証されません。
+良くないのは親となるコードは`renderer.setAnimationLoop()`、子クラスは`requestAnimationFrame()`で別々にループを持っているところです。うまく動く場合もありますが、どちらの更新が先に実行されるかを保証できません。結果として、`renderer.render(scene, camera);`の前後で`MyGroup`の更新がずれる可能性があります。
 
 ### 改善例
 
-メインとなるコードに一つだけ`requestAnimationFrame()`メソッドを用意し、そこからツリー構造で独自メソッドを叩いていくといいでしょう。
+メインとなるコードに一つだけ`renderer.setAnimationLoop()`を用意し、そこからツリー構造で独自メソッドを呼び出すのが安全です。
 
 良い例
 
@@ -82,7 +81,7 @@ class MyGroup extends THREE.Object3D {
 const myGroup = new MyGroup();
 scene.add(myGroup);
 
-tick();
+renderer.setAnimationLoop(tick);
 
 // 毎フレーム時に実行されるループイベントです
 function tick() {
@@ -92,9 +91,7 @@ function tick() {
 
   // レンダリング
   renderer.render(scene, camera);
-  requestAnimationFrame(tick);
 }
 ```
 
-こうすれば、`requestAnimationFrame()`メソッドが実行されるのはメインコードの一箇所のみになります。メインコードにレンダリングのための`renderer.render(scene, camera);`処理の前に子供の`MyGroup`クラスの`update()`メソッドが実行されることが保証されます。
-
+こうすれば、ループの登録箇所はメインコードの1箇所だけになります。`renderer.render(scene, camera);`の前に`MyGroup`クラスの`update()`メソッドが実行されることを保証できます。

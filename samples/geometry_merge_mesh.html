@@ -6,13 +6,14 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
           "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
         }
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
+      import * as THREE from "three/webgpu";
       import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 
       // サイズを指定
@@ -20,14 +21,17 @@
       const height = 540;
 
       // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new THREE.WebGPURenderer({
         canvas: document.querySelector("#myCanvas"),
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(devicePixelRatio);
       renderer.setSize(width, height);
+
+      renderer.setAnimationLoop(tick);
 
       // シーンを作成
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(45, width / height);
@@ -70,7 +74,6 @@
       stats.domElement.style.top = "10px";
       document.body.appendChild(stats.domElement);
 
-      tick();
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
@@ -86,7 +89,6 @@
         // フレームレートを表示
         stats.update();
 
-        requestAnimationFrame(tick);
       }
     </script>
   </head>

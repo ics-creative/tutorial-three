@@ -10,7 +10,7 @@
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
+      import * as THREE from "three/webgpu";
       import { WebGPURenderer } from "three/webgpu";
 
       // サイズを指定
@@ -21,13 +21,15 @@
       const renderer = new WebGPURenderer({
         canvas: document.querySelector("#myCanvas"),
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(devicePixelRatio);
       renderer.setSize(width, height);
       renderer.setClearColor(0x000000); // 背景色を指定
-      await renderer.init(); // 初期化
+
+      renderer.setAnimationLoop(tick);
 
       // シーンを作成
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(45, width / height);
@@ -39,14 +41,11 @@
       const box = new THREE.Mesh(geometry, material);
       scene.add(box);
 
-      tick();
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         box.rotation.y += 0.01;
         renderer.render(scene, camera); // レンダリング
-
-        requestAnimationFrame(tick);
       }
     </script>
   </head>

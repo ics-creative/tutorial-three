@@ -55,7 +55,7 @@ const mesh = new THREE.Mesh(geometry, material);
 mesh.rotation.x = Math.PI / 2; // 地面らしい角度にする
 scene.add(mesh);
 
-tick();
+renderer.setAnimationLoop(tick);
 
 // 毎フレーム時に実行されるループイベントです
 function tick() {
@@ -83,7 +83,6 @@ function tick() {
   // レンダリング
   renderer.render(scene, camera);
 
-  requestAnimationFrame(tick);
 }
 ```
 
@@ -105,7 +104,8 @@ SimplexNoiseを使ってノイズを生成することで、地面のような�
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+      "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
     }
   }
@@ -151,7 +151,7 @@ scene.add(mesh);
 // ノイズを初期化
 const simplexNoise = new SimplexNoise();
 
-tick();
+renderer.setAnimationLoop(tick);
 // 毎フレーム時に実行されるループイベントです
 function tick() {
   // ポジションをかえる

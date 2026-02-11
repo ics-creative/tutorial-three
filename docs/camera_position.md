@@ -76,7 +76,7 @@ document.addEventListener("mousemove", (event) => {
   mouseX = event.pageX;
 });
 
-tick();
+renderer.setAnimationLoop(tick);
 
 // 毎フレーム時に実行されるループイベントです
 function tick() {
@@ -98,7 +98,6 @@ function tick() {
   // レンダリング
   renderer.render(scene, camera);
 
-  requestAnimationFrame(tick);
 }
 ```
 

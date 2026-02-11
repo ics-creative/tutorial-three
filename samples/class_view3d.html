@@ -4,12 +4,13 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js"
         }
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
+      import * as THREE from "three/webgpu";
 
       class View3D {
         /**
@@ -20,14 +21,15 @@
          */
         constructor(selector, width, height) {
           // レンダラーを作成
-          const renderer = new THREE.WebGLRenderer({
+          const renderer = new THREE.WebGPURenderer({
             canvas: document.querySelector(selector),
           });
-          renderer.setPixelRatio(window.devicePixelRatio);
+          renderer.setPixelRatio(devicePixelRatio);
           renderer.setSize(width, height);
 
           // シーンを作成
           const scene = new THREE.Scene();
+          scene.background = new THREE.Color(0x000000);
 
           // カメラを作成
           const camera = new THREE.PerspectiveCamera(45, width / height);
@@ -40,7 +42,7 @@
           this.onTick = null;
 
           // 時間経過ループを開始する
-          this.tick();
+          renderer.setAnimationLoop(() => this.tick());
         }
 
         tick() {
@@ -52,9 +54,6 @@
 
           // レンダリング
           this.renderer.render(this.scene, this.camera);
-          requestAnimationFrame(() => {
-            this.tick();
-          });
         }
       }
 

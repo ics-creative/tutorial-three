@@ -72,7 +72,7 @@ scene.add(mesh);
 const mesh = new Donuts();
 scene.add(mesh);
 
-tick();
+renderer.setAnimationLoop(tick);
 
 // 毎フレーム時に実行されるループイベントです
 function tick() {
@@ -81,7 +81,6 @@ function tick() {
 
   // レンダリング
   renderer.render(scene, camera);
-  requestAnimationFrame(tick);
 }
 ```
 
@@ -154,7 +153,7 @@ const group = new MyGroup();
 // 3D空間にグループを追加する
 scene.add(group);
 
-tick();
+renderer.setAnimationLoop(tick);
 
 // 毎フレーム時に実行されるループイベントです
 function tick() {
@@ -162,7 +161,6 @@ function tick() {
 
   // レンダリング
   renderer.render(scene, camera);
-  requestAnimationFrame(tick);
 }
 ```
 

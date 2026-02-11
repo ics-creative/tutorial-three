@@ -86,13 +86,14 @@ Three.jsでは、`BufferGeometryUtils.mergeGeometries()`メソッドで結合で
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+      "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
     }
   }
 </script>
 <script type="module">
-  import * as THREE from "three";
+  import * as THREE from "three/webgpu";
   import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 </script>
 ```

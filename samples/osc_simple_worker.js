@@ -1,7 +1,7 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js";
 
 // メインスレッドから通達があったとき
-onmessage = (event) => {
+onmessage = async (event) => {
   // メインスレッドからオフスクリーンキャンバスを受け取る
   const canvas = event.data.canvas;
   // Three.jsのライブラリの内部で style.width にアクセスされてしまう
@@ -13,11 +13,14 @@ onmessage = (event) => {
   const height = 540;
 
   // レンダラーを作成
-  const renderer = new THREE.WebGLRenderer({ canvas });
+  const renderer = new THREE.WebGPURenderer({ canvas });
   renderer.setSize(width, height);
+
+  renderer.setAnimationLoop(tick);
 
   // シーンを作成
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x000000);
   const camera = new THREE.PerspectiveCamera(45, width / height);
   const directionalLight = new THREE.DirectionalLight(0xffffff);
   scene.add(directionalLight);
@@ -34,7 +37,6 @@ onmessage = (event) => {
     mesh.position.set(1000 * (Math.random() - 0.5), 1000 * (Math.random() - 0.5), 1000 * (Math.random() - 0.5));
   }
 
-  tick();
 
   // 毎フレーム時に実行されるループイベントです
   function tick() {
@@ -48,6 +50,5 @@ onmessage = (event) => {
 
     // レンダリング
     renderer.render(scene, camera);
-    requestAnimationFrame(tick);
   }
 };

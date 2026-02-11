@@ -11,7 +11,7 @@
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
+      import * as THREE from "three/webgpu";
       import { MeshStandardNodeMaterial, WebGPURenderer } from "three/webgpu";
       import {
         positionLocal,
@@ -36,13 +36,15 @@
       const renderer = new WebGPURenderer({
         canvas: document.querySelector("#myCanvas"),
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(devicePixelRatio);
       renderer.setSize(width, height);
       renderer.setClearColor(0x000000); // 背景色を指定
-      await renderer.init(); // 初期化
+
+      renderer.setAnimationLoop(tick);
 
       // シーンを作成
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
 
       // --- ライト設定の調整 ---
       // 平行光源 (角度と強度を再調整)
@@ -90,12 +92,9 @@
       const mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
 
-      tick();
 
       function tick() {
         renderer.render(scene, camera); // レンダリング
-
-        requestAnimationFrame(tick);
       }
     </script>
   </head>

@@ -69,7 +69,7 @@ function onResize() {
   const height = window.innerHeight;
 
   // レンダラーのサイズを調整する
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setPixelRatio(devicePixelRatio);
   renderer.setSize(width, height);
 
   // カメラのアスペクト比を正す

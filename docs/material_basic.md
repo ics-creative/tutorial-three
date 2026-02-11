@@ -24,10 +24,11 @@ const width = 960;
 const height = 540;
 
 // レンダラーを作成
-const renderer = new THREE.WebGLRenderer({
+const renderer = new THREE.WebGPURenderer({
   canvas: document.querySelector('#myCanvas')
 });
 renderer.setSize(width, height);
+renderer.setAnimationLoop(tick);
 
 // シーンを作成
 const scene = new THREE.Scene();
@@ -50,8 +51,6 @@ directionalLight.position.set(1, 1, 1);
 // シーンに追加
 scene.add(directionalLight);
 
-tick();
-
 // 毎フレーム時に実行されるループイベントです
 function tick() {
   // メッシュを回転させる
@@ -59,7 +58,6 @@ function tick() {
   // レンダリング
   renderer.render(scene, camera);
 
-  requestAnimationFrame(tick);
 }
 ```
 
@@ -127,10 +125,11 @@ const width = 960;
 const height = 540;
 
 // レンダラーを作成
-const renderer = new THREE.WebGLRenderer({
+const renderer = new THREE.WebGPURenderer({
   canvas: document.querySelector('#myCanvas')
 });
 renderer.setSize(width, height);
+renderer.setAnimationLoop(tick);
 
 // シーンを作成
 const scene = new THREE.Scene();
@@ -160,8 +159,6 @@ directionalLight.position.set(1, 1, 1);
 // シーンに追加
 scene.add(directionalLight);
 
-tick();
-
 // 毎フレーム時に実行されるループイベントです
 function tick() {
   // メッシュを回転させる
@@ -169,7 +166,6 @@ function tick() {
   // レンダリング
   renderer.render(scene, camera);
 
-  requestAnimationFrame(tick);
 }
 ```
 
@@ -204,4 +200,3 @@ const material = new THREE.MeshStandardMaterial({
 次はさまざまな基本的な形状の作成方法を説明します。
 
 [次の記事へ](geometry_general.md)
-

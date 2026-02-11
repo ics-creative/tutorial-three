@@ -51,7 +51,7 @@ function handleMouseMove(event) {
 // レイキャストを作成
 const raycaster = new THREE.Raycaster();
 
-tick();
+renderer.setAnimationLoop(tick);
 // 毎フレーム時に実行されるループイベントです
 function tick() {
 
@@ -67,7 +67,6 @@ function tick() {
 
   // レンダリング
   renderer.render(scene, camera);
-  requestAnimationFrame(tick);
 }
 ```
 

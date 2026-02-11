@@ -4,27 +4,31 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js"
         }
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
+      import * as THREE from "three/webgpu";
 
       // サイズを指定
       const width = 960;
       const height = 540;
 
       // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new THREE.WebGPURenderer({
         canvas: document.querySelector("#myCanvas"),
         antialias: true,
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(devicePixelRatio);
       renderer.setSize(width, height);
+
+      renderer.setAnimationLoop(tick);
 
       // シーンを作成
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(45, width / height);
@@ -50,7 +54,6 @@
       const pointLightHelper = new THREE.PointLightHelper(pointLight, 30);
       scene.add(pointLightHelper);
 
-      tick();
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
@@ -68,7 +71,6 @@
         // レンダリング
         renderer.render(scene, camera);
 
-        requestAnimationFrame(tick);
       }
     </script>
   </head>

@@ -4,13 +4,14 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
           "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
         }
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
+      import * as THREE from "three/webgpu";
       import { OrbitControls } from "three/addons/controls/OrbitControls.js";
       import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
@@ -20,14 +21,19 @@
 
       // レンダラーを作成
       const canvasElement = document.querySelector("#myCanvas");
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new THREE.WebGPURenderer({
         canvas: canvasElement,
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(devicePixelRatio);
       renderer.setSize(width, height);
+      let mixer;
+      let oldTime = Date.now();
+
+      renderer.setAnimationLoop(tick);
 
       // シーンを作成
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(45, width / height, 0.001, 10000);
@@ -64,16 +70,18 @@
       scene.add(model);
 
       // アニメーションミキサー
-      const mixer = new THREE.AnimationMixer(model);
+      mixer = new THREE.AnimationMixer(model);
 
       // 0 : idle, 1: run, 3: walk
       mixer.clipAction(gltf.animations[1]).play();
 
-      let oldTime = Date.now();
-      tick();
-
       // 毎フレーム時に実行されるループイベントです
       function tick() {
+        if (!mixer) {
+          renderer.render(scene, camera);
+          return;
+        }
+
         // レンダリング
         renderer.render(scene, camera);
 
@@ -82,7 +90,6 @@
         mixer.update(diffTime / 1000);
         oldTime = Date.now();
 
-        requestAnimationFrame(tick);
       }
     </script>
   </head>

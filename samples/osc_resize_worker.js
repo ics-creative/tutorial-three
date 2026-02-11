@@ -1,12 +1,12 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js";
 let renderer;
 let camera;
 
 // メインスレッドから通達があったとき
-onmessage = (event) => {
+onmessage = async (event) => {
   switch (event.data.type) {
     case "init":
-      init(event);
+      await init(event);
       break;
     case "resize":
       resize(event.data.width, event.data.height, event.data.devicePixelRatio);
@@ -14,7 +14,7 @@ onmessage = (event) => {
   }
 };
 
-function init(event) {
+async function init(event) {
   // メインスレッドからオフスクリーンキャンバスを受け取る
   const canvas = event.data.canvas;
   // スクリーン情報を受け取る
@@ -26,10 +26,13 @@ function init(event) {
   canvas.style = { width: 0, height: 0 };
 
   // レンダラーを作成
-  renderer = new THREE.WebGLRenderer({ canvas });
+  renderer = new THREE.WebGPURenderer({ canvas });
+
+  renderer.setAnimationLoop(tick);
 
   // シーンを作成
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x000000);
   camera = new THREE.PerspectiveCamera(45, width / height);
   camera.position.set(0, 0, 1000);
   resize(width, height, devicePixelRatio);
@@ -43,7 +46,6 @@ function init(event) {
   // 3D空間にメッシュを追加
   scene.add(mesh);
 
-  tick();
 
   // 毎フレーム時に実行されるループイベントです
   function tick() {
@@ -51,11 +53,12 @@ function init(event) {
 
     // レンダリング
     renderer.render(scene, camera);
-    requestAnimationFrame(tick);
   }
 }
 
 function resize(width, height, devicePixelRatio) {
+  if (!renderer || !camera) return;
+
   // レンダラーのサイズを調整する
   renderer.setPixelRatio(devicePixelRatio);
   renderer.setSize(width, height);

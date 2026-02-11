@@ -11,21 +11,25 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js"
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js"
         }
       }
     </script>
     <script type="module">
-      import * as THREE from "three";
+      import * as THREE from "three/webgpu";
 
       // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new THREE.WebGPURenderer({
         canvas: document.querySelector("#myCanvas"),
         antialias: true,
       });
 
+      renderer.setAnimationLoop(tick);
+
       // シーンを作成
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(45, 1.0);
@@ -40,13 +44,11 @@
       // 3D空間にメッシュを追加
       scene.add(mesh);
 
-      tick();
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         // レンダリング
         renderer.render(scene, camera);
-        requestAnimationFrame(tick);
       }
 
       // 初期化のために実行
@@ -60,7 +62,7 @@
         const height = window.innerHeight;
 
         // レンダラーのサイズを調整する
-        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setPixelRatio(devicePixelRatio);
         renderer.setSize(width, height);
 
         // カメラのアスペクト比を正す

@@ -53,7 +53,8 @@ https://github.com/KhronosGroup/glTF-Sample-Models/tree/master/2.0/ToyCar
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+      "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
     }
   }
@@ -64,7 +65,7 @@ https://github.com/KhronosGroup/glTF-Sample-Models/tree/master/2.0/ToyCar
 
 ```html
 <script type="module">
-  import * as THREE from "three";
+  import * as THREE from "three/webgpu";
   import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
   // …
@@ -152,7 +153,8 @@ async function init() {
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+      "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
     }
   }
@@ -163,7 +165,7 @@ async function init() {
 
 ```html
 <script type="module">
-  import * as THREE from "three";
+  import * as THREE from "three/webgpu";
   import { TDSLoader } from "three/addons/loaders/TDSLoader.js";
 
   // …
@@ -213,7 +215,8 @@ Colladaファイル（拡張子は`.dae`）の場合を読み込むには`Collad
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+      "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
     }
   }
@@ -224,7 +227,7 @@ Colladaファイル（拡張子は`.dae`）の場合を読み込むには`Collad
 
 ```html
 <script type="module">
-  import * as THREE from "three";
+  import * as THREE from "three/webgpu";
   import { ColladaLoader } from "three/addons/loaders/ColladaLoader.js";
 
   // …

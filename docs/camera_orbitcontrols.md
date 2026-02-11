@@ -22,7 +22,8 @@ Three.jsには**カメラの動きを自動的に制御する `OrbitControls` �
 <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+      "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
     }
   }
@@ -33,7 +34,7 @@ Three.jsには**カメラの動きを自動的に制御する `OrbitControls` �
 
 ```html
 <script type="module">
-import * as THREE from "three";
+import * as THREE from "three/webgpu";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 // …
@@ -78,10 +79,11 @@ const height = 540;
 
 // レンダラーを作成
 const canvasElement = document.querySelector('#myCanvas')
-const renderer = new THREE.WebGLRenderer({
+const renderer = new THREE.WebGPURenderer({
   canvas: canvasElement,
 });
 renderer.setSize(width, height);
+renderer.setAnimationLoop(tick);
 
 // シーンを作成
 const scene = new THREE.Scene();
@@ -99,13 +101,10 @@ const mesh = new THREE.Mesh(
   new THREE.MeshNormalMaterial());
 scene.add(mesh);
 
-tick();
-
 // 毎フレーム時に実行されるループイベントです
 function tick() {
   // レンダリング
   renderer.render(scene, camera);
-  requestAnimationFrame(tick);
 }
 ```
 
@@ -122,7 +121,7 @@ function tick() {
 
 `OrbitControls`インスタンスの`enableDamping`や`dampingFactor`プロパティーを設定すると、ドラッグ時にカメラが滑らかに動くようになります。デフォルトだと機械的な動きになってしまいますが、これらのプロパティーを設定するだけで心地良い操作感になります。
 
-`enableDamping`や`dampingFactor`プロパティーを使う場合は、`requestAnimationFrame`内で`OrbitControls`インスンタンスの`update`メソッドを呼び出す必要があります。
+`enableDamping`や`dampingFactor`プロパティーを使う場合は、`renderer.setAnimationLoop()`のコールバック内で`OrbitControls`インスタンスの`update`メソッドを呼び出す必要があります。
 
 ```js
 // カメラを作成
@@ -137,7 +136,7 @@ const controls = new OrbitControls(camera, canvasElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.2;
 
-tick();
+renderer.setAnimationLoop(tick);
 
 // 毎フレーム時に実行されるループイベントです
 function tick() {
@@ -147,7 +146,6 @@ function tick() {
   // レンダリング
   renderer.render(scene, camera);
 
-  requestAnimationFrame(tick);
 }
 ```
 
