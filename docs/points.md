@@ -2,7 +2,7 @@
 title: Three.jsで大量のパーティクルを表示する方法
 author: 池田 泰延
 published_date: 2017-11-03
-modified_date: 2021-04-21
+modified_date: 2026-02-11
 ---
 
 3D空間内に大量の粒子を表示させたい、星を表示させたい、塵を表示させたい。そんな表現に適しているのが`THREE.Point`クラスです。

@@ -2,7 +2,7 @@
 title: Three.jsで影を落とす方法
 author: 池田 泰延
 published_date: 2017-11-11
-modified_date: 2024-04-27
+modified_date: 2026-02-11
 ---
 
 Threeでは光源に対してオブジェクトの影を別のオブジェクトに落とすことができます。影を落とすことで、リアリティーの向上につながります。

@@ -2,7 +2,7 @@
 title: Three.jsのスクリーン座標の算出
 author: 池田 泰延
 published_date: 2017-11-12
-modified_date: 2021-04-21
+modified_date: 2026-02-11
 ---
 
 Three.jsの`canvas`要素にHTMLの表示を重ねたい時があります。

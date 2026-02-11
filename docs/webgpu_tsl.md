@@ -2,7 +2,7 @@
 title: TSL（Three.js Shading Language）
 author: 池田 泰延
 published_date: 2025-04-23
-modified_date: 2025-04-23
+modified_date: 2026-02-11
 ---
 
 

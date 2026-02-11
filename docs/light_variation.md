@@ -2,7 +2,7 @@
 title: Three.js ライト機能まとめ
 author: 池田 泰延
 published_date: 2017-11-11
-modified_date: 2021-04-21
+modified_date: 2026-02-11
 ---
 
 Three.jsにはさまざまなライトが用意されています。

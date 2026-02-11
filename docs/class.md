@@ -2,7 +2,7 @@
 title: Three.jsでclass構文を利用する（継承）
 author: 池田 泰延
 published_date: 2017-11-20
-modified_date: 2023-05-26
+modified_date: 2026-02-11
 ---
 
 JavaScriptではオブジェクト指向としてのクラスが利用できます。クラスを利用すると、Three.jsを構造的に設計しやすくなります。

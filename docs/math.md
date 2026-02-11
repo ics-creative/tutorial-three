@@ -2,7 +2,7 @@
 title: Three.js数値計算
 author: 池田 泰延
 published_date: 2019-01-17
-modified_date: 2019-01-17
+modified_date: 2026-02-11
 ---
 
 3Dでは、三角関数やベクトルの計算をする場面が多いです。実例を通して、これらを学んでいきましょう。

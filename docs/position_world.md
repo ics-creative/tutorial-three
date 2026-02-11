@@ -2,7 +2,7 @@
 title: Three.jsのワールド座標の算出
 author: 池田 泰延
 published_date: 2017-11-12
-modified_date: 2021-04-21
+modified_date: 2026-02-11
 ---
 
 ワールド座標（空間座標）とは3D空間（`scene`）の原点から見た座標をワールド座標といいます。

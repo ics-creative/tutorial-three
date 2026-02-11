@@ -2,7 +2,7 @@
 title: WebGLシェーダー編
 author: 池田 泰延
 published_date: 2019-01-17
-modified_date: 2019-01-17
+modified_date: 2026-02-11
 ---
 
 Three.jsだけだと実現できる表現の種類に限界があります。シェーダーをGLSLでカスタマイズすることによって、表現の種類を大きく広げられます。

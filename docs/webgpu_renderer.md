@@ -118,7 +118,7 @@ import { WebGPURenderer } from "three/webgpu";
 
 ## 従来レンダラーとの互換性について
 
-`WebGPURenderer` は、従来のレンダラーに近いコンストラクタオプションやメソッドを提供しており、既存コードを多くの場合で置き換えて利用できます。
+`WebGPURenderer` は、従来の`WebGLRenderer`レンダラーに近いコンストラクタオプションやメソッドを提供しており、既存コードを多くの場合で置き換えて利用できます。
 
 - コンストラクタオプション：
   - `canvas`（描画先の `<canvas>` 要素）

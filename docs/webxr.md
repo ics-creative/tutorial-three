@@ -2,7 +2,7 @@
 title: WebXR
 author: 池田 泰延
 published_date: 2019-01-17
-modified_date: 2019-01-17
+modified_date: 2026-02-11
 ---
 
 3Dの知識はバーチャルリアリティーの実装にも役立ちます。

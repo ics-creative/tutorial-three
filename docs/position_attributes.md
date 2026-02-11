@@ -2,7 +2,7 @@
 title: Three.jsのジオメトリを動かす方法
 author: 池田 泰延
 published_date: 2023-04-27
-modified_date: 2023-05-26
+modified_date: 2026-02-11
 ---
 
 Three.jsではジオメトリを動かすことで表現をつくりたいことがあります。平面の`THREE.PlaneGeometry`を例に取り上げて、ジオメトリのいじり方を紹介します。
