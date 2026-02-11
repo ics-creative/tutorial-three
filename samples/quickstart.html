@@ -20,7 +20,6 @@
       // レンダラーを作成
       const renderer = new THREE.WebGPURenderer({
         canvas,
-        antialias: true,
       });
       renderer.setSize(width, height);
       renderer.setPixelRatio(devicePixelRatio);
@@ -31,31 +30,18 @@
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(0x000000);
 
-      // カメラを作成(画角, アスペクト比, 描画開始距離, 描画終了距離)
-      const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
-      // カメラの初期座標を設定（X座標, Y座標, Z座標）
-      camera.position.set(0, 0, 1000);
+      // カメラを作成
+      const camera = new THREE.PerspectiveCamera(45, width / height);
+      camera.position.set(0, 0, +1000);
 
-      // 箱を作成(幅, 高さ, 奥行き)
-      const geometry = new THREE.BoxGeometry(500, 500, 500);
-      const material = new THREE.MeshStandardMaterial({ color: 0x0000ff });
+      // 箱を作成
+      const geometry = new THREE.BoxGeometry(400, 400, 400);
+      const material = new THREE.MeshNormalMaterial();
       const box = new THREE.Mesh(geometry, material);
-      // シーンに追加
       scene.add(box);
 
-      // 平行光源
-      const light = new THREE.DirectionalLight(0xffffff);
-      light.intensity = 2; // 光の強さを倍に
-      light.position.set(1, 1, 1); // ライトの方向
-      // シーンに追加
-      scene.add(light);
-
       function tick() {
-        // 箱を回転させる
-        box.rotation.x += 0.01;
         box.rotation.y += 0.01;
-
-        // レンダリング
         renderer.render(scene, camera);
       }
     </script>

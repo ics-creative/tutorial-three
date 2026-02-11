@@ -109,7 +109,7 @@ Three.jsだけだと実現できる表現の種類に限界があります。シ
 Three.jsは次世代のWebGPUにも対応しています。Three.jsでWebGPUを使うための方法を学びましょう。
 
 - [WebGPURendererの使い方](webgpu_renderer.md)
-- [TLSシェーダー言語](webgpu_tsl.md)
+- [TSLシェーダー言語](webgpu_tsl.md)
 
 
 ## VR表現

@@ -49,6 +49,7 @@ modified_date: 2026-02-11
 
       // シーンを作成
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(45, width / height);
@@ -144,6 +145,7 @@ renderer.setPixelRatio(devicePixelRatio);
 
 ```js
 const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000);
 ```
 
 ## カメラを作る

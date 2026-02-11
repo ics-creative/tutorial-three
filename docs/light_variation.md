@@ -112,14 +112,13 @@ scene.add(light);
 ```js
 // スポットライト光源を作成
 // new THREE.SpotLight(色, 光の強さ, 距離, 照射角, ボケ具合, 減衰率)
-const light = new THREE.SpotLight(0xFFFFFF, 4, 30, Math.PI / 4, 10, 0.5);
+const light = new THREE.SpotLight(0xFFFFFF, 4, 50, Math.PI / 4, 0, 0.5);
 scene.add(light);
 ```
 
 詳しい仕様は公式ドキュメント「[SpotLight](https://threejs.org/docs/#api/lights/SpotLight)」を参照ください。パラメーターを試せるデモが掲載されてるので、これを使うとイメージしやすいでしょう。
 
-
-たとえば、`exponent`プロパティーの値を変更すると次のように光源が変化します。境界がもやっとした感じに調整できます。
+たとえば、`penumbra`の値を変更すると次のように光源の境界が変化します。境界をなめらかにしたいときに調整するとよいでしょう。
 
 
 ![](../imgs/light_spot_exponent_0.png)
@@ -135,14 +134,14 @@ scene.add(light);
 
 ![](../imgs/light_spot_helper.png)
 
-スポットライトはパラメーターが難しいので、ヘルパークラスを利用してシミュレートするといいでしょう。使い方は次のようなコードで実現します。
-
+スポットライトはパラメーターが難しいので、ヘルパークラスを利用してシミュレートするといいでしょう。使い方は次のようなコードで実現します。
+
 ```js
 // スポットライト光源を作成
 const light = new THREE.SpotLight(0xFFFFFF, 4, 30, Math.PI / 6, 0, 0.5);
 scene.add(light);
 
-// ヘルパーを作成
+// ヘルパーを作成
 const lightHelper = new THREE.SpotLightHelper(light);
 scene.add(lightHelper);
 
@@ -170,7 +169,20 @@ function tick() {
 
 `RectAreaLight`クラスは、面を横切って矩形平面に均一に放出される光源です。明るい窓やストリップ照明のようなものをシミュレートするために使用できます。
 
+`three/webgpu`環境で`RectAreaLight`を使う場合、LTC（Linearly Transformed Cosines）の初期化が必要です。サンプルでは次のように`RectAreaLightTexturesLib`を読み込み、`THREE.RectAreaLightNode.setLTC()`へ渡しています。
+
 ```js
+import * as THREE from "three/webgpu";
+import { RectAreaLightTexturesLib } from "three/addons/lights/RectAreaLightTexturesLib.js";
+
+const ltc = RectAreaLightTexturesLib.init();
+THREE.RectAreaLightNode.setLTC(ltc);
+
+const renderer = new THREE.WebGPURenderer({
+  canvas: document.querySelector("#myCanvas"),
+  forceWebGL: true,
+});
+
 // 矩形光源を作成
 // new THREE.RectAreaLight(色, 光の強さ, 幅, 高さ)
 const light = new THREE.RectAreaLight(0xFFFFFF, 5.0, 10, 10);
