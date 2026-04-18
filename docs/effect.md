@@ -2,11 +2,12 @@
 title: Three.js演出編
 author: 池田 泰延
 published_date: 2019-01-17
-modified_date: 2026-02-11
+modified_date: 2026-04-18
 ---
 
 Three.jsを使った表現を作例を通して学びましょう。
 
+- [Three.js公式examplesの紹介](official_examples.md)
 - [レンズフレア表現](https://ics.media/entry/476/)
 - [3DのカバーフローUI](https://ics.media/entry/1787/)
 - [サウンドビジュアライザー](https://ics.media/entry/230421/)

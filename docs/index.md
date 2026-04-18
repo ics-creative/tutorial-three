@@ -2,7 +2,7 @@
 title: Three.js入門サイト
 author: 池田 泰延
 published_date: 2024-04-27
-modified_date: 2026-02-11
+modified_date: 2026-04-18
 ---
 
 このサイトは、3Dライブラリ「[Three.js](https://threejs.org)」の入門サイトです。Three.jsはWebGLとWebGPUの両方に対応していますが、このサイトでは次世代のWebGPU版（`three/webgpu`）を中心に解説します。
@@ -87,6 +87,7 @@ Three.jsを使った表現を作例を通して学びましょう。
 
 
 - [演出の記事一覧](effect.md)
+- [Three.js公式examplesの紹介](official_examples.md)
 
 ## シェーダー編
 
