@@ -37,7 +37,7 @@ Three.jsの公式examplesをピックアップして紹介します。とくに�
 
 - [Play Demo](https://threejs.org/examples/webgpu_upscaling_taau.html)
 
-都市の建物が整った箱庭のように並び、街全体がミニチュア模型のように見える作例です。細い線や建物の縁までそろって見えるので、情報量の多い景観でも画面が散らかって見えにくく、静かな迫力があります。
+都市の建物が整った箱庭のように並び、街全体がミニチュア模型のように見える作例です。
 
 ## 5. webgpu_postprocessing_ssr
 
