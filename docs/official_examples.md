@@ -13,7 +13,7 @@ Three.jsの公式examplesをピックアップして紹介します。とくに�
 
 - [Play Demo](https://threejs.org/examples/webgl_loader_3dtiles.html)
 
-`3d-tiles-renderer`で3D Tiles形式の地理データを読み込み、Google Photorealistic Tilesと`three-clouds`を組み合わせた作例です。広い範囲の地形や建物を出しながら、地表の上に雲の層も重ねています。見どころは、景観の密度と空の表情が同じ画面に入るところです。`time of day`で時刻を切り替えると、地表の明るさと雲の見え方が連動して変わります。
+3D Tiles形式の地理データを読み込み、Google Photorealistic Tilesと`three-clouds`を組み合わせた作例です。広い範囲の地形や建物を出しながら、地表の上に雲の層も重ねています。見どころは、景観の密度と空の表情が同じ画面に入るところです。画面上部のUIで時刻を切り替えると、地表の明るさと雲の見え方が連動して変わります。
 
 ## 2. webgpu_postprocessing_anamorphic
 
@@ -21,7 +21,7 @@ Three.jsの公式examplesをピックアップして紹介します。とくに�
 
 - [Play Demo](https://threejs.org/examples/webgpu_postprocessing_anamorphic.html)
 
-後処理で、横に長く伸びる光条を加える作例です。金属のヘルメットに入った強いハイライトから細い光が左右へ伸び、画面に横方向の緊張感が生まれます。発光体そのものを大きくぼかすのではなく、光の筋を重ねる見せ方なので、形の輪郭と光の存在感がきれいに並びます。
+ポストエフェクトで、横に長く伸びる光条を加える作例です。金属のヘルメットに入った強いハイライトから細い光が左右へ伸び、画面に横方向の緊張感が生まれます。発光体そのものを大きくぼかすのではなく、光の筋を重ねる見せ方なので、形の輪郭と光の存在感がきれいに並びます。
 
 ## 3. webgpu_postprocessing_radial_blur
 
@@ -37,7 +37,7 @@ Three.jsの公式examplesをピックアップして紹介します。とくに�
 
 - [Play Demo](https://threejs.org/examples/webgpu_upscaling_taau.html)
 
-時間方向の情報を使った拡大表示の作例です。都市モデルの細い線や建物の縁がそろって見え、カメラが動いても画面の面が安定します。光の演出が主役のデモではありませんが、細部の多いシーンを落ち着いた見た目にまとめる力がよく出ています。
+都市の建物が整った箱庭のように並び、街全体がミニチュア模型のように見える作例です。細い線や建物の縁までそろって見えるので、情報量の多い景観でも画面が散らかって見えにくく、静かな迫力があります。
 
 ## 5. webgpu_postprocessing_ssr
 
