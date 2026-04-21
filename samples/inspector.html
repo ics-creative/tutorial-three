@@ -28,7 +28,7 @@
       import { WebGPURenderer } from "three/webgpu";
       import { Inspector } from "three/addons/inspector/Inspector.js";
 
-      const renderer = new WebGPURenderer({ canvas: document.querySelector("#myCanvas"), antialias: true });
+      const renderer = new WebGPURenderer({ canvas: document.querySelector("#myCanvas") });
       renderer.setPixelRatio(devicePixelRatio);
       renderer.shadowMap.enabled = true;
       // Inspectorをレンダラーへ登録
@@ -91,7 +91,7 @@
       }
 
       // Parametersタブに専用セクションを追加
-      const params = renderer.inspector.createParameters("Toon Light");
+      const params = renderer.inspector.createParameters("Inspector Demo");
       // 項目のグループ化
       const light = params.addFolder("Light");
       // 数値 + min/max/step = レンジ

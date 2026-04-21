@@ -2,7 +2,7 @@
 title: Three.js入門サイト
 author: 池田 泰延
 published_date: 2024-04-27
-modified_date: 2026-04-18
+modified_date: 2026-04-21
 ---
 
 このサイトは、3Dライブラリ「[Three.js](https://threejs.org)」の入門サイトです。Three.jsはWebGLとWebGPUの両方に対応していますが、このサイトでは次世代のWebGPU版（`three/webgpu`）を中心に解説します。
@@ -110,6 +110,7 @@ Three.jsだけだと実現できる表現の種類に限界があります。シ
 Three.jsは次世代のWebGPUにも対応しています。Three.jsでWebGPUを使うための方法を学びましょう。
 
 - [WebGPURendererの使い方](webgpu_renderer.md)
+- [InspectorでデバッグUIと性能確認を行う方法](inspector.md)
 - [TSLシェーダー言語](webgpu_tsl.md)
 
 
