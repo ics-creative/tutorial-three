@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.js",
+          "three/tsl": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.tsl.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three/webgpu";
+      import { WebGPURenderer } from "three/webgpu";
+      import { Inspector } from "three/addons/inspector/Inspector.js";
+
+      const renderer = new WebGPURenderer({ canvas: document.querySelector("#myCanvas"), antialias: true });
+      renderer.setPixelRatio(devicePixelRatio);
+      renderer.shadowMap.enabled = true;
+      // Inspectorをレンダラーへ登録
+      renderer.inspector = new Inspector();
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
+
+      const camera = new THREE.PerspectiveCamera(45, 1);
+      camera.position.set(20, 20, 20);
+      camera.lookAt(0, 0, 0);
+
+      const floor = new THREE.Mesh(
+        new THREE.BoxGeometry(2000, 0.1, 2000),
+        new THREE.MeshStandardMaterial({ color: 0x4b5563, roughness: 0.18, metalness: 0.18 }),
+      );
+      floor.receiveShadow = true;
+      scene.add(floor);
+
+      const material = new THREE.MeshStandardMaterial({ color: 0x6699ff, roughness: 0.35, metalness: 0.05 });
+      const mesh = new THREE.Mesh(new THREE.TorusKnotGeometry(3, 1, 192, 32), material);
+      mesh.position.y = 5;
+      mesh.castShadow = true;
+      scene.add(mesh);
+
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+      directionalLight.position.set(1, 1, 1);
+      const spotLight = new THREE.SpotLight(0xffffff, 4, 50, Math.PI / 4, 0, 0.5);
+      spotLight.castShadow = true;
+      spotLight.shadow.mapSize.width = 1024;
+      spotLight.shadow.mapSize.height = 1024;
+      const spotLightHelper = new THREE.SpotLightHelper(spotLight);
+      scene.add(directionalLight, spotLight, spotLightHelper);
+
+      // リセット用の初期値
+      const defaults = {
+        y: 6,
+        distance: 20,
+        color: 0x6699ff,
+        floorColor: 0x4b5563,
+        wireframe: false,
+      };
+
+      // Inspectorが直接編集する設定値
+      const settings = {
+        ...defaults,
+        reset: () => {
+          Object.assign(settings, defaults);
+          apply();
+          // InspectorのConsoleへ出力
+          renderer.inspector.console.addMessage("info", "Settings reset.");
+        },
+      };
+
+      // 設定値をthree.jsオブジェクトへ反映
+      function apply() {
+        material.color.setHex(settings.color);
+        floor.material.color.setHex(settings.floorColor);
+        material.wireframe = settings.wireframe;
+      }
+
+      // Parametersタブに専用セクションを追加
+      const params = renderer.inspector.createParameters("Toon Light");
+      // 項目のグループ化
+      const light = params.addFolder("Light");
+      // 数値 + min/max/step = レンジ
+      light.add(settings, "y", 2, 20, 0.1).name("Y");
+      light.add(settings, "distance", 2, 20, 0.1).name("Distance");
+      const object = params.addFolder("Object");
+      // 色プロパティ = カラーピッカー
+      object.addColor(settings, "color").name("Color").onChange(apply);
+      object.addColor(settings, "floorColor").name("Floor Color").onChange(apply);
+      // 真偽値 = チェックボックス
+      object.add(settings, "wireframe").name("Wireframe").onChange(apply);
+      // 関数プロパティ = ボタン
+      object.add(settings, "reset").name("Reset");
+      apply();
+      // InspectorのConsoleへ出力
+      renderer.inspector.console.addMessage("info", "Parameters, Performance and Console are ready.");
+
+      function resize() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      }
+
+      resize();
+      window.addEventListener("resize", resize);
+
+      renderer.setAnimationLoop(() => {
+        const angle = Date.now() / 1000;
+        spotLight.position.set(
+          settings.distance * Math.cos(angle),
+          settings.y,
+          settings.distance * Math.sin(angle),
+        );
+        spotLight.target.position.set(0, 0, 0);
+        spotLightHelper.update();
+        mesh.rotation.x += 0.005;
+        mesh.rotation.y += 0.01;
+        renderer.render(scene, camera);
+      });
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
+</html>

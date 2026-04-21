@@ -17,6 +17,7 @@
   "geometry_merge_mesh.html",
   "geometry_merge_none.html",
   "index.html",
+  "inspector.html",
   "light_ambient.html",
   "light_directional.html",
   "light_hemisphere.html",
