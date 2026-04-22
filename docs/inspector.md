@@ -2,7 +2,7 @@
 title: Three.js InspectorでデバッグUIと性能確認を行う方法
 author: 池田 泰延
 published_date: 2026-04-21
-modified_date: 2026-04-21
+modified_date: 2026-04-22
 ---
 
 `THREE.Inspector` は、`WebGPURenderer` に組み込めるデバッグUIです。
@@ -12,13 +12,13 @@ modified_date: 2026-04-21
 
 ## サンプル
 
+![](../imgs/inspector_parameters.png)
+
 - [サンプルを再生する](https://ics-creative.github.io/tutorial-three/samples/inspector.html)
 - [サンプルのソースコードを確認する](../samples/inspector.html)
 
-このサンプルでは、スポットライトが動くシーンに Inspector を追加しています。
-`Parameters` タブからライトの位置や色を調整でき、`Performance` や `Console` もあわせて確認できます。
-
-![](../imgs/inspector_parameters.png)
+このサンプルでは、スポットライトが動く作例で、Inspector を追加しています。
+`Parameters` タブからライトの位置や色を調整できます。
 
 ## Inspectorを有効にする
 
@@ -35,11 +35,11 @@ const renderer = new WebGPURenderer({
 });
 
 // Inspector をレンダラーへ登録
-// この 1 行で右下に Inspector UI が追加される
+// この 1 行で右上に Inspector UI が追加される
 renderer.inspector = new Inspector();
 ```
 
-これで画面右下に Inspector が表示されます。
+これで画面右上に Inspector が表示されます。
 
 ## importmapの設定
 
@@ -60,7 +60,7 @@ Inspector を使うときは、`three/addons/` に加えて `three/tsl` の impo
 </script>
 ```
 
-サンプル本体で TSL を直接使っていなくても、`Inspector.js` の内部依存として `three/tsl` が読み込まれます。
+TSL を直接使っていなくても、`Inspector.js` の内部依存として `three/tsl` が読み込まれます。
 この設定がないと、Inspector の読み込み時にランタイムエラーになります。
 
 ## Parametersタブに項目を追加する
@@ -159,14 +159,14 @@ const object = params.addFolder("Object");
 object.add(settings, "reset").name("Reset");
 ```
 
-## Performanceタブで確認できること
+## Performanceタブ
 
 `Performance` タブでは、フレームごとの CPU / GPU の計測値や FPS を確認できます。
 アニメーションやライト、影などを追加したときに、描画負荷がどの程度増えたかを見たいときに便利です。
 
 ![](../imgs/inspector_performance.png)
 
-## Viewerタブとは
+## Viewerタブ
 
 `Viewer` タブは、Inspector が収集したノードの出力を小さなプレビューで表示するタブです。
 主に内部の描画ノードやシャドウ関連のノードが表示されます。
@@ -193,3 +193,16 @@ Three.js の開発では、昔から [`lil-gui`](https://github.com/georgealways
 Three.js では、見た目を調整しながら同時に描画性能も確認することが重要です。
 Inspector を使うと、パラメーター調整とパフォーマンス確認を同じ画面で進められます。
 試行錯誤を速く回したいときや、見た目と負荷のバランスを探りたいときに役立つでしょう。
+
+Inspector は調整 UI や簡易的な性能確認に便利ですが、実際の開発ではブラウザーの開発者ツールと併用することも重要です。
+また、フレームレートが不安定なときに何を疑うべきかを知っておくと、問題の切り分けがしやすくなります。
+より詳しく知りたい場合は、次の記事もぜひご覧ください。
+
+### ブラウザーの開発者機能
+
+- [Chrome・Safari・Firefoxで比較！クリエイティブ表現のレベルアップに使える最新ブラウザーの開発者機能（前編）](https://ics.media/entry/201119/)
+- [Chrome・Safari・Firefoxで比較！クリエイティブ表現のレベルアップに使える最新ブラウザーの開発者機能（パフォーマンス編）](https://ics.media/entry/201203/)
+
+### フレームレート対策
+
+- [安定しないフレームレートに効果的！ WebGLのカクつき対策まとめ（Three.js編）](https://ics.media/entry/12930/)

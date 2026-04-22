@@ -2,10 +2,11 @@
 title: Three.js公式examplesの紹介
 author: 池田 泰延
 published_date: 2026-04-18
-modified_date: 2026-04-18
+modified_date: 2026-04-22
 ---
 
-Three.jsの[公式examples](https://threejs.org/examples/)には、2026年4月18日時点で578点の作例が掲載されています。本ページでは、その中から特に注目したい作例をピックアップして紹介します。とくに利用している技術に焦点をあてています。
+Three.jsの[公式examples](https://threejs.org/examples/)には、500点を超える
+作例が掲載されています。本ページでは、その中から注目すべき作例をピックアップして紹介します。
 
 ## 1. webgl_loader_3dtiles
 
@@ -23,7 +24,7 @@ Three.jsの[公式examples](https://threejs.org/examples/)には、2026年4月18
 - [Play demo](https://threejs.org/examples/webgpu_postprocessing_anamorphic.html)
 - [Source Code](https://github.com/mrdoob/three.js/blob/dev/examples/webgpu_postprocessing_anamorphic.html)
 
-ポストエフェクトで、横に長く伸びる光条を加える作例です。金属のヘルメットに入った強いハイライトから細い光が左右へ伸びます。発光体そのものを大きくぼかすのではなく、光の筋を重ねる見せ方です。
+ポストエフェクトで、横に長く伸びる光条を加える作例です。金属のヘルメットに入った強いハイライトから細い光が左右へ伸びます。
 
 ## 3. webgpu_postprocessing_radial_blur
 
@@ -68,7 +69,7 @@ Three.jsの[公式examples](https://threejs.org/examples/)には、2026年4月18
 - [Play demo](https://threejs.org/examples/webgpu_caustics.html)
 - [Source Code](https://github.com/mrdoob/three.js/blob/dev/examples/webgpu_caustics.html)
 
-透過材質のダックやガラスを通った光が、床の影の中に模様として落ちる作例です。透明な物体を通った光が床にどう現れるかを見比べられます。
+透過材質のガラスを通った光が、床の影の中に模様として落ちる作例です。透明な物体を通った光が床にどう現れるかを見比べられます。
 
 ## 8. webgpu_lights_projector
 
@@ -77,7 +78,7 @@ Three.jsの[公式examples](https://threejs.org/examples/)には、2026年4月18
 - [Play demo](https://threejs.org/examples/webgpu_lights_projector.html)
 - [Source Code](https://github.com/mrdoob/three.js/blob/dev/examples/webgpu_lights_projector.html)
 
-映写機のように、画像や映像を光として投影する作例です。床には水面の反射を思わせる模様が映り、像のまわりには細い光の筋も見えます。
+映写機のように、画像や映像を光として投影する作例です。床には水面の反射を思わせる模様が映ります。
 
 ## 9. webgpu_loader_gltf_transmission
 
@@ -86,7 +87,7 @@ Three.jsの[公式examples](https://threejs.org/examples/)には、2026年4月18
 - [Play demo](https://threejs.org/examples/webgpu_loader_gltf_transmission.html)
 - [Source Code](https://github.com/mrdoob/three.js/blob/dev/examples/webgpu_loader_gltf_transmission.html)
 
-[glTF](https://www.khronos.org/gltf/)で透過材質を扱うための拡張仕様[KHR_materials_transmission](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_materials_transmission)を使った作例です。器の向こう側が透けて見え、輪郭の近くでは背景がわずかに曲がって映ります。ガラスや透明樹脂らしい厚みが出やすく、背景と一緒に見たときの材質感がつかみやすい作例です。反射だけの表面とは違う、抜けのある質感がよく出ています。
+[glTF](https://www.khronos.org/gltf/)で透過材質を扱うための拡張仕様[KHR_materials_transmission](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_materials_transmission)を使った作例です。器の向こう側が透けて見え、輪郭の近くでは背景がわずかに曲がって映ります。反射だけの表面とは違う、抜けのある質感がよく出ています。
 
 ## 10. webgpu_loader_gltf_iridescence
 
@@ -96,3 +97,7 @@ Three.jsの[公式examples](https://threejs.org/examples/)には、2026年4月18
 - [Source Code](https://github.com/mrdoob/three.js/blob/dev/examples/webgpu_loader_gltf_iridescence.html)
 
 [glTF](https://www.khronos.org/gltf/)で玉虫色の薄膜表現を扱うための拡張仕様[KHR_materials_iridescence](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_materials_iridescence)を使った作例です。見る角度に応じて青や紫、緑の色味が移り、単色の金属とは違う複雑な表情が現れます。表面にもう一枚薄い膜が乗ったような見え方なので、アクセサリーや塗装面のような繊細な光り方を見せたい場面に向いた作例です。
+
+Three.js以外も含めて、ブラウザの3D表現を広く見たい方は、次の記事もぜひご覧ください。
+
+- [WebGL入門 - サンプルで理解する3D表現の迫力](https://ics.media/entry/2328/)
